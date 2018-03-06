@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="dsCore.Buscador">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore.Buscador.dll</HintPath>
+    </Reference>
+    <Reference Include="dsCore.Comun">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore.Comun.dll</HintPath>
+    </Reference>
+    <Reference Include="dsCore.Tipos">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore.Tipos.dll</HintPath>
+    </Reference>
+    <Reference Include="dsCore2.DataAccess">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore2.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\system.data.sqlclient\4.4.0\ref\netstandard2.0\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

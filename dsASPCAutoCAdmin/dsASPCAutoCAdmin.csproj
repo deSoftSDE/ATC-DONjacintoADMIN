@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DevExpress.AspNetCore.Bootstrap" Version="17.2.6" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="17.1.5" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="1.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades.csproj" />
+    <ProjectReference Include="..\dsASPCAutoCAdmin.DataAccess\dsASPCAutoCAdmin.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="dsCore.Buscador">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore.Buscador.dll</HintPath>
+    </Reference>
+    <Reference Include="dsCore.Comun">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore.Comun.dll</HintPath>
+    </Reference>
+    <Reference Include="dsCore.Tipos">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore.Tipos.dll</HintPath>
+    </Reference>
+    <Reference Include="dsCore2.DataAccess">
+      <HintPath>..\..\..\..\..\..\..\Desktop\core2017\dsCore2.DataAccess.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

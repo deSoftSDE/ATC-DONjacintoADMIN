@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Use this area to provide additional information.</p>
+<div ng-controller="TiposVidrio">
+    <div class="demo-container">
+        <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="vidrio">
+
+            <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                <img class="img-fluid" ng-src="{{vidrio.value}}" />
+            </div>
+
+            <div data-options="dxTemplate: {name: 'detail'}">
+                <div class="master-detail-caption"></div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="text" ng-model="vidrio.data.descripcion" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input type="file" ng-file-model="vidrio.data.files" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" value="Guardar cambios" ng-click="guardarCambios(vidrio.data)"/>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        
+        </div>
+    </div>
