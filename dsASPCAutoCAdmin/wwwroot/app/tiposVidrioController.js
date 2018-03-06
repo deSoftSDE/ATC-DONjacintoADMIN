@@ -25,7 +25,10 @@
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "idTipoVidrio",
-        allowAdding: true,
+        editing: {
+            allowAdding: true // Enables insertion
+            //allowDeleting: true // Enables removing
+        },
         selection: {
             mode: "single"
         },
@@ -36,6 +39,11 @@
         onSelectionChanged: function (e) {
             e.component.collapseAll(-1);
             e.component.expandRow(e.currentSelectedRowKeys[0]);
+        },
+        onRowRemoving: function (e) {
+            console.log(e);
+            console.log(e.data.idTipoVidrio);
+            eliminarRegistro(e.data.idTipoVidrio);
         },
         columns: [
             {
@@ -54,6 +62,22 @@
                 width: 130,
                 caption: "Descripcion"
             },
+            {
+                caption: "Eliminar",
+                dataField: "idTipoVidrio",
+                width: 100,
+                allowFiltering: false,
+                allowSorting: false,
+                cellTemplate: function (container, options) {
+                    $('<div />').dxButton({
+                        icon: 'trash',
+                        type: 'danger',
+                        onClick: function (e) {
+                            $('#gridContainer').dxDataGrid('instance').deleteRow(options.rowIndex);
+                        }
+                    }).appendTo(container);
+                },
+            }
         ],
         summary: {
             totalItems: [{
@@ -93,16 +117,41 @@
     }
     $scope.files = "";
     $scope.guardarCambios = function (vidrio) {
-        console.log(vidrio);
-        var fd = new FormData();
-        fd.append('file.jpg', vidrio.files);
-        console.log(fd);
-        console.log($scope.files)
-        vidrio.imagen = vidrio.files.data;
+        if (NotNullNotUndefinedNotEmpty(vidrio.files)) {
+            console.log(vidrio);
+            var fd = new FormData();
+            fd.append('file.jpg', vidrio.files);
+            console.log(fd);
+            console.log($scope.files)
+            vidrio.imagen = vidrio.files.data;
+            Llamada.postFile(fd)
+                .then(function (respuesta) {
+                    vidrio.newImagen = respuesta.contenido;
+                    guardarCambios(vidrio);
+                });
+        } else {
+            vidrio.newImagen = vidrio.imagen;
+            guardarCambios(vidrio);
+        }
+        
         $scope.datagrid.collapseAll(-1);
+    }
+    guardarCambios = function (vidrio) {
+        Llamada.post("TiposVidrioCrearModificar", vidrio)
+            .then(function (respuesta) {
+                $scope.datagrid.collapseAll(-1);
+                mensajeExito("Datos guardados con éxito");
+            })
+        
     }
     $scope.cambioInput = function () {
         alert("Holi");
+    }
+    eliminarRegistro = function (id) {
+        Llamada.get("TiposVidrioEliminar?idTipoVidrio=" + id)
+            .then(function (respuesta) {
+                console.log(respuesta);
+            })
     }
     LeerRegistros(obj);
 });
