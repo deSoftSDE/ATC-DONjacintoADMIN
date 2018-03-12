@@ -3,7 +3,7 @@
 }
 
 
-<div class="container ">
+<div class="container " ng-controller="TiposVidrio">
     <div class="row">
         <div class="col-12 p-5">
             <h2>@ViewData["Title"]</h2>
@@ -13,31 +13,36 @@
     <div class="row">
         <div class="col-12">
             <p>Use this area to provide additional information.</p>
-            <div ng-controller="TiposVidrio">                
-                    <div class="dx-viewport demo-container">
-                        <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="vidrio">
-                            <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                                <img class="img-fluid" ng-src="{{vidrio.value}}" />
-                            </div>
-                            <div data-options="dxTemplate: {name: 'detail'}">
-                                <div class="master-detail-caption"></div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <input type="text" ng-model="vidrio.data.descripcion" class="form-control" />
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <input type="file" ng-file-model="vidrio.data.files" />
-                                                </div>
+            <div >
+                <div class="dx-viewport demo-container">
+                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="vidrio">
+                        <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                            <img class="img-fluid" ng-src="{{vidrio.value}}" />
+                            <input type="file" ng-file-model="vidrio.files" />
+                        </div>
+                        <div data-options="dxTemplate:{ name:'editTemplate' }">
+                            
+                            <input type="submit" ng-click="modificarVidrio(vidrio)" />
+
+                        </div>
+                        <div data-options="dxTemplate: {name: 'detail'}">
+                            <div class="master-detail-caption"></div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="text" ng-model="vidrio.data.descripcion" class="form-control" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-3">
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="submit" value="Guardar cambios" ng-click="guardarCambios(vidrio.data)" />
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="submit" value="Guardar cambios" ng-click="guardarCambios(vidrio.data)" />
                                     </div>
                                 </div>
                             </div>
@@ -47,3 +52,31 @@
             </div>
         </div>
     </div>
+    <input type="submit" value="holii" ng-click="crearRegistro()" />
+    <div dx-popup="popupOptions">
+        <div class='popup-property-details'>
+            <h3>Nuevo Elemento</h3>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" ng-model="currentvidrio.descripcion" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="file" ng-file-model="currentvidrio.files" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

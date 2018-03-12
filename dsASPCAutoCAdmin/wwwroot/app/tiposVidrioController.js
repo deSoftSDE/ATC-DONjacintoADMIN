@@ -26,17 +26,17 @@
         dataSource: [],
         keyExpr: "id",
         editing: {
-            allowAdding: true, // Enables insertion
+            allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            allowEditing: false
+            editEnabled: false
         },
         selection: {
             mode: "single"
         },
-        masterDetail: {
-            enabled: true,
+        /*masterDetail: {
+            enabled: false,
             template: "detail"
-        },
+        },*/
         onRowInserted: function (info, a) {
             console.log(info);
             console.log(a);
@@ -48,10 +48,10 @@
             console.log("HOLIII")
             info.component.saveEditData()
         },
-        onSelectionChanged: function (e) {
+        /*onSelectionChanged: function (e) {
             e.component.collapseAll(-1);
             e.component.expandRow(e.currentSelectedRowKeys[0]);
-        },
+        },*/
         onRowRemoving: function (e) {
             console.log(e);
             console.log(e.data.idTipoVidrio);
@@ -59,29 +59,30 @@
         },
         columns: [
             {
+                dataField: "idTipoVidrio",
+                allowEditing: false,
+                width: 130,
+                caption: "IDTipoVidrio"
+            }, {
                 dataField: "imagen",
                 caption: "Imagen",
                 width: 100,
                 allowFiltering: false,
                 allowSorting: false,
-                allowEditing:false,
+                allowEditing: false,
                 cellTemplate: "cellTemplate"
-            }, {
-                dataField: "idTipoVidrio",
-                width: 130,
-                caption: "IDTipoVidrio"
             }, {
                 dataField: "descripcion",
                 width: 130,
                 caption: "Descripcion"
             },
-            {
+            /*{
                 caption: "Eliminar",
                 dataField: "idTipoVidrio",
                 width: 100,
                 allowFiltering: false,
                 allowSorting: false,
-                allowEditing:false,
+                allowEditing: false,
                 cellTemplate: function (container, options) {
                     $('<div />').dxButton({
                         icon: 'trash',
@@ -91,6 +92,14 @@
                         }
                     }).appendTo(container);
                 }
+            },*/
+            {
+                caption: "Modificar",
+                width: 100,
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "editTemplate"
             }
         ],
         summary: {
@@ -112,6 +121,14 @@
         onInitialized: function (e) {
             console.log(e);
             $scope.datagrid = e.component;
+        },
+        rowUpdating: function (e) {
+            alert("Ey")
+            console.log(e);
+        },
+        rowUpdated : function (e) {
+            alert("Ey")
+            console.log(e);
         }
     };
     LeerRegistros = function (obj) {
@@ -150,6 +167,12 @@
 
         $scope.datagrid.collapseAll(-1);
     };
+    $scope.modificarVidrio = function (vid) {
+        alert("Holi");
+        console.log(vid);
+        $scope.popupVisible = true;
+        $scope.currentvidrio = vid.data;
+    }
     guardarCambios = function (vidrio) {
         Llamada.post("TiposVidrioCrearModificar", vidrio)
             .then(function (respuesta) {
@@ -158,6 +181,17 @@
             });
 
     };
+    $scope.popupVisible = false;
+    $scope.popupOptions = {
+        width: 660,
+            height: 540,
+                showTitle: true,
+                    dragEnabled: false,
+                        bindingOptions: {
+                            visible: 'popupVisible'
+                        },
+        closeOnOutsideClick: true,
+    }
     $scope.cambioInput = function () {
         alert("Holi");
     };
@@ -167,5 +201,21 @@
                 console.log(respuesta);
             });
     };
+    $scope.hola = function () {
+        alert("Hola");
+    }
     LeerRegistros(obj);
+    $scope.currentvidrio = {
+        descripcion: "Descripción",
+    };
+    $scope.crearRegistro = function () {
+        $scope.popupVisible = true;
+        $scope.currentvidrio = {
+            descripcion: "Descripción",
+        };
+    };
+    $scope.guardarCambiosPopup = function () {
+        alert("Ok");
+        console.log($scope.currentvidrio);
+    }
 });

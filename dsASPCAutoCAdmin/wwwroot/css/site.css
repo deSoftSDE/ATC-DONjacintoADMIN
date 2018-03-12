@@ -2353,3 +2353,7 @@ a {
         top: 26px;
         cursor: pointer
     }
+.dx-datagrid-header-panel {
+    visibility: hidden;
+    height: 0px;
+}
