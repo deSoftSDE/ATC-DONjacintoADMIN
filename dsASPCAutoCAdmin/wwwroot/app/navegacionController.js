@@ -1,5 +1,11 @@
 ﻿appadmin.controller('navegacion', function ($scope) {
     console.log("Holi");
+    mensajeError = function (error) {
+        DevExpress.ui.notify(error, "error", 2000);
+    }
+    mensajeExito = function (mensaje) {
+        DevExpress.ui.notify(mensaje, "success", 2000);
+    }
     obtenerImagenInput = function (imagen) {
         var reader = new FileReader();
         var a = window.URL.createObjectURL(imagen);

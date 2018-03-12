@@ -27,7 +27,7 @@
         keyExpr: "id",
         editing: {
             allowAdding: false, // Enables insertion
-            allowDeleting: false, // Enables removing
+            allowDeleting: true, // Enables removing
             editEnabled: false
         },
         selection: {
@@ -121,14 +121,6 @@
         onInitialized: function (e) {
             console.log(e);
             $scope.datagrid = e.component;
-        },
-        rowUpdating: function (e) {
-            alert("Ey")
-            console.log(e);
-        },
-        rowUpdated : function (e) {
-            alert("Ey")
-            console.log(e);
         }
     };
     LeerRegistros = function (obj) {
@@ -148,18 +140,25 @@
     };
     $scope.files = "";
     $scope.guardarCambios = function (vidrio) {
+        console.log("Aqui llegae l vidrio");
+        console.log(vidrio);
         if (NotNullNotUndefinedNotEmpty(vidrio.files)) {
+            console.log(document.getElementById("filesup").files);
             console.log(vidrio);
             var fd = new FormData();
-            fd.append('file.jpg', vidrio.files);
+            fd.append('file.jpg', document.getElementById("filesup").files[0]);
             console.log(fd);
-            console.log($scope.files);
+            console.log(vidrio.files);
+            //console.log($scope.files);
             vidrio.imagen = vidrio.files.data;
+            //console.log(vidrio.files.data);
             Llamada.postFile(fd)
                 .then(function (respuesta) {
-                    vidrio.newImagen = respuesta.contenido;
+                    vidrio.newImagen = respuesta[0].contenido;
+                    document.getElementById("filesup").files = null;
                     guardarCambios(vidrio);
                 });
+            guardarCambios(vidrio);
         } else {
             vidrio.newImagen = vidrio.imagen;
             guardarCambios(vidrio);
@@ -168,17 +167,15 @@
         $scope.datagrid.collapseAll(-1);
     };
     $scope.modificarVidrio = function (vid) {
-        alert("Holi");
-        console.log(vid);
         $scope.popupVisible = true;
         $scope.currentvidrio = vid.data;
     }
     guardarCambios = function (vidrio) {
-        Llamada.post("TiposVidrioCrearModificar", vidrio)
-            .then(function (respuesta) {
-                $scope.datagrid.collapseAll(-1);
+        /*Llamada.post("TiposVidrioCrearModificar", vidrio)
+            .then(function (respuesta) {*/
                 mensajeExito("Datos guardados con éxito");
-            });
+                $scope.popupVisible = false;/*
+            });*/
 
     };
     $scope.popupVisible = false;
@@ -215,7 +212,8 @@
         };
     };
     $scope.guardarCambiosPopup = function () {
-        alert("Ok");
+        console.log($scope.currentvidrio);
+        $scope.guardarCambios($scope.currentvidrio);
         console.log($scope.currentvidrio);
     }
 });
