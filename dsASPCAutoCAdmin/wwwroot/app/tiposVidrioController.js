@@ -26,9 +26,9 @@
         dataSource: [],
         keyExpr: "id",
         editing: {
-            allowAdding: true, // Enables insertion
-            allowDeleting: true, // Enables removing
-            editEnabled: true
+            allowAdding: false, // Enables insertion
+            allowDeleting: false, // Enables removing
+            editEnabled: false
         },
         selection: {
             mode: "single"
@@ -92,24 +92,15 @@
                         }
                     }).appendTo(container);
                 }
-            },
+            },*/
             {
                 caption: "Modificar",
-                dataField: "idTipoVidrio",
                 width: 100,
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
-                cellTemplate: function (container, options) {
-                    $('<div />').dxButton({
-                        icon: 'trash',
-                        type: 'danger',
-                        onClick: function (e) {
-                            $('#gridContainer').dxDataGrid('instance').editRow(options.rowIndex);
-                        }
-                    }).appendTo(container);
-                }
-            }*/
+                cellTemplate: "editTemplate"
+            }
         ],
         summary: {
             totalItems: [{
@@ -134,9 +125,10 @@
         rowUpdating: function (e) {
             alert("Ey")
             console.log(e);
-        }
-        rowUpdating : function (e) {
-
+        },
+        rowUpdated : function (e) {
+            alert("Ey")
+            console.log(e);
         }
     };
     LeerRegistros = function (obj) {
@@ -175,6 +167,12 @@
 
         $scope.datagrid.collapseAll(-1);
     };
+    $scope.modificarVidrio = function (vid) {
+        alert("Holi");
+        console.log(vid);
+        $scope.popupVisible = true;
+        $scope.currentvidrio = vid.data;
+    }
     guardarCambios = function (vidrio) {
         Llamada.post("TiposVidrioCrearModificar", vidrio)
             .then(function (respuesta) {
@@ -212,6 +210,9 @@
     };
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
+        $scope.currentvidrio = {
+            descripcion: "Descripción",
+        };
     };
     $scope.guardarCambiosPopup = function () {
         alert("Ok");

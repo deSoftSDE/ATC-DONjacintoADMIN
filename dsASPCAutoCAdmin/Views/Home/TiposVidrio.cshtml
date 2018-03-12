@@ -20,6 +20,11 @@
                             <img class="img-fluid" ng-src="{{vidrio.value}}" />
                             <input type="file" ng-file-model="vidrio.files" />
                         </div>
+                        <div data-options="dxTemplate:{ name:'editTemplate' }">
+                            
+                            <input type="submit" ng-click="modificarVidrio(vidrio)" />
+
+                        </div>
                         <div data-options="dxTemplate: {name: 'detail'}">
                             <div class="master-detail-caption"></div>
                             <div class="form-group">
@@ -30,7 +35,7 @@
                                     <div class="col-md-3">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                
+
                                             </div>
                                         </div>
                                     </div>
