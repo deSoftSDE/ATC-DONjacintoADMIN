@@ -16,6 +16,25 @@
             <div class="row mb-4">
                 <div class="col-6">
                     paginación
+                    <div class="dataTables_wrapper">
+                        <div class="dataTables_paginate" style="float:right">
+                            <ul class="pagination">
+                                <li id="primera" ng-click="cambiarPagina(this, 'F')">
+                                    <a><i class="fa fa-step-backward "></i> Primera</a>
+                                </li>
+                                <li id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                    <a><i class="fa fa-caret-left "></i> anterior</a>
+                                </li>
+                                <li id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                    <a> siguiente <i class="fa fa-caret-right "></i></a>
+                                </li>
+                                <li id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                    <a>Última <i class="fa fa-step-forward "></i> </a>
+                                </li>
+
+                            </ul>
+                        </div>
+            </div>
                 </div>
                <div class="col-6 text-right">
                     @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
