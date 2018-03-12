@@ -114,7 +114,7 @@
             $scope.datagrid = e.component;
         }
     };
-    LeerRegistros = function (obj) {
+    LeerRegistros = function (obj, objmodificado) {
         $scope.lastConsulta = JSON.parse("" + JSON.stringify(obj));
         Llamada.post("LecturasGenericasPaginadas", obj)
             .then(function (respuesta) {
@@ -131,6 +131,9 @@
                 } else {
                     $scope.vm = respuesta.data;
                     $scope.orders = respuesta.data.articulos;
+                    if (NotNullNotUndefinedNotEmpty(objmodificado)) {
+                        $scope.orders.splice(0, 0, objmodificado);
+                    }
                     for (i = 0; i < $scope.orders.length; i++) {
                         $scope.orders[i].url = Llamada.getRuta($scope.orders[i].imagen);
                     }
@@ -180,6 +183,19 @@
         Llamada.post("TiposVidrioCrearModificar", vidrio)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
+                if (ZeroSiNull(vidrio.idTipoVidrio) < 1) {
+                    var obj = {
+                        tipo: "TiposVidrio",
+                        cadena: "",
+                        accionPagina: "N",
+                        lastValor: vidrio.descripcion,
+                        lastIndice: respuesta.data.identidad,
+                    };
+                    vidrio.idTipoVidrio = respuesta.identidad
+                    LeerRegistros(obj, vidrio);
+                }
+                console.log(respuesta);
+                
                 $scope.popupVisible = false;
             });
 
