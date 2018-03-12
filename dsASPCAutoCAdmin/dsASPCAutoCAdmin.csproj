@@ -23,16 +23,16 @@
 
   <ItemGroup>
     <Reference Include="dsCore.Buscador">
-      <HintPath>..\..\..\..\..\..\Desktop\core2017\dsCore.Buscador.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore.Buscador.dll</HintPath>
     </Reference>
     <Reference Include="dsCore.Comun">
-      <HintPath>..\..\..\..\..\..\Desktop\core2017\dsCore.Comun.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore.Comun.dll</HintPath>
     </Reference>
     <Reference Include="dsCore.Tipos">
-      <HintPath>..\..\..\..\..\..\Desktop\core2017\dsCore.Tipos.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore.Tipos.dll</HintPath>
     </Reference>
     <Reference Include="dsCore2.DataAccess">
-      <HintPath>..\..\..\..\..\..\Desktop\core2017\dsCore2.DataAccess.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore2.DataAccess.dll</HintPath>
     </Reference>
   </ItemGroup>
 
