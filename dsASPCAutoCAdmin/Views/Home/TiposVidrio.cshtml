@@ -12,33 +12,31 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <p>Use this area to provide additional information.</p>
+            @*<p>Use this area to provide additional information.</p>*@
             <div class="row mb-4">
                 <div class="col-6">
-                    paginación
                     <div class="dataTables_wrapper">
-                        <div class="dataTables_paginate" style="float:right">
+                        <div class="dataTables_paginate" style="float:left">
                             <ul class="pagination">
-                                <li id="primera" ng-click="cambiarPagina(this, 'F')">
-                                    <a><i class="fa fa-step-backward "></i> Primera</a>
+                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
+                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
                                 </li>
-                                <li id="anterior" ng-click="cambiarPagina(this, 'P')">
-                                    <a><i class="fa fa-caret-left "></i> anterior</a>
+                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
                                 </li>
-                                <li id="siguiente" ng-click="cambiarPagina(this, 'N')">
-                                    <a> siguiente <i class="fa fa-caret-right "></i></a>
+                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
                                 </li>
-                                <li id="ultima" ng-click="cambiarPagina(this, 'L')">
-                                    <a>Última <i class="fa fa-step-forward "></i> </a>
+                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
                                 </li>
-
                             </ul>
                         </div>
-            </div>
+                    </div>
                 </div>
                <div class="col-6 text-right">
                     @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"> Añadir nuevo Tipo</button>
+                    <button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
                </div>
             </div>
                 <div class="dx-viewport demo-container">
@@ -49,7 +47,8 @@
                         </div>
                         <div data-options="dxTemplate:{ name:'editTemplate' }">
 
-                            <input type="submit" ng-click="modificarVidrio(vidrio)" />
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                            <button type="submit" ng-click="modificarVidrio(vidrio)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
 
                         </div>
 
@@ -94,8 +93,10 @@
                     
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />
+                    <div class="col text-right">
+                        @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
+                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                       
                     </div>
                 </div>
             </div>

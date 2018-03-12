@@ -2357,3 +2357,27 @@ a {
     visibility: hidden;
     height: 0px;
 }
+
+a.dx-link-delete{
+    background-color:red;
+    padding:.25rem .5rem;
+    font-size:0.875rem;
+    border-radius:.2rem;
+    background-color:#dddddd;
+    
+
+}
+    a.dx-link-delete:before {
+        content: "\f368";
+       
+    } 
+    
+.dx-datagrid-rowsview .dx-selection.dx-row > td, .dx-datagrid-rowsview .dx-selection.dx-row:hover > td {
+        background-color: #fff;
+    }
+.dx-datagrid-rowsview .dx-selection.dx-row.dx-column-lines > td, .dx-datagrid-rowsview .dx-selection.dx-row:hover.dx-column-lines > td {
+    border-left: 0;
+    border-right: 0;
+    border-bottom:0;
+    border-top:0;
+}
