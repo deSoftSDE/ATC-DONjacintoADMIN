@@ -64,7 +64,7 @@
                 width: 200,
                 caption: "IDTipoVidrio"
             }, {
-                dataField: "imagen",
+                dataField: "url",
                 caption: "Imagen",
                 width: 100,
                 allowFiltering: false,
@@ -128,6 +128,9 @@
             .then(function (respuesta) {
                 $scope.vm = respuesta.data;
                 $scope.orders = respuesta.data.articulos;
+                for (i = 0; i < $scope.orders.length; i++) {
+                    $scope.orders[i].url = Llamada.getRuta($scope.orders[i].imagen);
+                }
                 console.log($scope.orders);
                 console.log("Arriba las orders");
                 $scope.datagrid.option("dataSource", $scope.orders);
@@ -147,15 +150,14 @@
             console.log(fd);
             console.log(vidrio.files);
             //console.log($scope.files);
-            vidrio.imagen = vidrio.files.data;
+            vidrio.url = vidrio.files.data;
             //console.log(vidrio.files.data);
             Llamada.postFile(fd)
                 .then(function (respuesta) {
-                    vidrio.newImagen = respuesta[0].contenido;
+                    vidrio.imagen = respuesta[0].contenido;
                     document.getElementById("filesup").files = null;
                     guardarCambios(vidrio);
                 });
-            guardarCambios(vidrio);
         } else {
             vidrio.newImagen = vidrio.imagen;
             guardarCambios(vidrio);
@@ -168,11 +170,14 @@
         $scope.currentvidrio = vid.data;
     }
     guardarCambios = function (vidrio) {
-        /*Llamada.post("TiposVidrioCrearModificar", vidrio)
-            .then(function (respuesta) {*/
+        console.log("Guardando...");
+        console.log(vidrio);
+        vidrio.files = null;
+        Llamada.post("TiposVidrioCrearModificar", vidrio)
+            .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
-                $scope.popupVisible = false;/*
-            });*/
+                $scope.popupVisible = false;
+            });
 
     };
     $scope.popupVisible = false;

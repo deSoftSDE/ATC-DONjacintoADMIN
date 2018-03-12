@@ -152,7 +152,9 @@ namespace dsASPCAutoCAdmin.DataAccess
                 //SIN HACER
                 SqlParameter[] param = new SqlParameter[]
                 {
-                    new SqlParameter("@IDTipoVidrio", tiv),
+                    new SqlParameter("@IDTipoVidrio", tiv.IDTipoVidrio),
+                    new SqlParameter("@Descripcion", tiv.Descripcion),
+                    new SqlParameter("@Imagen", tiv.Imagen),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVidrioCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);

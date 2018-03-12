@@ -1,7 +1,7 @@
 ﻿appadmin = angular.module('app', ['dx', 'ng-file-model']);
 appadmin.factory('Llamada', function ($http, $q) {
     var api_url = "http://" + location.host + "/Data/";
-    var api_stream = "http://" + location.host + "/StreamFiles/Post";
+    var api_stream = "http://" + location.host + "/StreamFiles/";
     var http = {
         get: function (url) {
             var deferred = $q.defer();
@@ -28,11 +28,14 @@ appadmin.factory('Llamada', function ($http, $q) {
             });
             return deferred.promise;
         },
+        getRuta: function (imagen) {
+            return api_stream + "GetImagen?filename=" + imagen
+        },
         postFile: function (fd) {
             var deferred = $q.defer();
             $.ajax({
                 type: 'POST',
-                url: api_stream,
+                url: api_stream + "Post",
                 data: fd,
                 async: true,
                 cache: false,
