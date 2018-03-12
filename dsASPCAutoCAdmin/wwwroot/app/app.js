@@ -29,7 +29,7 @@ appadmin.factory('Llamada', function ($http, $q) {
             return deferred.promise;
         },
         getRuta: function (imagen) {
-            return api_stream + "GetImagen?filename=" + imagen
+            return api_stream + "GetImagen?filename=" + imagen;
         },
         postFile: function (fd) {
             var deferred = $q.defer();

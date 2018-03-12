@@ -41,8 +41,8 @@ namespace dsASPCAutoCAdmin.Controllers
                             await formFile.CopyToAsync(stream);
                             var msj = new MensajeRespuesta
                             {
-                                Archivo = a.ToString(),
-                                Contenido = FilePath,
+                                Archivo = FilePath,
+                                Contenido = a.ToString(),
                                 Tamano = stream.Length,
                             };
                             res.Add(msj);
