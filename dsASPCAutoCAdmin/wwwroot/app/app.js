@@ -1,7 +1,7 @@
 ﻿appadmin = angular.module('app', ['dx', 'ng-file-model']);
 appadmin.factory('Llamada', function ($http, $q) {
     var api_url = "http://" + location.host + "/Data/";
-    var api_stream = "http://" + location.host + "/StreamFiles/";
+    var api_stream = "http://" + location.host + "/StreamFiles/Post";
     var http = {
         get: function (url) {
             var deferred = $q.defer();
@@ -32,7 +32,7 @@ appadmin.factory('Llamada', function ($http, $q) {
             var deferred = $q.defer();
             $.ajax({
                 type: 'POST',
-                url: api_stream + "Enviar?overwrite=true",
+                url: api_stream,
                 data: fd,
                 async: true,
                 cache: false,
@@ -50,3 +50,17 @@ appadmin.factory('Llamada', function ($http, $q) {
     };
     return http;
 });
+function NotNullNotUndefinedNotEmpty(val) {
+    if (val !== null && val !== undefined && val !== "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+function VacioSiUndefined(val) {
+    if (NotNullNotUndefinedNotEmpty(val)) {
+        return val;
+    } else {
+        return "";
+    }
+}

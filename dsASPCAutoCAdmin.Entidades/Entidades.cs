@@ -138,4 +138,17 @@ namespace dsASPCAutoCAdmin.Entidades
         [DataMember]
         public int? IdTipoIva { get; set; }
     }
+    public class MensajeRespuesta
+    {
+        public bool Existente { get; set; }
+        public string Contenido { get; set; }
+        public string Archivo { get; set; }
+        public long Tamano { get; set; }
+    }
+    public class Tamano
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Res { get; set; }
+    }
 }

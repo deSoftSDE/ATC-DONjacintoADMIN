@@ -24,6 +24,9 @@ namespace dsASPCAutoCAdmin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDevExpressControls();
+            /*services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));*/
             services.AddDevExpressControls(options => {
                 options.Bootstrap(bootstrap => {
                     bootstrap.Mode = BootstrapMode.Bootstrap3;
