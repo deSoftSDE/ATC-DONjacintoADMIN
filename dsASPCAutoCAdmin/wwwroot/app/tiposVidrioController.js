@@ -24,10 +24,11 @@
 
     $scope.dataGridOptions = {
         dataSource: [],
-        keyExpr: "idTipoVidrio",
+        keyExpr: "id",
         editing: {
-            allowAdding: true // Enables insertion
-            //allowDeleting: true // Enables removing
+            allowAdding: true, // Enables insertion
+            allowDeleting: false, // Enables removing
+            allowEditing: false
         },
         selection: {
             mode: "single"
@@ -35,6 +36,17 @@
         masterDetail: {
             enabled: true,
             template: "detail"
+        },
+        onRowInserted: function (info, a) {
+            console.log(info);
+            console.log(a);
+        },
+        onInitNewRow: function (info, b) {
+            console.log("init");
+            console.log(info);
+            info.data.descripcion = 'Nuevo';
+            console.log("HOLIII")
+            info.component.saveEditData()
         },
         onSelectionChanged: function (e) {
             e.component.collapseAll(-1);
@@ -52,6 +64,7 @@
                 width: 100,
                 allowFiltering: false,
                 allowSorting: false,
+                allowEditing:false,
                 cellTemplate: "cellTemplate"
             }, {
                 dataField: "idTipoVidrio",
@@ -68,6 +81,7 @@
                 width: 100,
                 allowFiltering: false,
                 allowSorting: false,
+                allowEditing:false,
                 cellTemplate: function (container, options) {
                     $('<div />').dxButton({
                         icon: 'trash',
@@ -76,7 +90,7 @@
                             $('#gridContainer').dxDataGrid('instance').deleteRow(options.rowIndex);
                         }
                     }).appendTo(container);
-                },
+                }
             }
         ],
         summary: {
@@ -110,11 +124,11 @@
                 $scope.datagrid.option("dataSource", respuesta.data);
                 //$scope.datagrid.repaint();
             });
-    }
+    };
     var obj = {
         tipo: "TiposVidrio",
         cadena: ""
-    }
+    };
     $scope.files = "";
     $scope.guardarCambios = function (vidrio) {
         if (NotNullNotUndefinedNotEmpty(vidrio.files)) {
@@ -122,7 +136,7 @@
             var fd = new FormData();
             fd.append('file.jpg', vidrio.files);
             console.log(fd);
-            console.log($scope.files)
+            console.log($scope.files);
             vidrio.imagen = vidrio.files.data;
             Llamada.postFile(fd)
                 .then(function (respuesta) {
@@ -133,25 +147,25 @@
             vidrio.newImagen = vidrio.imagen;
             guardarCambios(vidrio);
         }
-        
+
         $scope.datagrid.collapseAll(-1);
-    }
+    };
     guardarCambios = function (vidrio) {
         Llamada.post("TiposVidrioCrearModificar", vidrio)
             .then(function (respuesta) {
                 $scope.datagrid.collapseAll(-1);
                 mensajeExito("Datos guardados con éxito");
-            })
-        
-    }
+            });
+
+    };
     $scope.cambioInput = function () {
         alert("Holi");
-    }
+    };
     eliminarRegistro = function (id) {
         Llamada.get("TiposVidrioEliminar?idTipoVidrio=" + id)
             .then(function (respuesta) {
                 console.log(respuesta);
-            })
-    }
+            });
+    };
     LeerRegistros(obj);
 });
