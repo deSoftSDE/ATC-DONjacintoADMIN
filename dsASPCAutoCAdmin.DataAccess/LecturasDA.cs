@@ -28,6 +28,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     TipoDato = typeof(Vidrio);
                     break;
                 case "TipoVidrio":
+                case "TiposVidrio":
                     MetodoRellenarLista = metodoRellenoTipoVidrio;
                     TipoDato = typeof(TipoVidrio);
                     break;

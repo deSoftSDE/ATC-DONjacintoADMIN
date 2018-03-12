@@ -78,6 +78,18 @@ namespace dsASPCAutoCAdmin.ViewModels
                     res.CampoClave = "IdCarroceria";
                     res.Entidad = "Carroceria";
                     break;
+                case "TiposVidrio":
+                    res.Vista = "VTiposVidrio";
+                    res.EntidadFuncion = "VTiposVidrio";
+                    res.CampoClave = "IdTipoVidrio";
+                    res.Entidad = "TipoVidrio";
+                    break;
+                case "Vidrios":
+                    res.Vista = "VVidrios";
+                    res.EntidadFuncion = "Vidrio";
+                    res.CampoClave = "IdVidrio";
+                    res.Entidad = "Vidrio";
+                    break;
                 case "MarcaModelo":
                     res.Vista = "VMarcaModelo";
                     res.EntidadFuncion = "MarcaModelo";
@@ -95,6 +107,13 @@ namespace dsASPCAutoCAdmin.ViewModels
                 {
                     case "Carroceria":
                         RellenoIndiceCarroceria(action);
+                        break;
+                    case "Vidrio":
+                        RellenoIndiceVidrio(action);
+                        break;
+                    case "TipoVidrio":
+                    case "TiposVidrio":
+                        RellenoIndiceTipoVidrio(action);
                         break;
                     case "BuscaArticulo":
                         RellenoIndiceBuscaObjeto(action);
@@ -117,6 +136,26 @@ namespace dsASPCAutoCAdmin.ViewModels
             cm.FirstIndice = d.IDCarroceria;
             cm.AccionPagina = action;
         }
+        private void RellenoIndiceTipoVidrio(string action)
+        {
+            var c = (TipoVidrio)Articulos[Articulos.Count - 1];
+            var d = (TipoVidrio)Articulos[0];
+            cm.LastValor = c.Descripcion;
+            cm.LastIndice = c.IDTipoVidrio;
+            cm.FirstValor = d.Descripcion;
+            cm.FirstIndice = d.IDTipoVidrio;
+            cm.AccionPagina = action;
+        }
+        private void RellenoIndiceVidrio(string action)
+        {
+            var c = (Vidrio)Articulos[Articulos.Count - 1];
+            var d = (Vidrio)Articulos[0];
+            cm.LastValor = c.Descripcion;
+            cm.LastIndice = c.IDVidrio;
+            cm.FirstValor = d.Descripcion;
+            cm.FirstIndice = d.IDVidrio;
+            cm.AccionPagina = action;
+        }
         private void RellenoIndiceBuscaObjeto(string action)
         {
             var c = (BuscaArticulo)Articulos[Articulos.Count - 1];
@@ -127,7 +166,6 @@ namespace dsASPCAutoCAdmin.ViewModels
             cm.FirstIndice = d.IdArticulo;
             cm.AccionPagina = action;
         }
-
     }
     
 }

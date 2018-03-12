@@ -153,7 +153,8 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
-        public IActionResult LecturasGenericasPaginadas(BusquedaPaginada bs)
+        [HttpPost]
+        public IActionResult LecturasGenericasPaginadas([FromBody] BusquedaPaginada bs)
         {
             ObjectResult result;
             //var ad = new AdaptadorAtcAdmin(_configuration);
