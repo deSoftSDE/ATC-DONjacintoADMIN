@@ -124,20 +124,17 @@
         }
     };
     LeerRegistros = function (obj) {
-        Llamada.post("EjemploTipoVidrio", obj)
+        Llamada.post("LecturasGenericasPaginadas", obj)
             .then(function (respuesta) {
                 $scope.vm = respuesta.data;
-                $scope.orders = respuesta.data;
+                $scope.orders = respuesta.data.articulos;
                 console.log($scope.orders);
                 console.log("Arriba las orders");
-                $scope.datagrid.option("dataSource", respuesta.data);
+                $scope.datagrid.option("dataSource", $scope.orders);
                 //$scope.datagrid.repaint();
             });
     };
-    var obj = {
-        tipo: "TiposVidrio",
-        cadena: ""
-    };
+    
     $scope.files = "";
     $scope.guardarCambios = function (vidrio) {
         console.log("Aqui llegae l vidrio");
@@ -202,6 +199,10 @@
     $scope.hola = function () {
         alert("Hola");
     }
+    var obj = {
+        tipo: "TiposVidrio",
+        cadena: ""
+    };
     LeerRegistros(obj);
     $scope.currentvidrio = {
         descripcion: "Descripción",
