@@ -182,7 +182,8 @@
     $scope.popupOptions = {
         width: 660,
             height: 540,
-                showTitle: true,
+            showTitle: true,
+                title:"Nuevo Tipo de Vidrio",
                     dragEnabled: false,
                         bindingOptions: {
                             visible: 'popupVisible'
