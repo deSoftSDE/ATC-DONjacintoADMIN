@@ -86,7 +86,7 @@ namespace dsASPCAutoCAdmin.ViewModels
                     break;
                 case "Vidrios":
                     res.Vista = "VVidrios";
-                    res.EntidadFuncion = "Vidrio";
+                    res.EntidadFuncion = "VVidrios";
                     res.CampoClave = "IdVidrio";
                     res.Entidad = "Vidrio";
                     break;

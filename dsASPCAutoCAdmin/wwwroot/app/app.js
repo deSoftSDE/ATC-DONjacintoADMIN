@@ -60,6 +60,13 @@ function NotNullNotUndefinedNotEmpty(val) {
         return false;
     }
 }
+function ZeroSiNull(val) {
+    if (NotNullNotUndefinedNotEmpty(val)) {
+        return val;
+    } else {
+        return 0;
+    }
+}
 function VacioSiUndefined(val) {
     if (NotNullNotUndefinedNotEmpty(val)) {
         return val;
