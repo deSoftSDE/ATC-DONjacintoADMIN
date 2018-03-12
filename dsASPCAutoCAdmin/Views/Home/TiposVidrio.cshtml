@@ -62,21 +62,34 @@
             <div class="form">
                 <div class="form-group">
                     <label>Descripción </label>
-                        <div class="col-12">
-                            <input type="text" ng-model="currentvidrio.descripcion" class="form-control" />
-                            <small id="emailHelp" class="form-text text-muted">Descripción del tipo de vidrio</small>
-                        </div>
-                  </div>
+                    <div class="col-12">
+                        <input type="text" ng-model="currentvidrio.descripcion" class="form-control" />
+                        <small id="emailHelp" class="form-text text-muted">Descripción del tipo de vidrio</small>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <hr />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Sube una imagen del Tipo de Vidrio</label>
+                <div class="row">
                     <div class="col-12">
-                        <input type="file" ng-file-model="currentvidrio.files" />
+                        <img class="img-fluid d-block mx-auto" src="~/images/imagen_defect.png" />
                     </div>
+                    <div class="col-12">
+                         <hr />
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Sube una imagen del Tipo de Vidrio</label>
+                            <div class="col-12 text-center">
+                                <input type="file" ng-file-model="currentvidrio.files" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
                 </div>
                 <div class="row">
                     <div class="col">
