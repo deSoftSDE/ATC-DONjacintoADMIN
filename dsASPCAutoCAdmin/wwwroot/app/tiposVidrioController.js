@@ -61,7 +61,7 @@
             {
                 dataField: "idTipoVidrio",
                 allowEditing: false,
-                width: 130,
+                width: 200,
                 caption: "IDTipoVidrio"
             }, {
                 dataField: "imagen",

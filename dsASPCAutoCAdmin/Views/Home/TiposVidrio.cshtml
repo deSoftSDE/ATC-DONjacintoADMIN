@@ -11,14 +11,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <p>Use this area to provide additional information.</p>
+            <div class="col-12">
+                <input type="submit" value="Añadir Nuevo" ng-click="crearRegistro()" />
+                
+            </div>
             <div >
                 <div class="dx-viewport demo-container">
                     <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="vidrio">
                         <div data-options="dxTemplate:{ name:'cellTemplate' }">
                             <img class="img-fluid" ng-src="{{vidrio.value}}" />
-                            <input type="file" ng-file-model="vidrio.files" />
+                           
                         </div>
                         <div data-options="dxTemplate:{ name:'editTemplate' }">
                             
@@ -52,15 +56,24 @@
             </div>
         </div>
     </div>
-    <input type="submit" value="holii" ng-click="crearRegistro()" />
+   
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
-            <h3>Nuevo Elemento</h3>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <input type="text" ng-model="currentvidrio.descripcion" class="form-control" />
-                    </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3>Añadir Nuevo Tipo de Vidrio</h3>
+                </div>
+            </div>
+            <div class="form">
+                <div class="form-group">
+                   
+                        <label>Descripción </label>
+                        <div class="col-12">
+                            <input type="text" ng-model="currentvidrio.descripcion" class="form-control" />
+                            <small id="emailHelp" class="form-text text-muted">Descripción del tipo de vidrio</small>
+                        </div>
+                        
+                   
                     <div class="col-md-3">
                         <div class="row">
                             <div class="col-md-3">
