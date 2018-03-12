@@ -61,19 +61,19 @@
             {
                 dataField: "idTipoVidrio",
                 allowEditing: false,
-                width: 200,
+                width: 100,
                 caption: "IDTipoVidrio"
             }, {
                 dataField: "url",
                 caption: "Imagen",
-                width: 100,
+                width: 150,
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "cellTemplate"
             }, {
                 dataField: "descripcion",
-                width: 130,
+                width: 600,
                 caption: "Descripcion"
             },
             /*{

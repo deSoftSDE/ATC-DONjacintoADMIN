@@ -11,49 +11,31 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <p>Use this area to provide additional information.</p>
-            <div class="col-12">
-                <input type="submit" value="Añadir Nuevo" ng-click="crearRegistro()" />
-                
+            <div class="row mb-4">
+                <div class="col-6">
+                    paginación
+                </div>
+               <div class="col-6 text-right">
+                    <input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />
+               </div>
             </div>
-            <div >
                 <div class="dx-viewport demo-container">
-                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="vidrio">
+                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="vidrio" style="width:100% !important;">
                         <div data-options="dxTemplate:{ name:'cellTemplate' }">
                             <img class="img-fluid" ng-src="{{vidrio.value}}" />
-                           
+
                         </div>
                         <div data-options="dxTemplate:{ name:'editTemplate' }">
-                            
+
                             <input type="submit" ng-click="modificarVidrio(vidrio)" />
 
                         </div>
-                        <div data-options="dxTemplate: {name: 'detail'}">
-                            <div class="master-detail-caption"></div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input type="text" ng-model="vidrio.data.descripcion" class="form-control" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-3">
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="submit" value="Guardar cambios" ng-click="guardarCambios(vidrio.data)" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
+           
         </div>
     </div>
    
@@ -83,7 +65,7 @@
                         <div class="form-group">
                             <label>Sube una imagen del Tipo de Vidrio</label>
                             <div class="col-12 text-center">
-                                <input type="file" ng-file-model="currentvidrio.files" />
+                                <input type="file" id="filesup" ng-file-model="currentvidrio.files" />
                             </div>
                         </div>
                     </div>
