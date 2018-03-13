@@ -296,7 +296,7 @@ a {
 
     .layout-content .main-content {
         overflow: hidden;
-        height: 812px;
+        height: 100%;
         background-color: #fafafa;
         border: 1px solid #cfcfcf;
         -moz-border-radius: 3px;
@@ -2368,8 +2368,8 @@ a.dx-link-delete{
 
 }
     a.dx-link-delete:before {
-        content: "\f368";
-       
+        /*content: "\f368";*/
+        /*font-family: 'Font Awesome\ 5 Free';*/
     } 
     
 .dx-datagrid-rowsview .dx-selection.dx-row > td, .dx-datagrid-rowsview .dx-selection.dx-row:hover > td {
