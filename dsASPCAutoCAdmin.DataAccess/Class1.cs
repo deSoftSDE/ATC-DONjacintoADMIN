@@ -172,6 +172,20 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
 
         }
+        public void MarcasEliminar(int IDSeccion)
+        {
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDSeccion", IDSeccion),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.MarcasEliminar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+
+        }
         public List<TipoVidrio> TiposVidrioLeerPorCadena(string cadena)
         {
             var res = new List<TipoVidrio>();

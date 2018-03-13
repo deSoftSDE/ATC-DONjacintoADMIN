@@ -204,7 +204,7 @@
             if (val) {
 
 
-                Llamada.get("CarroceriasEliminar?idCarroceria=" + id.data.idCarroceria)
+                Llamada.get("MarcasEliminar?idSeccion=" + id.data.idSeccion)
                     .then(function (respuesta) {
                         console.log(respuesta);
 
