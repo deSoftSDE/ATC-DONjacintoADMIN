@@ -161,8 +161,8 @@ namespace dsASPCAutoCAdmin.Controllers
             var ad = new AdaptadorAtcAdmin(_configuration);
             try
             {
-                //var res = ad.CarroceriasCrearModificar(carroceria);
-                result = new ObjectResult(1)
+                var res = ad.CarroceriasCrearModificar(carroceria);
+                result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK
                 };
@@ -232,6 +232,30 @@ namespace dsASPCAutoCAdmin.Controllers
                 //var res = new LecturasViewModel(_configuration, bs);
                 var res = ad.TiposVidrioLeerPorCadena(cadena);
                 result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpGet]
+        public IActionResult CarroceriasEliminar(int IDCarroceria)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                //var res = new LecturasViewModel(_configuration, bs);
+                ad.CarroceriasEliminar(IDCarroceria);
+                result = new ObjectResult(1)
                 {
                     StatusCode = (int)HttpStatusCode.OK
                 };

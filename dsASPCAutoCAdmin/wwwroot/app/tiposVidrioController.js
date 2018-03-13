@@ -55,11 +55,6 @@
         },
         columns: [
             {
-                dataField: "idTipoVidrio",
-                allowEditing: false,
-                width: 100,
-                caption: "IDTipoVidrio"
-            }, {
                 dataField: "url",
                 caption: "Imagen",
                 width: 100,
@@ -90,7 +85,7 @@
                 }
             },*/
             {
-                caption: "Modificar",
+                caption: "",
                 width: 80,
                 allowFiltering: false,
                 allowSorting: false,

@@ -71,11 +71,11 @@ namespace dsASPCAutoCAdmin.Entidades
     }
     public class TipoVehiculo
     {
-        public int IDTipoVehiculo { get; set; }
         public int IDGenerico { get; set; }
-        public string NombreTipo { get; set; }
-        public string Descripcion { get; set; }
         public string Imagen { get; set; }
+        public string DescripcionGenerico { get; set; }
+        public string CodigoGenerico { get; set; }
+        //public int IdFamilia { get; set; }
     }
     public class MarcaModelo
     {

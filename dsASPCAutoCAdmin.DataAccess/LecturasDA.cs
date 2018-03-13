@@ -95,11 +95,10 @@ namespace dsASPCAutoCAdmin.DataAccess
         }
         private void metodoRellenoTipoVehiculo(object entidadLista)
         {
-            ((TipoVehiculo)entidadLista).IDTipoVehiculo = AsignaEntero("IDTipoVehiculo");
             ((TipoVehiculo)entidadLista).IDGenerico = AsignaEntero("IDGenerico");
-            ((TipoVehiculo)entidadLista).Descripcion = AsignaCadena("Descripcion");
+            ((TipoVehiculo)entidadLista).DescripcionGenerico = AsignaCadena("DescripcionGenerico");
             ((TipoVehiculo)entidadLista).Imagen = AsignaCadena("Imagen");
-            ((TipoVehiculo)entidadLista).NombreTipo = AsignaCadena("NombreTipo");
+            ((TipoVehiculo)entidadLista).CodigoGenerico = AsignaCadena("CodigoGenerico");
 
         }
         private void metodoRellenoMarcaModelo(object entidadLista)
