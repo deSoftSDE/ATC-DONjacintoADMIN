@@ -2397,3 +2397,13 @@ a.dx-link-delete{
         margin: 0 20px 0 0px;
     }
 }
+
+.desplegable {
+    background-color: aliceblue;
+    border-left: 1px solid #c0d3e4;
+    border-right: 1px solid #c0d3e4;
+    border-bottom: 1px solid #c0d3e4;
+    font-size:14px;
+    line-height:20px;
+    padding-left:10px;
+}

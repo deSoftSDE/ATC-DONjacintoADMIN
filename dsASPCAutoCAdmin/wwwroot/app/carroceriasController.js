@@ -224,7 +224,7 @@
                     //$scope.NumReg = respuesta.data.numReg;
                     $scope.mostrardesplegable = true;
                     $scope.loading = false;
-                    document.getElementById("desplegable").style.display = "inline";
+                    document.getElementById("desplegable").style.display = "block";
                 })
         } else {
             $scope.resultadobusqueda = [];
