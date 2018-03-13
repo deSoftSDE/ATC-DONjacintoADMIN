@@ -63,7 +63,7 @@
            
         </div>
     </div>
-   
+   @*POPUP EDITAR/CREAR CARROCERIAS*@
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
             <div class="form">
@@ -75,10 +75,10 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <input type="text" class="form-control campo-search " ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar producto" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
+                    <input type="text" class="form-control campo-search " ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
                     <span class="input-group-btn">
                         <button class="btn btn-default boton-buscar" type="submit" id="btn_buscar" tabindex="2">
-                            <i class="glyphicon glyphicon-search"></i>
+                            <i class="fas fa-search"></i>
                         </button>
                     </span>
 
@@ -142,7 +142,7 @@
                     <div class="col text-right">
                         @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
                         <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
                     </div>
                 </div>
             </div>

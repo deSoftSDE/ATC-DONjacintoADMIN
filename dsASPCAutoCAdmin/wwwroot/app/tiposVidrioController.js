@@ -267,4 +267,7 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    $scope.cancelarCambios = function () {
+        $scope.popupVisible = false;
+    }
 });

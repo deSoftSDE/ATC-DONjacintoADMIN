@@ -301,4 +301,7 @@
             }
         });
     }
+    $scope.cancelarCambios = function () {
+        $scope.popupVisible = false;
+    }
 });
