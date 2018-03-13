@@ -189,9 +189,9 @@
                         cadena: "",
                         accionPagina: "N",
                         lastValor: vidrio.descripcion,
-                        lastIndice: respuesta.data.identidad,
+                        lastIndice: respuesta.data.identidad
                     };
-                    vidrio.idTipoVidrio = respuesta.identidad
+                    vidrio.idTipoVidrio = respuesta.identidad;
                     LeerRegistros(obj, vidrio);
                 }
                 console.log(respuesta);
@@ -223,26 +223,26 @@
     };
     $scope.hola = function () {
         alert("Hola");
-    }
+    };
     var obj = {
         tipo: "TiposVidrio",
         cadena: ""
     };
     LeerRegistros(obj);
     $scope.currentvidrio = {
-        descripcion: "Descripción",
+        descripcion: "Descripción"
     };
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
         $scope.currentvidrio = {
-            descripcion: "Descripción",
+            descripcion: "Descripción"
         };
     };
     $scope.guardarCambiosPopup = function () {
         console.log($scope.currentvidrio);
         $scope.guardarCambios($scope.currentvidrio);
         console.log($scope.currentvidrio);
-    }
+    };
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
         switch (val) {
