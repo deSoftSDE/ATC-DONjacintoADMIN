@@ -49,6 +49,14 @@
         },
         columns: [
             {
+                dataField: "url",
+                caption: "Imagen",
+                width: 100,
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "cellTemplate"
+            }, {
                 dataField: "descripcionGenerico",
                 width: 600,
                 caption: "Descripcion"
@@ -98,40 +106,53 @@
     };
 
     $scope.files = "";
-    $scope.guardarCambios = function (carroceria) {
-        guardarCambios(carroceria);
+    $scope.guardarCambios = function (vehiculo) {
+        if (NotNullNotUndefinedNotEmpty(vehiculo.files)) {
+            console.log(document.getElementById("filesup").files);
+            var fd = new FormData();
+            fd.append('file.jpg', document.getElementById("filesup").files[0]);
+            console.log(fd);
+            console.log(vehiculo.files);
+            //console.log($scope.files);
+            vehiculo.url = vehiculo.files.data;
+            //console.log(vidrio.files.data);
+            Llamada.postFile(fd)
+                .then(function (respuesta) {
+                    vehiculo.imagen = respuesta[0].contenido;
+                    document.getElementById("filesup").files = null;
+                    guardarCambios(vehiculo);
+                });
+        } else {
+            vehiculo.newImagen = vehiculo.imagen;
+            guardarCambios(vehiculo);
+        }
+
         $scope.datagrid.collapseAll(-1);
     };
-    $scope.modificarCarroceria = function (vid) {
-        console.log(vid);
-        Llamada.get("CarroceriasLeerPorID?IDCarroceria=" + vid.data.idCarroceria)
-            .then(function (respuesta) {
-                $scope.popupVisible = true;
-                $scope.currentcarroceria = respuesta.data;
-            })
+    $scope.modificarTipoVehiculo = function (vid) {
+        $scope.popupVisible = true;
+        $scope.currentvehiculo = vid.data;
     };
-    guardarCambios = function (carroceria) {
-        carroceria.files = null;
-        console.log(carroceria);
-        Llamada.post("CarroceriasCrearModificar", carroceria)
+    guardarCambios = function (vehiculo) {
+        vehiculo.files = null;
+        Llamada.post("TiposVehiculoCrearModificar", vehiculo)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
-                if (ZeroSiNull(carroceria.idCarroceria) < 1) {
+                if (ZeroSiNull(vehiculo.idGenerico) < 1) {
                     var obj = {
-                        tipo: "Carrocerias",
+                        tipo: "TipoVehiculo",
                         cadena: "",
                         accionPagina: "N",
-                        lastValor: carroceria.descripcion,
+                        lastValor: vehiculo.descripcion,
                         lastIndice: respuesta.data.identidad
                     };
-                    carroceria.idCarroceria = respuesta.identidad;
-                    LeerRegistros(obj, carroceria);
+                    vehiculo.idGenerico = respuesta.identidad;
+                    LeerRegistros(obj, vehiculo);
                 }
                 console.log(respuesta);
 
                 $scope.popupVisible = false;
             });
-        $scope.popupVisible = false;
 
     };
     $scope.popupVisible = false;
@@ -168,12 +189,12 @@
     };
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
-        $scope.currentcarroceria = {
+        $scope.currentvehiculo = {
             descripcion: "Descripción"
         };
     };
     $scope.guardarCambiosPopup = function () {
-        $scope.guardarCambios($scope.currentcarroceria);
+        $scope.guardarCambios($scope.currentvehiculo);
     };
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
