@@ -3,7 +3,7 @@
 }
 
 
-<div class="container " ng-controller="Marcas">aaaa
+<div class="container " ng-controller="Marcas">
     <div class="row">
         <div class="col-12 p-5">
             <h2>@ViewData["Title"]</h2>
@@ -35,7 +35,7 @@
                 </div>
                <div class="col-6 text-right">
                     @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
+                    <button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nueva marca</button>
                </div>
             </div>
                 <div class="dx-viewport demo-container">
@@ -53,7 +53,7 @@
                         <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
                             @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
                         </div>
 
@@ -67,14 +67,16 @@
         <div class='popup-property-details'>
             <div class="form">
                 <div class="form-group">
-                    <label>Descripción </label>
+                    <label>Descripción de la marca </label>
                     <div class="col-12">
                         <input type="text" ng-model="currentmarca.descripcionSeccion" class="form-control" />
-                        <small id="emailHelp" class="form-text text-muted">Descripción de la marca</small>
                     </div>
+                    
+                </div>
+                <div class="form-group">
                     <div class="col-12">
+                        <label>Código de sección</label>
                         <input type="text" ng-model="currentmarca.codigoSeccion" class="form-control" />
-                        <small id="emailHelp" class="form-text text-muted">Código de sección</small>
                     </div>
                 </div>
                 <div class="row">
@@ -83,7 +85,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6 offset-3">
                         <img class="img-fluid d-block mx-auto" ng-src="{{currentmarca.url}}" onerror="this.src='../images/imagen_defect.png'" />
                     </div>
                     <div class="col-12">
@@ -104,7 +106,8 @@
                 <div class="row">
                     <div class="col text-right">
                         <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                       
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
+
                     </div>
                 </div>
             </div>
