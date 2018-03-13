@@ -70,6 +70,14 @@ namespace dsASPCAutoCAdmin.Controllers
             return View();
         }
 
+        public IActionResult Marcas()
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            ViewData["Message"] = "Página de Marcas";
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

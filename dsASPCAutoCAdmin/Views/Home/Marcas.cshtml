@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Marcas";
+}
+
+
+<div class="container " ng-controller="Marcas">aaaa
+    <div class="row">
+        <div class="col-12 p-5">
+            <h2>@ViewData["Title"]</h2>
+            <h3>@ViewData["Message"]</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row mb-4">
+                <div class="col-6">
+                    <div class="dataTables_wrapper">
+                        <div class="dataTables_paginate" style="float:left">
+                            <ul class="pagination">
+                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
+                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
+                                </li>
+                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
+                                </li>
+                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
+                                </li>
+                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+               <div class="col-6 text-right">
+                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
+                    <button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
+               </div>
+            </div>
+                <div class="dx-viewport demo-container">
+                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
+                        <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                            <img class="img-fluid" ng-src="{{tiv.value}}" onerror="this.src='../images/imagen_defect.png'" />
+
+                        </div>
+                        <div data-options="dxTemplate:{ name:'editTemplate' }">
+
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                            <button type="submit" ng-click="modificarMarca(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+
+                        </div>
+                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+
+                        </div>
+
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+   
+    <div dx-popup="popupOptions">
+        <div class='popup-property-details'>
+            <div class="form">
+                <div class="form-group">
+                    <label>Descripción </label>
+                    <div class="col-12">
+                        <input type="text" ng-model="currentmarca.descripcionSeccion" class="form-control" />
+                        <small id="emailHelp" class="form-text text-muted">Descripción de la marca</small>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" ng-model="currentmarca.codigoSeccion" class="form-control" />
+                        <small id="emailHelp" class="form-text text-muted">Código de sección</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <img class="img-fluid d-block mx-auto" ng-src="{{currentmarca.url}}" onerror="this.src='../images/imagen_defect.png'" />
+                    </div>
+                    <div class="col-12">
+                         <hr />
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Sube una imagen de la marca</label>
+                            <div class="col-12 text-center">
+                                <input type="file" id="filesup" ng-file-model="currentmarca.files" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                </div>
+                <div class="row">
+                    <div class="col text-right">
+                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
