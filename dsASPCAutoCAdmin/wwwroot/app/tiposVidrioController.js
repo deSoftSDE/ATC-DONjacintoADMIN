@@ -19,8 +19,13 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: true, // Enables removing
-            editEnabled: false
+            editEnabled: false,
+            texts: {
+                deleteRow:"eliminar",
+            }
         },
+        width: "auto",
+        columnAutoWidth:true,
         selection: {
             mode: "single"
         },

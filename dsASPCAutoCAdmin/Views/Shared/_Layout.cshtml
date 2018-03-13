@@ -73,7 +73,7 @@
 </head>
 <body ng-controller="navegacion">
 
-    <section class="layout-navigation">
+    <section class="layout-navigation d-none  d-lg-block">
         <div class="site-logo p-1">
             <img class="img-fluid" src="~/images/logo.png" />
             <div class="main-menu" id=""></div>
@@ -94,28 +94,51 @@
         <div class="left-menu" id="custom-filters">
             <div class="menu-header">Custom Filters</div>
             <div class="custom-filers-block">
-                <ul></ul>
+                <ul>
+                   
+}
+                </ul>
             </div>
         </div>
     </section>
 
     <section class="layout-content">
         <header class="header">
-            <div class="buttons">
-               
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="buttons  d-block d-sm-block d-md-block  d-lg-none ">
+                            <ul class="list-inline text-center ">
+                                @foreach (var item in FilterMenu)
+            {
+                    <li class="list-inline-item"><a href="/Home/@item.Value">@item.Key</a></li>
+}
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
             </div>
-            <div class="search-box">
+           
+            @*<div class="search-box">
                 <div class="search"></div>
                 <div class="icon-find"></div>
-            </div>
+            </div>*@
         </header>
-        <div class="main-content">
-            @RenderBody()
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="main-content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
         </div>
+        
         <footer class="footer">
             <div class="copy">
-                Powered by DevExtreme&copy;<br />
-                <a href="https://js.devexpress.com/Download/" target="_blank">Download your free 30-day trial</a>
+               
             </div>
             <div class="social">
                 <a target="_blank" href="https://www.facebook.com/DevExpress" class="facebook"></a>
