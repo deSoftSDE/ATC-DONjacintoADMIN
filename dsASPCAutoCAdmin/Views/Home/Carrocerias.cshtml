@@ -71,63 +71,69 @@
                     <label>Descripción </label>
                     <div class="col-12">
                         <input type="text" ng-model="currentcarroceria.descripcion" class="form-control form-control-sm" />
-                        <small id="emailHelp" class="form-text text-muted">Descripción de la carrocería</small>
                     </div>
                 </div>
-                <div class="input-group">
-                    <input type="text" class="form-control campo-search " ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default boton-buscar" type="submit" id="btn_buscar" tabindex="2">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </span>
-
+                <div class="form-group">
+                    <label class="">Incluir un tipo de Vidrio a la Carrocería</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control campo-search " ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2">
+                                <i class="fas fa-search"></i></button>
+                        </span>
+                    </div>
                 </div>
                 <div class="desplegable" style="display:none" id="desplegable" ng-hide="!mostrardesplegable">
-                <table class="tablaresultados">
-                    <tbody>
-                        <tr ng-if="!loading" class="" ng-repeat="resultado in resultadobusqueda" ng-click="anadirVidrio(resultado)">
-                            <td class="">
-                                <a class="resul-search">
-                                    {{resultado.descripcion}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="otrainfo" ng-if="loading">
-                            <td class="">
-                                <a>
-                                    <img class="img-fluid" src="~/img/cargando.gif" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr ng-show="resultadobusqueda.length<1" class="otrainfo">
-                            <td>
-                                <a>
-                                    No hay resultados que mostrar
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-                <div class="row">
-                    <table>
-                        <tr>
-                            <th>Tipo de Vidrio</th>
-                            <th>Posición Vertical</th>
-                            <th>Posicion Horizontal</th>
-                            <th>Extension Vertical</th>
-                            <th>Extensión Horizontal</th>
-                        </tr>
-                        <tr ng-repeat="vidrio in currentcarroceria.vidrios | filter:noEliminado">
-                            <td>{{vidrio.descripcion}}</td>
-                            <td><input type="number" ng-model="vidrio.posVer" /></td>
-                            <td><input type="number" ng-model="vidrio.posHor" /></td>
-                            <td><input type="number" ng-model="vidrio.spanVer" /></td>
-                            <td><input type="number" ng-model="vidrio.spanHor" /></td>
-                            <td><input type="submit" ng-click="eliminarVidrio(vidrio, $index)" /></td>
-                        </tr>
+                    <table class="tablaresultados">
+                        <tbody>
+                            <tr ng-if="!loading" class="" ng-repeat="resultado in resultadobusqueda" ng-click="anadirVidrio(resultado)">
+                                <td class="">
+                                    <a class="resul-search">
+                                        {{resultado.descripcion}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="otrainfo" ng-if="loading">
+                                <td class="">
+                                    <a>
+                                        <img class="img-fluid" src="~/img/cargando.gif" />
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr ng-show="resultadobusqueda.length<1" class="otrainfo">
+                                <td>
+                                    <a>
+                                        No hay resultados que mostrar
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table-sm ">
+                                <tr>
+                                    <th>Tipo de Vidrio</th>
+                                    <th>Posición Vertical</th>
+                                    <th>Posicion Horizontal</th>
+                                    <th>Extension Vertical</th>
+                                    <th>Extensión Horizontal</th>
+                                </tr>
+                                <tr ng-repeat="vidrio in currentcarroceria.vidrios | filter:noEliminado">
+                                    <td>{{vidrio.descripcion}}</td>
+                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posVer" /></td>
+                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posHor" /></td>
+                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanVer" /></td>
+                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanHor" /></td>
+                                    <td><button class="btn btn-sm btn-default form-control" type="submit" ng-click="eliminarVidrio(vidrio, $index)" ><i class="fas fa-trash"></i> </button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                   
                 </div>
                 <div class="row">
                     <div class="col-12">
