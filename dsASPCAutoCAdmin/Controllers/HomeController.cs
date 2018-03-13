@@ -60,7 +60,13 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "Página de Carrocerías";
-            //ViewData["Company"] = SampleData.Companies;
+            return View();
+        }
+        public IActionResult TiposVehiculo()
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            ViewData["Message"] = "Página de Tipos de vehiculo";
             return View();
         }
 

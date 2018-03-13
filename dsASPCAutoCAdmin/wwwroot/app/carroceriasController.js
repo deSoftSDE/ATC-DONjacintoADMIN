@@ -49,16 +49,11 @@
         },
         columns: [
             {
-                dataField: "idCarroceria",
-                allowEditing: false,
-                width: 100,
-                caption: "IDCarrocería"
-            }, {
                 dataField: "descripcion",
                 width: 600,
                 caption: "Descripcion"
             }, {
-                caption: "Modificar",
+                caption: "",
                 width: 100,
                 allowFiltering: false,
                 allowSorting: false,

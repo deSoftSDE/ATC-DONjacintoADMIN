@@ -30,16 +30,26 @@ namespace dsASPCAutoCAdmin.DataAccess
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 if (_reader.Read())
                 {
-                    res.IDTipoVehiculo = AsignaEntero("IDTipoVehiculo");
                     res.IDGenerico = AsignaEntero("IDGenerico");
                     res.Imagen = AsignaCadena("Imagen");
-                    res.Descripcion = AsignaCadena("Descripcion");
-                    res.NombreTipo = AsignaCadena("NombreTipo");
+                    
                 }
             }
             return res;
         }
-        
+        public void CarroceriasEliminar(int IDCarroceria)
+        {
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDCarroceria", IDCarroceria),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.CarroceriasEliminar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+        }
 
         public MarcaModelo MarcasModelosLeerPorID(int IDMarcaModelo)
         {
@@ -91,7 +101,10 @@ namespace dsASPCAutoCAdmin.DataAccess
                         IDVidrio = AsignaEntero("IDVidrio"),
                         IDTipoVidrio = AsignaEntero("IDTipoVidrio"),
                         Descripcion = AsignaCadena("Descripcion"),
-                        Imagen = AsignaCadena("Imagen"),
+                        PosVer = AsignaEntero("PosVer"),
+                        PosHor = AsignaEntero("PosHor"),
+                        SpanVer = AsignaEntero("SpanVer"),
+                        SpanHor = AsignaEntero("SpanHor"),
                     };
                     res.Vidrios.Add(vd);
                 }
@@ -183,6 +196,30 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Imagen", tiv.Imagen),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVidrioCrearModificar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.Identidad = AsignaEntero("Identidad");
+                    res.TS = AsignaArrayByte("TS");
+                    res.Resultado = AsignaCadena("Resultado");
+                }
+            }
+            return res;
+        }
+        public ResultadoIM CarroceriasCrearModificar(Carroceria tiv)
+        {
+            var res = new ResultadoIM();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                var vid = dsCore.Comun.Ayudas.SerializarACadenaXML(tiv.Vidrios);
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDCarroceria", tiv.IDCarroceria),
+                    new SqlParameter("@Descripcion", tiv.Descripcion),
+                    new SqlParameter("@Vidrios", vid),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.CarroceriasCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 if (_reader.Read())
                 {
