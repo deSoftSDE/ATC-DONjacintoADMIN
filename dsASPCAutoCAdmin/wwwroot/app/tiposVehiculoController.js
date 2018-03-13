@@ -122,7 +122,7 @@
             Llamada.postFile(fd)
                 .then(function (respuesta) {
                     vehiculo.imagen = respuesta[0].contenido;
-                    document.getElementById("filesup").files = null;
+                    document.getElementById("filesup").value = null;
                     guardarCambios(vehiculo);
                 });
         } else {

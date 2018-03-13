@@ -145,7 +145,7 @@
             Llamada.postFile(fd)
                 .then(function (respuesta) {
                     marca.imagen = respuesta[0].contenido;
-                    document.getElementById("filesup").files = null;
+                    document.getElementById("filesup").value = null;
                     guardarCambios(marca);
                 });
         } else {
