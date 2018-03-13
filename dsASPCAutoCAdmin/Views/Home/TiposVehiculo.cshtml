@@ -12,7 +12,6 @@
     </div>
     <div class="row">
         <div class="col-12">
-            @*<p>Use this area to provide additional information.</p>*@
             <div class="row mb-4">
                 <div class="col-6">
                     <div class="dataTables_wrapper">
@@ -42,7 +41,7 @@
                 <div class="dx-viewport demo-container">
                     <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
                         <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                            <img class="img-fluid" ng-src="{{tiv.value}}" />
+                            <img class="img-fluid" ng-src="{{tiv.value}}" onerror="this.src='../images/imagen_defect.png'" />
 
                         </div>
                         <div data-options="dxTemplate:{ name:'editTemplate' }">
@@ -81,7 +80,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <img class="img-fluid d-block mx-auto" src="~/images/imagen_defect.png" />
+                        <img class="img-fluid d-block mx-auto" ng-src="{{currentvehiculo.url}}" onerror="this.src='../images/imagen_defect.png'" />
                     </div>
                     <div class="col-12">
                          <hr />
