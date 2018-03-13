@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Tipo de Vehiculo";
+    ViewData["Title"] = "Marcas";
 }
 
 
-<div class="container " ng-controller="TiposVehiculo">
+<div class="container " ng-controller="Marcas">aaaa
     <div class="row">
         <div class="col-12 p-5">
             <h2>@ViewData["Title"]</h2>
@@ -47,13 +47,13 @@
                         <div data-options="dxTemplate:{ name:'editTemplate' }">
 
                             @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="modificarTipoVehiculo(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+                            <button type="submit" ng-click="modificarMarca(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
 
                         </div>
                         <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
                             @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
 
                         </div>
 
@@ -69,8 +69,12 @@
                 <div class="form-group">
                     <label>Descripción </label>
                     <div class="col-12">
-                        <input type="text" ng-model="currentvehiculo.descripcionGenerico" class="form-control" />
-                        <small id="emailHelp" class="form-text text-muted">Descripción del tipo de vehículo</small>
+                        <input type="text" ng-model="currentmarca.descripcionSeccion" class="form-control" />
+                        <small id="emailHelp" class="form-text text-muted">Descripción de la marca</small>
+                    </div>
+                    <div class="col-12">
+                        <input type="text" ng-model="currentmarca.codigoSeccion" class="form-control" />
+                        <small id="emailHelp" class="form-text text-muted">Código de sección</small>
                     </div>
                 </div>
                 <div class="row">
@@ -80,16 +84,16 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <img class="img-fluid d-block mx-auto" ng-src="{{currentvehiculo.url}}" onerror="this.src='../images/imagen_defect.png'" />
+                        <img class="img-fluid d-block mx-auto" ng-src="{{currentmarca.url}}" onerror="this.src='../images/imagen_defect.png'" />
                     </div>
                     <div class="col-12">
                          <hr />
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label>Sube una imagen del Tipo de Vehículo</label>
+                            <label>Sube una imagen de la marca</label>
                             <div class="col-12 text-center">
-                                <input type="file" id="filesup" ng-file-model="currentvehiculo.files" />
+                                <input type="file" id="filesup" ng-file-model="currentmarca.files" />
                             </div>
                         </div>
                     </div>

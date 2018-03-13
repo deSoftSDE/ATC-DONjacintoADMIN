@@ -64,29 +64,6 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
-
-        public IActionResult MarcasModelosLeerPorID(int IDMarcaModelo)
-        {
-            ObjectResult result;
-            var ad = new AdaptadorAtcAdmin(_configuration);
-            try
-            {
-                var res = ad.MarcasModelosLeerPorID(IDMarcaModelo);
-                result = new ObjectResult(res)
-                {
-                    StatusCode = (int)HttpStatusCode.OK
-                };
-            }
-            catch (Exception ex)
-            {
-                result = new ObjectResult(ex)
-                {
-                    StatusCode = (int)HttpStatusCode.Conflict
-                };
-                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
-            }
-            return result;
-        }
         public IActionResult TiposVidrioLeerPorID(int IDTipoVidrio)
         {
             ObjectResult result;
@@ -139,6 +116,29 @@ namespace dsASPCAutoCAdmin.Controllers
             try
             {
                 var res = ad.TiposVidrioCrearModificar(vidrio);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpPost]
+        public IActionResult MarcasCrearModificar([FromBody] Marca marca)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.MarcasCrearModificar(marca);
                 result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK

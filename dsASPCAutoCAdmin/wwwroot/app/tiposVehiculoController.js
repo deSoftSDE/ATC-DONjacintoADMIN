@@ -146,7 +146,7 @@
                         tipo: "TipoVehiculo",
                         cadena: "",
                         accionPagina: "N",
-                        lastValor: vehiculo.descripcion,
+                        lastValor: vehiculo.descripcionGenerico,
                         lastIndice: respuesta.data.identidad
                     };
                     vehiculo.idGenerico = respuesta.identidad;

@@ -104,6 +104,13 @@ namespace dsASPCAutoCAdmin.ViewModels
                     res.Entidad = "TipoVehiculo";
                     res.CampoOrdenacion = "DescripcionGenerico";
                     break;
+                case "Marcas":
+                    res.Vista = "Seccion";
+                    res.EntidadFuncion = "Seccion";
+                    res.CampoClave = "IdSeccion";
+                    res.Entidad = "Marca";
+                    res.CampoOrdenacion = "DescripcionSeccion";
+                    break;
             }
             return res;
         }
@@ -129,6 +136,10 @@ namespace dsASPCAutoCAdmin.ViewModels
                         break;
                     case "TipoVehiculo":
                         RellenoIndiceTipoVehiculo(action);
+                        break;
+                    case "Marca":
+                    case "Marcas":
+                        RellenoIndiceMarca(action);
                         break;
                 }
             }
@@ -156,6 +167,16 @@ namespace dsASPCAutoCAdmin.ViewModels
             cm.LastIndice = c.IDTipoVidrio;
             cm.FirstValor = d.Descripcion;
             cm.FirstIndice = d.IDTipoVidrio;
+            cm.AccionPagina = action;
+        }
+        private void RellenoIndiceMarca(string action)
+        {
+            var c = (Marca)Articulos[Articulos.Count - 1];
+            var d = (Marca)Articulos[0];
+            cm.LastValor = c.DescripcionSeccion;
+            cm.LastIndice = c.IDSeccion;
+            cm.FirstValor = d.DescripcionSeccion;
+            cm.FirstIndice = d.IDSeccion;
             cm.AccionPagina = action;
         }
         private void RellenoIndiceTipoVehiculo(string action)

@@ -77,12 +77,19 @@ namespace dsASPCAutoCAdmin.Entidades
         public string CodigoGenerico { get; set; }
         //public int IdFamilia { get; set; }
     }
-    public class MarcaModelo
+    /*public class MarcaModelo
     {
         public int IDMarcaModelo { get; set; }
         public int IDFamilia { get; set; }
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
+    }*/
+    public class Marca
+    {
+        public int IDSeccion { get; set; }
+        public string DescripcionSeccion { get; set; }
+        public string Imagen { get; set; }
+        public string CodigoSeccion { get; set; }
     }
     [DataContract]
     [Serializable]
