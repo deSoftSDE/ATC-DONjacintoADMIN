@@ -110,5 +110,13 @@ namespace dsASPCAutoCAdmin.DataAccess
             ((Marca)entidadLista).CodigoSeccion = AsignaCadena("CodigoSeccion");
 
         }
+        private void metodoRellenoModelo(object entidadLista)
+        {
+            ((Modelo)entidadLista).IDFamilia = AsignaEntero("IDFamilia");
+            ((Modelo)entidadLista).DescripcionFamilia = AsignaCadena("DescripcionFamilia");
+            ((Modelo)entidadLista).Imagen = AsignaCadena("Imagen");
+            ((Modelo)entidadLista).CodigoFamilia = AsignaCadena("CodigoFamilia");
+
+        }
     }
 }

@@ -165,7 +165,7 @@
         Llamada.post("MarcasCrearModificar", carroceria)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
-                if (ZeroSiNull(carroceria.idCarroceria) < 1) {
+                if (ZeroSiNull(carroceria.idSeccion) < 1) {
                     var obj = {
                         tipo: "Marcas",
                         cadena: "",

@@ -91,6 +91,13 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Imagen { get; set; }
         public string CodigoSeccion { get; set; }
     }
+    public class Modelo
+    {
+        public int IDFamilia { get; set; }
+        public string DescripcionFamilia { get; set; }
+        public string Imagen { get; set; }
+        public string CodigoFamilia { get; set; }
+    }
     [DataContract]
     [Serializable]
     public class BuscaArticulo
