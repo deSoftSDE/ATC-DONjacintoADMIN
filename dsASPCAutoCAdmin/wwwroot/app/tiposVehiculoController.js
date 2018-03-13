@@ -43,10 +43,6 @@
             e.component.collapseAll(-1);
             e.component.expandRow(e.currentSelectedRowKeys[0]);
         },*/
-        onRowRemoving: function (e) {
-            console.log(e);
-            eliminarRegistro(e.data.idCarroceria);
-        },
         columns: [
             {
                 dataField: "url",
@@ -67,6 +63,13 @@
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "editTemplate"
+            }, {
+                caption: "",
+                width: 80,
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "deleteTemplate"
             }
         ],
         onInitialized: function (e) {
@@ -170,10 +173,11 @@
     $scope.cambioInput = function () {
         alert("Holi");
     };
-    eliminarRegistro = function (id) {
-        Llamada.get("CarroceriasEliminar?idCarroceria=" + id)
+    $scope.eliminarRegistro = function (a) {
+        Llamada.get("TipoVehiculoEliminar?idGenerico=" + a.data.idGenerico)
             .then(function (respuesta) {
                 console.log(respuesta);
+                LeerRegistros($scope.lastConsulta);
             });
     };
     $scope.hola = function () {
