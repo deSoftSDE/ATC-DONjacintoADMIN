@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Tipo de Carrocería";
+    ViewData["Title"] = "Tipo de Vehiculo";
 }
 
 
@@ -51,6 +51,12 @@
                             <button type="submit" ng-click="modificarTipoVehiculo(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
 
                         </div>
+                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+
+                        </div>
 
                     </div>
                 </div>
@@ -94,7 +100,6 @@
                 </div>
                 <div class="row">
                     <div class="col text-right">
-                        @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
                         <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
                        
                     </div>

@@ -18,7 +18,7 @@
         keyExpr: "id",
         editing: {
             allowAdding: false, // Enables insertion
-            allowDeleting: true, // Enables removing
+            allowDeleting: false, // Enables removing
             editEnabled: false,
             texts: {
                 deleteRow:"eliminar",
@@ -48,11 +48,6 @@
             e.component.collapseAll(-1);
             e.component.expandRow(e.currentSelectedRowKeys[0]);
         },*/
-        onRowRemoving: function (e) {
-            console.log(e);
-            console.log(e.data.idTipoVidrio);
-            eliminarRegistro(e.data.idTipoVidrio);
-        },
         columns: [
             {
                 dataField: "url",
@@ -91,6 +86,14 @@
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "editTemplate"
+            },
+            {
+                caption: "",
+                width: 80,
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "deleteTemplate"
             }
         ],
         summary: {
@@ -215,11 +218,19 @@
     $scope.cambioInput = function () {
         alert("Holi");
     };
-    eliminarRegistro = function (id) {
-        Llamada.get("TiposVidrioEliminar?idTipoVidrio=" + id)
-            .then(function (respuesta) {
-                console.log(respuesta);
-            });
+    $scope.eliminarRegistro = function (a) {
+        console.log(a);
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este tipo de vidrio?");
+        result.then(function (val) {
+            if (val) {
+                Llamada.get("TiposVidrioEliminar?idTipoVidrio=" + a.data.idTipoVidrio)
+                    .then(function (respuesta) {
+                        console.log(respuesta);
+                            LeerRegistros($scope.lastConsulta);
+                    });
+            }
+        });
+        
     };
     $scope.hola = function () {
         alert("Hola");

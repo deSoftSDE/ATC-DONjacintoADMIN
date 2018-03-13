@@ -59,6 +59,13 @@
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "editTemplate"
+            }, {
+                caption: "",
+                width: 80,
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "deleteTemplate"
             }
         ],
         summary: {
@@ -124,7 +131,7 @@
             .then(function (respuesta) {
                 $scope.popupVisible = true;
                 $scope.currentcarroceria = respuesta.data;
-            })
+            });
     };
     guardarCambios = function (carroceria) {
         carroceria.files = null;
@@ -165,11 +172,22 @@
     $scope.cambioInput = function () {
         alert("Holi");
     };
-    eliminarRegistro = function (id) {
-        Llamada.get("CarroceriasEliminar?idCarroceria=" + id)
-            .then(function (respuesta) {
-                console.log(respuesta);
-            });
+    $scope.eliminarRegistro = function (id) {
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta carrocería?");
+        result.then(function (val) {
+            if (val) {
+                
+
+                Llamada.get("CarroceriasEliminar?idCarroceria=" + id.data.idCarroceria)
+                    .then(function (respuesta) {
+                        console.log(respuesta);
+                        
+                            LeerRegistros($scope.lastConsulta);
+                    });
+            }
+        });
+
+        
     };
     $scope.hola = function () {
         alert("Hola");
@@ -206,15 +224,15 @@
     };
     fnocultar = function () {
         $scope.mostrardesplegable = false;
-    }
+    };
     $scope.focofuera = function (a, b) {
         $timeout(fnocultar, 1000);
-    }
+    };
     $scope.entrafoco = function () {
         if (NotNullNotUndefinedNotEmpty($scope.resultadobusqueda)) {
             $scope.mostrardesplegable = true;
         }
-    }
+    };
     buscarArticulos = function () {
         $scope.loading = true;
         if ($scope.cadena.length > 0) {
