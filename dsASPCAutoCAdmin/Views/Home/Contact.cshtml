@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
+<script type="text/javascript" src="https://cdn.rawgit.com/dbunic/REDIPS_drag/master/redips-drag-min.js"></script>
+<script type="text/javascript" src="~/app/drag-and-drop.js"></script>
+<link rel="stylesheet" href="~/css/drag.css"/>
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
@@ -15,3 +18,53 @@
     <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+<!-- drag container -->
+<div id="redips-drag">
+    <!-- table1 -->
+    holiii
+    <table id="table1">
+        <colgroup>
+            <col width="100" />
+            <col width="100" />
+            <col width="100" />
+        </colgroup>
+        <tbody>
+            <!-- clone 2 elements -->
+            <tr>
+                <td><div id="a" class="redips-drag redips-clone orange">A</div></td>
+                <td><div id="b" class="redips-drag redips-clone green">B</div></td>
+                <td class="redips-trash">Trash</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- table2 -->
+    <table id="table2"  border="1">
+        <colgroup>
+            <col width="100" />
+            <col width="100" />
+            <col width="100" />
+            <col width="100" />
+        </colgroup>
+        <tbody>
+            <tr id="tr1" style="height:40px">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="height:40px">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="height:40px"><td></td><td></td><td></td><td></td></tr>
+            <tr style="height:40px"><td></td><td></td><td></td><td></td></tr>
+            <tr style="height:40px"><td></td><td></td><td></td><td></td></tr>
+            <tr style="height:40px"><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<br />

@@ -67,6 +67,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public int SpanVer { get; set; }
         public int SpanHor { get; set; }
         public string DescripcionTipoVidrio { get; set; }
+        public int Modificador { get; set; }
     }
     public class TipoVehiculo
     {

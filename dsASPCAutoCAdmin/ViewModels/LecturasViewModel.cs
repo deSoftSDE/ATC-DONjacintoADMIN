@@ -73,8 +73,9 @@ namespace dsASPCAutoCAdmin.ViewModels
             switch (tipo)
             {
                 case "Carroceria":
+                case "Carrocerias":
                     res.Vista = "VCarrocerias";
-                    res.EntidadFuncion = "Carroceria";
+                    res.EntidadFuncion = "VCarrocerias";
                     res.CampoClave = "IdCarroceria";
                     res.Entidad = "Carroceria";
                     break;

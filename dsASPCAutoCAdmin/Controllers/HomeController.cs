@@ -41,6 +41,8 @@ namespace dsASPCAutoCAdmin.Controllers
 
         public IActionResult Contact()
         {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "Your contact page.";
 
             return View();
@@ -50,6 +52,14 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "Página de tipos de Vidrio";
+            //ViewData["Company"] = SampleData.Companies;
+            return View();
+        }
+        public IActionResult Carrocerias()
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            ViewData["Message"] = "Página de Carrocerías";
             //ViewData["Company"] = SampleData.Companies;
             return View();
         }

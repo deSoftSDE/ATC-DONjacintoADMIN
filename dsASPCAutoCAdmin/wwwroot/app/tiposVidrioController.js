@@ -119,7 +119,7 @@
         Llamada.post("LecturasGenericasPaginadas", obj)
             .then(function (respuesta) {
                 if (respuesta.data.articulos.length < 1) {
-                    switch (val) {
+                    switch (obj.accionPagina) {
                         case "N":
                             cambiarBotonesPaginacionFinales("disabled");
                             break;

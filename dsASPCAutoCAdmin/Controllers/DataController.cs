@@ -154,6 +154,29 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        [HttpPost]
+        public IActionResult CarroceriasCrearModificar([FromBody] Carroceria carroceria)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                //var res = ad.CarroceriasCrearModificar(carroceria);
+                result = new ObjectResult(1)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
         public IActionResult VidriosLeerPorID(int IDVidrio)
         {
             ObjectResult result;
@@ -184,6 +207,30 @@ namespace dsASPCAutoCAdmin.Controllers
             try
             {
                 var res = new LecturasViewModel(_configuration, bs);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpGet]
+        public IActionResult TiposVidrioLeerPorCadena(string cadena)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                //var res = new LecturasViewModel(_configuration, bs);
+                var res = ad.TiposVidrioLeerPorCadena(cadena);
                 result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK
