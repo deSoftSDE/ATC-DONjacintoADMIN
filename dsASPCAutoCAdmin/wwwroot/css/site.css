@@ -2406,4 +2406,17 @@ a.dx-link-delete{
     font-size:14px;
     line-height:20px;
     padding-left:10px;
+    margin-top:-16px;
+}
+
+.form-posicion {
+    width: 51px;
+    background-color: #fafafa !important;
+    border-top: 0 solid !important;
+    border-left: 0 solid !important;
+    border-right: 0 solid !important;
+    text-align:center;
+}
+
+
 }

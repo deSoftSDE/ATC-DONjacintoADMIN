@@ -18,7 +18,7 @@
         keyExpr: "id",
         editing: {
             allowAdding: false, // Enables insertion
-            allowDeleting: true, // Enables removing
+            allowDeleting: false, // Enables removing
             editEnabled: false
         },
         selection: {
