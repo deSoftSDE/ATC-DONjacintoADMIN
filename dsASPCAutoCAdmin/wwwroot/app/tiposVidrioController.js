@@ -57,7 +57,7 @@
             }, {
                 dataField: "url",
                 caption: "Imagen",
-                width: 150,
+                width: 100,
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
@@ -86,7 +86,7 @@
             },*/
             {
                 caption: "Modificar",
-                width: 100,
+                width: 80,
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
