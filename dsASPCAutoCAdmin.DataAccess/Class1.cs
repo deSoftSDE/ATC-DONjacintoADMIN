@@ -206,6 +206,31 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public ResultadoIM TiposVehiculoCrearModificar(TipoVehiculo tiv)
+        {
+            var res = new ResultadoIM();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                //SIN HACER
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDGenerico", tiv.IDGenerico),
+                    new SqlParameter("@DescripcionGenerico", tiv.DescripcionGenerico),
+                    new SqlParameter("@Imagen", tiv.Imagen),
+                    new SqlParameter("@CodigoGenerico", tiv.CodigoGenerico),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVehiculoCrearModificar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.Identidad = AsignaEntero("Identidad");
+                    res.TS = AsignaArrayByte("TS");
+                    res.Resultado = AsignaCadena("Resultado");
+                }
+            }
+            return res;
+        }
         public ResultadoIM CarroceriasCrearModificar(Carroceria tiv)
         {
             var res = new ResultadoIM();
