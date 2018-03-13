@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Tipo de Carrocería";
+    ViewData["Title"] = "Tipo de Vehículo";
 }
 
 
-<div class="container " ng-controller="TiposVehiculo">aaaa
+<div class="container " ng-controller="TiposVehiculo">
     <div class="row">
         <div class="col-12 p-5">
             <h2>@ViewData["Title"]</h2>
@@ -136,6 +136,7 @@
                     <div class="col text-right">
                         @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
                         <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
 
                     </div>
                 </div>
