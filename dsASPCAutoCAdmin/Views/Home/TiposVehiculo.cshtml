@@ -53,7 +53,7 @@
                         <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
                             @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
                         </div>
 
@@ -67,10 +67,10 @@
         <div class='popup-property-details'>
             <div class="form">
                 <div class="form-group">
-                    <label>Descripción </label>
+                    <label>Descripción del tipo de vehículo </label>
                     <div class="col-12">
                         <input type="text" ng-model="currentvehiculo.descripcionGenerico" class="form-control" />
-                        <small id="emailHelp" class="form-text text-muted">Descripción del tipo de vehículo</small>
+                        
                     </div>
                 </div>
                 <div class="row">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6 offset-3">
                         <img class="img-fluid d-block mx-auto" ng-src="{{currentvehiculo.url}}" onerror="this.src='../images/imagen_defect.png'" />
                     </div>
                     <div class="col-12">
@@ -100,7 +100,8 @@
                 <div class="row">
                     <div class="col text-right">
                         <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                       
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
+
                     </div>
                 </div>
             </div>

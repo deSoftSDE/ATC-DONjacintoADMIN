@@ -193,9 +193,9 @@
     $scope.popupVisible = false;
     $scope.popupOptions = {
         width: 660,
-        height: 540,
+        height: "auto",
         showTitle: true,
-        title: "Nueva Carrocería",
+        title: "Nueva Marca",
         dragEnabled: false,
         bindingOptions: {
             visible: 'popupVisible'
@@ -318,6 +318,9 @@
                 console.log(vidrio);
             }
         });
+    }
+    $scope.cancelarCambios = function () {
+        $scope.popupVisible = false;
     }
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;

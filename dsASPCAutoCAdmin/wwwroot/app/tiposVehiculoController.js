@@ -18,7 +18,7 @@
         keyExpr: "id",
         editing: {
             allowAdding: false, // Enables insertion
-            allowDeleting: true, // Enables removing
+            allowDeleting: false, // Enables removing
             editEnabled: false
         },
         selection: {
@@ -161,9 +161,9 @@
     $scope.popupVisible = false;
     $scope.popupOptions = {
         width: 660,
-        height: 540,
+        height: "auto",
         showTitle: true,
-        title: "Nueva Carrocería",
+        title: "Editar/crear Tipo de Vehículo",
         dragEnabled: false,
         bindingOptions: {
             visible: 'popupVisible'
@@ -199,6 +199,9 @@
     };
     $scope.guardarCambiosPopup = function () {
         $scope.guardarCambios($scope.currentvehiculo);
+    };
+    $scope.cancelarCambios = function () {
+        $scope.popupVisible = false;
     };
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
