@@ -41,7 +41,7 @@
                 <div class="dx-viewport demo-container">
                     <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
                         <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                            <img class="img-fluid" ng-src="{{tiv.value}}" onerror="this.src='../images/imagen_defect.png'" />
+                            <img class="img-fluid d-block mx-auto" ng-src="{{tiv.value}}" onerror="this.src='../images/escudo.png'" />
 
                         </div>
                         <div data-options="dxTemplate:{ name:'editTemplate' }">
@@ -59,9 +59,9 @@
                         <div data-options="dxTemplate:{ name:'verTemplate' }">
 
                             @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            {{tiv.data.idSeccion}}
+                           
                             <a href="Modelos/{{tiv.data.idSeccion}}">
-                                <button type="submit" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Ver mas</button>
+                                <button type="submit" class="btn btn-default btn-sm"><i class="fas fa-share-square"></i></i> ir a Modelos</button>
                             </a>
 
 
