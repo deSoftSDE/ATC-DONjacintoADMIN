@@ -267,6 +267,29 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        [HttpPost]
+        public IActionResult ModelosCrearModificar([FromBody] Modelo modelo)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.ModelosCrearModificar(modelo);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
         public IActionResult VidriosLeerPorID(int IDVidrio)
         {
             ObjectResult result;
@@ -274,6 +297,28 @@ namespace dsASPCAutoCAdmin.Controllers
             try
             {
                 var res = ad.VidriosLeerPorID(IDVidrio);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        public IActionResult ModelosLeerPorID(int IDFamilia)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.ModelosLeerPorID(IDFamilia);
                 result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK
@@ -321,6 +366,30 @@ namespace dsASPCAutoCAdmin.Controllers
             {
                 //var res = new LecturasViewModel(_configuration, bs);
                 var res = ad.TiposVidrioLeerPorCadena(cadena);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpGet]
+        public IActionResult CarroceriasLeerPorCadena(string cadena)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                //var res = new LecturasViewModel(_configuration, bs);
+                var res = ad.CarroceriasLeerPorCadena(cadena);
                 result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK

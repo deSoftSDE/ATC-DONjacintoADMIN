@@ -12,11 +12,17 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    $scope.verModelo = function (a) {
+        irAModelo(a);
+    };
+    $scope.verMarca = function (a) {
+        irAMarca(a);
+    };
     Llamada.get("MarcasLeerPorID?IdSeccion=" + parseInt(document.getElementById("idseccion").value))
         .then(function (respuesta) {
             $scope.currentmarca = respuesta.data;
             $scope.currentmarca.url = Llamada.getRuta($scope.currentmarca.imagen);
-        })
+        });
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
@@ -53,6 +59,14 @@
         },
         columns: [
             {
+                dataField: "url",
+                caption: "Imagen",
+                width: 100,
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "cellTemplate"
+            }, {
                 dataField: "descripcionFamilia",
                 width: 600,
                 caption: "Descripcion"
@@ -264,7 +278,7 @@
                     $scope.mostrardesplegable = true;
                     $scope.loading = false;
                     document.getElementById("desplegable").style.display = "block";
-                })
+                });
         } else {
             $scope.resultadobusqueda = [];
             $scope.NumReg = 0;

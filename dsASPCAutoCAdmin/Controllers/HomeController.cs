@@ -69,7 +69,7 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Message"] = "";
             return View();
         }
-        public IActionResult ModelosCarrocerias(int id)
+        public IActionResult Modelo(int id)
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
@@ -103,7 +103,7 @@ namespace dsASPCAutoCAdmin.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Modelos(int id)
+        public IActionResult Marca(int id)
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;

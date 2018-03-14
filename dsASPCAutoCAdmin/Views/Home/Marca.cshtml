@@ -2,7 +2,14 @@
    
     var c = (Marca)ViewData["Marca"];
 }
+<script type="text/javascript">
+    function irAModelo(id) {
 
+        var url = '@Url.Action("Modelo", "Home")';
+        window.location.href = url + "/" +  id
+    }
+
+</script>
 
 <div class="container " ng-controller="Modelos">
     <div class="row">
@@ -83,6 +90,10 @@
             </div>
             <div class="dx-viewport demo-container">
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
+                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                        <img class="img-fluid d-block mx-auto" ng-src="{{tiv.value}}" onerror="this.src='../../images/escudo.png'" />
+
+                    </div>
                     <div data-options="dxTemplate:{ name:'editTemplate' }">
 
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
@@ -96,13 +107,7 @@
 
                     </div>
                     <div data-options="dxTemplate:{ name:'verTemplate' }">
-
-                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <a href="../ModelosCarrocerias/{{tiv.data.idFamilia}}">
-                            <button type="submit" class="btn btn-default btn-sm"><i class="fas fa-share-square"></i> Ver</button>
-                        </a>
-
-
+                            <button type="submit" class="btn btn-default btn-sm" ng-click="verModelo(tiv.data.idFamilia)"><i class="fas fa-share-square"></i> Ver</button>
                     </div>
 
                 </div>

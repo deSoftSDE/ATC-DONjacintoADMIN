@@ -21,6 +21,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Descripcion { get; set; }
         public List<Vidrio> Vidrios { get; set; }
         public string Imagen { get; set; }
+        public int IDModeloCarroceria { get; set; }
     }
     public class ResultadoIM
     {
@@ -100,6 +101,8 @@ namespace dsASPCAutoCAdmin.Entidades
         public string CodigoFamilia { get; set; }
         public int IdSeccion { get; set; }
         public string descripcionSeccion { get; set; }
+        public List<Carroceria> Carrocerias { get; set; }
+        public List<Carroceria> CarroceriasEliminadas { get; set; }
     }
     [DataContract]
     [Serializable]
