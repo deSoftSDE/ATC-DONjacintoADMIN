@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = ViewData["Message"];
+   
     var c = (Marca)ViewData["Marca"];
 }
 
@@ -7,9 +7,9 @@
 <div class="container " ng-controller="Modelos">
     <div class="row">
         <div class="col-12 p-5">
-            <h2>@ViewData["Title"]</h2>
+            <h2>@c.DescripcionSeccion</h2>
             <h3>@ViewData["Message"]</h3>
-            <input type="text" value="@c.IDSeccion" id="idseccion" />
+            <input type="hidden" value="@c.IDSeccion" id="idseccion" />
         </div>
     </div>
     <div>
