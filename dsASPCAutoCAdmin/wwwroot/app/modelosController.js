@@ -12,6 +12,9 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    $scope.verModelo = function (a) {
+        irAModelo(a);
+    }
     Llamada.get("MarcasLeerPorID?IdSeccion=" + parseInt(document.getElementById("idseccion").value))
         .then(function (respuesta) {
             $scope.currentmarca = respuesta.data;

@@ -2,7 +2,14 @@
     ViewData["Title"] = ViewData["Message"];
     var c = (Marca)ViewData["Marca"];
 }
+<script type="text/javascript">
+    function irAModelo(id) {
 
+        var url = '@Url.Action("Modelo", "Home")';
+        window.location.href = url + "/" +  id
+    }
+
+</script>
 
 <div class="container " ng-controller="Modelos">
     <div class="row">
@@ -96,13 +103,7 @@
 
                     </div>
                     <div data-options="dxTemplate:{ name:'verTemplate' }">
-
-                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <a href="../ModelosCarrocerias/{{tiv.data.idFamilia}}">
-                            <button type="submit" class="btn btn-default btn-sm"><i class="fas fa-share-square"></i> Ver</button>
-                        </a>
-
-
+                            <button type="submit" class="btn btn-default btn-sm" ng-click="verModelo(tiv.data.idFamilia)"><i class="fas fa-share-square"></i> Ver</button>
                     </div>
 
                 </div>

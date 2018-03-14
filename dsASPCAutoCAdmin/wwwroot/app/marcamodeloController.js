@@ -94,6 +94,12 @@
             $scope.datagrid = e.component;
         }
     };
+    $scope.verModelo = function (a) {
+        irAModelo(a);
+    }
+    $scope.verMarca = function (a) {
+        irAMarca(a);
+    }
     LeerRegistros = function (obj, objmodificado) {
         $scope.lastConsulta = JSON.parse("" + JSON.stringify(obj));
         Llamada.post("LecturasGenericasPaginadas", obj)

@@ -1,7 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Marcas (Sección)";
 }
+<script type="text/javascript">
+    function irAMarca(id) {
 
+        var url = '@Url.Action("Marca", "Home")';
+        window.location.href = url + "/" + id;
+    }
+
+    </script>
 
 <div class="container " ng-controller="Marcas">
     <div class="row">
@@ -34,7 +41,7 @@
                     </div>
                 </div>
                <div class="col-6 text-right">
-                   
+
                </div>
             </div>
                 <div class="dx-viewport demo-container">
@@ -58,20 +65,18 @@
                         <div data-options="dxTemplate:{ name:'verTemplate' }">
 
                             @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                           
-                            <a href="Modelos/{{tiv.data.idSeccion}}">
-                                <button type="submit" class="btn btn-default btn-sm"><i class="fas fa-share-square"></i></i> Ver </button>
-                            </a>
+
+                                <button type="submit" class="btn btn-default btn-sm" ng-click="verMarca(tiv.data.idSeccion)"><i class="fas fa-share-square"></i></i> Ver </button>
 
 
                         </div>
 
                     </div>
                 </div>
-           
+
         </div>
     </div>
-   
+
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
             <div class="form">
@@ -80,7 +85,7 @@
                     <div class="col-12">
                         <input type="text" ng-model="currentmarca.descripcionSeccion" class="form-control" />
                     </div>
-                    
+
                 </div>
                 <div class="form-group">
                     <div class="col-12">
@@ -110,7 +115,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    
+
                 </div>
                 <div class="row">
                     <div class="col text-right">

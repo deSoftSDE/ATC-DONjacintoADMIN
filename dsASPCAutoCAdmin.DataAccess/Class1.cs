@@ -59,6 +59,18 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.DescripcionFamilia = AsignaCadena("DescripcionFamilia");
 
                 }
+                res.Carrocerias = new List<Carroceria>();
+                _reader.NextResult();
+                while (_reader.Read())
+                {
+                    var cr = new Carroceria
+                    {
+                        Descripcion = AsignaCadena("Descripcion"),
+                        IDCarroceria = AsignaEntero("IDCarroceria"),
+                        IDModeloCarroceria = AsignaEntero("IDModeloCarroceria"),
+                    };
+                    res.Carrocerias.Add(cr);
+                }
             }
             return res;
         }
