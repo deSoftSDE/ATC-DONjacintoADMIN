@@ -58,7 +58,7 @@ namespace dsASPCAutoCAdmin.Controllers
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
-            ViewData["Message"] = "Editar-crear tipos de Vidrio";
+            ViewData["Message"] = "";
             //ViewData["Company"] = SampleData.Companies;
             return View();
         }
@@ -66,7 +66,7 @@ namespace dsASPCAutoCAdmin.Controllers
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
-            ViewData["Message"] = "Editar-crear Carrocerías";
+            ViewData["Message"] = "";
             return View();
         }
         public IActionResult ModelosCarrocerias(int id)
@@ -84,7 +84,7 @@ namespace dsASPCAutoCAdmin.Controllers
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
-            ViewData["Message"] = "Editar-crear Tipos de vehiculo";
+            ViewData["Message"] = "";
             return View();
         }
         public IActionResult Articulos()
@@ -99,7 +99,7 @@ namespace dsASPCAutoCAdmin.Controllers
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
-            ViewData["Message"] = "Editar-crear Marcas";
+            ViewData["Message"] = "";
             return View();
         }
         [HttpGet]

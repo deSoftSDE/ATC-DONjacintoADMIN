@@ -18,7 +18,8 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            editEnabled: false,
+            
         },
         selection: {
             mode: "single"
@@ -57,7 +58,7 @@
                 cellTemplate: "cellTemplate"
             }, {
                 dataField: "descripcionSeccion",
-                width: 600,
+                width: "auto",
                 caption: "Descripcion"
             }, {
                 dataField: "codigoSeccion",
@@ -72,14 +73,14 @@
                 cellTemplate: "editTemplate"
             }, {
                 caption: "",
-                width: 80,
+                width: "auto",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "deleteTemplate"
             }, {
                 caption: "",
-                width: 80,
+                width: "auto",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
