@@ -127,6 +127,14 @@ namespace dsASPCAutoCAdmin.ViewModels
                     res.Entidad = "Modelo";
                     res.CampoOrdenacion = "DescripcionFamilia";
                     break;
+                case "Articulo":
+                case "Articulos":
+                    res.Vista = "WebArticulos";
+                    res.EntidadFuncion = "WebArticulos";
+                    res.CampoClave = "IdArticulo";
+                    res.Entidad = "Articulo";
+                    res.CampoOrdenacion = "Descripcion";
+                    break;
             }
             return res;
         }
@@ -161,6 +169,10 @@ namespace dsASPCAutoCAdmin.ViewModels
                     case "Modelo":
                         RellenoIndiceModelo(action);
                         break;
+                    case "Articulo":
+                    case "Articulos":
+                        RellenoIndiceArticulo(action);
+                        break;
                 }
             }
             catch
@@ -187,6 +199,16 @@ namespace dsASPCAutoCAdmin.ViewModels
             cm.LastIndice = c.IDTipoVidrio;
             cm.FirstValor = d.Descripcion;
             cm.FirstIndice = d.IDTipoVidrio;
+            cm.AccionPagina = action;
+        }
+        private void RellenoIndiceArticulo(string action)
+        {
+            var c = (BuscaArticulo)Articulos[Articulos.Count - 1];
+            var d = (BuscaArticulo)Articulos[0];
+            cm.LastValor = c.Descripcion;
+            cm.LastIndice = c.IdArticulo;
+            cm.FirstValor = d.Descripcion;
+            cm.FirstIndice = d.IdArticulo;
             cm.AccionPagina = action;
         }
         private void RellenoIndiceMarca(string action)

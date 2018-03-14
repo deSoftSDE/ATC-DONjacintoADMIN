@@ -87,6 +87,13 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Message"] = "";
             return View();
         }
+        public IActionResult Articulos()
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            ViewData["Message"] = "Editar artículos";
+            return View();
+        }
 
         public IActionResult Marcas()
         {

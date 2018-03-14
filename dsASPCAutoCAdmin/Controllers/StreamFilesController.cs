@@ -95,6 +95,36 @@ namespace dsASPCAutoCAdmin.Controllers
                 return result;
             }
         }
+        /*[HttpGet]
+        public async Task<IActionResult> GetImagenPorIDArticulo(string idArticulo)
+        {
+            try
+            {
+                if (filename == null)
+                    return Content("Archivo no encontrado");
+                var downloadpath = _configuration.GetSection("StreamFiles")["downloads"];
+                var path = Path.Combine(
+                               downloadpath, filename);
+
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(path, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memory);
+                }
+                memory.Position = 0;
+
+                return File(memory, "image/png", Path.GetFileName(path));
+            }
+            catch (Exception ex)
+            {
+                var result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+                return result;
+            }
+        }*/
         [HttpGet]
         public async Task<IActionResult> Get(string filename)
         {

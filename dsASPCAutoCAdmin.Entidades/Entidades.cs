@@ -156,6 +156,12 @@ namespace dsASPCAutoCAdmin.Entidades
 
         [DataMember]
         public int? IdTipoIva { get; set; }
+        public int? IdFamilia { get; set; }
+        public int? IdSeccion { get; set; }
+        public int? IdGenerico { get; set; }
+        public string DescripcionFamilia { get; set; }
+        public string DescripcionSeccion { get; set; }
+        public string DescripcionGenerico { get; set; }
     }
     public class MensajeRespuesta
     {

@@ -338,6 +338,30 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        [HttpGet]
+        public IActionResult TiposVehiculoEliminar(int idGenerico)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                //var res = new LecturasViewModel(_configuration, bs);
+                ad.TiposVehiculoEliminar(idGenerico);
+                result = new ObjectResult(1)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
         [HttpPost]
         public IActionResult EjemploTipoVidrio(BusquedaPaginada bs)
         {
