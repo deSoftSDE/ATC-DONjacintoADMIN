@@ -53,7 +53,7 @@
                 allowEditing: false,
                 cellTemplate: "cellTemplate"
             }, {
-                dataField: "descripcionGenerico",
+                dataField: "descripcion",
                 width: 600,
                 caption: "Descripcion"
             }, {
@@ -141,15 +141,15 @@
         Llamada.post("TiposVehiculoCrearModificar", vehiculo)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
-                if (ZeroSiNull(vehiculo.idGenerico) < 1) {
+                if (ZeroSiNull(vehiculo.idTipoVehiculo) < 1) {
                     var obj = {
-                        tipo: "TipoVehiculo",
+                        tipo: "TiposVehiculo",
                         cadena: "",
                         accionPagina: "N",
-                        lastValor: vehiculo.descripcionGenerico,
+                        lastValor: vehiculo.descripcion,
                         lastIndice: respuesta.data.identidad
                     };
-                    vehiculo.idGenerico = respuesta.identidad;
+                    vehiculo.idTipoVehiculo = respuesta.identidad;
                     LeerRegistros(obj, vehiculo);
                 }
                 console.log(respuesta);
@@ -174,7 +174,7 @@
         alert("Holi");
     };
     $scope.eliminarRegistro = function (a) {
-        Llamada.get("TipoVehiculoEliminar?idGenerico=" + a.data.idGenerico)
+        Llamada.get("TipoVehiculoEliminar?idTipoVehiculo=" + a.data.idTipoVehiculo)
             .then(function (respuesta) {
                 console.log(respuesta);
                 LeerRegistros($scope.lastConsulta);

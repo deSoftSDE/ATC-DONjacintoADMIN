@@ -106,11 +106,12 @@ namespace dsASPCAutoCAdmin.ViewModels
                     res.Entidad = "MarcaModelo";
                     break;
                 case "TipoVehiculo":
-                    res.Vista = "Generico";
-                    res.EntidadFuncion = "Generico";
-                    res.CampoClave = "IdGenerico";
+                case "TiposVehiculo":
+                    res.Vista = "VTiposVehiculo";
+                    res.EntidadFuncion = "VTiposVehiculo";
+                    res.CampoClave = "IdTipoVehiculo";
                     res.Entidad = "TipoVehiculo";
-                    res.CampoOrdenacion = "DescripcionGenerico";
+                    res.CampoOrdenacion = "Descripcion";
                     break;
                 case "Marcas":
                     res.Vista = "Seccion";
@@ -236,10 +237,10 @@ namespace dsASPCAutoCAdmin.ViewModels
         {
             var c = (TipoVehiculo)Articulos[Articulos.Count - 1];
             var d = (TipoVehiculo)Articulos[0];
-            cm.LastValor = c.DescripcionGenerico;
-            cm.LastIndice = c.IDGenerico;
-            cm.FirstValor = d.DescripcionGenerico;
-            cm.FirstIndice = d.IDGenerico;
+            cm.LastValor = c.Descripcion;
+            cm.LastIndice = c.IDTipoVehiculo;
+            cm.FirstValor = d.Descripcion;
+            cm.FirstIndice = d.IDTipoVehiculo;
             cm.AccionPagina = action;
         }
         private void RellenoIndiceVidrio(string action)
