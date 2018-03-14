@@ -102,6 +102,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public int IdSeccion { get; set; }
         public string descripcionSeccion { get; set; }
         public List<Carroceria> Carrocerias { get; set; }
+        public List<Carroceria> CarroceriasEliminadas { get; set; }
     }
     [DataContract]
     [Serializable]

@@ -14,15 +14,15 @@
     };
     $scope.verModelo = function (a) {
         irAModelo(a);
-    }
+    };
     $scope.verMarca = function (a) {
         irAMarca(a);
-    }
+    };
     Llamada.get("MarcasLeerPorID?IdSeccion=" + parseInt(document.getElementById("idseccion").value))
         .then(function (respuesta) {
             $scope.currentmarca = respuesta.data;
             $scope.currentmarca.url = Llamada.getRuta($scope.currentmarca.imagen);
-        })
+        });
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
@@ -278,7 +278,7 @@
                     $scope.mostrardesplegable = true;
                     $scope.loading = false;
                     document.getElementById("desplegable").style.display = "block";
-                })
+                });
         } else {
             $scope.resultadobusqueda = [];
             $scope.NumReg = 0;

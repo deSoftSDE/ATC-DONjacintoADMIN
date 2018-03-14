@@ -9,7 +9,7 @@
     }
 </script>
 
-<div class="container " ng-controller="Carrocerias">
+<div class="container " ng-controller="ModeloCarroceria">
     <input style="display:none" type="text" value="@c.IDFamilia" id="idFamilia" />
     <div class="row">
         <div class="col-12 p-5">
@@ -63,51 +63,69 @@
             @*<p>Use this area to provide additional information.</p>*@
             <div class="row mb-4">
                 <div class="col-6">
-                    <div class="dataTables_wrapper">
-                        <div class="dataTables_paginate" style="float:left">
-                            <ul class="pagination">
-                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
-                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
-                                </li>
-                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
-                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
-                                </li>
-                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
-                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
-                                </li>
-                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
-                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="col-6 text-right">
                     @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
+                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="anadirCarroceria()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir Carrocería existente</button>
+                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Crear Nueva Carrocería </button>
                 </div>
             </div>
             <div class="dx-viewport demo-container">
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="carroceria" style="width:100% !important;">
                     <div data-options="dxTemplate:{ name:'cellTemplate' }">
                         <img class="img-fluid" ng-src="{{carroceria.value}}" />
-
                     </div>
                     <div data-options="dxTemplate:{ name:'editTemplate' }">
-
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
                         <button type="submit" ng-click="modificarCarroceria(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
-
                     </div>
                     <div data-options="dxTemplate:{ name:'deleteTemplate' }">
-
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
                         <button type="submit" ng-click="eliminarRegistro(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
-
                     </div>
 
                 </div>
             </div>
+            <div class="form-group">
+                <label class="">Incluir una carrocería existente</label>
+                <div class="input-group">
+                    <input type="text" class="form-control campo-search " ng-blur="focofuera2()" ng-focus="entrafoco2()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto2" tabindex="1" autocomplete="off" ng-change="cambiobusqueda2()" ng-model="cadena2" name="producto2">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="desplegable" style="display:none" id="desplegable2" ng-hide="!mostrardesplegable2">
+                <table class="tablaresultados">
+                    <tbody>
+                        <tr ng-if="!loading2" class="" ng-repeat="resultado in resultadobusqueda2" ng-click="anadirCarroceria(resultado)">
+                            <td class="">
+                                <a class="resul-search">
+                                    {{resultado.descripcion}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="otrainfo" ng-if="loading2">
+                            <td class="">
+                                <a>
+                                    <img class="img-fluid" src="~/img/cargando.gif" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="resultadobusqueda2.length<1" class="otrainfo">
+                            <td>
+                                <a>
+                                    No hay resultados que mostrar
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
 
         </div>
     </div>

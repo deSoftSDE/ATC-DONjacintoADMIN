@@ -16,12 +16,7 @@
     $scope.verMarca = function (a) {
         irAMarca(a);
     };
-    Llamada.get("ModelosLeerPorID?idFamilia=" + document.getElementById("idFamilia").value)
-        .then(function (respuesta) {
-            console.log(respuesta);
-            $scope.currentmodelo = respuesta.data;
-            $scope.currentmodelo.url = Llamada.getRuta($scope.currentmodelo.imagen);
-        });
+    
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
