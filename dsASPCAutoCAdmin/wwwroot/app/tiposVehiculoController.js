@@ -15,7 +15,6 @@
     };
     $scope.dataGridOptions = {
         dataSource: [],
-        keyExpr: "id",
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
@@ -24,10 +23,10 @@
         selection: {
             mode: "single"
         },
-        /*masterDetail: {
+        masterDetail: {
             enabled: false,
             template: "detail"
-        },*/
+        },
         onRowInserted: function (info, a) {
             console.log(info);
             console.log(a);
@@ -40,6 +39,8 @@
             info.component.saveEditData();
         },
         /*onSelectionChanged: function (e) {
+            console.log(e);
+            alert("abierto");
             e.component.collapseAll(-1);
             e.component.expandRow(e.currentSelectedRowKeys[0]);
         },*/
@@ -75,7 +76,15 @@
         onInitialized: function (e) {
             console.log(e);
             $scope.datagrid = e.component;
-        }
+        },
+        onRowUpdated: function (e) {
+            alert("Hola");
+            console.log(e);
+        },
+        onRowUpdating: function (e) {
+            alert("Hola");
+            console.log(e);
+        },
     };
     LeerRegistros = function (obj, objmodificado) {
         $scope.lastConsulta = JSON.parse("" + JSON.stringify(obj));

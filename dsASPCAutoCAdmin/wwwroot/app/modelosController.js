@@ -12,6 +12,11 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    Llamada.get("MarcasLeerPorID?IdSeccion=" + parseInt(document.getElementById("idseccion").value))
+        .then(function (respuesta) {
+            $scope.currentmarca = respuesta.data;
+            $scope.currentmarca.url = Llamada.getRuta($scope.currentmarca.imagen);
+        })
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
@@ -55,7 +60,7 @@
                 dataField: "codigoFamilia",
                 width: 100,
                 caption: "Código"
-            }, {
+            }, /*{
                 caption: "",
                 width: 100,
                 allowFiltering: false,
@@ -69,7 +74,7 @@
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "deleteTemplate"
-            }, {
+            },*/ {
                 caption: "",
                 width: 80,
                 allowFiltering: false,
@@ -154,27 +159,17 @@
 
         $scope.datagrid.collapseAll(-1);
     };
-    $scope.modificarMarca = function (vid) {
+    /*$scope.modificarMarca = function (vid) {
             $scope.popupVisible = true;
             $scope.currentmarca = vid.data;
-    };
+    };*/
     guardarCambios = function (carroceria) {
         carroceria.files = null;
         console.log(carroceria);
         Llamada.post("MarcasCrearModificar", carroceria)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
-                if (ZeroSiNull(carroceria.idSeccion) < 1) {
-                    var obj = {
-                        tipo: "Marcas",
-                        cadena: "",
-                        accionPagina: "N",
-                        lastValor: carroceria.descripcionSeccion,
-                        lastIndice: respuesta.data.identidad
-                    };
-                    carroceria.idCarroceria = respuesta.identidad;
-                    LeerRegistros(obj, carroceria);
-                }
+                
                 console.log(respuesta);
 
                 $scope.popupVisible = false;
@@ -223,15 +218,15 @@
         idSeccion: parseInt(document.getElementById("idseccion").value)
     };
     LeerRegistros(obj);
-    $scope.currentmarca = {
+    /*$scope.currentmarca = {
         descripcionSeccion: "Descripción"
-    };
-    $scope.crearRegistro = function () {
+    };*/
+    /*$scope.crearRegistro = function () {
         $scope.popupVisible = true;
         $scope.currentmarca = {
             descripcionSeccion: "Descripción"
         };
-    };
+    };*/
     $scope.guardarCambiosPopup = function () {
         $scope.guardarCambios($scope.currentmarca);
     };

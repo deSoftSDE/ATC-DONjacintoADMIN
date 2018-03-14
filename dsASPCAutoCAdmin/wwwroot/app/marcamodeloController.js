@@ -66,20 +66,6 @@
                 caption: "Código"
             }, {
                 caption: "",
-                width: 100,
-                allowFiltering: false,
-                allowSorting: false,
-                allowEditing: false,
-                cellTemplate: "editTemplate"
-            }, {
-                caption: "",
-                width: "auto",
-                allowFiltering: false,
-                allowSorting: false,
-                allowEditing: false,
-                cellTemplate: "deleteTemplate"
-            }, {
-                caption: "",
                 width: "auto",
                 allowFiltering: false,
                 allowSorting: false,

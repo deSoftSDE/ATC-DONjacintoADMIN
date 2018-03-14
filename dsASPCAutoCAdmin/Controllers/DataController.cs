@@ -130,6 +130,28 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        public IActionResult MarcasLeerPorID(int IDSeccion)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.MarcasLeerPorID(IDSeccion);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
         [HttpPost]
         public IActionResult TiposVidrioCrearModificar([FromBody] TipoVidrio vidrio)
         {
