@@ -23,6 +23,14 @@
             $scope.currentmarca = respuesta.data;
             $scope.currentmarca.url = Llamada.getRuta($scope.currentmarca.imagen);
         });
+    $scope.cancelar = function () {
+        Llamada.get("MarcasLeerPorID?IdSeccion=" + parseInt(document.getElementById("idseccion").value))
+            .then(function (respuesta) {
+                $scope.currentmarca = respuesta.data;
+                $scope.currentmarca.url = Llamada.getRuta($scope.currentmarca.imagen);
+                $scope.cambios = false;
+            });
+    }
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",

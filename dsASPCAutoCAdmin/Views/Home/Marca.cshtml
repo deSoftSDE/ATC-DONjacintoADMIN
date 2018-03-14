@@ -12,86 +12,63 @@
 </script>
 
 <div class="container " ng-controller="Modelos">
-    <div class="row">
-        <div class="col-12 p-5">
-            <h2>@c.DescripcionSeccion</h2>
-            <h3>@ViewData["Message"]</h3>
+    <div class="row mt-3">
+        <div class="col-4">
+            <h3>@c.DescripcionSeccion</h3>
+
             <input type="hidden" value="@c.IDSeccion" id="idseccion" />
-        </div>
-    </div>
-    <div>
-        <div class="form">
+            <img style="max-height:80px" class="img-fluid" ng-src="{{currentmarca.url}}" onerror="this.src=' ../../images/escudo.png'" />
             <div class="form-group">
-                <label>Descripción de la marca </label>
-                <div class="col-12">
-                    <input type="text" ng-model="currentmarca.descripcionSeccion" class="form-control" />
-                </div>
+                <label class=""><small>Sube una imagen de la marca</small></label>
+                <div class="col-12 ">
 
-            </div>
-            <div class="form-group">
-                <div class="col-12">
-                    <label>Código de sección</label>
-                    <input type="text" ng-model="currentmarca.codigoSeccion" class="form-control" />
+                    <input class="form-control form-control-sm" type="file" id="filesup" ng-file-model="currentmarca.files" />
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <hr />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 offset-3">
-                    <img class="img-fluid d-block mx-auto" ng-src="{{currentmarca.url}}" onerror="this.src='../images/imagen_defect.png'" />
-                </div>
-                <div class="col-12">
-                    <hr />
-                </div>
-                <div class="col-12">
-                    <div class="form-group">
-                        <label>Sube una imagen de la marca</label>
-                        <div class="col-12 text-center">
-                            <input type="file" id="filesup" ng-file-model="currentmarca.files" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
             </div>
         </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Nombre de la marca </label>
+                <div class="col-12">
+                    <input type="text" ng-change="cambios=true" ng-model="currentmarca.descripcionSeccion" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Código de sección</label>
+                <div class="col-3">
+                    <input type="text" ng-change="cambios=true" ng-model="currentmarca.codigoSeccion" class="form-control disabled" />
+                </div>
+            </div>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+            <button class="btn btn-danger" ng-if="cambios" type="submit" value="Guardar cambios" ng-click="cancelar()">Cancelar</button>
+
+        </div>
+
     </div>
+    <div class="row my-1">
+        <div class="col-12">
+            <hr />
+        </div>
+        <div classs="col-8"><h4>@ViewData["Message"] (Familia)</h4></div>
+        <div class="col text-right">
+           
+        </div>
+
+    </div>
+
+
+
+
+
+
     <div class="row">
         <div class="col-12">
-            <div class="row mb-4">
-                <div class="col-6">
-                    <div class="dataTables_wrapper">
-                        <div class="dataTables_paginate" style="float:left">
-                            <ul class="pagination">
-                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
-                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
-                                </li>
-                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
-                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
-                                </li>
-                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
-                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
-                                </li>
-                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
-                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 text-right">
-                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
-                </div>
-            </div>
             <div class="dx-viewport demo-container">
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
                     <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                        <img class="img-fluid d-block mx-auto" ng-src="{{tiv.value}}" onerror="this.src='../../images/escudo.png'" />
+                        <img class="img-fluid d-block mx-auto" ng-src="{{tiv.value}}" onerror="this.src='../../images/imagen_defect.png'" />
 
                     </div>
                     <div data-options="dxTemplate:{ name:'editTemplate' }">
@@ -107,7 +84,7 @@
 
                     </div>
                     <div data-options="dxTemplate:{ name:'verTemplate' }">
-                            <button type="submit" class="btn btn-default btn-sm" ng-click="verModelo(tiv.data.idFamilia)"><i class="fas fa-share-square"></i> Ver</button>
+                            <button type="submit" class="btn btn-default btn-sm" ng-click="verModelo(tiv.data.idFamilia)"><i class="fas fa-share-square"></i>Editar</button>
                     </div>
 
                 </div>
@@ -115,12 +92,26 @@
 
         </div>
     </div>
-    <div class="row">
-        <div class="col text-right">
-            <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-            <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
-
+    <div class="row my-2">
+        <div class="col">
+            <nav class="">
+                <ul class="pagination justify-content-left">
+                    <li class="page-item disabled" id="primera" ng-click="cambiarPagina(this, 'F')">
+                        <a class="page-link"><i class="fa fa-step-backward fa-xs "></i><small style="font-size:72%">Primera</small> </a>
+                    </li>
+                    <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                        <a class="page-link"><i class="fa fa-caret-left fa-xs "></i> <small style="font-size:72%"> anterior</small></a>
+                    </li>
+                    <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                        <a class="page-link"><small style="font-size:72%">siguiente</small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                    </li>
+                    <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                        <a class="page-link"><small style="font-size:72%">Última</small> <i class="fa fa-step-forward fa-xs "></i> </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
+       
     </div>
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
