@@ -74,6 +74,25 @@ namespace dsASPCAutoCAdmin.DataAccess
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
         }
+        public byte[] ImagenLeerPorIDArticulo(int IDArticulo)
+        {
+            byte[] res = null;
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDArticulo", IDArticulo),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ImagenLeerPorIDArticulo", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res = AsignaArrayByte("Imagen");
+                };
+            }
+            return res;
+        }
 
         public Marca MarcasLeerPorID(int IDSeccion)
         {
@@ -180,6 +199,21 @@ namespace dsASPCAutoCAdmin.DataAccess
                 }
             }
             return res;
+        }
+        public void TiposVehiculoEliminar(int IdGenerico)
+        {
+            var res = new TipoVidrio();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IdGenerico", IdGenerico),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVehiculoEliminar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+
         }
         public void TiposVidrioEliminar(int IDTipoVidrio)
         {
