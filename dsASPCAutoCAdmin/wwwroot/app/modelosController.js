@@ -15,6 +15,9 @@
     $scope.verModelo = function (a) {
         irAModelo(a);
     }
+    $scope.verMarca = function (a) {
+        irAMarca(a);
+    }
     Llamada.get("MarcasLeerPorID?IdSeccion=" + parseInt(document.getElementById("idseccion").value))
         .then(function (respuesta) {
             $scope.currentmarca = respuesta.data;
@@ -56,6 +59,14 @@
         },
         columns: [
             {
+                dataField: "url",
+                caption: "Imagen",
+                width: 100,
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "cellTemplate"
+            }, {
                 dataField: "descripcionFamilia",
                 width: 600,
                 caption: "Descripcion"

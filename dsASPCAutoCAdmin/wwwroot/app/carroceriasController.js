@@ -13,6 +13,15 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    $scope.verMarca = function (a) {
+        irAMarca(a);
+    };
+    Llamada.get("ModelosLeerPorID?idFamilia=" + document.getElementById("idFamilia").value)
+        .then(function (respuesta) {
+            console.log(respuesta);
+            $scope.currentmodelo = respuesta.data;
+            $scope.currentmodelo.url = Llamada.getRuta($scope.currentmodelo.imagen);
+        });
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
@@ -124,6 +133,38 @@
     $scope.guardarCambios = function (carroceria) {
         guardarCambios(carroceria);
         $scope.datagrid.collapseAll(-1);
+    };
+    $scope.guardarCambiosModelo = function () {
+        if (NotNullNotUndefinedNotEmpty($scope.currentmodelo.files)) {
+            console.log(document.getElementById("filesup").files);
+            var fd = new FormData();
+            fd.append('file.jpg', document.getElementById("filesup").files[0]);
+            console.log(fd);
+            console.log($scope.currentmodelo.files);
+            //console.log($scope.files);
+            $scope.currentmodelo.url = $scope.currentmodelo.files.data;
+            //console.log(vidrio.files.data);
+            Llamada.postFile(fd)
+                .then(function (respuesta) {
+                    $scope.currentmodelo.imagen = respuesta[0].contenido;
+                    document.getElementById("filesup").value = null;
+                    guardarCambiosModelo($scope.currentmodelo);
+                });
+        } else {
+            $scope.currentmodelo.newImagen = $scope.currentmodelo.imagen;
+            guardarCambiosModelo($scope.currentmodelo);
+        }
+
+        $scope.datagrid.collapseAll(-1);
+    };
+    guardarCambiosModelo = function (modelo) {
+        modelo.files = null;
+        console.log(modelo);
+        Llamada.post("ModelosCrearModificar", modelo)
+            .then(function (respuesta) {
+                mensajeExito("Datos guardados con éxito");
+                console.log(respuesta);
+            });
     };
     $scope.modificarCarroceria = function (vid) {
         console.log(vid);
@@ -244,20 +285,20 @@
                     $scope.mostrardesplegable = true;
                     $scope.loading = false;
                     document.getElementById("desplegable").style.display = "block";
-                })
+                });
         } else {
             $scope.resultadobusqueda = [];
             $scope.NumReg = 0;
             $scope.loading = false;
         }
-    }
+    };
     var inputChangedPromise;
     $scope.cambiobusqueda = function () {
         if (inputChangedPromise) {
             $timeout.cancel(inputChangedPromise);
         }
         inputChangedPromise = $timeout(buscarArticulos, 1000);
-    }
+    };
     $scope.anadirVidrio = function (res) {
         console.log(res);
         $scope.mostrardesplegable = false;
@@ -270,9 +311,9 @@
             descripcion: res.descripcion,
             IdTipoVidrio: res.idTipoVidrio,
             modificador: 1
-        }
+        };
         $scope.currentcarroceria.vidrios.push(vid);
-    }
+    };
     $scope.noEliminado = function (vidrio) {
         if (NotNullNotUndefinedNotEmpty(vidrio)) {
             if (NotNullNotUndefinedNotEmpty(vidrio.modificador)) {
@@ -287,7 +328,7 @@
         } else {
             return false;
         }
-    }
+    };
     $scope.eliminarVidrio = function (vidrio, $index) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este vidrio?");
         result.then(function (val) {
@@ -296,12 +337,12 @@
                 $scope.$apply(function () {
                     vidrio.modificador = 2;
                 });
-               
+
 
                 console.log(vidrio);
             }
         });
-    }
+    };
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
     }

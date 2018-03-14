@@ -55,6 +55,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.IDFamilia = AsignaEntero("IDFamilia");
                     res.Imagen = AsignaCadena("Imagen");
                     res.IdSeccion = AsignaEntero("IDSeccion");
+                    res.CodigoFamilia = AsignaCadena("CodigoFamilia");
                     res.descripcionSeccion = AsignaCadena("DescripcionSeccion");
                     res.DescripcionFamilia = AsignaCadena("DescripcionFamilia");
 
@@ -297,6 +298,32 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Imagen", tiv.Imagen),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.MarcasCrearModificar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.Identidad = AsignaEntero("Identidad");
+                    res.TS = AsignaArrayByte("TS");
+                    res.Resultado = AsignaCadena("Resultado");
+                }
+            }
+            return res;
+        }
+        public ResultadoIM ModelosCrearModificar(Modelo tiv)
+        {
+            var res = new ResultadoIM();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                //SIN HACER
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDFamilia", tiv.IDFamilia),
+                    new SqlParameter("@IDSeccion", tiv.IdSeccion),
+                    new SqlParameter("@CodigoFamilia", tiv.CodigoFamilia),
+                    new SqlParameter("@DescripcionFamilia", tiv.DescripcionFamilia),
+                    new SqlParameter("@Imagen", tiv.Imagen),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ModelosCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 if (_reader.Read())
                 {

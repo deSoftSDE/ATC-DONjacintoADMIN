@@ -16,7 +16,7 @@
         <div class="col-12 p-5">
             <h2>@ViewData["Title"]</h2>
             <h3>@ViewData["Message"]</h3>
-            <input type="text" value="@c.IDSeccion" id="idseccion" />
+            <input style="display:none" type="text" value="@c.IDSeccion" id="idseccion" />
         </div>
     </div>
     <div>
@@ -90,6 +90,10 @@
             </div>
             <div class="dx-viewport demo-container">
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
+                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                        <img class="img-fluid d-block mx-auto" ng-src="{{tiv.value}}" onerror="this.src='../../images/escudo.png'" />
+
+                    </div>
                     <div data-options="dxTemplate:{ name:'editTemplate' }">
 
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
