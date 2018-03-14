@@ -16,12 +16,14 @@ namespace dsASPCAutoCAdmin.ViewModels
         public int NumReg;
         public int NumPags;
         public Boolean SinResultados;
+        public int? idSeccion;
         public LecturasViewModel(IConfiguration configuration, BusquedaPaginada ba)
         {
             var cadenas = ObtenerCadenasSegúnTipo(ba.tipo);
             cm = new BusquedaPaginada();
             cm.cadena = ba.cadena;
             cm.tipo = ba.tipo;
+            idSeccion = ba.idSeccion;
             var v = "";
             var vc = "";
             if (ba.AccionPagina == null)
@@ -39,9 +41,15 @@ namespace dsASPCAutoCAdmin.ViewModels
                     vc = ba.LastIndice.ToString();
                     break;
             }
+            string lcb = null;
+            if (ba.idSeccion.HasValue)
+            {
+                lcb = "IDSeccion=" + ba.idSeccion;
+            }
             var criterioAuxiliares = new CriterioBusqueda
             {
                 IdISOLang = null,
+                SqlWhere = lcb,
                 CampoOrdenacion = cadenas.CampoOrdenacion, //"Descripcion",
                 TipoOrden = "ASC",
                 NumPagina = 1,
@@ -111,6 +119,14 @@ namespace dsASPCAutoCAdmin.ViewModels
                     res.Entidad = "Marca";
                     res.CampoOrdenacion = "DescripcionSeccion";
                     break;
+                case "Modelos":
+                case "Modelo":
+                    res.Vista = "Familia";
+                    res.EntidadFuncion = "Familia";
+                    res.CampoClave = "IdFamilia";
+                    res.Entidad = "Modelo";
+                    res.CampoOrdenacion = "DescripcionFamilia";
+                    break;
             }
             return res;
         }
@@ -140,6 +156,10 @@ namespace dsASPCAutoCAdmin.ViewModels
                     case "Marca":
                     case "Marcas":
                         RellenoIndiceMarca(action);
+                        break;
+                    case "Modelos":
+                    case "Modelo":
+                        RellenoIndiceModelo(action);
                         break;
                 }
             }
@@ -178,6 +198,17 @@ namespace dsASPCAutoCAdmin.ViewModels
             cm.FirstValor = d.DescripcionSeccion;
             cm.FirstIndice = d.IDSeccion;
             cm.AccionPagina = action;
+        }
+        private void RellenoIndiceModelo(string action)
+        {
+            var c = (Modelo)Articulos[Articulos.Count - 1];
+            var d = (Modelo)Articulos[0];
+            cm.LastValor = c.DescripcionFamilia;
+            cm.LastIndice = c.IDFamilia;
+            cm.FirstValor = d.DescripcionFamilia;
+            cm.FirstIndice = d.IDFamilia;
+            cm.AccionPagina = action;
+            cm.idSeccion = idSeccion;
         }
         private void RellenoIndiceTipoVehiculo(string action)
         {

@@ -55,6 +55,8 @@ namespace dsASPCAutoCAdmin.Entidades
         public string FirstValor { get; set; }
         [DataMember]
         public int FirstIndice { get; set; }
+        [DataMember]
+        public int? idSeccion { get; set; }
     }
     public class Vidrio
     {
@@ -97,6 +99,8 @@ namespace dsASPCAutoCAdmin.Entidades
         public string DescripcionFamilia { get; set; }
         public string Imagen { get; set; }
         public string CodigoFamilia { get; set; }
+        public int IdSeccion { get; set; }
+        public string descripcionSeccion { get; set; }
     }
     [DataContract]
     [Serializable]

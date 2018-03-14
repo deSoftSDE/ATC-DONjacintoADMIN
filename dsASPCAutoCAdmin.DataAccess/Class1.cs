@@ -32,7 +32,31 @@ namespace dsASPCAutoCAdmin.DataAccess
                 {
                     res.IDGenerico = AsignaEntero("IDGenerico");
                     res.Imagen = AsignaCadena("Imagen");
-                    
+
+                }
+            }
+            return res;
+        }
+        public Modelo ModelosLeerPorID(int IDFamilia)
+        {
+            var res = new Modelo();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDFamilia", IDFamilia),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ModelosLeerPorID", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.IDFamilia = AsignaEntero("IDFamilia");
+                    res.Imagen = AsignaCadena("Imagen");
+                    res.IdSeccion = AsignaEntero("IDSeccion");
+                    res.descripcionSeccion = AsignaCadena("DescripcionSeccion");
+                    res.DescripcionFamilia = AsignaCadena("DescripcionFamilia");
+
                 }
             }
             return res;
@@ -51,28 +75,28 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
         }
 
-        //public MarcaModelo MarcasModelosLeerPorID(int IDMarcaModelo)
-        //{
-        //    var res = new MarcaModelo();
-        //    var cc = _configuration.GetConnectionString("DefaultConnection");
-        //    using (SqlConnection conn = new SqlConnection(cc))
-        //    {
-        //        SqlParameter[] param = new SqlParameter[]
-        //        {
-        //            new SqlParameter("@IDMarcaModelo", IDMarcaModelo),
-        //        };
-        //        _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.MarcasModelosLeerPorID", param);
-        //        _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
-        //        if (_reader.Read())
-        //        {
-        //            res.IDMarcaModelo = AsignaEntero("IDMarcaModelo");
-        //            res.IDFamilia = AsignaEntero("IDFamilia");
-        //            res.Imagen = AsignaCadena("Imagen");
-        //            res.Descripcion = AsignaCadena("Descripcion");
-        //        }
-        //    }
-        //    return res;
-        //}
+        public Marca MarcasLeerPorID(int IDSeccion)
+        {
+            var res = new Marca();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDSeccion", IDSeccion),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.MarcasLeerPorID", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.IDSeccion = AsignaEntero("IDSeccion");
+                    res.DescripcionSeccion = AsignaCadena("DescripcionSeccion");
+                    res.Imagen = AsignaCadena("Imagen");
+                    res.CodigoSeccion = AsignaCadena("CodigoSeccion");
+                };
+            }
+            return res;
+        }
 
         public Carroceria CarroceriasLeerPorID(int IDCarroceria)
         {

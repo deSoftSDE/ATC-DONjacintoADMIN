@@ -45,6 +45,11 @@ namespace dsASPCAutoCAdmin.DataAccess
                     MetodoRellenarLista = metodoRellenoMarca;
                     TipoDato = typeof(Marca);
                     break;
+                case "Modelo":
+                case "Modelos":
+                    MetodoRellenarLista = metodoRellenoModelo;
+                    TipoDato = typeof(Modelo);
+                    break;
 
 
             }

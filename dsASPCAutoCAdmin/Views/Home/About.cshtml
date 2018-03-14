@@ -1,12 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    @ViewData["Message"]
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
 <p>Use this area to provide additional information.</p>
-@(Html.DevExpress()
-        .BootstrapMemo("MemoDefault")
-        .Rows(3)
-        .Value("Quisque imperdiet risus quis nisl vulputate, a pharetra tortor ornare. ")
-)

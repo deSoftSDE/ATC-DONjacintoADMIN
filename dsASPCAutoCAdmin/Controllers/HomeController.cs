@@ -9,12 +9,19 @@ using dsASPCAutoCAdmin.ViewModels;
 using DevExtreme.AspNet.Mvc;
 using Newtonsoft.Json;
 using DevExtreme.AspNet.Data;
+using dsASPCAutoCAdmin.DataAccess;
+using Microsoft.Extensions.Configuration;
 
 namespace dsASPCAutoCAdmin.Controllers
 {
     public class HomeController : Controller
     {
+        private IConfiguration _configuration;
 
+        public HomeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public IActionResult Index()
         {
             var em = new MenuViewModel();
@@ -62,6 +69,17 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Message"] = "Página de Carrocerías";
             return View();
         }
+        public IActionResult ModelosCarrocerias(int id)
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            //var c = Int32.Parse(IDSeccion);
+            var md = ad.ModelosLeerPorID(id);
+            ViewData["Modelo"] = md;
+            ViewData["Message"] = "Carrocerias de " + md.DescripcionFamilia;
+            return View();
+        }
         public IActionResult TiposVehiculo()
         {
             var em = new MenuViewModel();
@@ -75,6 +93,18 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "Página de Marcas";
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Modelos(int id)
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            //var c = Int32.Parse(IDSeccion);
+            var mc = ad.MarcasLeerPorID(id);
+            ViewData["Marca"] = mc;
+            ViewData["Message"] = "Modelos de " + mc.DescripcionSeccion;
             return View();
         }
 

@@ -1,4 +1,4 @@
-﻿appadmin.controller('Marcas', function ($scope, Llamada, $timeout) {
+﻿appadmin.controller('Modelos', function ($scope, Llamada, $timeout) {
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
         switch (val) {
@@ -48,19 +48,11 @@
         },
         columns: [
             {
-                dataField: "url",
-                caption: "Imagen",
-                width: 100,
-                allowFiltering: false,
-                allowSorting: false,
-                allowEditing: false,
-                cellTemplate: "cellTemplate"
-            }, {
-                dataField: "descripcionSeccion",
+                dataField: "descripcionFamilia",
                 width: 600,
                 caption: "Descripcion"
             }, {
-                dataField: "codigoSeccion",
+                dataField: "codigoFamilia",
                 width: 100,
                 caption: "Código"
             }, {
@@ -226,8 +218,9 @@
         alert("Hola");
     };
     var obj = {
-        tipo: "Marcas",
-        cadena: ""
+        tipo: "Modelos",
+        cadena: "",
+        idSeccion: parseInt(document.getElementById("idseccion").value)
     };
     LeerRegistros(obj);
     $scope.currentmarca = {
