@@ -30,8 +30,9 @@ namespace dsASPCAutoCAdmin.DataAccess
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 if (_reader.Read())
                 {
-                    res.IDGenerico = AsignaEntero("IDGenerico");
+                    res.IDTipoVehiculo = AsignaEntero("IDTipoVehiculo");
                     res.Imagen = AsignaCadena("Imagen");
+                    res.Descripcion = AsignaCadena("Descripcion");
 
                 }
             }
@@ -200,7 +201,7 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
-        public void TiposVehiculoEliminar(int IdGenerico)
+        public void TiposVehiculoEliminar(int IDTipoVehiculo)
         {
             var res = new TipoVidrio();
             var cc = _configuration.GetConnectionString("DefaultConnection");
@@ -208,7 +209,7 @@ namespace dsASPCAutoCAdmin.DataAccess
             {
                 SqlParameter[] param = new SqlParameter[]
                 {
-                    new SqlParameter("@IdGenerico", IdGenerico),
+                    new SqlParameter("@IDTipoVehiculo", IDTipoVehiculo),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVehiculoEliminar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -327,10 +328,9 @@ namespace dsASPCAutoCAdmin.DataAccess
                 //SIN HACER
                 SqlParameter[] param = new SqlParameter[]
                 {
-                    new SqlParameter("@IDGenerico", tiv.IDGenerico),
-                    new SqlParameter("@DescripcionGenerico", tiv.DescripcionGenerico),
-                    new SqlParameter("@Imagen", tiv.Imagen),
-                    new SqlParameter("@CodigoGenerico", tiv.CodigoGenerico),
+                    new SqlParameter("@IDTipoVehiculo", tiv.IDTipoVehiculo),
+                    new SqlParameter("@Descripcion", tiv.Descripcion),
+                    new SqlParameter("@Imagen", tiv.Imagen)
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVehiculoCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);

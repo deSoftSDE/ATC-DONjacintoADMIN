@@ -53,7 +53,7 @@
                 allowEditing: false,
                 cellTemplate: "cellTemplate"
             }, {
-                dataField: "descripcionGenerico",
+                dataField: "descripcion",
                 width: 600,
                 caption: "Descripcion"
             }, {
@@ -141,15 +141,15 @@
         Llamada.post("TiposVehiculoCrearModificar", vehiculo)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
-                if (ZeroSiNull(vehiculo.idGenerico) < 1) {
+                if (ZeroSiNull(vehiculo.idTipoVehiculo) < 1) {
                     var obj = {
-                        tipo: "TipoVehiculo",
+                        tipo: "TiposVehiculo",
                         cadena: "",
                         accionPagina: "N",
-                        lastValor: vehiculo.descripcionGenerico,
+                        lastValor: vehiculo.descripcion,
                         lastIndice: respuesta.data.identidad
                     };
-                    vehiculo.idGenerico = respuesta.identidad;
+                    vehiculo.idTipoVehiculo = respuesta.identidad;
                     LeerRegistros(obj, vehiculo);
                 }
                 console.log(respuesta);
@@ -174,19 +174,11 @@
         alert("Holi");
     };
     $scope.eliminarRegistro = function (a) {
-        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este vehículo?");
-        result.then(function (val) {
-            if (val) {
-
-
-                Llamada.get("TiposVehiculoEliminar?idGenerico=" + a.data.idGenerico)
-                    .then(function (respuesta) {
-                        console.log(respuesta);
-                        LeerRegistros($scope.lastConsulta);
-                    });
-            }
-        });
-        
+        Llamada.get("TipoVehiculoEliminar?idTipoVehiculo=" + a.data.idTipoVehiculo)
+            .then(function (respuesta) {
+                console.log(respuesta);
+                LeerRegistros($scope.lastConsulta);
+            });
     };
     $scope.hola = function () {
         alert("Hola");

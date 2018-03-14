@@ -36,6 +36,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     TipoDato = typeof(TipoVidrio);
                     break;
                 case "TipoVehiculo":
+                case "TiposVehiculo":
                     MetodoRellenarLista = metodoRellenoTipoVehiculo;
                     TipoDato = typeof(TipoVehiculo);
                     break;
@@ -110,10 +111,9 @@ namespace dsASPCAutoCAdmin.DataAccess
         }
         private void metodoRellenoTipoVehiculo(object entidadLista)
         {
-            ((TipoVehiculo)entidadLista).IDGenerico = AsignaEntero("IDGenerico");
-            ((TipoVehiculo)entidadLista).DescripcionGenerico = AsignaCadena("DescripcionGenerico");
+            ((TipoVehiculo)entidadLista).IDTipoVehiculo = AsignaEntero("IDTipoVehiculo");
+            ((TipoVehiculo)entidadLista).Descripcion = AsignaCadena("Descripcion");
             ((TipoVehiculo)entidadLista).Imagen = AsignaCadena("Imagen");
-            ((TipoVehiculo)entidadLista).CodigoGenerico = AsignaCadena("CodigoGenerico");
 
         }
         private void metodoRellenoMarca(object entidadLista)
