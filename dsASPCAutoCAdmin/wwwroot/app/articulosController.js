@@ -340,8 +340,15 @@
             $scope.selectElement = e.component;
         },
         onValueChanged: function (e) {
-            console.log(e);
-            console.log(e.component._option)
+            if (e.component._options.selectedItem) {
+                console.log(e);
+                console.log(e.component._options)
+                console.log(e.component._options.selectedItem)
+                $scope.lastValor = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+            } else {
+
+            }
+            
         }
     }
 
@@ -358,6 +365,7 @@
                     $scope.marcas[i].url = Llamada.getRuta($scope.marcas[i].imagen);
                 }
                 $scope.selectElement.option("dataSource", $scope.marcas);
+                $scope.selectElement.open();
             })
     }
 
