@@ -76,8 +76,10 @@ namespace dsASPCAutoCAdmin.Controllers
             var ad = new AdaptadorAtcAdmin(_configuration);
             //var c = Int32.Parse(IDSeccion);
             var md = ad.ModelosLeerPorID(id);
+            var vh = ad.TiposVehiculoLeer();
             ViewData["Modelo"] = md;
             ViewData["Message"] = "Carrocerias de " + md.DescripcionFamilia;
+            ViewData["TiposVehiculo"] = vh;
             return View();
         }
         public IActionResult TiposVehiculo()

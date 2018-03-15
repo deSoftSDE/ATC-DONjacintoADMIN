@@ -74,85 +74,36 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="">Incluir un tipo de Vidrio a la Carrocería</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control campo-search " ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2">
-                                <i class="fas fa-search"></i></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="desplegable" style="display:none" id="desplegable" ng-hide="!mostrardesplegable">
-                    <table class="tablaresultados">
-                        <tbody>
-                            <tr ng-if="!loading" class="" ng-repeat="resultado in resultadobusqueda" ng-click="anadirVidrio(resultado)">
-                                <td class="">
-                                    <a class="resul-search">
-                                        {{resultado.descripcion}}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="otrainfo" ng-if="loading">
-                                <td class="">
-                                    <a>
-                                        <img class="img-fluid" src="~/img/cargando.gif" />
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr ng-show="resultadobusqueda.length<1" class="otrainfo">
-                                <td>
-                                    <a>
-                                        No hay resultados que mostrar
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-lg-6" id="style-3" style="max-height:300px;overflow: auto; ">
-                        <div class="table-responsive">
-                            <table class="table-sm ">
-                                <tr>
-                                    <th>Tipo de Vidrio</th>
-                                    <th>Posición Vertical</th>
-                                    <th>Posicion Horizontal</th>
-                                    <th>Extension Vertical</th>
-                                    <th>Extensión Horizontal</th>
-                                </tr>
-                                <tr ng-repeat="vidrio in currentcarroceria.vidrios | filter:noEliminado">
-                                    <td>{{vidrio.descripcion}}</td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posVer" /></td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posHor" /></td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanVer" /></td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanHor" /></td>
-                                    <td><button class="btn btn-sm btn-default form-control" type="submit" ng-click="eliminarVidrio(vidrio, $index)" ><i class="fas fa-trash"></i> </button></td>
-                                </tr>
-                            </table>
+                    <div style="z-index:99999999" dx-select-box="selectBox" dx-item-alias="product">
+                        <!--<div data-options="dxTemplate: { name: 'field' }">
+                            <div class="custom-item">
+                                <img ng-src="{{product.ImageSrc}}" />
+                                <div class="product-name" dx-text-box=" {value: product.Name, readOnly: true }">
+                                </div>
+                            </div>
+                        </div>-->
+                        <div data-options="dxTemplate: { name: 'field' }">
+                            <div dx-text-box="settingsbox"></div>
+                        </div>
+                        <div data-options="dxTemplate: { name: 'item' }">
+                            <div class="custom-item">
+                                <div class="row">
+                                    <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/imagen_defect.png'" /></div>
+                                    <div class="col-md-3">
+                                        <div class="product-name">
+                                            {{product.descripcionSeccion}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
                     </div>
-                    <div>esquema</div>
-
-                   
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <hr />
-                    </div>
-                </div>
-
-                <div class="row">
-
-                </div>
-                <div class="row">
-                    <div class="col text-right">
-                        @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
-                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
-                    </div>
-                </div>
+                
             </div>
+            {{textBoxValue}}
         </div>
     </div>
 </div>

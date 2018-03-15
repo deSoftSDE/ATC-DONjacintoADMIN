@@ -38,6 +38,27 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public List<TipoVehiculo> TiposVehiculoLeer()
+        {
+            var res = new List<TipoVehiculo>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVehiculoLeer", null);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var vh = new TipoVehiculo
+                    {
+                        IDTipoVehiculo = AsignaEntero("IDTipoVehiculo"),
+                        Imagen = AsignaCadena("Imagen"),
+                        Descripcion = AsignaCadena("Descripcion")
+                    };
+                    res.Add(vh);
+                }
+            }
+            return res;
+        }
         public Modelo ModelosLeerPorID(int IDFamilia)
         {
             var res = new Modelo();
@@ -58,6 +79,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.CodigoFamilia = AsignaCadena("CodigoFamilia");
                     res.descripcionSeccion = AsignaCadena("DescripcionSeccion");
                     res.DescripcionFamilia = AsignaCadena("DescripcionFamilia");
+                    res.descripcionTipoVehiculo = AsignaCadena("DescripcionTipoVehiculo");
+                    res.idTipoVehiculo = AsignaEntero("IdTipoVehiculo");
 
                 }
                 res.Carrocerias = new List<Carroceria>();
@@ -126,6 +149,32 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.DescripcionSeccion = AsignaCadena("DescripcionSeccion");
                     res.Imagen = AsignaCadena("Imagen");
                     res.CodigoSeccion = AsignaCadena("CodigoSeccion");
+                };
+            }
+            return res;
+        }
+        public List<Marca> MarcasLeerPorCadena(string cadena)
+        {
+            var res = new List<Marca>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@cadena", cadena),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.MarcasLeerPorCadena", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var mc = new Marca
+                    {
+                        IDSeccion = AsignaEntero("IDSeccion"),
+                        DescripcionSeccion = AsignaCadena("DescripcionSeccion"),
+                        Imagen = AsignaCadena("Imagen"),
+                        CodigoSeccion = AsignaCadena("CodigoSeccion")
+                    };
+                    res.Add(mc);
                 };
             }
             return res;
@@ -366,6 +415,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Imagen", tiv.Imagen),
                     new SqlParameter("@Carrocerias", cr),
                     new SqlParameter("@CarroceriasElim", crel),
+                    new SqlParameter("@idTipoVehiculo", tiv.idTipoVehiculo),
+                    
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ModelosCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);

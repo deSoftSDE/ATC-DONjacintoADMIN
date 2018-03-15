@@ -99,8 +99,10 @@ namespace dsASPCAutoCAdmin.Entidades
         public string DescripcionFamilia { get; set; }
         public string Imagen { get; set; }
         public string CodigoFamilia { get; set; }
-        public int IdSeccion { get; set; }
+        public int? IdSeccion { get; set; }
         public string descripcionSeccion { get; set; }
+        public int idTipoVehiculo { get; set; }
+        public string descripcionTipoVehiculo { get; set; }
         public List<Carroceria> Carrocerias { get; set; }
         public List<Carroceria> CarroceriasEliminadas { get; set; }
     }
@@ -158,12 +160,21 @@ namespace dsASPCAutoCAdmin.Entidades
 
         [DataMember]
         public int? IdTipoIva { get; set; }
+        [DataMember]
         public int? IdFamilia { get; set; }
+        [DataMember]
         public int? IdSeccion { get; set; }
+        [DataMember]
+        public int? IdTipoVidrio { get; set; }
         public int? IdGenerico { get; set; }
+        [DataMember]
         public string DescripcionFamilia { get; set; }
+        [DataMember]
         public string DescripcionSeccion { get; set; }
+
         public string DescripcionGenerico { get; set; }
+        [DataMember]
+        public string DescripcionTipoVidrio { get; set; }
     }
     public class MensajeRespuesta
     {
