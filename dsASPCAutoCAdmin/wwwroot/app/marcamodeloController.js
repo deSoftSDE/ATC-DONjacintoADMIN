@@ -59,7 +59,7 @@
                 caption: "Descripcion"
             }, {
                 dataField: "codigoSeccion",
-                width: 100,
+                width: "auto",
                 caption: "Código"
             }, {
                 caption: "",

@@ -18,65 +18,63 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <div class="row mb-4">
-                <div class="col-6">
-                    <div class="dataTables_wrapper">
-                        <div class="dataTables_paginate" style="float:left">
-                            <ul class="pagination">
-                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
-                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
-                                </li>
-                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
-                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
-                                </li>
-                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
-                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
-                                </li>
-                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
-                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-               <div class="col-6 text-right">
+        <div class="col-6 offset-3 text-center">
+            <div class="dx-viewport demo-container">
+                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
+                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                        <img class="img-fluid d-block mx-auto" ng-src="{{tiv.value}}" onerror="this.src='../images/escudo.png'" />
 
-               </div>
+                    </div>
+                    <div data-options="dxTemplate:{ name:'editTemplate' }">
+
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        <button type="submit" ng-click="modificarMarca(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'verTemplate' }">
+
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+
+                                <button type="submit" class="btn btn-default btn-sm" ng-click="verMarca(tiv.data.idSeccion)"><i class="fas fa-share-square"></i> Editar </button>
+
+
+                    </div>
+
+                </div>
             </div>
-                <div class="dx-viewport demo-container">
-                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
-                        <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                            <img class="img-fluid d-block mx-auto" ng-src="{{tiv.value}}" onerror="this.src='../images/escudo.png'" />
-
-                        </div>
-                        <div data-options="dxTemplate:{ name:'editTemplate' }">
-
-                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="modificarMarca(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
-
-                        </div>
-                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
-
-                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
-
-                        </div>
-                        <div data-options="dxTemplate:{ name:'verTemplate' }">
-
-                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-
-                                <button type="submit" class="btn btn-default btn-sm" ng-click="verMarca(tiv.data.idSeccion)"><i class="fas fa-share-square"></i> Ver </button>
-
-
-                        </div>
-
-                    </div>
-                </div>
 
         </div>
-    </div>
 
+    </div>
+    <div class="row mt-4">
+        <div class="col-6 offset-3 ">
+            <div class="">
+                <nav class="">
+                    <ul class="pagination justify-content-center" >
+                        <li class="page-item disabled" id="primera" ng-click="cambiarPagina(this, 'F')">
+                            <a class="page-link"><i class="fa fa-step-backward fa-xs "></i><small style="font-size:72%">Primera</small> </a>
+                        </li>
+                        <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                            <a class="page-link"><i class="fa fa-caret-left fa-xs "></i> <small style="font-size:72%"> anterior</small></a>
+                        </li>
+                        <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                            <a class="page-link"><small style="font-size:72%">siguiente</small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                        </li>
+                        <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                            <a class="page-link"><small style="font-size:72%">Última</small> <i class="fa fa-step-forward fa-xs "></i> </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+    </div>
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
             <div class="form">
@@ -103,7 +101,7 @@
                         <img class="img-fluid d-block mx-auto" ng-src="{{currentmarca.url}}" onerror="this.src='../images/imagen_defect.png'" />
                     </div>
                     <div class="col-12">
-                         <hr />
+                        <hr />
                     </div>
                     <div class="col-12">
                         <div class="form-group">
