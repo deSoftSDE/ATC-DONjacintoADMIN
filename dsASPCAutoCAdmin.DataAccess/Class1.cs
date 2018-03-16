@@ -98,6 +98,35 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public List<Modelo> ModelosLeerPorMarca(int IDSeccion)
+        {
+            var res = new List<Modelo>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDSeccion", IDSeccion),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ModelosLeerPorMarca", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var md = new Modelo
+                    {
+                        IDFamilia = AsignaEntero("IDFamilia"),
+                        Imagen = AsignaCadena("Imagen"),
+                        IdSeccion = AsignaEntero("IDSeccion"),
+                        CodigoFamilia = AsignaCadena("CodigoFamilia"),
+                        descripcionSeccion = AsignaCadena("DescripcionSeccion"),
+                        DescripcionFamilia = AsignaCadena("DescripcionFamilia")
+                    };
+                   res.Add(md);
+                }
+                
+            }
+            return res;
+        }
         public void CarroceriasEliminar(int IDCarroceria)
         {
             var cc = _configuration.GetConnectionString("DefaultConnection");

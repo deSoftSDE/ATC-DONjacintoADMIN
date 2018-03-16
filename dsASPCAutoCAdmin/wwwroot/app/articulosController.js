@@ -13,6 +13,7 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
@@ -174,183 +175,81 @@
     $scope.cambioInput = function () {
         alert("Holi");
     };
-
-
-
-
-
-
-    var products = [{
-        "ID": 1,
-        "Name": "HD Video Player",
-        "Price": 330,
-        "Current_Inventory": 225,
-        "Backorder": 0,
-        "Manufacturing": 10,
-        "Category": "Video Players",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 2,
-        "Name": "SuperHD Player",
-        "Price": 400,
-        "Current_Inventory": 150,
-        "Backorder": 0,
-        "Manufacturing": 25,
-        "Category": "Video Players",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 3,
-        "Name": "SuperPlasma 50",
-        "Price": 2400,
-        "Current_Inventory": 0,
-        "Backorder": 0,
-        "Manufacturing": 0,
-        "Category": "Televisions",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 4,
-        "Name": "SuperLED 50",
-        "Price": 1600,
-        "Current_Inventory": 77,
-        "Backorder": 0,
-        "Manufacturing": 55,
-        "Category": "Televisions",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 5,
-        "Name": "SuperLED 42",
-        "Price": 1450,
-        "Current_Inventory": 445,
-        "Backorder": 0,
-        "Manufacturing": 0,
-        "Category": "Televisions",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 6,
-        "Name": "SuperLCD 55",
-        "Price": 1350,
-        "Current_Inventory": 345,
-        "Backorder": 0,
-        "Manufacturing": 5,
-        "Category": "Televisions",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 7,
-        "Name": "SuperLCD 42",
-        "Price": 1200,
-        "Current_Inventory": 210,
-        "Backorder": 0,
-        "Manufacturing": 20,
-        "Category": "Televisions",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 8,
-        "Name": "SuperPlasma 65",
-        "Price": 3500,
-        "Current_Inventory": 0,
-        "Backorder": 0,
-        "Manufacturing": 0,
-        "Category": "Televisions",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 9,
-        "Name": "SuperLCD 70",
-        "Price": 4000,
-        "Current_Inventory": 95,
-        "Backorder": 0,
-        "Manufacturing": 5,
-        "Category": "Televisions",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 10,
-        "Name": "DesktopLED 21",
-        "Price": 175,
-        "Current_Inventory": 0,
-        "Backorder": 425,
-        "Manufacturing": 75,
-        "Category": "Monitors",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 11,
-        "Name": "DesktopLED 19",
-        "Price": 165,
-        "Current_Inventory": 425,
-        "Backorder": 0,
-        "Manufacturing": 110,
-        "Category": "Monitors",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 12,
-        "Name": "DesktopLCD 21",
-        "Price": 170,
-        "Current_Inventory": 210,
-        "Backorder": 0,
-        "Manufacturing": 60,
-        "Category": "Monitors",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 13,
-        "Name": "DesktopLCD 19",
-        "Price": 160,
-        "Current_Inventory": 150,
-        "Backorder": 0,
-        "Manufacturing": 210,
-        "Category": "Monitors",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 14,
-        "Name": "Projector Plus",
-        "Price": 550,
-        "Current_Inventory": 0,
-        "Backorder": 55,
-        "Manufacturing": 10,
-        "Category": "Projectors",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 15,
-        "Name": "Projector PlusHD",
-        "Price": 750,
-        "Current_Inventory": 110,
-        "Backorder": 0,
-        "Manufacturing": 90,
-        "Category": "Projectors",
-        "ImageSrc": "../images/escudo.png"
-    }, {
-        "ID": 16,
-        "Name": "Projector PlusHT",
-        "Price": 1050,
-        "Current_Inventory": 0,
-        "Backorder": 75,
-        "Manufacturing": 57,
-        "Category": "Projectors",
-        "ImageSrc": "../images/escudo.png"
-    }];
-
-
-
-
     $scope.selectBox = {
-        dataSource: products,
-        displayExpr: "Name",
+        dataSource: [],
+        displayExpr: "descripcionSeccion",
         valueExpr: "idSeccion",
         searchEnabled: true,
-        value: products[0].idSeccion,
+        //value: products[0].idSeccion,
         fieldTemplate: 'field',
         onInitialized: function (e) {
             $scope.selectElement = e.component;
+            oldValue = e.component.option("value");
         },
         onValueChanged: function (e) {
-            if (e.component._options.selectedItem) {
+            console.log(e);
+            if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
                 console.log(e);
                 console.log(e.component._options)
                 console.log(e.component._options.selectedItem)
-                $scope.lastValor = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+                $scope.lastMarca = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+                buscaModelos($scope.lastMarca);
             } else {
-
+                console.log(e);
+                console.log("Está vacío!!");
+                oldValue = e.previousValue
             }
-            
+
         }
     }
+    $scope.selectBox2 = {
+        dataSource: [],
+        displayExpr: "Name",
+        valueExpr: "idFamilia",
+        placeholder: "Selecciona un modelo",
+        displayExpr: "descripcionFamilia",
+        //value: products[0].idFamilia,
+        onInitialized: function (e) {
+            $scope.selectElement2 = e.component;
+        },
+        onValueChanged: function (e) {
+            if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
+                console.log(e);
+                console.log(e.component._options)
+                console.log(e.component._options.selectedItem)
+                $scope.lastModelo = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+                console.log("Mira el modelo:");
+                console.log($scope.lastModelo);
+            }
+
+        }
+    }
+
+    $scope.selectBox3 = {
+        dataSource: [],
+        displayExpr: "descripcion",
+        valueExpr: "idTipoVehiculo",
+        //searchEnabled: true,
+        //value: products[0].idTipoVehiculo,
+        //fieldTemplate: 'field',
+        onInitialized: function (e) {
+            $scope.selectElement3 = e.component;
+            Llamada.get("TiposVehiculoLeer")
+                .then(function (respuesta) {
+                    console.log(respuesta.data);
+                    $scope.tiposvehic = respuesta.data;
+                    if (NotNullNotUndefinedNotEmpty($scope.selectElement3)) {
+                        $scope.selectElement3.option("dataSource", $scope.tiposvehic);
+                    }
+
+                })
+        },
+        onValueChanged: function (e) {
+            console.log(e);
+
+        }
+    }
+    
 
     buscaMarcas = function (val) {
         console.log("Ahora  busca marcas");
@@ -368,6 +267,22 @@
                 $scope.selectElement.open();
             })
     }
+    buscaModelos = function (val) {
+        console.log("Ahora  busca modelos");
+        console.log(val);
+        console.log($scope.newValor);
+        Llamada.get("ModelosLeerPorMarca?IDSeccion=" + val.idSeccion)
+            .then(function (respuesta) {
+                console.log(respuesta.data);
+                console.log($scope.selectElement);
+                $scope.modelos = respuesta.data;
+                for (i = 0; i < $scope.modelos.length; i++) {
+                    $scope.modelos[i].url = Llamada.getRuta($scope.modelos[i].imagen);
+                }
+                $scope.selectElement2.option("dataSource", $scope.modelos);
+                $scope.selectElement2.open();
+            })
+    }
 
     var inputChangedPromise;
     $scope.cambiobusqueda = function () {
@@ -377,7 +292,7 @@
         inputChangedPromise = $timeout(buscaMarcas, 1000);
     }
     $scope.settingsbox = {
-        placeholder: 'Select a stateeeeee',
+        placeholder: 'Selecciona una Marca',
         bindingOptions: {
             value: 'textBoxValue'
         },

@@ -74,17 +74,17 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label>Selecciona la marca</label>
+                    {{lastMarca.descripcionSeccion}}
                     <div style="z-index:99999999" dx-select-box="selectBox" dx-item-alias="product">
-                        <!--<div data-options="dxTemplate: { name: 'field' }">
-                            <div class="custom-item">
-                                <img ng-src="{{product.ImageSrc}}" />
-                                <div class="product-name" dx-text-box=" {value: product.Name, readOnly: true }">
-                                </div>
-                            </div>
-                        </div>-->
+
                         <div data-options="dxTemplate: { name: 'field' }">
+                            <!--<div class="custom-item">
+                <img ng-src="{{product.ImageSrc}}" />
+                <div class="product-name" dx-text-box=" {value: product.Name, readOnly: true }">
+                </div>
+            </div>-->
                             <div dx-text-box="settingsbox"></div>
-                            {{product}}
                         </div>
                         <div data-options="dxTemplate: { name: 'item' }">
                             <div class="custom-item">
@@ -93,6 +93,55 @@
                                     <div class="col-md-3">
                                         <div class="product-name">
                                             {{product.descripcionSeccion}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <label>Selecciona el Modelo</label>
+                    {{lastModelo.descripcionFamilia}}
+                    <div style="z-index:99999999" dx-select-box="selectBox2" dx-item-alias="product">
+                        <div data-options="dxTemplate: { name: 'field' }">
+                            <div class="custom-item">
+                                <img ng-src="{{product.ImageSrc}}" />
+                                {{product.descripcionFamilia}}
+                            </div>
+                        </div>
+                        <div data-options="dxTemplate: { name: 'item' }">
+                            <div class="custom-item">
+                                <div class="row">
+                                    <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/imagen_defect.png'" /></div>
+                                    <div class="col-md-3">
+                                        <div class="product-name">
+                                            {{product.descripcionFamilia}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>Selecciona el Tipo de Vehículo</label>
+                    {{lastVehiculo.descripcion}}
+                    <div style="z-index:99999999" dx-select-box="selectBox3" dx-item-alias="product">
+                        <div data-options="dxTemplate: { name: 'field' }">
+                            <div class="custom-item">
+                                <img ng-src="{{product.ImageSrc}}" />
+                                {{product.descripcion}}
+                            </div>
+                        </div>
+                        <div data-options="dxTemplate: { name: 'item' }">
+                            <div class="custom-item">
+                                <div class="row">
+                                    <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/imagen_defect.png'" /></div>
+                                    <div class="col-md-3">
+                                        <div class="product-name">
+                                            {{product.descripcion}}
                                         </div>
                                     </div>
                                 </div>

@@ -42,6 +42,28 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        public IActionResult TiposVehiculoLeer()
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.TiposVehiculoLeer();
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
         public IActionResult TiposVehiculoLeerPorID(int IDTipoVehiculo)
         {
             ObjectResult result;
@@ -137,6 +159,28 @@ namespace dsASPCAutoCAdmin.Controllers
             try
             {
                 var res = ad.MarcasLeerPorID(IDSeccion);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        public IActionResult ModelosLeerPorMarca(int IDSeccion)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.ModelosLeerPorMarca(IDSeccion);
                 result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK
