@@ -23,6 +23,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                 case "Articulos":
                 case "Articulo":
                 case "WebArticulo":
+                case "WBuscaArticulo":
                     MetodoRellenarLista = metodoRellenoBuscaArticulos;
                     TipoDato = typeof(BuscaArticulo);
                     break;
@@ -84,7 +85,10 @@ namespace dsASPCAutoCAdmin.DataAccess
             ((BuscaArticulo)entidadLista).IdGenerico = AsignaEnteroNull("IdGenerico");
             ((BuscaArticulo)entidadLista).DescripcionFamilia = AsignaCadena("DescripcionFamilia");
             ((BuscaArticulo)entidadLista).DescripcionSeccion = AsignaCadena("DescripcionSeccion");
-            ((BuscaArticulo)entidadLista).DescripcionGenerico = AsignaCadena("DescripcionGenerico");
+            ((BuscaArticulo)entidadLista).DescripcionCorta = AsignaCadena("DescripcionCorta");
+            ((BuscaArticulo)entidadLista).DescripcionDetallada = AsignaCadena("DescripcionDetallada");
+            ((BuscaArticulo)entidadLista).IdTipoVidrio = AsignaEntero("IdTipoVidrio");
+            ((BuscaArticulo)entidadLista).DescripcionTipoVidrio = AsignaCadena("DescripcionTipoVidrio");
         }
         private void metodoRellenoVidrio(object entidadLista)
         {

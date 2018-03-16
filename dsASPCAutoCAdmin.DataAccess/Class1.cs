@@ -361,6 +361,31 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public List<TipoVidrio> TiposVidrioLeer()
+        {
+            var res = new List<TipoVidrio>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    //new SqlParameter("@cadena", cadena),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVidrioLeer", null);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var vid = new TipoVidrio
+                    {
+                        IDTipoVidrio = AsignaEntero("IDTipoVidrio"),
+                        Descripcion = AsignaCadena("Descripcion"),
+                        Imagen = AsignaCadena("Imagen"),
+                    };
+                    res.Add(vid);
+                }
+            }
+            return res;
+        }
         public List<Carroceria> CarroceriasLeerPorCadena(string cadena)
         {
             var res = new List<Carroceria>();
@@ -386,13 +411,41 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public ResultadoIM ArticulosModificar(BuscaArticulo bs)
+        {
+            var res = new ResultadoIM();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDSeccion", bs.IdSeccion),
+                    new SqlParameter("@IDArticulo", bs.IdArticulo),
+                    new SqlParameter("@IDFamilia", bs.IdFamilia),
+                    new SqlParameter("@IDTipoVidrio", bs.IdTipoVidrio),
+                    new SqlParameter("@Codigo", bs.Codigo),
+                    new SqlParameter("@Descripcion", bs.Descripcion),
+                    new SqlParameter("@DescripcionCorta", bs.DescripcionCorta),
+                    new SqlParameter("@DescripcionDetallada", bs.DescripcionDetallada),
+
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosModificar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.Identidad = AsignaEntero("Identidad");
+                    res.TS = AsignaArrayByte("TS");
+                    res.Resultado = AsignaCadena("Resultado");
+                }
+            }
+            return res;
+        }
         public ResultadoIM MarcasCrearModificar(Marca tiv)
         {
             var res = new ResultadoIM();
             var cc = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection conn = new SqlConnection(cc))
             {
-                //SIN HACER
                 SqlParameter[] param = new SqlParameter[]
                 {
                     new SqlParameter("@IDSeccion", tiv.IDSeccion),
