@@ -165,14 +165,12 @@
         console.log(art);
         console.log("Hasta aqui he llegado!");
         console.log(art);
-        if (true) {
-            Llamada.post("ArticulosModificar", art)
-                .then(function (respuesta) {
-                    mensajeExito("Datos guardados con éxito");
-                    $scope.popupVisible = false;
-                });
-            $scope.popupVisible = false;
-        }
+        Llamada.post("ArticulosModificar", art)
+            .then(function (respuesta) {
+                mensajeExito("Datos guardados con éxito");
+                $scope.popupVisible = false;
+            });
+        $scope.popupVisible = false;
         
 
     };
@@ -222,7 +220,6 @@
     }
     $scope.selectBox2 = {
         dataSource: [],
-        displayExpr: "Name",
         valueExpr: "idFamilia",
         placeholder: "Selecciona un modelo",
         noDataText: 'Selecciona la marca primero',
@@ -247,6 +244,7 @@
     $scope.selectBox3 = {
         dataSource: [],
         displayExpr: "descripcion",
+        placeholder: "Selecciona un tipo de vidrio",
         noDataText: 'No se han encontrado vidrios',
         valueExpr: "idTipoVidrio",
         //searchEnabled: true,
