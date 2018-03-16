@@ -198,8 +198,8 @@
         width: 660,
         height: 540,
         showTitle: true,
-        title: "Nueva Carrocería",
-        fullScreen:true,
+        title: "Carrocería",
+        fullScreen:false,
         dragEnabled: false,
         bindingOptions: {
             visible: 'popupVisible'

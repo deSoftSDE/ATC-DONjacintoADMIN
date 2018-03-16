@@ -212,6 +212,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         console.log($scope.currentmodelo);
         $scope.datagrid.option("dataSource", $scope.currentmodelo.carrocerias);
     };
+    $scope.selected = 0;
     $scope.guardarCambiosPopup = function () {
         $scope.guardarCambios($scope.currentcarroceria);
     };

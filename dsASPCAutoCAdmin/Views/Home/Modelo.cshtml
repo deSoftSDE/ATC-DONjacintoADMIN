@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Tipo de Carrocería";
     var c = (Modelo)ViewData["Modelo"];
+    var vh = (List<TipoVehiculo>)ViewData["TiposVehiculo"];
 }
 <script type="text/javascript">
     function irAMarca(id) {
@@ -11,82 +12,54 @@
 
 <div class="container " ng-controller="ModeloCarroceria">
     <input style="display:none" type="text" value="@c.IDFamilia" id="idFamilia" />
-    <div class="row">
+    @Html.ActionLink("Marcas", "Marcas") >
+    <a ng-click="verMarca(@c.IdSeccion)">@c.descripcionSeccion</a> >
+    @c.DescripcionFamilia
+    <div class="row mt-3">
         <div class="col-6">
-            @*<h2>@ViewData["Title"]</h2>*@
-
-            <h3>Modelo @c.DescripcionFamilia</h3>
-            <img class="img-fluid " style="max-height:80px" ng-src="{{currentmodelo.url}}" onerror="this.src='../../images/imagen_defect.png'" />
-            <small class="d-block mx-auto">Sube una imagen del modelo</small>
-            <div class="col-6">
-                <input class="form-control form-control-sm" type="file" id="filesup" ng-file-model="currentmodelo.files" />
-            </div>
-        </div>
-        <div class="col-6">
-           Marca: <a ng-click="verMarca(@c.IdSeccion)">@c.descripcionSeccion</a>
+            <h2>@c.DescripcionFamilia</h2>
             <div class="form-group">
-                <label>Descripción del Modelo (Familia) </label>
+                <label>Descripción de la familia </label>
                 <div class="col-12">
                     <input type="text" ng-model="currentmodelo.descripcionFamilia" class="form-control" />
                 </div>
+
             </div>
-            <div class="form-group">
-                sec: {{currentmodelo.idSeccion}}
-                <div class="col-12">
-                    <label>Código de familia:</label>
-                    <div class="col-3">
-                        <input type="text" ng-model="currentmodelo.codigoFamilia" class="form-control" />
+            <div class="col-12">
+                <label>Selecciona el tipo de vehículo</label>
+                <select class="form-control" ng-model="currentmodelo.idTipoVehiculo">
+                    <option value="0">Sin tipo</option>
+                    @foreach (TipoVehiculo tv in vh)
+                    {
+                        <option ng-selected="currentmodelo.idTipoVehiculo == @tv.IDTipoVehiculo" value="@tv.IDTipoVehiculo">@tv.Descripcion</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="col-6 offset-3">
+                <img class="img-fluid d-block mx-auto" ng-src="{{currentmodelo.url}}" onerror="this.src='../../images/imagen_defect.png'" />
+            </div>
+            <div class="col-12">
+                <hr />
+            </div>
+            
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Sube una imagen de la familia</label>
+                    <div class="col-12 text-center">
+                        <input type="file" id="filesup" ng-file-model="currentmodelo.files" />
                     </div>
-                   
                 </div>
             </div>
         </div>
     </div>
-    
-    
-        
-       
-        
-      
-        <div class="row">
-            <div class="col-12">
-                <hr />
-            </div>
-        </div>
-
-   
     <div class="row">
         <div class="col-12">
-            <div class="row mb-4">
-                <div class="col-6">
-                    <h3>@ViewData["Message"]</h3>
-                </div>
-                <div class="col-6 text-right">
-                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    @*<button type="submit" value="Añadir Nuevo Tipo" ng-click="anadirCarroceria()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir Carrocería existente</button>*@
-                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Crear Nueva Carrocería </button>
-                </div>
-            </div>
-            <div class="dx-viewport demo-container">
-                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="carroceria" style="width:100% !important;">
-                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                        <img class="img-fluid" ng-src="{{carroceria.value}}" />
-                    </div>
-                    <div data-options="dxTemplate:{ name:'editTemplate' }">
-                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <button type="submit" ng-click="modificarCarroceria(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
-                    </div>
-                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
-                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <button type="submit" ng-click="eliminarRegistro(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                    </div>
-
-                </div>
-            </div>
             <div class="form-group">
                 <label class="">Incluir una carrocería existente</label>
                 <div class="input-group">
-                    <input type="text" class="form-control campo-search " ng-blur="focofuera2()" ng-focus="entrafoco2()" placeholder="Buscar carrocería..." value="" id="busqueda_producto2" tabindex="1" autocomplete="off" ng-change="cambiobusqueda2()" ng-model="cadena2" name="producto2">
+                    <input type="text" class="form-control campo-search " ng-blur="focofuera2()" ng-focus="entrafoco2()" placeholder="Buscar Carrocería" value="" id="busqueda_producto2" tabindex="1" autocomplete="off" ng-change="cambiobusqueda2()" ng-model="cadena2" name="producto2">
                     <span class="input-group-btn">
                         <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2">
                             <i class="fas fa-search"></i>
@@ -121,8 +94,33 @@
                     </tbody>
                 </table>
             </div>
+            @*<p>Use this area to provide additional information.</p>*@
+            <!--<div class="row mb-4">
+                <div class="col-6">
 
+                </div>
+                <div class="col-6 text-right">
+                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
+                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="anadirCarroceria()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir Carrocería existente</button>
+                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Crear Nueva Carrocería </button>
+                </div>
+            </div>-->
+            <div class="dx-viewport demo-container">
+                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="carroceria" style="width:100% !important;">
+                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                        <img class="img-fluid" ng-src="{{carroceria.value}}" />
+                    </div>
+                    <div data-options="dxTemplate:{ name:'editTemplate' }">
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        <button type="submit" ng-click="modificarCarroceria(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+                    </div>
+                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        <button type="submit" ng-click="eliminarRegistro(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                    </div>
 
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -223,6 +221,6 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 

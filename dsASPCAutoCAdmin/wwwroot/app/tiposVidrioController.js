@@ -208,7 +208,7 @@
         width: 660,
         height: 540,
         showTitle: true,
-        title: "Nuevo Tipo de Vidrio",
+        title: "Tipo de Vidrio",
         dragEnabled: false,
         bindingOptions: {
             visible: 'popupVisible'

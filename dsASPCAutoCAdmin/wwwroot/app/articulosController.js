@@ -13,6 +13,7 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
@@ -121,50 +122,65 @@
     };
 
     $scope.files = "";
-    $scope.guardarCambios = function (carroceria) {
-        guardarCambios(carroceria);
+    $scope.guardarCambios = function (articulo) {
+        
         $scope.datagrid.collapseAll(-1);
+        articulo.idSeccion = $scope.lastMarca.idSeccion;
+        articulo.idFamilia = $scope.lastModelo.idFamilia;
+        articulo.idTipoVidrio = $scope.lastVidrio.idTipoVidrio;
+        guardarCambios(articulo);
     };
     $scope.modificarArticulo = function (vid) {
+        try {
+            $scope.selectElement.option("value", undefined);
+            $scope.selectElement3.option("value", undefined);
+            $scope.selectElement2.option("value", undefined);
+
+        } catch (ex) {
+            console.log(ex);
+            //alert("Error");
+        }
         console.log(vid);
         $scope.popupVisible = true;
         $scope.currentarticulo = vid.data;
+        $scope.lastMarca = {
+            idSeccion: $scope.currentarticulo.idSeccion,
+            descripcionSeccion: $scope.currentarticulo.descripcionSeccion,
+        }
+        $scope.lastModelo = {
+            idFamilia: $scope.currentarticulo.idFamilia,
+            descripcionFamilia: $scope.currentarticulo.descripcionFamilia,
+        }
+        $scope.lastVidrio = {
+            idTipoVidrio: $scope.currentarticulo.idTipoVidrio,
+            descripcion: $scope.currentarticulo.descripcionTipoVidrio,
+        }
+        /*if (NotNullNotUndefinedNotEmpty($scope.currentarticulo.idSeccion)) {
+            buscaModelos($scope.lastMarca);
+        }*/
+        //console.log(Currentarticulo);
     };
     guardarCambios = function (art) {
         art.files = null;
         console.log(art);
-        alert("Hasta aqui he llegado!");
-        if (false) {
-            Llamada.post("ArticulosModificar", art)
-                .then(function (respuesta) {
-                    mensajeExito("Datos guardados con éxito");
-                    if (ZeroSiNull(art.idArticulo) < 1) {
-                        var obj = {
-                            tipo: "Articulo",
-                            cadena: "",
-                            accionPagina: "N",
-                            lastValor: carroceria.descripcion,
-                            lastIndice: respuesta.data.identidad
-                        };
-                        art.idArticulo = respuesta.identidad;
-                        LeerRegistros(obj, art);
-                    }
-                    console.log(respuesta);
-
-                    $scope.popupVisible = false;
-                });
-            $scope.popupVisible = false;
-        }
+        console.log("Hasta aqui he llegado!");
+        console.log(art);
+        Llamada.post("ArticulosModificar", art)
+            .then(function (respuesta) {
+                mensajeExito("Datos guardados con éxito");
+                $scope.popupVisible = false;
+            });
+        $scope.popupVisible = false;
         
 
     };
     $scope.popupVisible = false;
     $scope.popupOptions = {
         width: 660,
-        height: 540,
+        height: '90%',
         showTitle: true,
-        title: "Nueva Carrocería",
-        fullScreen:true,
+        title: "Modificar Artículo",
+        fullScreen:false,
         dragEnabled: false,
         bindingOptions: {
             visible: 'popupVisible'
@@ -174,6 +190,150 @@
     $scope.cambioInput = function () {
         alert("Holi");
     };
+    $scope.selectBox = {
+        dataSource: [],
+        displayExpr: "descripcionSeccion",
+        valueExpr: "idSeccion",
+        searchEnabled: true,
+        noDataText: 'No se ha encontrado ninguna marca',
+        //value: products[0].idSeccion,
+        fieldTemplate: 'field',
+        onInitialized: function (e) {
+            $scope.selectElement = e.component;
+            oldValue = e.component.option("value");
+        },
+        onValueChanged: function (e) {
+            console.log(e);
+            if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
+                console.log(e);
+                console.log(e.component._options)
+                console.log(e.component._options.selectedItem)
+                $scope.lastMarca = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+                buscaModelos($scope.lastMarca);
+            } else {
+                console.log(e);
+                console.log("Está vacío!!");
+                oldValue = e.previousValue
+            }
+
+        }
+    }
+    $scope.selectBox2 = {
+        dataSource: [],
+        valueExpr: "idFamilia",
+        placeholder: "Selecciona un modelo",
+        noDataText: 'Selecciona la marca primero',
+        displayExpr: "descripcionFamilia",
+        //value: products[0].idFamilia,
+        onInitialized: function (e) {
+            $scope.selectElement2 = e.component;
+        },
+        onValueChanged: function (e) {
+            if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
+                console.log(e);
+                console.log(e.component._options)
+                console.log(e.component._options.selectedItem)
+                $scope.lastModelo = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+                console.log("Mira el modelo:");
+                console.log($scope.lastModelo);
+            }
+
+        }
+    }
+
+    $scope.selectBox3 = {
+        dataSource: [],
+        displayExpr: "descripcion",
+        placeholder: "Selecciona un tipo de vidrio",
+        noDataText: 'No se han encontrado vidrios',
+        valueExpr: "idTipoVidrio",
+        //searchEnabled: true,
+        //value: products[0].idTipoVehiculo,
+        //fieldTemplate: 'field',
+        onInitialized: function (e) {
+            $scope.selectElement3 = e.component;
+            Llamada.get("TiposVidrioLeer")
+                .then(function (respuesta) {
+                    console.log(respuesta.data);
+                    $scope.tiposvid = respuesta.data;
+                    for (i = 0; i < $scope.tiposvid.length; i++) {
+                        $scope.tiposvid[i].url = Llamada.getRuta($scope.tiposvid[i].imagen);
+                    }
+                    if (NotNullNotUndefinedNotEmpty($scope.selectElement3)) {
+                        $scope.selectElement3.option("dataSource", $scope.tiposvid);
+                    }
+
+                })
+        },
+        onValueChanged: function (e) {
+            console.log(e);
+            $scope.lastVidrio = e.component._options.selectedItem;
+            console.log(e.component._options.selectedItem);
+        }
+    }
+    
+
+    buscaMarcas = function (val) {
+        console.log("Ahora  busca marcas");
+        console.log(val);
+        console.log($scope.newValor);
+        Llamada.get("MarcasLeerPorCadena?cadena=" + $scope.newValor)
+            .then(function (respuesta) {
+                console.log(respuesta.data);
+                console.log($scope.selectElement);
+                $scope.marcas = respuesta.data;
+                for (i = 0; i < $scope.marcas.length; i++) {
+                    $scope.marcas[i].url = Llamada.getRuta($scope.marcas[i].imagen);
+                }
+                $scope.selectElement.option("dataSource", $scope.marcas);
+                $scope.selectElement.open();
+            })
+    }
+    buscaModelos = function (val) {
+        console.log("Ahora  busca modelos");
+        console.log(val);
+        console.log($scope.newValor);
+        Llamada.get("ModelosLeerPorMarca?IDSeccion=" + val.idSeccion)
+            .then(function (respuesta) {
+                console.log(respuesta.data);
+                console.log($scope.selectElement);
+                $scope.modelos = respuesta.data;
+                for (i = 0; i < $scope.modelos.length; i++) {
+                    $scope.modelos[i].url = Llamada.getRuta($scope.modelos[i].imagen);
+                }
+                $scope.selectElement2.option("dataSource", $scope.modelos);
+                $scope.selectElement2.open();
+            })
+    }
+
+    var inputChangedPromise;
+    $scope.cambiobusqueda = function () {
+        if (inputChangedPromise) {
+            $timeout.cancel(inputChangedPromise);
+        }
+        inputChangedPromise = $timeout(buscaMarcas, 1000);
+    }
+    $scope.settingsbox = {
+        placeholder: 'Selecciona una Marca',
+        bindingOptions: {
+            value: 'textBoxValue'
+        },
+        onInitialized: function (e) {
+            $scope.campotexto = e.component;
+        },
+        valueChangeEvent: "keyup",
+        onKeyUp(e) {
+            $scope.newValor = e.component.option("value");
+            $scope.cambiobusqueda();
+        }
+    }
+    $scope.inittext = function (e) {
+        alert("Holi");
+        console.log(e);
+        console.log("Aqui se inicializa");
+        console.log(e);
+        $scope.campotexto = e.component;
+    }
     $scope.eliminarRegistro = function (id) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta carrocería?");
         result.then(function (val) {
@@ -252,13 +412,7 @@
             $scope.loading = false;
         }
     }
-    var inputChangedPromise;
-    $scope.cambiobusqueda = function () {
-        if (inputChangedPromise) {
-            $timeout.cancel(inputChangedPromise);
-        }
-        inputChangedPromise = $timeout(buscarArticulos, 1000);
-    }
+    
     /*$scope.anadirVidrio = function (res) {
         console.log(res);
         $scope.mostrardesplegable = false;

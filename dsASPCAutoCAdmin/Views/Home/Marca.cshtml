@@ -12,12 +12,34 @@
 </script>
 
 <div class="container " ng-controller="Modelos">
+    @Html.ActionLink("Marcas", "Marcas") >
+     @c.DescripcionSeccion
     <div class="row mt-3">
         <div class="col-6">
             <h3 class="">@c.DescripcionSeccion</h3>
+            <div class="form-group">
+                <label>Nombre de la marca (Sección) </label>
+                <div class="col-12">
+                    <input type="text" ng-change="cambios=true" ng-model="currentmarca.descripcionSeccion" class="form-control" />
+                </div>
+            </div>
+            <!--<div class="form-group">
+        <label>Código de sección</label>
+        <div class="col-3">
+            <input type="text" ng-change="cambios=true" ng-model="currentmarca.codigoSeccion" class="form-control disabled" />
+        </div>
+    </div>-->
+            <div class="col text-right">
+                <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                <button class="btn btn-danger" ng-if="cambios" type="submit" value="Guardar cambios" ng-click="cancelar()">Cancelar</button>
+
+            </div>
+        </div>
+        <div class="col-6">
+            
 
             <input type="hidden" value="@c.IDSeccion" id="idseccion" />
-            <img style="max-height:80px" class="img-fluid "  ng-src="{{currentmarca.url}}" onerror="this.src=' ../../images/escudo.png'" />
+            <img style="max-height:80px" class="img-fluid " ng-src="{{currentmarca.url}}" onerror="this.src=' ../../images/escudo.png'" />
             <div class="form-group">
                 <label class=""><small>Sube una imagen de la marca</small></label>
                 <div class="col-12 ">
@@ -26,26 +48,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label>Nombre de la marca (Sección) </label>
-                <div class="col-12">
-                    <input type="text" ng-change="cambios=true" ng-model="currentmarca.descripcionSeccion" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Código de sección</label>
-                <div class="col-3">
-                    <input type="text" ng-change="cambios=true" ng-model="currentmarca.codigoSeccion" class="form-control disabled" />
-                </div>
-            </div>
-            <div class="col text-right">
-                <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                <button class="btn btn-danger" ng-if="cambios" type="submit" value="Guardar cambios" ng-click="cancelar()">Cancelar</button>
+        
 
-            </div>
-        </div>
-       
 
     </div>
     <div class="row my-1">
@@ -54,7 +58,7 @@
         </div>
         <div classs="col-8"><h4>@ViewData["Message"] (Familia)</h4></div>
         <div class="col text-right">
-           
+
         </div>
 
     </div>
@@ -85,7 +89,7 @@
 
                     </div>
                     <div data-options="dxTemplate:{ name:'verTemplate' }">
-                            <button type="submit" class="btn btn-default btn-sm" ng-click="verModelo(tiv.data.idFamilia)"><i class="fas fa-share-square"></i>Editar</button>
+                        <button type="submit" class="btn btn-default btn-sm" ng-click="verModelo(tiv.data.idFamilia)"><i class="fas fa-share-square"></i>Editar</button>
                     </div>
 
                 </div>
@@ -112,7 +116,7 @@
                 </ul>
             </nav>
         </div>
-       
+
     </div>
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
