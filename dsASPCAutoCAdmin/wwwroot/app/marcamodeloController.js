@@ -19,6 +19,7 @@
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
             editEnabled: false,
+            columnAutoWidth:true,
             
         },
         selection: {
@@ -48,22 +49,22 @@
             {
                 dataField: "url",
                 caption: "Imagen",
-                width: 100,
+                width: 30%,
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "cellTemplate"
             }, {
                 dataField: "descripcionSeccion",
-                width: "auto",
+                width: "30%",
                 caption: "Descripcion"
             }, {
                 dataField: "codigoSeccion",
-                width: "auto",
+                width: "30%",
                 caption: "Código"
             }, {
                 caption: "",
-                width: "auto",
+                width: "30",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,

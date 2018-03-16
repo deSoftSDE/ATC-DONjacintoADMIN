@@ -157,11 +157,11 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
     };
     $scope.popupVisible = false;
     $scope.popupOptions = {
-        width: 660,
-        height: 540,
+        width: "80%",
+        height: "80%",
         showTitle: true,
         title: "Nueva Carrocería",
-        fullScreen: true,
+        fullScreen: false,
         dragEnabled: false,
         bindingOptions: {
             visible: 'popupVisible'
