@@ -13,8 +13,19 @@
         LeerRegistros($scope.vm.cm);
     };
     $scope.verModelo = function (a) {
-        irAModelo(a);
-    };
+        console.log($scope.cambios)
+        if ($scope.cambios === true) {
+            result = DevExpress.ui.dialog.confirm("¿Seguro que deseas dejar de modificar esta marca sin guardar los cambios?");
+            result.then(function (val) {
+                if (val) {
+                    irAModelo(a);
+                }
+            });
+        } else {
+            irAModelo(a);
+        }
+
+    }
     $scope.verMarca = function (a) {
         irAMarca(a);
     };

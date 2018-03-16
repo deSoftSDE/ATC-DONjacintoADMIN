@@ -6,7 +6,17 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
     console.log("Holi");
 
     $scope.verMarca = function (a) {
-        irAMarca(a);
+        console.log($scope.cambios)
+        if ($scope.cambios === true) {
+            result = DevExpress.ui.dialog.confirm("¿Seguro que deseas dejar de modificar este modelo sin guardar los cambios?");
+            result.then(function (val) {
+                if (val) {
+                    irAMarca(a);
+                }
+            });
+        } else {
+            irAMarca(a);
+        }
     };
     Llamada.get("ModelosLeerPorID?idFamilia=" + document.getElementById("idFamilia").value)
         .then(function (respuesta) {
@@ -92,6 +102,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         $scope.datagrid.collapseAll(-1);
     };
     $scope.guardarCambiosModelo = function () {
+        $scope.cambios = false;
         if (NotNullNotUndefinedNotEmpty($scope.currentmodelo.files)) {
             console.log(document.getElementById("filesup").files);
             var fd = new FormData();
@@ -175,6 +186,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta carrocería de este modelo?");
         result.then(function (val) {
             if (val) {
+                $scope.cambios = true;
                 console.log(id.rowIndex);
                 var b = $scope.currentmodelo.carrocerias.splice(id.rowIndex, 1);
                 $scope.datagrid.option("dataSource", $scope.currentmodelo.carrocerias);
