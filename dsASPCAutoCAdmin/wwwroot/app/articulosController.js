@@ -128,6 +128,9 @@
         articulo.idSeccion = $scope.lastMarca.idSeccion;
         articulo.idFamilia = $scope.lastModelo.idFamilia;
         articulo.idTipoVidrio = $scope.lastVidrio.idTipoVidrio;
+        articulo.descripcionSeccion = $scope.lastMarca.descripcionSeccion;
+        articulo.descripcionFamilia = $scope.lastModelo.descripcionFamilia;
+        articulo.descripcionTipoVidrio = $scope.lastVidrio.descripcion;
         guardarCambios(articulo);
     };
     $scope.modificarArticulo = function (vid) {
