@@ -332,4 +332,35 @@
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
     }
+
+
+
+
+    var buscaChangePromise;
+    $scope.cambioBuscador = function () {
+        if (buscaChangePromise) {
+            $timeout.cancel(buscaChangePromise);
+        }
+        buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
+    }
+    $scope.activarBusqueda = function () {
+        console.log("Ok, busco con");
+        console.log($scope.buscador);
+        var obj = {
+            tipo: "Modelos",
+            cadena: $scope.buscador,
+            idSeccion: parseInt(document.getElementById("idseccion").value)
+        };
+        LeerRegistros(obj);
+    }
+    $scope.anularBusqueda = function () {
+        console.log("Ok, anulo búsqueda");
+        $scope.buscador = "";
+        var obj = {
+            tipo: "Modelos",
+            cadena: "",
+            idSeccion: parseInt(document.getElementById("idseccion").value)
+        };
+        LeerRegistros(obj);
+    }
 });

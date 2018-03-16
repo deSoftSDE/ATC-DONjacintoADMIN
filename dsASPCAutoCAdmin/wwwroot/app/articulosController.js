@@ -362,12 +362,6 @@
     $scope.currentarticulo = {
         descripcion: "Descripción"
     };
-    $scope.crearRegistro = function () {
-        $scope.popupVisible = true;
-        $scope.currentarticulo = {
-            descripcion: "Descripción"
-        };
-    };
     $scope.guardarCambiosPopup = function () {
         $scope.guardarCambios($scope.currentarticulo);
     };
@@ -459,5 +453,34 @@
     }
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
+    }
+
+
+
+    var buscaChangePromise;
+    $scope.cambioBuscador = function () {
+        if (buscaChangePromise) {
+            $timeout.cancel(buscaChangePromise);
+        }
+        buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
+    }
+    $scope.activarBusqueda = function () {
+        console.log("Ok, busco con");
+        console.log($scope.buscador);
+        var obj = {
+            tipo: "Articulo",
+            cadena: $scope.buscador,
+        };
+        LeerRegistros(obj);
+    }
+    $scope.anularBusqueda = function () {
+        console.log("Ok, anulo búsqueda");
+        $scope.buscador = "";
+        var obj = {
+            tipo: "Articulo",
+            cadena: "",
+            
+        };
+        LeerRegistros(obj);
     }
 });

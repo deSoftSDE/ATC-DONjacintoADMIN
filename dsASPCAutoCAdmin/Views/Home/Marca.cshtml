@@ -13,7 +13,7 @@
 
 <div class="container " ng-controller="Modelos">
     @Html.ActionLink("Marcas", "Marcas") >
-     @c.DescripcionSeccion
+    @c.DescripcionSeccion
     <div class="row mt-3">
         <div class="col-6">
             <h3 class="">@c.DescripcionSeccion</h3>
@@ -24,11 +24,11 @@
                 </div>
             </div>
             <!--<div class="form-group">
-        <label>Código de sección</label>
-        <div class="col-3">
-            <input type="text" ng-change="cambios=true" ng-model="currentmarca.codigoSeccion" class="form-control disabled" />
-        </div>
-    </div>-->
+                <label>Código de sección</label>
+                <div class="col-3">
+                    <input type="text" ng-change="cambios=true" ng-model="currentmarca.codigoSeccion" class="form-control disabled" />
+                </div>
+            </div>-->
             <div class="col text-right">
                 <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
                 <button class="btn btn-danger" ng-if="cambios" type="submit" value="Guardar cambios" ng-click="cancelar()">Cancelar</button>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-6">
-            
+
 
             <input type="hidden" value="@c.IDSeccion" id="idseccion" />
             <img style="max-height:80px" class="img-fluid " ng-src="{{currentmarca.url}}" onerror="this.src=' ../../images/escudo.png'" />
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        
+
 
 
     </div>
@@ -65,7 +65,19 @@
 
 
 
+    <div class="input-group">
 
+
+        <input type="text" class="form-control campo-search " placeholder="Buscar Modelos" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
+        <div class="input-group-append">
+            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
+                <i class="fas fa-ban"></i>
+            </button>
+        </div>
+    </div>
 
 
     <div class="row">

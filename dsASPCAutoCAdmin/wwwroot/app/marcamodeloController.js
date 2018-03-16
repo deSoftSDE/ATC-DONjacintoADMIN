@@ -226,7 +226,8 @@
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
         $scope.currentmarca = {
-            descripcionSeccion: "Descripción"
+            descripcionSeccion: "",
+            url: Llamada.getRuta(""),
         };
     };
     $scope.guardarCambiosPopup = function () {
@@ -314,5 +315,31 @@
     }
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
+    }
+
+    var buscaChangePromise;
+    $scope.cambioBuscador = function () {
+        if (buscaChangePromise) {
+            $timeout.cancel(buscaChangePromise);
+        }
+        buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
+    }
+    $scope.activarBusqueda = function () {
+        console.log("Ok, busco con");
+        console.log($scope.buscador);
+        var obj = {
+            tipo: "Marcas",
+            cadena: $scope.buscador,
+        };
+        LeerRegistros(obj);
+    }
+    $scope.anularBusqueda = function () {
+        console.log("Ok, anulo búsqueda");
+        $scope.buscador = "";
+        var obj = {
+            tipo: "Marcas",
+            cadena: ""
+        };
+        LeerRegistros(obj);
     }
 });

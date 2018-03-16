@@ -45,6 +45,13 @@ namespace dsASPCAutoCAdmin.ViewModels
             if (ba.idSeccion.HasValue)
             {
                 lcb = "IDSeccion=" + ba.idSeccion;
+                if (ba.cadena != null && ba.cadena.Length > 0)
+                {
+                    lcb = lcb + " AND " + cadenas.CampoOrdenacion + " LIKE '%" + ba.cadena + "%' ";
+                }
+            } else if (ba.cadena != null && ba.cadena.Length > 0)
+            {
+                lcb = cadenas.CampoOrdenacion + " LIKE '%" + ba.cadena + "%' "; 
             }
             var criterioAuxiliares = new CriterioBusqueda
             {

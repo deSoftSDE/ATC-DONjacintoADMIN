@@ -201,7 +201,8 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
         $scope.currentcarroceria = {
-            descripcion: "Descripción"
+            descripcion: "",
+            url: Llamada.getRuta(""),
         };
     };
     $scope.anadirCarroceria = function (r) {

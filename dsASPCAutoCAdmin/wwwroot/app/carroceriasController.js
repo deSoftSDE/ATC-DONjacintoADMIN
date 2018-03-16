@@ -240,7 +240,7 @@
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
         $scope.currentcarroceria = {
-            descripcion: "Descripción"
+            descripcion: ""
         };
     };
     $scope.guardarCambiosPopup = function () {

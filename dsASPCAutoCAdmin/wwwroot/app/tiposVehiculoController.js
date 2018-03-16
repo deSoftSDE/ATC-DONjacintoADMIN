@@ -201,9 +201,11 @@
         descripcion: "Descripción"
     };
     $scope.crearRegistro = function () {
+        //alert("Holi");
         $scope.popupVisible = true;
         $scope.currentvehiculo = {
-            descripcion: "Descripción"
+            descripcion: "",
+            url: Llamada.getRuta(""),
         };
     };
     $scope.guardarCambiosPopup = function () {
@@ -303,5 +305,33 @@
                 console.log(vidrio);
             }
         });
+    }
+
+
+    var buscaChangePromise;
+    $scope.cambioBuscador = function () {
+        if (buscaChangePromise) {
+            $timeout.cancel(buscaChangePromise);
+        }
+        buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
+    }
+    $scope.activarBusqueda = function () {
+        console.log("Ok, busco con");
+        console.log($scope.buscador);
+        var obj = {
+            tipo: "TipoVehiculo",
+            cadena: $scope.buscador,
+        };
+        LeerRegistros(obj);
+    }
+    $scope.anularBusqueda = function () {
+        console.log("Ok, anulo búsqueda");
+        $scope.buscador = "";
+        var obj = {
+            tipo: "TipoVehiculo",
+            cadena: "",
+
+        };
+        LeerRegistros(obj);
     }
 });

@@ -1,4 +1,4 @@
-﻿appadmin.controller('TiposVidrio', function ($scope, Llamada) {
+﻿appadmin.controller('TiposVidrio', function ($scope, Llamada, $timeout) {
     console.log("Holi");
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
@@ -246,7 +246,8 @@
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
         $scope.currentvidrio = {
-            descripcion: "Descripción"
+            descripcion: "",
+            url: Llamada.getRuta(""),
         };
     };
     $scope.guardarCambiosPopup = function () {
@@ -269,5 +270,34 @@
     };
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
+    }
+
+
+
+    var buscaChangePromise;
+    $scope.cambioBuscador = function () {
+        if (buscaChangePromise) {
+            $timeout.cancel(buscaChangePromise);
+        }
+        buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
+    }
+    $scope.activarBusqueda = function () {
+        console.log("Ok, busco con");
+        console.log($scope.buscador);
+        var obj = {
+            tipo: "TiposVidrio",
+            cadena: $scope.buscador,
+        };
+        LeerRegistros(obj);
+    }
+    $scope.anularBusqueda = function () {
+        console.log("Ok, anulo búsqueda");
+        $scope.buscador = "";
+        var obj = {
+            tipo: "TiposVidrio",
+            cadena: "",
+
+        };
+        LeerRegistros(obj);
     }
 });

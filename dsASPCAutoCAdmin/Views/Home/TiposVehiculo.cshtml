@@ -38,32 +38,45 @@
                     <button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
                </div>
             </div>
-                <div class="dx-viewport demo-container">
-                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
-                        <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                            <img class="img-fluid" ng-src="{{tiv.value}}" onerror="this.src='../images/imagen_defect.png'" />
+            <div class="dx-viewport demo-container">
+                <div class="input-group">
 
-                        </div>
-                        <div data-options="dxTemplate:{ name:'editTemplate' }">
 
-                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="modificarTipoVehiculo(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
-
-                        </div>
-                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
-
-                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                            <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
-
-                        </div>
-                        <div data-options="dxTemplate:{ name:'detail' }">
-
-                            holiii soy el detalle
-
-                        </div>
-
+                    <input type="text" class="form-control campo-search " placeholder="Buscar Buscar Tipo de Vehículo" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
+                    <div class="input-group-append">
+                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
+                            <i class="fas fa-ban"></i>
+                        </button>
                     </div>
                 </div>
+                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
+                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                        <img class="img-fluid" ng-src="{{tiv.value}}" onerror="this.src='../images/imagen_defect.png'" />
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'editTemplate' }">
+
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        <button type="submit" ng-click="modificarTipoVehiculo(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'detail' }">
+
+                        holiii soy el detalle
+
+                    </div>
+
+                </div>
+            </div>
            
         </div>
     </div>
@@ -85,6 +98,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6 offset-3">
+                       
                         <img class="img-fluid d-block mx-auto" ng-src="{{currentvehiculo.url}}" onerror="this.src='../images/imagen_defect.png'" />
                     </div>
                     <div class="col-12">
