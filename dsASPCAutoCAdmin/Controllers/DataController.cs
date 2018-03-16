@@ -546,14 +546,14 @@ namespace dsASPCAutoCAdmin.Controllers
             return result;
         }
         [HttpGet]
-        public IActionResult TiposVehiculoEliminar(int idGenerico)
+        public IActionResult TiposVehiculoEliminar(int IDTipoVehiculo)
         {
             ObjectResult result;
             var ad = new AdaptadorAtcAdmin(_configuration);
             try
             {
                 //var res = new LecturasViewModel(_configuration, bs);
-                ad.TiposVehiculoEliminar(idGenerico);
+                ad.TiposVehiculoEliminar(IDTipoVehiculo);
                 result = new ObjectResult(1)
                 {
                     StatusCode = (int)HttpStatusCode.OK

@@ -183,11 +183,20 @@
         alert("Holi");
     };
     $scope.eliminarRegistro = function (a) {
-        Llamada.get("TipoVehiculoEliminar?idTipoVehiculo=" + a.data.idTipoVehiculo)
-            .then(function (respuesta) {
-                console.log(respuesta);
-                LeerRegistros($scope.lastConsulta);
-            });
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este tipo de vehículo?");
+        result.then(function (val) {
+            if (val) {
+                console.log("OK");
+                Llamada.get("TiposVehiculoEliminar?idTipoVehiculo=" + a.data.idTipoVehiculo)
+                    .then(function (respuesta) {
+                        console.log(respuesta);
+                        LeerRegistros($scope.lastConsulta);
+                    });
+
+              
+            }
+        });
+        
     };
     $scope.hola = function () {
         alert("Hola");

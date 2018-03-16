@@ -49,7 +49,7 @@
             {
                 dataField: "url",
                 caption: "Imagen",
-                width: 30%,
+                width: "30%",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
