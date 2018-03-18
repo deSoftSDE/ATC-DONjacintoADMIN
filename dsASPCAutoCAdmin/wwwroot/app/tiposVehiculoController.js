@@ -48,28 +48,31 @@
             {
                 dataField: "url",
                 caption: "Imagen",
-                width: 100,
+                width: "30%",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
+                alignment: "center",
                 cellTemplate: "cellTemplate"
             }, {
                 dataField: "descripcion",
-                width: 600,
-                caption: "Descripcion"
+                width: "30%",
+                caption: "Descripción"
             }, {
                 caption: "",
-                width: 100,
+                width: "20%",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
+                alignment: "center",
                 cellTemplate: "editTemplate"
             }, {
                 caption: "",
-                width: 80,
+                width: "20%",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
+                alingment: "center",
                 cellTemplate: "deleteTemplate"
             }
         ],

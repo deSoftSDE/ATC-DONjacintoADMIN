@@ -11,47 +11,26 @@
     </div>
     <div class="row">
         <div class="col-12">
-            @*<p>Use this area to provide additional information.</p>*@
-            <div class="row mb-4">
-                <div class="col-6">
-                    <div class="dataTables_wrapper">
-                        <div class="dataTables_paginate" style="float:left">
-                            <ul class="pagination">
-                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
-                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
-                                </li>
-                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
-                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
-                                </li>
-                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
-                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
-                                </li>
-                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
-                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
-                                </li>
-                            </ul>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="input-group">
+
+
+                        <input type="text" class="form-control campo-search " placeholder="Buscar Artículos" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
+                        <div class="input-group-append">
+                            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-default boton-buscar form-control-sm btn-right" type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
+                                <i class="fas fa-ban"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 text-right">
-                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <!--<button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>-->
-                </div>
             </div>
+            @*<p>Use this area to provide additional information.</p>*@
             <div class="dx-viewport demo-container">
-                <div class="input-group">
-
-
-                    <input type="text" class="form-control campo-search " placeholder="Buscar Artículos" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
-                    <div class="input-group-append">
-                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
-                            <i class="fas fa-ban"></i>
-                        </button>
-                    </div>
-                </div>
+                
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="art" style="width:100% !important;">
                     <div data-options="dxTemplate:{ name:'cellTemplate' }">
                         <img class="img-fluid" ng-src="{{art.value}}" />
@@ -72,128 +51,147 @@
 
                 </div>
             </div>
-           
+
         </div>
     </div>
-    <div dx-popup="popupOptions">
-        <div class='popup-property-details'>
-            <div class="form">
-
-                <div class="form-group">
-                    <label>Descripción </label>
-                    <div class="col-12">
-                        <input type="text" ng-model="currentarticulo.descripcion" class="form-control form-control-sm" />
-                    </div>
-                    <label>Descripción Corta </label>
-                    <div class="col-12">
-                        <input type="text" ng-model="currentarticulo.descripcionCorta" class="form-control form-control-sm" />
-                    </div>
-                    <label>Descripción Detallada </label>
-                    <div class="col-12">
-                        <input type="text" ng-model="currentarticulo.descripcionDetallada" class="form-control form-control-sm" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-12">
-                            <label>Selecciona la marca</label>
-                            <h4>{{lastMarca.descripcionSeccion}}</h4>
-                            <div style="z-index:99999999" dx-select-box="selectBox" dx-item-alias="product">
-
-                                <div data-options="dxTemplate: { name: 'field' }">
-                                    <!--<div class="custom-item">
-                                    <img ng-src="{{product.ImageSrc}}" />
-                                    <div class="product-name" dx-text-box=" {value: product.Name, readOnly: true }">
-                                    </div>
-                                </div>-->
-                                    <div dx-text-box="settingsbox"></div>
-                                </div>
-                                at
-                                <div data-options="dxTemplate: { name: 'item' }">
-                                    <div class="custom-item">
-                                        <div class="row">
-                                            <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/escudo.png'" /></div>
-                                            <div class="col-md-3">
-                                                <div class="product-name">
-                                                    {{product.descripcionSeccion}}
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <label>Selecciona el Modelo</label>
-                            <h4>{{lastModelo.descripcionFamilia}}</h4>
-                            <div style="z-index:99999999" dx-select-box="selectBox2" dx-item-alias="product">
-                                <div data-options="dxTemplate: { name: 'field' }">
-                                    <div class="custom-item">
-                                        <img ng-src="{{product.ImageSrc}}" />
-                                        {{product.descripcionFamilia}}
-                                    </div>
-                                </div>
-                                <div data-options="dxTemplate: { name: 'item' }">
-                                    <div class="custom-item">
-                                        <div class="row">
-                                            <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/escudo.png'" /></div>
-                                            <div class="col-md-3">
-                                                <div class="product-name">
-                                                    {{product.descripcionFamilia}}
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <label>Selecciona el Tipo de Vidrio</label>
-                            <h4>{{lastVidrio.descripcion}}</h4>
-
-                            <div style="z-index:99999999" dx-select-box="selectBox3" dx-item-alias="product">
-                                <div data-options="dxTemplate: { name: 'field' }">
-                                    <div class="custom-item">
-                                        <img ng-src="{{product.ImageSrc}}" />
-                                        {{product.descripcion}}
-                                    </div>
-                                </div>
-                                <div data-options="dxTemplate: { name: 'item' }">
-                                    <div class="custom-item">
-                                        <div class="row">
-                                            <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/imagen_defect.png'" /></div>
-                                            <div class="col-md-3">
-                                                <div class="product-name">
-                                                    {{product.descripcion}}
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-
+    <div class="row mt-4">
+        <div class="col-6 offset-3 ">
+            <div class="">
+                <nav class="">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled" id="primera" ng-click="cambiarPagina(this, 'F')">
+                            <a class="page-link"><i class="fa fa-step-backward fa-xs "></i><small style="font-size:72%">Primera</small> </a>
+                        </li>
+                        <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                            <a class="page-link"><i class="fa fa-caret-left fa-xs "></i> <small style="font-size:72%"> anterior</small></a>
+                        </li>
+                        <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                            <a class="page-link"><small style="font-size:72%">siguiente</small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                        </li>
+                        <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                            <a class="page-link"><small style="font-size:72%">Última</small> <i class="fa fa-step-forward fa-xs "></i> </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
-        <div class="row align-items-end">
+    </div>
+    @*POPUP EDITAR ARTICULOS*@
+    <div dx-popup="popupOptions">
+        <div class='popup-property-details'>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Descripción </label>
+                        <div class="col-12">
+                            <input type="text" ng-model="currentarticulo.descripcion" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción Corta </label>
+                        <div class="col-12">
+                            <input type="text" ng-model="currentarticulo.descripcionCorta" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Descripción Detallada </label>
+                        <div class="col-12">
+                            <textarea type="" ng-model="currentarticulo.descripcionDetallada" class="form-control form-control-sm" style="height:100px;" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*OPCIONES*@
+            <div class="row" >
+                <div class="col-4 p-3" style="border:1px solid #cecece; border-radius:0.2rem;">
+
+                    <h4>Marca: {{lastMarca.descripcionSeccion}}</h4>
+                    <h4>Modelo: {{lastModelo.descripcionFamilia}}</h4>
+                    <h4>Tipo de Vidrio: {{lastVidrio.descripcion}}</h4>
+                </div>
+                <div class="col-8">
+                    <label class="m-0">Modificar marca</label>
+
+                    <div style="z-index:99999999" dx-select-box="selectBox" dx-item-alias="product" class="mb-1">
+
+                        <div data-options="dxTemplate: { name: 'field' }">
+
+                            <div dx-text-box="settingsbox"></div>
+                        </div>
+
+                        <div data-options="dxTemplate: { name: 'item' }">
+                            <div class="custom-item">
+                                <div class="row">
+                                    <div class="col-md-3"><img ng-src="{{product.url}}" style="width:20px" onerror="this.src='../images/escudo.png'" /></div>
+                                    <div class="col-md-3">
+                                        <div class="product-name">
+                                            {{product.descripcionSeccion}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <label class="mb-0">Modificar el Modelo</label>
+                  
+                    <div style="z-index:99999999" dx-select-box="selectBox2" dx-item-alias="product" class="mb-1">
+                        <div data-options="dxTemplate: { name: 'field' }">
+                            <div class="custom-item">
+                                <img ng-src="{{product.ImageSrc}}" />
+                                {{product.descripcionFamilia}}
+                            </div>
+                        </div>
+                        <div data-options="dxTemplate: { name: 'item' }">
+                            <div class="custom-item">
+                                <div class="row">
+                                    <div class="col-md-3"><img ng-src="{{product.url}}" style="width:20px" onerror="this.src='../images/escudo.png'" /></div>
+                                    <div class="col-md-3">
+                                        <div class="product-name">
+                                            {{product.descripcionFamilia}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <label class="mb-0">Selecciona el Tipo de Vidrio</label>
+                   
+
+                    <div style="z-index:99999999" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
+                        <div data-options="dxTemplate: { name: 'field' }">
+                            <div class="custom-item">
+                                <img ng-src="{{product.ImageSrc}}" />
+                                {{product.descripcion}}
+                            </div>
+                        </div>
+                        <div data-options="dxTemplate: { name: 'item' }">
+                            <div class="custom-item">
+                                <div class="row">
+                                    <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/imagen_defect.png'" /></div>
+                                    <div class="col-md-3">
+                                        <div class="product-name">
+                                            {{product.descripcion}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div class="row align-items-end" style="min-height:160px;">
             <div class="col text-right">
                 @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
                 <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>

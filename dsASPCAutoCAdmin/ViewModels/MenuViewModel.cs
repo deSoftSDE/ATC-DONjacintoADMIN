@@ -14,7 +14,7 @@ namespace dsASPCAutoCAdmin.ViewModels
         {
             menu = new List<ElementoMenu>
             {
-                new ElementoMenu { Key = "Marcas", Value = "Marcas" },
+                new ElementoMenu { Key = "Marcas > Modelos", Value = "Marcas" },
                 new ElementoMenu { Key = "Tipos de Vehículo", Value = "TiposVehiculo" },
                 //new ElementoMenu { Key = "Modelo", Value = "Modelos" },
                 new ElementoMenu { Key = "Carrocerias", Value = "Carrocerias" },

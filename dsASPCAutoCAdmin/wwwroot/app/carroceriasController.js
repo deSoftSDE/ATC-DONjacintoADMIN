@@ -55,18 +55,20 @@
             {
                 dataField: "descripcion",
                 width: 600,
-                caption: "Descripcion"
+                caption: "Descripción"
             }, {
                 caption: "",
-                width: 100,
+                width: "20%",
                 allowFiltering: false,
+                alignment: "center",
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "editTemplate"
             }, {
                 caption: "",
-                width: 80,
+                width: "20%",
                 allowFiltering: false,
+                alignment: "center",
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "deleteTemplate"
@@ -195,8 +197,8 @@
     };
     $scope.popupVisible = false;
     $scope.popupOptions = {
-        width: 660,
-        height: 540,
+        width: "90%",
+        height: "90%",
         showTitle: true,
         title: "Carrocería",
         fullScreen:false,

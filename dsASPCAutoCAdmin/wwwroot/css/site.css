@@ -2432,3 +2432,24 @@ a.dx-link-delete{
 #style-3::-webkit-scrollbar-thumb {
     background-color: #000000;
 }
+
+.input-group-append {
+    margin-left: -1px;
+    display:flex;
+}
+.boton-buscar {
+    border-radius: 0px !important;
+    border-right: 1px solid #929292;
+    border-top: 1px solid #929292;
+    border-bottom: 1px solid #929292;
+}
+.btn-right {
+    border-top-right-radius: 0.2rem !important;
+    border-bottom-right-radius: 0.2rem !important;
+}
+.imagen-tabla{
+    max-height:50px;
+}
+.btn-admin-save{
+    border:1px solid #929292;
+}

@@ -80,14 +80,15 @@
             {
                 dataField: "url",
                 caption: "Imagen",
-                width: 100,
+                width: "30%",
+                alignment: "center",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "cellTemplate"
             }, {
                 dataField: "descripcionFamilia",
-                width: 600,
+                width: "30%",
                 caption: "Descripcion"
             }, {
                 dataField: "codigoFamilia",
@@ -109,7 +110,8 @@
                 cellTemplate: "deleteTemplate"
             },*/ {
                 caption: "",
-                width: 80,
+                width: 30,
+                alignment: "center",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,

@@ -13,13 +13,16 @@
 <div class="container " ng-controller="ModeloCarroceria">
     <input style="display:none" type="text" value="@c.IDFamilia" id="idFamilia" />
     @Html.ActionLink("Marcas", "Marcas") >
-    <a ng-click="verMarca(@c.IdSeccion)">@c.descripcionSeccion</a> >
-    @c.DescripcionFamilia
+    <a style="color:#bf4e6a;cursor:pointer;" ng-click="verMarca(@c.IdSeccion)">
+        @c.descripcionSeccion >
+    </a>
+        @c.DescripcionFamilia
+    
     <div class="row mt-3">
         <div class="col-6">
             <h2>@c.DescripcionFamilia</h2>
             <div class="form-group">
-                <label>Descripción de la familia </label>
+                <label>Descripción del Modelo (Familia) </label>
                 <div class="col-12">
                     <input type="text" ng-change="cambios=true" ng-model="currentmodelo.descripcionFamilia" class="form-control" />
                 </div>
@@ -46,7 +49,7 @@
             
             <div class="col-12">
                 <div class="form-group">
-                    <label>Sube una imagen de la familia</label>
+                    <label>Sube una imagen del Modelo (Familia)</label>
                     <div class="col-12 text-center">
                         <input type="file" id="filesup" ng-file-model="currentmodelo.files" />
                     </div>
@@ -61,7 +64,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control campo-search " ng-blur="focofuera2()" ng-focus="entrafoco2()" placeholder="Buscar Carrocería" value="" id="busqueda_producto2" tabindex="1" autocomplete="off" ng-change="cambiobusqueda2()" ng-model="cadena2" name="producto2">
                     <span class="input-group-btn">
-                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2">
+                        <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2">
                             <i class="fas fa-search"></i>
                         </button>
                     </span>
@@ -71,8 +74,8 @@
                 <table class="tablaresultados">
                     <tbody>
                         <tr ng-if="!loading2" class="" ng-repeat="resultado in resultadobusqueda2" ng-click="anadirCarroceria(resultado)">
-                            <td class="">
-                                <a class="resul-search">
+                            <td class="p-2">
+                                <a class="resul-search" style="cursor:pointer;">
                                     {{resultado.descripcion}}
                                 </a>
                             </td>
@@ -123,9 +126,9 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row m-2">
         <div class="col text-right">
-            <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosModelo()">Guardar</button>
+            <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosModelo()"><i class="fas fa-save"></i> Guardar</button>
 
         </div>
     </div>

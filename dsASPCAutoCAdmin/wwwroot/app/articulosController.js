@@ -51,11 +51,12 @@
         columns: [
             {
                 dataField: "descripcion",
-                width: 600,
+                width: "80%",
                 caption: "Descripcion"
             }, {
                 caption: "",
-                width: 100,
+                width: "20%",
+                alignment: "center",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
@@ -179,7 +180,7 @@
     };
     $scope.popupVisible = false;
     $scope.popupOptions = {
-        width: 660,
+        width: "90%",
         height: '90%',
         showTitle: true,
         title: "Modificar Artículo",

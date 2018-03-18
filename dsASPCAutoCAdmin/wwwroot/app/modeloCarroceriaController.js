@@ -66,8 +66,9 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
                 caption: "Descripcion"
             }, {
                 caption: "",
-                width: 80,
+                width: 30,
                 allowFiltering: false,
+                alignment: "center",
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "deleteTemplate"

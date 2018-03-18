@@ -14,43 +14,27 @@
             @*<p>Use this area to provide additional information.</p>*@
             <div class="row mb-4">
                 <div class="col-6">
-                    <div class="dataTables_wrapper">
-                        <div class="dataTables_paginate" style="float:left">
-                            <ul class="pagination">
-                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
-                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
-                                </li>
-                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
-                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
-                                </li>
-                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
-                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
-                                </li>
-                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
-                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="col-6 text-right">
                     @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
+                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo tipo de Carrocería</button>
                 </div>
             </div>
-            <div class="input-group">
-
-
-                <input type="text" class="form-control campo-search " placeholder="Buscar Modelos" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
-                <div class="input-group-append">
-                    <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
-                        <i class="fas fa-ban"></i>
-                    </button>
+            <div class="col-12 mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control campo-search " placeholder="Buscar Carrocerías" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
+                    <div class="input-group-append">
+                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
+           
             <div class="dx-viewport demo-container">
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="carroceria" style="width:100% !important;">
                     <div data-options="dxTemplate:{ name:'cellTemplate' }">
@@ -66,11 +50,35 @@
                     <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <button type="submit" ng-click="eliminarRegistro(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+                        <button type="submit" ng-click="eliminarRegistro(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
                     </div>
 
                 </div>
+            </div>
+            <div class="row">
+               
+                    <div class="col-6 offset-3 mt-3 ">
+                        <div class="">
+                            <nav class="">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled" id="primera" ng-click="cambiarPagina(this, 'F')">
+                                        <a class="page-link"><i class="fa fa-step-backward fa-xs "></i><small style="font-size:72%">Primera</small> </a>
+                                    </li>
+                                    <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                        <a class="page-link"><i class="fa fa-caret-left fa-xs "></i> <small style="font-size:72%"> anterior</small></a>
+                                    </li>
+                                    <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                        <a class="page-link"><small style="font-size:72%">siguiente</small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                                    </li>
+                                    <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                        <a class="page-link"><small style="font-size:72%">Última</small> <i class="fa fa-step-forward fa-xs "></i> </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div> 
+               
             </div>
 
         </div>
@@ -78,76 +86,96 @@
    @*POPUP EDITAR/CREAR CARROCERIAS*@
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
-            <div class="form">
-                <div class="form-group">
-                    <label>Descripción </label>
-                    <div class="col-12">
-                        <input type="text" ng-model="currentcarroceria.descripcion" class="form-control form-control-sm" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="">Incluir un tipo de Vidrio a la Carrocería</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control campo-search " ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2">
-                                <i class="fas fa-search"></i></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="desplegable" style="display:none" id="desplegable" ng-hide="!mostrardesplegable">
-                    <table class="tablaresultados">
-                        <tbody>
-                            <tr ng-if="!loading" class="" ng-repeat="resultado in resultadobusqueda" ng-click="anadirVidrio(resultado)">
-                                <td class="">
-                                    <a class="resul-search">
-                                        {{resultado.descripcion}}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="otrainfo" ng-if="loading">
-                                <td class="">
-                                    <a>
-                                        <img class="img-fluid" src="~/img/cargando.gif" />
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr ng-show="resultadobusqueda.length<1" class="otrainfo">
-                                <td>
-                                    <a>
-                                        No hay resultados que mostrar
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="col-12 " id="style-3" style="max-height:300px;overflow: auto; ">
-                        <div class="table-responsive">
-                            <table class="table-sm ">
-                                <tr>
-                                    <th>Tipo de Vidrio</th>
-                                    <th>Posición Vertical</th>
-                                    <th>Posicion Horizontal</th>
-                                    <th>Extension Vertical</th>
-                                    <th>Extensión Horizontal</th>
-                                </tr>
-                                <tr ng-repeat="vidrio in currentcarroceria.vidrios | filter:noEliminado">
-                                    <td>{{vidrio.descripcion}}</td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posVer" /></td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posHor" /></td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanVer" /></td>
-                                    <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanHor" /></td>
-                                    <td><button class="btn btn-sm btn-default form-control" type="submit" ng-click="eliminarVidrio(vidrio, $index)"><i class="fas fa-trash"></i> </button></td>
-                                </tr>
-                            </table>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form">
+                        <div class="form-group">
+                            <label>Descripción Carrocería </label>
+                            <div class="col-12">
+                                <input type="text" ng-model="currentcarroceria.descripcion" class="form-control" />
+                            </div>
                         </div>
                     </div>
-                    <!--<div>esquema</div>-->
-
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="">Incluir un tipo de Vidrio a la Carrocería</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control campo-search" ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="desplegable" style="display:none" id="desplegable" ng-hide="!mostrardesplegable">
+                        <table class="tablaresultados">
+                            <tbody>
+                                <tr ng-if="!loading" class="" ng-repeat="resultado in resultadobusqueda" ng-click="anadirVidrio(resultado)">
+                                    <td class="">
+                                        <a class="resul-search" style="cursor:pointer;">
+                                            {{resultado.descripcion}}
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="otrainfo" ng-if="loading">
+                                    <td class="">
+                                        <a>
+                                            <img class="img-fluid" src="~/img/cargando.gif" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr ng-show="resultadobusqueda.length<1" class="otrainfo">
+                                    <td>
+                                        <a>
+                                            No hay resultados que mostrar
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
+                <div class="col-4">
+                    <div class="col text-right">
+                        @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
+                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 " id="style-3" style="max-height:300px;overflow: auto; ">
+                            <div class="table-responsive">
+                                <table class="table-sm ">
+                                    <tr>
+                                        <th>Tipo de Vidrio</th>
+                                        <th>Posición Vertical</th>
+                                        <th>Posicion Horizontal</th>
+                                        <th>Extension Vertical</th>
+                                        <th>Extensión Horizontal</th>
+                                    </tr>
+                                    <tr ng-repeat="vidrio in currentcarroceria.vidrios | filter:noEliminado">
+                                        <td>{{vidrio.descripcion}}</td>
+                                        <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posVer" /></td>
+                                        <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.posHor" /></td>
+                                        <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanVer" /></td>
+                                        <td><input class="form-posicion" width="5" type="number" ng-model="vidrio.spanHor" /></td>
+                                        <td><button class="btn btn-sm btn-default form-control" type="submit" ng-click="eliminarVidrio(vidrio, $index)"><i class="fas fa-trash"></i> </button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <img src="~/images/esquema_coche.png" style="max-height:400px" class="img-fluid d-block mx-auto "/>
+                        </div>
+
+                    </div>
+                </div>
+               
+                
                 <div class="row">
                     <div class="col-12">
                         <hr />
@@ -160,11 +188,11 @@
                 <div class="row">
                     <div class="col text-right">
                         @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
-                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
+                        @*<button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>*@
                     </div>
                 </div>
-            </div>
+            
         </div>
     </div>
 </div>

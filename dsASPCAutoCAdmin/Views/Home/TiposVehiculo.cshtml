@@ -14,7 +14,7 @@
         <div class="col-12">
             <div class="row mb-4">
                 <div class="col-6">
-                    <div class="dataTables_wrapper">
+                    @*<div class="dataTables_wrapper">
                         <div class="dataTables_paginate" style="float:left">
                             <ul class="pagination">
                                 <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
@@ -31,30 +31,35 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>*@
+                </div>
+                <div class="col-6 text-right">
+                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
+                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo tipo de Vehículo</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="input-group">
+
+
+                        <input type="text" class="form-control campo-search " placeholder="Buscar Tipo de Vehículo" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
+                        <div class="input-group-append">
+                            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-               <div class="col-6 text-right">
-                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <button  type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nuevo Tipo</button>
-               </div>
             </div>
             <div class="dx-viewport demo-container">
-                <div class="input-group">
-
-
-                    <input type="text" class="form-control campo-search " placeholder="Buscar Tipo de Vehículo" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
-                    <div class="input-group-append">
-                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
-                            <i class="fas fa-ban"></i>
-                        </button>
-                    </div>
-                </div>
+                
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
                     <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                        <img class="img-fluid" ng-src="{{tiv.value}}" onerror="this.src='../images/imagen_defect.png'" />
+                        <img class="img-fluid d-block mx-auto imagen-tabla" ng-src="{{tiv.value}}" onerror="this.src='../images/imagen_defect.png'" />
 
                     </div>
                     <div data-options="dxTemplate:{ name:'editTemplate' }">
@@ -71,13 +76,37 @@
                     </div>
                     <div data-options="dxTemplate:{ name:'detail' }">
 
-                        holiii soy el detalle
+
 
                     </div>
 
                 </div>
+
             </div>
-           
+            <div class="row mt-4">
+                <div class="col-6 offset-3 ">
+                    <div class="">
+                        <nav class="">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled" id="primera" ng-click="cambiarPagina(this, 'F')">
+                                    <a class="page-link"><i class="fa fa-step-backward fa-xs "></i><small style="font-size:72%">Primera</small> </a>
+                                </li>
+                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                    <a class="page-link"><i class="fa fa-caret-left fa-xs "></i> <small style="font-size:72%"> anterior</small></a>
+                                </li>
+                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                    <a class="page-link"><small style="font-size:72%">siguiente</small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                                </li>
+                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                    <a class="page-link"><small style="font-size:72%">Última</small> <i class="fa fa-step-forward fa-xs "></i> </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
    

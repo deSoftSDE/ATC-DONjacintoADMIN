@@ -51,6 +51,7 @@
                 caption: "Imagen",
                 width: "30%",
                 allowFiltering: false,
+                alignment: "center",
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "cellTemplate"
@@ -60,7 +61,7 @@
                 caption: "Descripcion"
             }, {
                 dataField: "codigoSeccion",
-                width: "30%",
+                width: "10%",
                 caption: "Código"
             }, {
                 caption: "",
@@ -68,6 +69,7 @@
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
+                alignment:"center",
                 cellTemplate: "verTemplate"
             }
         ],
