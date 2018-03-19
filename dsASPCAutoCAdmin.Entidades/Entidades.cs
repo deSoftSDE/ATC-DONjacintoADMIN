@@ -172,6 +172,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Valor { get; set; }
         [DataMember]
         public int IDFamilia { get; set; }
+        public string holi { get; set; }
     }
     [DataContract]
     [Serializable]
