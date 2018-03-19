@@ -222,9 +222,14 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.carrocerias)) {
             $scope.currentmodelo.carrocerias = [];
         }
-        $scope.currentmodelo.carrocerias.push(r);
-        console.log($scope.currentmodelo);
-        $scope.datagrid.option("dataSource", $scope.currentmodelo.carrocerias);
+        if (!$scope.estaEnListado(r.idCarroceria)) {
+            $scope.currentmodelo.carrocerias.push(r);
+            console.log($scope.currentmodelo);
+            $scope.datagrid.option("dataSource", $scope.currentmodelo.carrocerias);
+        } else {
+            mensajeError("La carrocería seleccionada ya forma parte del modelo.");
+        }
+        
     };
     $scope.selected = 0;
     $scope.guardarCambiosPopup = function () {
@@ -360,4 +365,16 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
     };
+    $scope.estaEnListado = function (val) {
+        if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.carrocerias)) {
+            $scope.currentmodelo.carrocerias = [];
+        }
+        res = false;
+        for (i = 0; i < $scope.currentmodelo.carrocerias.length; i++) {
+            if ($scope.currentmodelo.carrocerias[i].idCarroceria == val) {
+                res = true;
+            }
+        }
+        return res;
+    }
 });

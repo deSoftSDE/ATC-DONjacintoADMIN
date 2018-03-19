@@ -8,6 +8,7 @@ namespace dsASPCAutoCAdmin.Entidades
     {
         public string Key { get; set; }
         public string Value { get; set; }
+        public string Img { get; set; }
     }
     public class TipoVidrio
     {
