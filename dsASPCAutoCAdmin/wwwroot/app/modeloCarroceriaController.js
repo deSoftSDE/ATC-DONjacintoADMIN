@@ -28,6 +28,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             }
             for (i = 0; i < $scope.currentmodelo.imagenes.length; i++) {
                 $scope.currentmodelo.imagenes[i].url = Llamada.getRuta($scope.currentmodelo.imagenes[i].valor);
+                
             }
             $scope.datagrid.option("dataSource", $scope.currentmodelo.carrocerias);
             $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
