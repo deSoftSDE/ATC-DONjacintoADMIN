@@ -199,6 +199,7 @@
         displayExpr: "descripcionSeccion",
         valueExpr: "idSeccion",
         searchEnabled: true,
+        height:"30px",
         noDataText: 'No se ha encontrado ninguna marca',
         //value: products[0].idSeccion,
         fieldTemplate: 'field',
