@@ -31,8 +31,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             }
             $scope.datagrid.option("dataSource", $scope.currentmodelo.carrocerias);
             $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
-
-            alert("Holi");
+            
         });
     $scope.dataGridOptions = {
         dataSource: [],
@@ -245,6 +244,19 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
     $scope.cambioInput = function () {
         alert("Holi");
     };
+    $scope.eliminarImagen = function (a) {
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta carrocería de este modelo?");
+        result.then(function (val) {
+            if (val) {
+                var b = $scope.currentmodelo.imagenes.splice(id.rowIndex, 1);
+                $scope.datagrid.option("dataSource", $scope.currentmodelo.imagenes);
+                if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.imagenesEliminadas)) {
+                    $scope.currentmodelo.imagenesEliminadas = [];
+                }
+                $scope.currentmodelo.imagenesEliminadas.push(b[0]);
+            }
+        });
+    }
     $scope.eliminarRegistro = function (id) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta carrocería de este modelo?");
         result.then(function (val) {
