@@ -87,7 +87,7 @@
         onRowUpdating: function (e) {
             alert("Hola");
             console.log(e);
-        },
+        }
     };
     LeerRegistros = function (obj, objmodificado) {
         $scope.lastConsulta = JSON.parse("" + JSON.stringify(obj));
@@ -217,7 +217,7 @@
         $scope.popupVisible = true;
         $scope.currentvehiculo = {
             descripcion: "",
-            url: Llamada.getRuta(""),
+            url: Llamada.getRuta("")
         };
     };
     $scope.guardarCambiosPopup = function () {
@@ -241,15 +241,15 @@
     };
     fnocultar = function () {
         $scope.mostrardesplegable = false;
-    }
+    };
     $scope.focofuera = function (a, b) {
         $timeout(fnocultar, 1000);
-    }
+    };
     $scope.entrafoco = function () {
         if (NotNullNotUndefinedNotEmpty($scope.resultadobusqueda)) {
             $scope.mostrardesplegable = true;
         }
-    }
+    };
     buscarArticulos = function () {
         $scope.loading = true;
         if ($scope.cadena.length > 0) {
@@ -260,20 +260,20 @@
                     $scope.mostrardesplegable = true;
                     $scope.loading = false;
                     document.getElementById("desplegable").style.display = "inline";
-                })
+                });
         } else {
             $scope.resultadobusqueda = [];
             $scope.NumReg = 0;
             $scope.loading = false;
         }
-    }
+    };
     var inputChangedPromise;
     $scope.cambiobusqueda = function () {
         if (inputChangedPromise) {
             $timeout.cancel(inputChangedPromise);
         }
         inputChangedPromise = $timeout(buscarArticulos, 1000);
-    }
+    };
     $scope.anadirVidrio = function (res) {
         console.log(res);
         $scope.mostrardesplegable = false;
@@ -286,9 +286,9 @@
             descripcion: res.descripcion,
             IdTipoVidrio: res.idTipoVidrio,
             modificador: 1
-        }
+        };
         $scope.currentcarroceria.vidrios.push(vid);
-    }
+    };
     $scope.noEliminado = function (vidrio) {
         if (NotNullNotUndefinedNotEmpty(vidrio)) {
             if (NotNullNotUndefinedNotEmpty(vidrio.modificador)) {
@@ -303,7 +303,7 @@
         } else {
             return false;
         }
-    }
+    };
     $scope.eliminarVidrio = function (vidrio, $index) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este vidrio?");
         result.then(function (val) {
@@ -317,7 +317,7 @@
                 console.log(vidrio);
             }
         });
-    }
+    };
 
 
     var buscaChangePromise;
@@ -326,24 +326,24 @@
             $timeout.cancel(buscaChangePromise);
         }
         buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
-    }
+    };
     $scope.activarBusqueda = function () {
         console.log("Ok, busco con");
         console.log($scope.buscador);
         var obj = {
             tipo: "TipoVehiculo",
-            cadena: $scope.buscador,
+            cadena: $scope.buscador
         };
         LeerRegistros(obj);
-    }
+    };
     $scope.anularBusqueda = function () {
         console.log("Ok, anulo búsqueda");
         $scope.buscador = "";
         var obj = {
             tipo: "TipoVehiculo",
-            cadena: "",
+            cadena: ""
 
         };
         LeerRegistros(obj);
-    }
+    };
 });

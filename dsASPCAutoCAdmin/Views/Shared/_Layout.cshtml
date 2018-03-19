@@ -2,7 +2,6 @@
 @{ 
     var FilterMenu = (List<ElementoMenu>)ViewData["FilterMenu"];
 }
-<!DOCTYPE html>
 <html ng-app="app">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -75,8 +74,11 @@
 <body ng-controller="navegacion">
 
     <section class="layout-navigation d-none  d-lg-block">
-        <div asp-action="" class="site-logo p-1">
-            <img class="img-fluid" src="~/images/logo.png" />
+        <div  class="site-logo p-1">
+            <a href="/Home">
+                <img class="img-fluid" src="~/images/logo.png" />
+            </a>
+            
             @*<div class="main-menu" id=""></div>*@
         </div>
 
@@ -86,7 +88,7 @@
             <ul>
                 @foreach (var item in FilterMenu)
                 {
-            <li><a href="/Home/@item.Value">@item.Key</a></li>
+                    <li><a href="/Home/@item.Value">@item.Key</a></li>
                 }
             </ul>
         </div>
@@ -111,9 +113,9 @@
                         <div class="buttons  d-block d-sm-block d-md-block  d-lg-none ">
                             <ul class="list-inline text-center ">
                                 @foreach (var item in FilterMenu)
-            {
-                    <li class="list-inline-item"><a href="/Home/@item.Value">@item.Key</a></li>
-}
+                                {
+                                        <li class="list-inline-item"><a href="/Home/@item.Value">@item.Key</a></li>
+                                }
                             </ul>
 
                         </div>
@@ -126,6 +128,7 @@
                 <div class="search"></div>
                 <div class="icon-find"></div>
             </div>*@
+
         </header>
         <div class="container-fluid">
             <div class="row">
@@ -192,6 +195,5 @@
             </div>
         </div>
     </section>
-
 </body>
 </html>

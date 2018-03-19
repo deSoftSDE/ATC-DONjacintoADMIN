@@ -149,16 +149,16 @@
         $scope.currentarticulo = vid.data;
         $scope.lastMarca = {
             idSeccion: $scope.currentarticulo.idSeccion,
-            descripcionSeccion: $scope.currentarticulo.descripcionSeccion,
-        }
+            descripcionSeccion: $scope.currentarticulo.descripcionSeccion
+        };
         $scope.lastModelo = {
             idFamilia: $scope.currentarticulo.idFamilia,
-            descripcionFamilia: $scope.currentarticulo.descripcionFamilia,
-        }
+            descripcionFamilia: $scope.currentarticulo.descripcionFamilia
+        };
         $scope.lastVidrio = {
             idTipoVidrio: $scope.currentarticulo.idTipoVidrio,
-            descripcion: $scope.currentarticulo.descripcionTipoVidrio,
-        }
+            descripcion: $scope.currentarticulo.descripcionTipoVidrio
+        };
         /*if (NotNullNotUndefinedNotEmpty($scope.currentarticulo.idSeccion)) {
             buscaModelos($scope.lastMarca);
         }*/
@@ -210,18 +210,18 @@
             console.log(e);
             if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
                 console.log(e);
-                console.log(e.component._options)
-                console.log(e.component._options.selectedItem)
+                console.log(e.component._options);
+                console.log(e.component._options.selectedItem);
                 $scope.lastMarca = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
                 buscaModelos($scope.lastMarca);
             } else {
                 console.log(e);
                 console.log("Está vacío!!");
-                oldValue = e.previousValue
+                oldValue = e.previousValue;
             }
 
         }
-    }
+    };
     $scope.selectBox2 = {
         dataSource: [],
         valueExpr: "idFamilia",
@@ -235,15 +235,15 @@
         onValueChanged: function (e) {
             if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
                 console.log(e);
-                console.log(e.component._options)
-                console.log(e.component._options.selectedItem)
+                console.log(e.component._options);
+                console.log(e.component._options.selectedItem);
                 $scope.lastModelo = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
                 console.log("Mira el modelo:");
                 console.log($scope.lastModelo);
             }
 
         }
-    }
+    };
 
     $scope.selectBox3 = {
         dataSource: [],
@@ -267,14 +267,14 @@
                         $scope.selectElement3.option("dataSource", $scope.tiposvid);
                     }
 
-                })
+                });
         },
         onValueChanged: function (e) {
             console.log(e);
             $scope.lastVidrio = e.component._options.selectedItem;
             console.log(e.component._options.selectedItem);
         }
-    }
+    };
     
 
     buscaMarcas = function (val) {
@@ -291,8 +291,8 @@
                 }
                 $scope.selectElement.option("dataSource", $scope.marcas);
                 $scope.selectElement.open();
-            })
-    }
+            });
+    };
     buscaModelos = function (val) {
         console.log("Ahora  busca modelos");
         console.log(val);
@@ -307,8 +307,8 @@
                 }
                 $scope.selectElement2.option("dataSource", $scope.modelos);
                 $scope.selectElement2.open();
-            })
-    }
+            });
+    };
 
     var inputChangedPromise;
     $scope.cambiobusqueda = function () {
@@ -316,7 +316,7 @@
             $timeout.cancel(inputChangedPromise);
         }
         inputChangedPromise = $timeout(buscaMarcas, 1000);
-    }
+    };
     $scope.settingsbox = {
         placeholder: 'Selecciona una Marca',
         bindingOptions: {
@@ -330,14 +330,14 @@
             $scope.newValor = e.component.option("value");
             $scope.cambiobusqueda();
         }
-    }
+    };
     $scope.inittext = function (e) {
         alert("Holi");
         console.log(e);
         console.log("Aqui se inicializa");
         console.log(e);
         $scope.campotexto = e.component;
-    }
+    };
     $scope.eliminarRegistro = function (id) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta carrocería?");
         result.then(function (val) {
@@ -403,13 +403,13 @@
                     $scope.mostrardesplegable = true;
                     $scope.loading = false;
                     document.getElementById("desplegable").style.display = "block";
-                })
+                });
         } else {
             $scope.resultadobusqueda = [];
             $scope.NumReg = 0;
             $scope.loading = false;
         }
-    }
+    };
     
     /*$scope.anadirVidrio = function (res) {
         console.log(res);
@@ -440,7 +440,7 @@
         } else {
             return false;
         }
-    }
+    };
     $scope.eliminarVidrio = function (vidrio, $index) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este vidrio?");
         result.then(function (val) {
@@ -449,15 +449,15 @@
                 $scope.$apply(function () {
                     vidrio.modificador = 2;
                 });
-               
+
 
                 console.log(vidrio);
             }
         });
-    }
+    };
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
-    }
+    };
 
 
 
@@ -467,24 +467,24 @@
             $timeout.cancel(buscaChangePromise);
         }
         buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
-    }
+    };
     $scope.activarBusqueda = function () {
         console.log("Ok, busco con");
         console.log($scope.buscador);
         var obj = {
             tipo: "Articulo",
-            cadena: $scope.buscador,
+            cadena: $scope.buscador
         };
         LeerRegistros(obj);
-    }
+    };
     $scope.anularBusqueda = function () {
         console.log("Ok, anulo búsqueda");
         $scope.buscador = "";
         var obj = {
             tipo: "Articulo",
-            cadena: "",
-            
+            cadena: ""
+
         };
         LeerRegistros(obj);
-    }
+    };
 });

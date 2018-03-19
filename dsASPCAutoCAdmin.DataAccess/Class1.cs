@@ -578,6 +578,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@IDCarroceria", tiv.IDCarroceria),
                     new SqlParameter("@Descripcion", tiv.Descripcion),
                     new SqlParameter("@Vidrios", vid),
+                    new SqlParameter("@ImagenCarr", tiv.Imagen),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.CarroceriasCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
