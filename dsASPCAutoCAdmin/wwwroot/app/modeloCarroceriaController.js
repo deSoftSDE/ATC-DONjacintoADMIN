@@ -188,6 +188,26 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         $scope.datagrid.collapseAll(-1);
     };
     guardarCambiosModelo = function (modelo) {
+        recorrerImagenes(modelo, 0);
+    };
+    recorrerImagenes = function (modelo, indice) {
+        if (indice < modelo.imagenes.length) {
+            if (NotNullNotUndefinedNotEmpty(modelo.imagenes[indice].fdata)) {
+                Llamada.postFile(modelo.imagenes[indice].fdata)
+                    .then(function (respuesta) {
+                        modelo.imagenes.valor = respuesta[0].contenido;
+                        indice++;
+                        recorrerImagenes(modelo, indice);
+                    });
+            } else {
+                indice++;
+                recorrerImagenes(modelo, indice);
+            }
+        } else {
+            guardarCambiosFinal(modelo);
+        }
+    };
+    guardarCambiosFinal = function(modelo) {
         modelo.files = null;
         console.log(modelo);
         Llamada.post("ModelosCrearModificar", modelo)
@@ -195,7 +215,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
                 mensajeExito("Datos guardados con éxito");
                 console.log(respuesta);
             });
-    };
+    }
     $scope.modificarCarroceria = function (vid) {
         console.log(vid);
         Llamada.get("CarroceriasLeerPorID?IDCarroceria=" + vid.data.idCarroceria)
@@ -245,7 +265,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         alert("Holi");
     };
     $scope.eliminarImagen = function (a) {
-        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta carrocería de este modelo?");
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta imagen?");
         result.then(function (val) {
             if (val) {
                 var b = $scope.currentmodelo.imagenes.splice(id.rowIndex, 1);
@@ -450,5 +470,37 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             }
         }
         return res;
+    }
+    $scope.popupImagenVisible = false;
+    $scope.popupImagen = {
+        width: "80%",
+        height: "80%",
+        showTitle: true,
+        title: "Imagen",
+        fullScreen: false,
+        dragEnabled: false,
+        bindingOptions: {
+            visible: 'popupImagenVisible'
+        },
+        closeOnOutsideClick: true
+    };
+    $scope.nuevaImagen = function() 
+    {
+        $scope.popupImagenVisible = true;
+    }
+    $scope.guardarCambiosImagen = function () {
+        var b = document.getElementById("imagenpopup").files;
+        var fd = new FormData();
+        fd.append('file.jpg', b[0]);
+        $scope.popupImagenVisible = false;
+        $scope.newImagen = {
+            url = $scope.newImagen.files.data,
+            fdata = fd,
+        }
+        if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.imagenes)) {
+            $scope.currentmodelo.imagenes = [];
+        }
+        $scope.currentmodelo.imagenes.push($scope.newImagen);
+        $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
     }
 });
