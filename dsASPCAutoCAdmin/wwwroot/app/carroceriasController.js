@@ -128,8 +128,32 @@
 
     $scope.files = "";
     $scope.guardarCambios = function (carroceria) {
-        guardarCambios(carroceria);
-        $scope.datagrid.collapseAll(-1);
+
+
+        if (NotNullNotUndefinedNotEmpty(carroceria.files)) {
+            console.log(document.getElementById("filesup").files);
+            var fd = new FormData();
+            fd.append('file.jpg', document.getElementById("filesup").files[0]);
+            console.log(fd);
+            console.log(carroceria.files);
+            //console.log($scope.files);
+            carroceria.url = carroceria.files.data;
+            //console.log(vidrio.files.data);
+            Llamada.postFile(fd)
+                .then(function (respuesta) {
+                    carroceria.imagen = respuesta[0].contenido;
+                    document.getElementById("filesup").value = null;
+                    guardarCambios(carroceria);
+                });
+        } else {
+            carroceria.newImagen = carroceria.imagen;
+            guardarCambios(carroceria);
+        }
+
+
+
+        //guardarCambios(carroceria);
+        //$scope.datagrid.collapseAll(-1);
     };
     $scope.guardarCambiosModelo = function () {
         if (NotNullNotUndefinedNotEmpty($scope.currentmodelo.files)) {
@@ -169,6 +193,7 @@
             .then(function (respuesta) {
                 $scope.popupVisible = true;
                 $scope.currentcarroceria = respuesta.data;
+                $scope.currentcarroceria.url = Llamada.getRuta($scope.currentcarroceria.imagen);
             });
     };
     guardarCambios = function (carroceria) {
@@ -242,7 +267,8 @@
     $scope.crearRegistro = function () {
         $scope.popupVisible = true;
         $scope.currentcarroceria = {
-            descripcion: ""
+            descripcion: "",
+            url: Llamada.getRuta(""),
         };
     };
     $scope.guardarCambiosPopup = function () {

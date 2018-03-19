@@ -94,6 +94,24 @@
                             <div class="col-12">
                                 <input type="text" ng-model="currentcarroceria.descripcion" class="form-control" />
                             </div>
+
+                            <div class="row">
+                                <div class="col-6 offset-3">
+
+                                    <img class="img-fluid d-block mx-auto" ng-src="{{currentcarroceria.url}}" onerror="this.src='../images/imagen_defect.png'" />
+                                </div>
+                                <div class="col-12">
+                                    <hr />
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Sube una imagen de la carrocería</label>
+                                        <div class="col-12 text-center">
+                                            <input type="file" id="filesup" ng-file-model="currentcarroceria.files" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
