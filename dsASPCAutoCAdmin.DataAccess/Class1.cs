@@ -62,6 +62,7 @@ namespace dsASPCAutoCAdmin.DataAccess
         public Modelo ModelosLeerPorID(int IDFamilia)
         {
             var res = new Modelo();
+            res.Imagenes = new List<ImagenFamilia>();
             var cc = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection conn = new SqlConnection(cc))
             {
@@ -94,6 +95,17 @@ namespace dsASPCAutoCAdmin.DataAccess
                         IDModeloCarroceria = AsignaEntero("IDModeloCarroceria"),
                     };
                     res.Carrocerias.Add(cr);
+                }
+                _reader.NextResult();
+                while (_reader.Read())
+                {
+                    var im = new ImagenFamilia
+                    {
+                        IDImagenFamilia = AsignaEntero("IDImagenFamilia"),
+                        IDFamilia = AsignaEntero("IDFamilia"),
+                        Valor = AsignaCadena("Valor"),
+                    };
+                    res.Imagenes.Add(im);
                 }
             }
             return res;
@@ -427,6 +439,10 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Descripcion", bs.Descripcion),
                     new SqlParameter("@DescripcionCorta", bs.DescripcionCorta),
                     new SqlParameter("@DescripcionDetallada", bs.DescripcionDetallada),
+                    new SqlParameter("@DescripcionWeb1", bs.DescripcionWeb1),
+                    new SqlParameter("@DescripcionWeb2", bs.DescripcionWeb2),
+                    new SqlParameter("@AnoInicial", bs.AnoInicial),
+                    new SqlParameter("@AnoFinal", bs.AnoFinal),
 
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosModificar", param);
@@ -472,11 +488,13 @@ namespace dsASPCAutoCAdmin.DataAccess
             {
                 var cr = "";
                 var crel = "";
+                var img = "";
+                var imgel = "";
                 try
                 {
                     cr = dsCore.Comun.Ayudas.SerializarACadenaXML(tiv.Carrocerias);
                 }
-                catch (Exception ex)
+                catch
                 {
                     //Si está vacía la lista no nos importa
                 }
@@ -484,7 +502,23 @@ namespace dsASPCAutoCAdmin.DataAccess
                 {
                     crel = dsCore.Comun.Ayudas.SerializarACadenaXML(tiv.CarroceriasEliminadas);
                 }
-                catch (Exception ex)
+                catch
+                {
+                    //Si está vacía la lista no nos importa
+                }
+                try
+                {
+                    img = dsCore.Comun.Ayudas.SerializarACadenaXML(tiv.Imagenes);
+                }
+                catch
+                {
+                    //Si está vacía la lista no nos importa
+                }
+                try
+                {
+                    imgel = dsCore.Comun.Ayudas.SerializarACadenaXML(tiv.ImagenesEliminadas);
+                }
+                catch
                 {
                     //Si está vacía la lista no nos importa
                 }
@@ -497,6 +531,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Imagen", tiv.Imagen),
                     new SqlParameter("@Carrocerias", cr),
                     new SqlParameter("@CarroceriasElim", crel),
+                    new SqlParameter("@Imagenes", img),
+                    new SqlParameter("@ImagenesElim", imgel),
                     new SqlParameter("@idTipoVehiculo", tiv.idTipoVehiculo),
                     
                 };

@@ -58,6 +58,19 @@
         </div>
     </div>
     <div class="row">
+        <div class="dx-viewport demo-container">
+            <div id="gridContainer" dx-data-grid="dataGridOptionsImagenes" dx-item-alias="imagen" style="width:100% !important;">
+                <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                    <img class="img-fluid" ng-src="{{imagen.value}}" />
+                </div>
+                <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+                    <button type="submit" ng-click="eliminarImagen(imagen)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label class="">Incluir una carrocería existente</label>

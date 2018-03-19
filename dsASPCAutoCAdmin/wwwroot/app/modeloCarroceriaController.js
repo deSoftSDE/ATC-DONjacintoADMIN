@@ -23,7 +23,16 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             console.log(respuesta);
             $scope.currentmodelo = respuesta.data;
             $scope.currentmodelo.url = Llamada.getRuta($scope.currentmodelo.imagen);
+            if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.imagenes)) {
+                $scope.currentmodelo.imagenes = [];
+            }
+            for (i = 0; i < $scope.currentmodelo.imagenes.length; i++) {
+                $scope.currentmodelo.imagenes[i].url = Llamada.getRuta($scope.currentmodelo.imagenes[i].valor);
+            }
             $scope.datagrid.option("dataSource", $scope.currentmodelo.carrocerias);
+            $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
+
+            alert("Holi");
         });
     $scope.dataGridOptions = {
         dataSource: [],
@@ -93,6 +102,59 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         onInitialized: function (e) {
             console.log(e);
             $scope.datagrid = e.component;
+        }
+    };
+
+    $scope.dataGridOptionsImagenes = {
+        dataSource: [],
+        keyExpr: "IdImagenModelo",
+        editing: {
+            allowAdding: false, // Enables insertion
+            allowDeleting: false, // Enables removing
+            editEnabled: false
+        },
+        selection: {
+            mode: "single"
+        },
+        columns: [
+            {
+                dataField: "url",
+                caption: "Imagen",
+                width: "30%",
+                allowFiltering: false,
+                alignment: "center",
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "cellTemplate"
+            }, {
+                caption: "",
+                width: 30,
+                allowFiltering: false,
+                alignment: "center",
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "deleteTemplate"
+            }
+        ],
+        summary: {
+            totalItems: [{
+                column: "OrderNumber",
+                summaryType: "count"
+            }, {
+                column: "OrderDate",
+                summaryType: "min",
+                customizeText: function (data) {
+                    return "First: " + Globalize.formatDate(data.value, { date: "medium" });
+                }
+            }, {
+                column: "SaleAmount",
+                summaryType: "sum",
+                valueFormat: "currency"
+            }]
+        },
+        onInitialized: function (e) {
+            console.log(e);
+            $scope.datagridImagenes = e.component;
         }
     };
 

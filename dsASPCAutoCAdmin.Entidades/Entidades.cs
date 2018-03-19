@@ -158,6 +158,20 @@ namespace dsASPCAutoCAdmin.Entidades
         public List<Carroceria> Carrocerias { get; set; }
         [DataMember]
         public List<Carroceria> CarroceriasEliminadas { get; set; }
+        [DataMember]
+        public List<ImagenFamilia> Imagenes { get; set; }
+        [DataMember]
+        public List<ImagenFamilia> ImagenesEliminadas { get; set; }
+    }
+    [DataContract]
+    public class ImagenFamilia
+    {
+        [DataMember]
+        public int IDImagenFamilia { get; set; }
+        [DataMember]
+        public string Valor { get; set; }
+        [DataMember]
+        public int IDFamilia { get; set; }
     }
     [DataContract]
     [Serializable]
@@ -231,6 +245,14 @@ namespace dsASPCAutoCAdmin.Entidades
         public string DescripcionTipoVidrio { get; set; }
         [DataMember]
         public string DescripcionDetallada { get; set; }
+        [DataMember]
+        public string DescripcionWeb1 { get; set; }
+        [DataMember]
+        public string DescripcionWeb2 { get; set; }
+        [DataMember]
+        public int AnoInicial { get; set; }
+        [DataMember]
+        public int AnoFinal { get; set; }
     }
     [DataContract]
     public class MensajeRespuesta

@@ -89,6 +89,10 @@ namespace dsASPCAutoCAdmin.DataAccess
             ((BuscaArticulo)entidadLista).DescripcionDetallada = AsignaCadena("DescripcionDetallada");
             ((BuscaArticulo)entidadLista).IdTipoVidrio = AsignaEntero("IdTipoVidrio");
             ((BuscaArticulo)entidadLista).DescripcionTipoVidrio = AsignaCadena("DescripcionTipoVidrio");
+            ((BuscaArticulo)entidadLista).DescripcionWeb1 = AsignaCadena("DescripcionWeb1");
+            ((BuscaArticulo)entidadLista).DescripcionWeb2 = AsignaCadena("DescripcionWeb2");
+            ((BuscaArticulo)entidadLista).AnoInicial = AsignaEntero("AnoInicial");
+            ((BuscaArticulo)entidadLista).AnoFinal = AsignaEntero("AnoFinal");
         }
         private void metodoRellenoVidrio(object entidadLista)
         {

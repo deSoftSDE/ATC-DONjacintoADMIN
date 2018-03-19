@@ -104,6 +104,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Descripción Web 2 </label>
+                            <div class="col-12">
+                                <input type="text" ng-model="currentarticulo.descripcionWeb1" class="form-control form-control-sm" />
+                            </div>
+                            <div class="col-12">
+                                <label>Año inicial </label>
+                                <input type="number" ng-model="currentarticulo.anoInicial" class="form-control form-control-sm" />
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Descripción Web 1 </label>
+                            <div class="col-12">
+                                <input type="text" ng-model="currentarticulo.descripcionWeb2" class="form-control form-control-sm" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label>Año final</label>
+                            <input type="number" ng-model="currentarticulo.anoFinal" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                    
+
+                </div>
             </div>
             @*OPCIONES*@
             <div class="row" >
@@ -116,7 +146,7 @@
                 <div class="col-8">
                     <label class="m-0">Modificar marca</label>
 
-                    <div style="z-index:99999999" dx-select-box="selectBox" dx-item-alias="product" class="mb-1">
+                    <div style="z-index:99999999;height:30px" dx-select-box="selectBox" dx-item-alias="product" class="mb-1">
 
                         <div data-options="dxTemplate: { name: 'field' }">
 
@@ -140,7 +170,7 @@
                     </div>
                     <label class="mb-0">Modificar el Modelo</label>
                   
-                    <div style="z-index:99999999" dx-select-box="selectBox2" dx-item-alias="product" class="mb-1">
+                    <div style="z-index:99999999;height:30px" dx-select-box="selectBox2" dx-item-alias="product" class="mb-1">
                         <div data-options="dxTemplate: { name: 'field' }">
                             <div class="custom-item">
                                 <img ng-src="{{product.ImageSrc}}" />
@@ -165,7 +195,7 @@
                     <label class="mb-0">Selecciona el Tipo de Vidrio</label>
                    
 
-                    <div style="z-index:99999999" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
+                    <div style="z-index:99999999;height:30px" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
                         <div data-options="dxTemplate: { name: 'field' }">
                             <div class="custom-item">
                                 <img ng-src="{{product.ImageSrc}}" />
@@ -191,7 +221,7 @@
             </div> 
         </div>
 
-        <div class="row align-items-end" style="min-height:160px;">
+        <div class="row align-items-end" style="min-height:120px;">
             <div class="col text-right">
                 @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
                 <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
