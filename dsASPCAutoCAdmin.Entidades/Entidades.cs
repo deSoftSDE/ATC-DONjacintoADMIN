@@ -6,36 +6,57 @@ namespace dsASPCAutoCAdmin.Entidades
 {
     public class ElementoMenu
     {
+
         public string Key { get; set; }
         public string Value { get; set; }
         public string Img { get; set; }
     }
+    [DataContract]
     public class TipoVidrio
     {
+        [DataMember]
         public int IDTipoVidrio { get; set; }
+        [DataMember]
         public string Descripcion { get; set; }
+        [DataMember]
         public string Imagen { get; set; }
     }
+    [DataContract]
     public class Carroceria
     {
+        [DataMember]
         public int IDCarroceria { get; set; }
+        [DataMember]
         public string Descripcion { get; set; }
+        [DataMember]
         public List<Vidrio> Vidrios { get; set; }
+        [DataMember]
         public string Imagen { get; set; }
+        [DataMember]
         public int IDModeloCarroceria { get; set; }
     }
+    [DataContract]
     public class ResultadoIM
     {
+        [DataMember]
         public int Identidad { get; set; }
+        [DataMember]
         public byte[] TS { get; set; }
+        [DataMember]
         public string Resultado { get; set; }
     }
+    [DataContract]
     public class CadenasBusqueda
     {
+        [DataMember]
         public string Vista { get; set; }
+        [DataMember]
         public string EntidadFuncion { get; set; }
+        [DataMember]
         public string CampoClave { get; set; }
+        [DataMember]
         public string Entidad { get; set; }
+        [DataMember]
         public string CampoOrdenacion { get; set; }
     }
     [DataContract]
@@ -60,23 +81,38 @@ namespace dsASPCAutoCAdmin.Entidades
         [DataMember]
         public int? idSeccion { get; set; }
     }
+    [DataContract]
     public class Vidrio
     {
+        [DataMember]
         public int IDVidrio { get; set; }
+        [DataMember]
         public int IDTipoVidrio { get; set; }
+        [DataMember]
         public string Descripcion { get; set; }
+        [DataMember]
         public string Imagen { get; set; }
+        [DataMember]
         public int PosVer { get; set; }
+        [DataMember]
         public int PosHor { get; set; }
+        [DataMember]
         public int SpanVer { get; set; }
+        [DataMember]
         public int SpanHor { get; set; }
+        [DataMember]
         public string DescripcionTipoVidrio { get; set; }
+        [DataMember]
         public int Modificador { get; set; }
     }
+    [DataContract]
     public class TipoVehiculo
     {
+        [DataMember]
         public int IDTipoVehiculo { get; set; }
+        [DataMember]
         public string Imagen { get; set; }
+        [DataMember]
         public string Descripcion { get; set; }
         //public int IdFamilia { get; set; }
     }
@@ -87,24 +123,40 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
     }*/
+    [DataContract]
     public class Marca
     {
+        [DataMember]
         public int IDSeccion { get; set; }
+        [DataMember]
         public string DescripcionSeccion { get; set; }
+        [DataMember]
         public string Imagen { get; set; }
+        [DataMember]
         public string CodigoSeccion { get; set; }
     }
+    [DataContract]
     public class Modelo
     {
+        [DataMember]
         public int IDFamilia { get; set; }
+        [DataMember]
         public string DescripcionFamilia { get; set; }
+        [DataMember]
         public string Imagen { get; set; }
+        [DataMember]
         public string CodigoFamilia { get; set; }
+        [DataMember]
         public int? IdSeccion { get; set; }
+        [DataMember]
         public string descripcionSeccion { get; set; }
+        [DataMember]
         public int idTipoVehiculo { get; set; }
+        [DataMember]
         public string descripcionTipoVehiculo { get; set; }
+        [DataMember]
         public List<Carroceria> Carrocerias { get; set; }
+        [DataMember]
         public List<Carroceria> CarroceriasEliminadas { get; set; }
     }
     [DataContract]
@@ -180,17 +232,26 @@ namespace dsASPCAutoCAdmin.Entidades
         [DataMember]
         public string DescripcionDetallada { get; set; }
     }
+    [DataContract]
     public class MensajeRespuesta
     {
+        [DataMember]
         public bool Existente { get; set; }
+        [DataMember]
         public string Contenido { get; set; }
+        [DataMember]
         public string Archivo { get; set; }
+        [DataMember]
         public long Tamano { get; set; }
     }
+    [DataContract]
     public class Tamano
     {
+        [DataMember]
         public int Width { get; set; }
+        [DataMember]
         public int Height { get; set; }
+        [DataMember]
         public int Res { get; set; }
     }
 }
