@@ -59,6 +59,71 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public BuscaArticulo ArticulosLeerPorID(int IDArticulo)
+        {
+            var res = new BuscaArticulo();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDArticulo", IDArticulo),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosLeerPorID", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.IdArticulo = AsignaEntero("IdArticulo");
+                    res.Codigo = AsignaCadena("Codigo");
+                    res.Descripcion = AsignaCadena("Descripcion");
+                    res.IdFamilia = AsignaEnteroNull("IdFamilia");
+                    res.IdSeccion = AsignaEnteroNull("IdSeccion");
+                    res.IdGenerico = AsignaEnteroNull("IdGenerico");
+                    res.DescripcionFamilia = AsignaCadena("DescripcionFamilia");
+                    res.DescripcionSeccion = AsignaCadena("DescripcionSeccion");
+                    res.DescripcionCorta = AsignaCadena("DescripcionCorta");
+                    res.DescripcionDetallada = AsignaCadena("DescripcionDetallada");
+                    res.IdTipoVidrio = AsignaEntero("IdTipoVidrio");
+                    res.DescripcionTipoVidrio = AsignaCadena("DescripcionTipoVidrio");
+                    res.DescripcionWeb1 = AsignaCadena("DescripcionWeb1");
+                    res.DescripcionWeb2 = AsignaCadena("DescripcionWeb2");
+                    res.AnoInicial = AsignaEntero("AnoInicial");
+                    res.AnoFinal = AsignaEntero("AnoFinal");
+                }
+                res.Accesorios = new List<BuscaArticulo>();
+                _reader.NextResult();
+                while (_reader.Read())
+                {
+                    var ar = new BuscaArticulo();
+                    res.IdArticulo = AsignaEntero("IdArticuloRel");
+                    res.Descripcion = AsignaCadena("DescripcionArticuloRel");
+                    res.Accesorios.Add(ar);
+                }
+            }
+            return res;
+        }
+        public List<Categoria> CategoriasLeer()
+        {
+            var res = new List<Categoria>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.CategoriasLeer", null);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var ct = new Categoria
+                    {
+                        IDCategoria = AsignaEntero("IDCategoria"),
+                        Descripcion = AsignaCadena("Descripcion"),
+                        Codigo = AsignaCadena("Codigo"),
+                    };
+                    res.Add(ct);
+                }
+
+            }
+            return res;
+        }
         public Modelo ModelosLeerPorID(int IDFamilia)
         {
             var res = new Modelo();

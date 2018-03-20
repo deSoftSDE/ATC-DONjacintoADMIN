@@ -135,13 +135,18 @@
 
                 </div>
             </div>
-            @*OPCIONES*@
             <div class="row" >
                 <div class="col-4 p-3" style="border:1px solid #cecece; border-radius:0.2rem;">
 
                     <h4>Marca: {{lastMarca.descripcionSeccion}}</h4>
                     <h4>Modelo: {{lastModelo.descripcionFamilia}}</h4>
                     <h4>Tipo de Vidrio: {{lastVidrio.descripcion}}</h4>
+                    <div class="row align-items-end">
+                        <div class="col text-right">
+                            <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                            <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-8">
                     <label class="m-0">Modificar marca</label>
@@ -169,7 +174,7 @@
                         </div>
                     </div>
                     <label class="mb-0">Modificar el Modelo</label>
-                  
+
                     <div style="z-index:99999999;height:30px" dx-select-box="selectBox2" dx-item-alias="product" class="mb-1">
                         <div data-options="dxTemplate: { name: 'field' }">
                             <div class="custom-item">
@@ -193,7 +198,7 @@
                         </div>
                     </div>
                     <label class="mb-0">Selecciona el Tipo de Vidrio</label>
-                   
+
 
                     <div style="z-index:99999999;height:30px" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
                         <div data-options="dxTemplate: { name: 'field' }">
@@ -217,17 +222,12 @@
                             </div>
                         </div>
                     </div>
+                        
                 </div>
             </div> 
         </div>
 
-        <div class="row align-items-end" style="min-height:120px;">
-            <div class="col text-right">
-                @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
-                <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
-            </div>
-        </div>
+        
 
     </div>
 </div>
