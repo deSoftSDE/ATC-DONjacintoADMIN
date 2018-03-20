@@ -241,23 +241,61 @@
 
 
 
+                <div class="row">
+                    <div class="col-6">
+                        <div id="gridContainer" dx-data-grid="dataGridCategorias" dx-item-alias="cat" style="width:100% !important;">
 
+                            <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
+                                <button type="submit" ng-click="eliminarCategoria(cat)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
 
+                            </div>
+                            <div data-options="dxTemplate:{ name:'editTemplate' }">
 
-                    <div dx-tab-panel="tabPanelOptions" dx-item-alias="categoria">
-                        <div data-options="dxTemplate : { name: 'title' } ">
-                            <span>{{categoria.descripcion}}</span>
+                                <button type="submit" ng-click="mostrarArticulosCat(cat)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Ver Artículos</button>
+
+                            </div>
+
                         </div>
-                        <div data-options="dxTemplate : { name: 'customer' } ">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div id="gridContainer" dx-data-grid="dataGridAccesorios" dx-item-alias="art" style="width:100% !important;">
+                        <div style="z-index:99999999;height:30px" dx-select-box="SelectBoxCategs" dx-item-alias="product" class="mb-1">
+                        </div>
+                    </div>
+                    <div class="col-6" ng-hide="!selectedCat">
 
-                                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+                        <h4>{{selectedCat.descripcion}}</h4>
+                        <div id="gridContainer" dx-data-grid="dataGridArticulosCat" dx-item-alias="art" style="width:100% !important;">
 
-                                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                                            <button type="submit" ng-click="eliminarArticulo(art)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+                            <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                                <button type="submit" ng-click="eliminarArticulos(cat)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+
+                            </div>
+
+
+                        </div>
+                        <div style="z-index:99999999;height:30px" dx-select-box="selectoboxcat" dx-item-alias="product" class="mb-1">
+                            <div data-options="dxTemplate: { name: 'field' }">
+
+                                <div dx-text-box="settingsboxAccesorios"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*<div dx-tab-panel="tabPanelOptions" dx-item-alias="categoria">
+                    <div data-options="dxTemplate : { name: 'title' } ">
+                        <span>{{categoria.descripcion}}</span>
+                    </div>
+                    <div data-options="dxTemplate : { name: 'customer' } ">
+                        <div class="row">
+                            <div class="col-6">
+                                <div id="gridContainer" dx-data-grid="dataGridAccesorios" dx-item-alias="art" style="width:100% !important;">
+                                    
+                                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                                        <button type="submit" ng-click="eliminarArticulo(art)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
 
                                         </div>
 
@@ -267,14 +305,14 @@
                                     <div style="z-index:99999999;height:30px" dx-select-box="selectoboxcat" dx-item-alias="product" class="mb-1">
                                         <div data-options="dxTemplate: { name: 'field' }">
 
-                                            <div dx-text-box="settingsboxAccesorios"></div>
-                                        </div>
+                                        <div dx-text-box="settingsboxAccesorios"></div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                        
                     </div>
+                </div>*@
 
 
 
@@ -292,6 +330,4 @@
         
 
     </div>
-</div>
-
 
