@@ -880,6 +880,13 @@
         //value: products[0].idFamilia,
         onInitialized: function (e) {
             $scope.selectboxcategs = e.component;
+            Llamada.get("CategoriasLeer")
+                .then(function (respuesta) {
+                    $scope.categorias = respuesta.data;
+                    $scope.selectboxcategs.option("dataSource", $scope.categorias);
+                    console.log("Holi")
+                    console.log($scope.selectboxcategs)
+                })
         },
         onValueChanged: function (e) {
             if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
@@ -898,6 +905,11 @@
                     $scope.currentarticulo.accesorios.push(e.component._options.selectedItem);
                 } else {
                     mensajeError("Categoria Repetida");
+                }
+                for (i = 0; i < $scope.currentarticulo.accesorios.length; i++) {
+                    if ($scope.currentarticulo.accesorios[i].idCategoria == 0) {
+                        $scope.currentarticulo.accesorios.splice(i, 1);
+                    }
                 }
                 $scope.datagridcats.option("dataSource", $scope.currentarticulo.accesorios);
                 /*console.log(e);
@@ -921,6 +933,11 @@
     }
     $scope.anadirColumna = function () {
         console.log($scope.datagridcats)
-        $scope.datagridcats.addRow();
+        $scope.currentarticulo.accesorios.push({
+            idCategoria: 0,
+            descripcion: null,
+        })
+        $scope.datagridcats.option("dataSource", $scope.currentarticulo.accesorios);
+
     }
 });
