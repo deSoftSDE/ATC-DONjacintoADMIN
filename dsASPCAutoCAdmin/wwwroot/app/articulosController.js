@@ -168,7 +168,7 @@
                 Llamada.get("CategoriasLeer")
                     .then(function (respuesta) {
                         $scope.categorias = respuesta.data;
-                        $scope.selectboxcategs.option("dataSource", $scope.categorias);
+                        //$scope.selectboxcategs.option("dataSource", $scope.categorias);
                         //$scope.tabpanel.option("dataSource", $scope.categorias);
                         $scope.datagridcats.option("dataSource", $scope.currentarticulo.accesorios);
                     })
