@@ -180,6 +180,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Descripcion { get; set; }
         public string Codigo { get; set; }
         public List<BuscaArticulo> Articulos { get; set; }
+        public int IdArticuloCategoria { get; set; }
     }
     [DataContract]
     [Serializable]
@@ -263,7 +264,14 @@ namespace dsASPCAutoCAdmin.Entidades
         public int AnoFinal { get; set; }
         [DataMember]
         public List<Categoria> Accesorios { get; set; }
+        [DataMember]
         public int IdCategoria { get; set; }
+        [DataMember]
+        public List<ModificarAccesorio> accesoriosinsertar { get; set; }
+        [DataMember]
+        public int IdArticuloCategoria { get; set; }
+        //[DataMember]
+        //public List<ModificarAccesorio> accesorioseliminar { get; set; }
     }
     [DataContract]
     public class MensajeRespuesta
@@ -286,5 +294,17 @@ namespace dsASPCAutoCAdmin.Entidades
         public int Height { get; set; }
         [DataMember]
         public int Res { get; set; }
+    }
+    [DataContract]
+    public class ModificarAccesorio
+    {
+        [DataMember]
+        public int? IDArticuloCategoria { get; set; }
+        [DataMember]
+        public int? IDCategoria { get; set; }
+        [DataMember]
+        public int? IDArticuloRel { get; set; }
+        [DataMember]
+        public int TipoOperacion { get; set; }
     }
 }
