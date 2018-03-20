@@ -62,6 +62,7 @@ namespace dsASPCAutoCAdmin.DataAccess
         public BuscaArticulo ArticulosLeerPorID(int IDArticulo)
         {
             var res = new BuscaArticulo();
+            var Accesorios = new List<BuscaArticulo>();
             var cc = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection conn = new SqlConnection(cc))
             {
@@ -90,15 +91,92 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.AnoInicial = AsignaEntero("AnoInicial");
                     res.AnoFinal = AsignaEntero("AnoFinal");
                 }
-                res.Accesorios = new List<BuscaArticulo>();
+                res.Accesorios = new List<Categoria>();
+                _reader.NextResult();
+                while (_reader.Read())
+                {
+                    var cat = new Categoria
+                    {
+                        IDCategoria = AsignaEntero("IDCategoria"),
+                        Descripcion = AsignaCadena("Descripcion"),
+                        Articulos = new List<BuscaArticulo>(),
+                    };
+                    res.Accesorios.Add(cat);
+                }
                 _reader.NextResult();
                 while (_reader.Read())
                 {
                     var ar = new BuscaArticulo();
                     res.IdArticulo = AsignaEntero("IdArticuloRel");
                     res.Descripcion = AsignaCadena("DescripcionArticuloRel");
-                    res.Accesorios.Add(ar);
+                    res.IdCategoria = AsignaEntero("IdCategoria");
+                    Accesorios.Add(ar);
                 }
+            }
+            foreach (Categoria cat in res.Accesorios)
+            {
+                foreach (BuscaArticulo ar in Accesorios)
+                {
+                    if (ar.IdCategoria == cat.IDCategoria)
+                    {
+                        cat.Articulos.Add(ar);
+                    }
+                }
+            }
+            return res;
+        }
+        public List<BuscaArticulo> ArticulosLeerPorCategoria(int IDCategoria)
+        {
+            var res = new List<BuscaArticulo>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDCategoria", IDCategoria),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosLeerPorCategoria", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var ar = new BuscaArticulo
+                    {
+                        IdArticulo = AsignaEntero("IdArticulo"),
+                        Codigo = AsignaCadena("Codigo"),
+                        Descripcion = AsignaCadena("Descripcion"),
+
+                    };
+                    res.Add(ar);
+                }
+
+            }
+            return res;
+        }
+        public List<BuscaArticulo> ArticulosLeerPorCategoriaYCadena(int IDCategoria, string cadena)
+        {
+            var res = new List<BuscaArticulo>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IDCategoria", IDCategoria),
+                    new SqlParameter("@cadena", cadena),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosLeerPorCategoriaYCadena", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var ar = new BuscaArticulo
+                    {
+                        IdArticulo = AsignaEntero("IdArticulo"),
+                        Codigo = AsignaCadena("Codigo"),
+                        Descripcion = AsignaCadena("Descripcion"),
+
+                    };
+                    res.Add(ar);
+                }
+
             }
             return res;
         }

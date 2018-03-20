@@ -167,8 +167,8 @@
                 };
                 Llamada.get("CategoriasLeer")
                     .then(function (respuesta) {
-                        $scope.categorias = respuesta.data;
-                        $scope.selectElementCategorias.option("dataSource", $scope.categorias);
+                        $scope.categorias = $scope.currentarticulo.accesorios;
+                        $scope.tabpanel.option("dataSource", $scope.categorias);
                     })
             })
         
@@ -574,13 +574,6 @@
             console.log(info);
             console.log(a);
         },
-        onInitNewRow: function (info, b) {
-            console.log("init");
-            console.log(info);
-            info.data.descripcion = 'Nuevo';
-            console.log("HOLIII");
-            info.component.saveEditData();
-        },
         onRowRemoving: function (e) {
             console.log(e);
             alert("Esto no está hecho bien");
@@ -606,5 +599,99 @@
             $scope.datagridaccs = e.component;
         }
     }
+
+
+    $scope.tabPanelOptions = {
+        height: 260,
+        dataSource: [],
+        itemTemplate: "customer",
+        bindingOptions: {
+            selectedIndex: "selectedIndex",
+            loop: "loop",
+            animationEnabled: "animationEnabled",
+            swipeEnabled: "swipeEnabled"
+        },
+        onInitialized: function (e) {
+            console.log(e);
+            $scope.tabpanel = e.component;
+        },
+        onSelectionChanged: function (e) {
+            console.log(e);
+            console.log(e.component._options.selectedItem);
+            idcategoria = e.component._options.selectedItem.idCategoria;
+            Llamada.get("ArticulosLeerPorCategoria?IDCategoria=" + idcategoria)
+                .then(function (respuesta) {
+                    $scope.selectboxcatc.option("dataSource", respuesta.data);
+                    $scope.datagridaccs.option("dataSource", e.articulos)
+                })
+        }
+    };
+    $scope.selectoboxcat = {
+        dataSource: [],
+        displayExpr: 'descripcion',
+        valueExpr: 'idArticulo',
+        searchEnabled: true,
+        fieldTemplate: 'field',
+        onInitialized: function (e) {
+            console.log(e);
+            $scope.selectboxcatc = e.component;
+        },
+        onValueChanged: function (e) {
+            console.log(e);
+            $scope.lastAccesorio = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+            if (NotNullNotUndefinedNotEmpty($scope.lastAccesorio)) {
+                console.log($scope.lastAccesorio);
+                idcategoria = $scope.tabpanel._options.selectedItem.idCategoria;
+                for (i = 0; i < $scope.currentarticulo.accesorios.length; i++) {
+                    if ($scope.currentarticulo.accesorios[i].idCategoria == idcategoria) {
+                        $scope.currentarticulo.accesorios[i].articulos.push($scope.lastAccesorio);
+                        alert("Añadido");
+                        console.log($scope.currentarticulo);
+                        $scope.datagridaccs.option("dataSource", $scope.currentarticulo.accesorios[i].articulos)
+                    }
+                }
+            }
+            
+        }
+    }
+
+    buscaAccesorios = function () {
+        idcategoria = $scope.tabpanel._options.selectedItem.idCategoria;
+        alert("Ey busco");
+        console.log($scope.newValorAccesorio);
+        Llamada.get("ArticulosLeerPorCategoriaYCadena?IDCategoria=" + idcategoria + "&Cadena=" + $scope.newValorAccesorio)
+            .then(function (respuesta) {
+                $scope.selectboxcatc.option("dataSource", respuesta.data);
+            })
+    }
+    $scope.eliminarArticulo = function (art) {
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este accesorio?");
+        result.then(function (val) {
+            if (val) {
+
+                console.log(art);
+                
+            }
+        });
+    }
+    var inputChangedAccesoriosPromise;
+    $scope.cambiobusquedaaccesorios = function () {
+        if (inputChangedAccesoriosPromise) {
+            $timeout.cancel(inputChangedAccesoriosPromise);
+        }
+        inputChangedAccesoriosPromise = $timeout(buscaAccesorios, 1000);
+    };
+
+    $scope.settingsboxAccesorios = {
+        placeholder: 'Busca un accesorio',
+        onInitialized: function (e) {
+            $scope.campotextoaccesorio = e.component;
+        },
+        valueChangeEvent: "keyup",
+        onKeyUp(e) {
+            $scope.newValorAccesorio = e.component.option("value");
+            $scope.cambiobusquedaaccesorios();
+        }
+    };
 
 });
