@@ -771,6 +771,7 @@
                 dataField: "descripcion",
                 width: "50%",
                 caption: "Descripción",
+                cellTemplate:"descriptionTemplate"
                 
                 
             }, {
