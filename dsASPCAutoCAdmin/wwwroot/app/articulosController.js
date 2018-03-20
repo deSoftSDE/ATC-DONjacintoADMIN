@@ -234,8 +234,8 @@
     };
     $scope.popupVisible = false;
     $scope.popupOptions = {
-        width: "90%",
-        height: '90%',
+        width: "95%",
+        height: '95%',
         showTitle: true,
         title: "Modificar Artículo",
         fullScreen:false,
