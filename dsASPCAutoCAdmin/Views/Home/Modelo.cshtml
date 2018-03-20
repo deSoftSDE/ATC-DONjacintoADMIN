@@ -16,8 +16,8 @@
     <a style="color:#bf4e6a;cursor:pointer;" ng-click="verMarca(@c.IdSeccion)">
         @c.descripcionSeccion >
     </a>
-        @c.DescripcionFamilia
-    
+    @c.DescripcionFamilia
+
     <div class="row mt-3">
         <div class="col-6">
             <h2>@c.DescripcionFamilia</h2>
@@ -46,7 +46,7 @@
             <div class="col-12">
                 <hr />
             </div>
-            
+
             <div class="col-12">
                 <div class="form-group">
                     <label>Sube una imagen del Modelo (Familia)</label>
@@ -56,6 +56,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-6 text-right">
+        <button type="submit" value="Añadir Nueva Imagen" ng-click="nuevaImagen()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nueva imagen</button>
     </div>
     <div class="row">
         <div class="col-12">
@@ -239,6 +242,26 @@
             </div>
         </div>
     </div>
+
+    <div dx-popup="popupImagen">
+        <div class='popup-property-details'>
+            <div class="form">
+                <div class="form-group">
+                    <label>Imagen </label>
+                    <div class="col-12">
+                        <input type="file" ng-file-model="newImagen" id="imagenpopup" multiple />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">
+                        @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
+                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosImagen()">Guardar</button>
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambiosImagen()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 

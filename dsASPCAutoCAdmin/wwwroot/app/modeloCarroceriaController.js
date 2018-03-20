@@ -183,35 +183,35 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
                 });
         } else {
             $scope.currentmodelo.newImagen = $scope.currentmodelo.imagen;
-            guardarCambiosModelo($scope.currentmodelo);
+            guardarCambiosModelo();
         }
 
         $scope.datagrid.collapseAll(-1);
     };
-    guardarCambiosModelo = function (modelo) {
-        recorrerImagenes(modelo, 0);
+    guardarCambiosModelo = function () {
+        recorrerImagenes(0);
     };
-    recorrerImagenes = function (modelo, indice) {
-        if (indice < modelo.imagenes.length) {
-            if (NotNullNotUndefinedNotEmpty(modelo.imagenes[indice].fdata)) {
-                Llamada.postFile(modelo.imagenes[indice].fdata)
+    recorrerImagenes = function (indice) {
+        if (indice < $scope.currentmodelo.imagenes.length) {
+            if (NotNullNotUndefinedNotEmpty($scope.currentmodelo.imagenes[indice].fdata)) {
+                Llamada.postFile($scope.currentmodelo.imagenes[indice].fdata)
                     .then(function (respuesta) {
-                        modelo.imagenes.valor = respuesta[0].contenido;
+                        alert("Subida");
+                        $scope.currentmodelo.imagenes[indice].valor = respuesta[0].contenido;
                         indice++;
-                        recorrerImagenes(modelo, indice);
+                        recorrerImagenes(indice);
                     });
             } else {
                 indice++;
-                recorrerImagenes(modelo, indice);
+                recorrerImagenes(indice);
             }
         } else {
-            guardarCambiosFinal(modelo);
+            guardarCambiosFinal();
         }
     };
-    guardarCambiosFinal = function(modelo) {
-        modelo.files = null;
-        console.log(modelo);
-        Llamada.post("ModelosCrearModificar", modelo)
+    guardarCambiosFinal = function() {
+        $scope.currentmodelo.files = null;
+        Llamada.post("ModelosCrearModificar", $scope.currentmodelo)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
                 console.log(respuesta);
@@ -269,8 +269,8 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta imagen?");
         result.then(function (val) {
             if (val) {
-                var b = $scope.currentmodelo.imagenes.splice(id.rowIndex, 1);
-                $scope.datagrid.option("dataSource", $scope.currentmodelo.imagenes);
+                var b = $scope.currentmodelo.imagenes.splice(a.rowIndex, 1);
+                $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
                 if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.imagenesEliminadas)) {
                     $scope.currentmodelo.imagenesEliminadas = [];
                 }
@@ -460,6 +460,9 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
     $scope.cancelarCambios = function () {
         $scope.popupVisible = false;
     };
+    $scope.cancelarCambiosImagen = function () {
+        $scope.popupImagenVisible = false;
+    };
     $scope.estaEnListado = function (val) {
         if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.carrocerias)) {
             $scope.currentmodelo.carrocerias = [];
@@ -485,23 +488,28 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         },
         closeOnOutsideClick: true
     };
-    $scope.nuevaImagen = function() 
-    {
+    $scope.nuevaImagen = function () {
         $scope.popupImagenVisible = true;
     }
+        
+
     $scope.guardarCambiosImagen = function () {
+        console.log($scope.newImagen);
         var b = document.getElementById("imagenpopup").files;
-        var fd = new FormData();
-        fd.append('file.jpg', b[0]);
-        $scope.popupImagenVisible = false;
-        $scope.newImagen = {
-            url = $scope.newImagen.files.data,
-            fdata = fd,
-        }
         if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.imagenes)) {
             $scope.currentmodelo.imagenes = [];
         }
-        $scope.currentmodelo.imagenes.push($scope.newImagen);
+        for (n = 0; n < b.length; n++) {
+            var fd = new FormData();
+            fd.append('file.jpg', b[n]);
+            $scope.popupImagenVisible = false;
+            newImagen = {
+                url: obtenerImagenInput(b[n]),
+                fdata: fd,
+            }
+            $scope.currentmodelo.imagenes.push(newImagen);
+        }
+        
         $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
     }
 });
