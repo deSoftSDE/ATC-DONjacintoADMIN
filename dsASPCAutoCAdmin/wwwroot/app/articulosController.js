@@ -769,21 +769,21 @@
         columns: [
             {
                 dataField: "descripcion",
-                width: "80%",
-                caption: "Descripcion",
+                width: "50%",
+                caption: "Descripción",
                 
-                cellTemplate: "descriptionTemplate",
+                
             }, {
-                caption: "",
-                width: "20%",
+                caption: "Eliminar",
+                width: "25%",
                 alignment: "center",
                 allowFiltering: false,
                 allowSorting: false,
                 allowEditing: false,
                 cellTemplate: "deleteTemplate"
             }, {
-                caption: "",
-                width: "20%",
+                caption: "Ver Artículos",
+                width: "25%",
                 alignment: "center",
                 allowFiltering: false,
                 allowSorting: false,
