@@ -192,6 +192,20 @@
 
     };
     $scope.popupVisible = false;
+
+    $scope.scrollarticulos = {
+        scrollByContent: true,
+        scrollByThumb: true,
+        reachBottomText: 'Updating...',
+        bindingOptions: {
+            bounceEnabled: 'pullDownValue',
+            showScrollbar: 'showScrollbarMode',
+            scrollByContent: 'scrollByContentValue',
+            scrollByThumb: 'scrollByThumbValue',
+            onPullDown: 'updateTopContent',
+            onReachBottom: 'updateBottomContent'
+        }
+    };
     $scope.popupOptions = {
         width: "90%",
         height: '90%',
