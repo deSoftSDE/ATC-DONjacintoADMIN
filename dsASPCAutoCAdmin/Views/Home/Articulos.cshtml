@@ -350,18 +350,15 @@
                                 <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
                                     <div class="row">
                                         <div class="col-6">
-                                            <span ng-if="!cat.modificando">
-
+                                            <span ng-if="cat.value">
                                                 {{cat.value}}
 
                                             </span>
-                                            <span ng-if="cat.modificando">
+                                            <span ng-hide="cat.value">
+                                                <div style="z-index:99999999;height:30px" dx-select-box="SelectBoxCategs" dx-item-alias="product" class="mb-1">
 
-                                                lo estoy modificando
+                                                </div>
                                             </span>
-                                        </div>
-                                        <div class="col-6">
-                                            <button type="submit" ng-click="modificarCat(cat)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Modificar</button>
                                         </div>
                                     </div>
                                     
@@ -381,8 +378,8 @@
                                 </div>
 
                             </div>
-                            <div style="z-index:99999999;height:30px" dx-select-box="SelectBoxCategs" dx-item-alias="product" class="mb-1">
-                            </div>
+                            <!--<div style="z-index:99999999;height:30px" dx-select-box="SelectBoxCategs" dx-item-alias="product" class="mb-1">
+                            </div>-->
                         </div>
                         <div class="col-6" ng-hide="!selectedCat">
 
