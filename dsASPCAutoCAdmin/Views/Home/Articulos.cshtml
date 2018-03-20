@@ -170,7 +170,7 @@
                             <div class="row">
                                 <label class="etiq-form col-2 text-right pr-0">TIPO</label>
                                 <div class="col-10">
-                                    <div style="z-index:99999999;" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
+                                    <div style="z-index:99999999;height:30px" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
                                         <div data-options="dxTemplate: { name: 'field' }">
                                             <div class="custom-item">
                                                 <img ng-src="{{product.ImageSrc}}" />
@@ -187,6 +187,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -402,53 +404,26 @@
                             </div>
                         </div>
                     </div>
+                   </div>
 
 
 
-                    @*<div dx-tab-panel="tabPanelOptions" dx-item-alias="categoria">
-                <div data-options="dxTemplate : { name: 'title' } ">
-                    <span>{{categoria.descripcion}}</span>
-                </div>
-                <div data-options="dxTemplate : { name: 'customer' } ">
-                    <div class="row">
-                        <div class="col-6">
-                            <div id="gridContainer" dx-data-grid="dataGridAccesorios" dx-item-alias="art" style="width:100% !important;">
 
-                                <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
-                                    <button type="submit" ng-click="eliminarArticulo(art)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
 
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div style="z-index:99999999;height:30px" dx-select-box="selectoboxcat" dx-item-alias="product" class="mb-1">
-                                <div data-options="dxTemplate: { name: 'field' }">
-
-                                    <div dx-text-box="settingsboxAccesorios"></div>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="row align-items-end">
+                        <div class="col text-right">
+                            <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
+                            <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
                         </div>
                     </div>
-
                 </div>
-            </div>*@
+        </div>
+    </div>
+</div>
 
 
 
-
-
-
-
-
-
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-
+                   
