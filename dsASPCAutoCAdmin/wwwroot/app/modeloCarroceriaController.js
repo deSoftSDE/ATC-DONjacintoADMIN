@@ -71,11 +71,11 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         columns: [
             {
                 dataField: "descripcion",
-                width: 600,
-                caption: "Descripcion"
+                width: "70%",
+                caption: "Descripción"
             }, {
-                caption: "",
-                width: 30,
+                caption: "Eliminar",
+                width:"30%",
                 allowFiltering: false,
                 alignment: "center",
                 allowSorting: false,
