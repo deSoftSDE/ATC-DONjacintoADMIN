@@ -174,6 +174,12 @@ namespace dsASPCAutoCAdmin.Entidades
         public int IDFamilia { get; set; }
         public string holi { get; set; }
     }
+    public class Categoria
+    {
+        public int IDCategoria { get; set; }
+        public string Descripcion { get; set; }
+        public string Codigo { get; set; }
+    }
     [DataContract]
     [Serializable]
     public class BuscaArticulo
@@ -254,6 +260,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public int AnoInicial { get; set; }
         [DataMember]
         public int AnoFinal { get; set; }
+        public List<BuscaArticulo> Accesorios { get; set; }
     }
     [DataContract]
     public class MensajeRespuesta

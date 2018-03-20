@@ -145,20 +145,33 @@
             //alert("Error");
         }
         console.log(vid);
-        $scope.popupVisible = true;
+        
         $scope.currentarticulo = vid.data;
-        $scope.lastMarca = {
-            idSeccion: $scope.currentarticulo.idSeccion,
-            descripcionSeccion: $scope.currentarticulo.descripcionSeccion
-        };
-        $scope.lastModelo = {
-            idFamilia: $scope.currentarticulo.idFamilia,
-            descripcionFamilia: $scope.currentarticulo.descripcionFamilia
-        };
-        $scope.lastVidrio = {
-            idTipoVidrio: $scope.currentarticulo.idTipoVidrio,
-            descripcion: $scope.currentarticulo.descripcionTipoVidrio
-        };
+        Llamada.get("ArticulosLeerPorID?IDArticulo=" + vid.data.idArticulo)
+            .then(function (respuesta) {
+                alert("viene el articulo");
+                console.log(respuesta);
+                $scope.popupVisible = true;
+                $scope.currentarticulo = respuesta.data;
+                $scope.lastMarca = {
+                    idSeccion: $scope.currentarticulo.idSeccion,
+                    descripcionSeccion: $scope.currentarticulo.descripcionSeccion
+                };
+                $scope.lastModelo = {
+                    idFamilia: $scope.currentarticulo.idFamilia,
+                    descripcionFamilia: $scope.currentarticulo.descripcionFamilia
+                };
+                $scope.lastVidrio = {
+                    idTipoVidrio: $scope.currentarticulo.idTipoVidrio,
+                    descripcion: $scope.currentarticulo.descripcionTipoVidrio
+                };
+                Llamada.get("CategoriasLeer")
+                    .then(function (respuesta) {
+                        $scope.categorias = respuesta.data;
+                        $scope.selectElementCategorias.option("dataSource", $scope.categorias);
+                    })
+            })
+        
         /*if (NotNullNotUndefinedNotEmpty($scope.currentarticulo.idSeccion)) {
             buscaModelos($scope.lastMarca);
         }*/
@@ -488,4 +501,110 @@
         };
         LeerRegistros(obj);
     };
+    $scope.selectBoxCategorias = {
+        dataSource: [],
+        displayExpr: "descripcion",
+        valueExpr: "idCategoria",
+        searchEnabled: true,
+        height: "30px",
+        noDataText: 'No se ha encontrado ninguna categoría',
+        //value: products[0].idSeccion,
+        onInitialized: function (e) {
+            $scope.selectElementCategorias = e.component;
+        },
+        onValueChanged: function (e) {
+            console.log(e);
+            /*if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
+                console.log(e);
+                console.log(e.component._options);
+                console.log(e.component._options.selectedItem);
+                $scope.lastMarca = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+                buscaModelos($scope.lastMarca);
+            } else {
+                console.log(e);
+                console.log("Está vacío!!");
+                oldValue = e.previousValue;
+            }*/
+
+        }
+    };
+    $scope.selectBoxAccesorios = {
+        dataSource: [],
+        displayExpr: "descripcion",
+        valueExpr: "idArticulo",
+        searchEnabled: true,
+        height: "30px",
+        noDataText: 'No se ha encontrado ningun artículo',
+        //value: products[0].idSeccion,
+        onInitialized: function (e) {
+            $scope.selectElementAccesorios = e.component;
+            oldValue = e.component.option("value");
+        },
+        onValueChanged: function (e) {
+            console.log(e);
+            /*if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
+                console.log(e);
+                console.log(e.component._options);
+                console.log(e.component._options.selectedItem);
+                $scope.lastMarca = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
+                buscaModelos($scope.lastMarca);
+            } else {
+                console.log(e);
+                console.log("Está vacío!!");
+                oldValue = e.previousValue;
+            }*/
+
+        }
+    }
+    $scope.settingsBoxAccesorios = {
+
+    }
+    $scope.dataGridAccesorios = {
+        dataSource: [],
+        keyExpr: "id",
+        editing: {
+            allowAdding: false, // Enables insertion
+            allowDeleting: false, // Enables removing
+            editEnabled: false
+        },
+        selection: {
+            mode: "single"
+        },
+        onRowInserted: function (info, a) {
+            console.log(info);
+            console.log(a);
+        },
+        onInitNewRow: function (info, b) {
+            console.log("init");
+            console.log(info);
+            info.data.descripcion = 'Nuevo';
+            console.log("HOLIII");
+            info.component.saveEditData();
+        },
+        onRowRemoving: function (e) {
+            console.log(e);
+            alert("Esto no está hecho bien");
+            //eliminarRegistro(e.data.idCarroceria);
+        },
+        columns: [
+            {
+                dataField: "descripcion",
+                width: "80%",
+                caption: "Descripcion"
+            }, {
+                caption: "",
+                width: "20%",
+                alignment: "center",
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                cellTemplate: "deleteTemplate"
+            }
+        ],
+        onInitialized: function (e) {
+            console.log(e);
+            $scope.datagridaccs = e.component;
+        }
+    }
+
 });

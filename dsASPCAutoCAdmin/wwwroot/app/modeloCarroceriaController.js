@@ -509,7 +509,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             }
             $scope.currentmodelo.imagenes.push(newImagen);
         }
-        
+        document.getElementById("imagenpopup").value = null
         $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
     }
 });
