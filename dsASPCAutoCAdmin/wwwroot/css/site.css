@@ -2457,3 +2457,7 @@ a.dx-link-delete{
     height:100%;
     min-height:800px;
 }
+
+label.etiq-form{
+    font-size:12px;
+}
