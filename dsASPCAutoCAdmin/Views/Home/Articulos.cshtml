@@ -279,7 +279,31 @@
                     
                     <div class="row">
                         <div class="col-6">
+
+                            <input type="submit" ng-click="anadirColumna()" />
                             <div id="gridContainer" dx-data-grid="dataGridCategorias" dx-item-alias="cat" style="width:100% !important;">
+
+                                <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span ng-if="!cat.modificando">
+
+                                                {{cat.value}}
+
+                                            </span>
+                                            <span ng-if="cat.modificando">
+
+                                                lo estoy modificando
+                                            </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="submit" ng-click="modificarCat(cat)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Modificar</button>
+                                        </div>
+                                    </div>
+                                    
+
+                                    
+                                </div>
 
                                 <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 

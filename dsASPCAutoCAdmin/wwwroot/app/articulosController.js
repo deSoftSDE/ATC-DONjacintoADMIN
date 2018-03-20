@@ -770,7 +770,9 @@
             {
                 dataField: "descripcion",
                 width: "80%",
-                caption: "Descripcion"
+                caption: "Descripcion",
+                
+                cellTemplate: "descriptionTemplate",
             }, {
                 caption: "",
                 width: "20%",
@@ -793,6 +795,15 @@
             console.log(e);
             $scope.datagridcats = e.component;
         }
+    }
+    $scope.modificarCat = function (cat) {
+        console.log(cat);
+        if (cat.modificando === true) {
+            cat.modificando = false;
+        } else {
+            cat.modificando = true;
+        }
+        
     }
     $scope.dataGridArticulosCat = {
         dataSource: [],
@@ -818,7 +829,7 @@
             {
                 dataField: "descripcion",
                 width: "80%",
-                caption: "Descripcion"
+                caption: "Descripcion",
             }, {
                 caption: "",
                 width: "20%",
@@ -907,5 +918,9 @@
         }
         $scope.currentarticulo.articulosElim.push(c[0]);
         $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
+    }
+    $scope.anadirColumna = function () {
+        console.log($scope.datagridcats)
+        $scope.datagridcats.addRow();
     }
 });
