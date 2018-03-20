@@ -99,6 +99,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     {
                         IDCategoria = AsignaEntero("IDCategoria"),
                         Descripcion = AsignaCadena("Descripcion"),
+                        IdArticuloCategoria = AsignaEntero("IDArticuloCategoria"),
                         Articulos = new List<BuscaArticulo>(),
                     };
                     res.Accesorios.Add(cat);
@@ -107,9 +108,10 @@ namespace dsASPCAutoCAdmin.DataAccess
                 while (_reader.Read())
                 {
                     var ar = new BuscaArticulo();
-                    res.IdArticulo = AsignaEntero("IdArticuloRel");
-                    res.Descripcion = AsignaCadena("DescripcionArticuloRel");
-                    res.IdCategoria = AsignaEntero("IdCategoria");
+                    ar.IdArticulo = AsignaEntero("IdArticuloRel");
+                    ar.Descripcion = AsignaCadena("DescripcionArticuloRel");
+                    ar.IdCategoria = AsignaEntero("IdCategoria");
+                    ar.IdArticuloCategoria = AsignaEntero("IDArticuloCategoria");
                     Accesorios.Add(ar);
                 }
             }
@@ -570,6 +572,15 @@ namespace dsASPCAutoCAdmin.DataAccess
         {
             var res = new ResultadoIM();
             var cc = _configuration.GetConnectionString("DefaultConnection");
+            var cr = "";
+            try
+            {
+                cr = dsCore.Comun.Ayudas.SerializarACadenaXML(bs.accesoriosinsertar);
+            }
+            catch
+            {
+                //Si está vacía la lista no nos importa
+            }
             using (SqlConnection conn = new SqlConnection(cc))
             {
                 SqlParameter[] param = new SqlParameter[]
@@ -586,6 +597,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@DescripcionWeb2", bs.DescripcionWeb2),
                     new SqlParameter("@AnoInicial", bs.AnoInicial),
                     new SqlParameter("@AnoFinal", bs.AnoFinal),
+                    new SqlParameter("@Accesorios", cr),
 
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosModificar", param);

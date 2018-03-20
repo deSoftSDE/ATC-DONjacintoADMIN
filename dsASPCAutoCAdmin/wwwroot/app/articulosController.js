@@ -151,6 +151,7 @@
             .then(function (respuesta) {
                 console.log(respuesta);
                 $scope.popupVisible = true;
+                $scope.selectedCat = null;
                 $scope.currentarticulo = respuesta.data;
                 $scope.lastMarca = {
                     idSeccion: $scope.currentarticulo.idSeccion,
@@ -182,6 +183,45 @@
         art.files = null;
         console.log(art);
         console.log("Hasta aqui he llegado!");
+        console.log(art);
+        art.accesoriosinsertar = [];
+        art.accesorioseliminar = [];
+        for (i = 0; i < art.accesorios.length; i++) {
+            if (!NotNullNotUndefinedNotEmpty(art.accesorios[i].articulos)) {
+                art.accesorios[i].articulos = [];
+            }
+            if (art.accesorios[i].articulos.length > 0) {
+                for (s = 0; s < art.accesorios[i].articulos.length; s++) {
+                    art.accesorios[i].articulos[s].idCategoria = art.accesorios[i].idCategoria;
+                    art.accesorios[i].articulos[s].idArticuloRel = art.accesorios[i].articulos[s].idArticulo;
+                    art.accesoriosinsertar.push(art.accesorios[i].articulos[s]);
+                }
+                
+            } else {
+                var c = {
+                    idArticuloCategoria: art.accesorios[i].idArticuloCategoria,
+                    idCategoria: art.accesorios[i].idCategoria,
+                    idArticuloRel: null
+                }
+                art.accesoriosinsertar.push(c);
+            }
+        }
+        if (NotNullNotUndefinedNotEmpty(art.accesoriosElim)) {
+            for (q = 0; q < art.accesoriosElim.length; q++) {
+                art.accesorioseliminar.push(art.accesoriosElim[q]);
+            }
+        }
+        if (NotNullNotUndefinedNotEmpty(art.articulosElim)) {
+
+            for (r = 0; r < art.articulosElim.length; r++) {
+                art.accesorioseliminar.push(art.articulosElim[r]);
+            }
+        }
+        for (x = 0; x < art.accesoriosinsertar.length; x++) {
+            art.accesoriosinsertar[x].tipoOperacion = 1;
+        }
+        art.accesoriosinsertar = art.accesoriosinsertar.concat(art.accesorioseliminar);
+        art.accesorios = null;
         console.log(art);
         Llamada.post("ArticulosModificar", art)
             .then(function (respuesta) {
@@ -806,7 +846,21 @@
                // $scope.datagridaccs.option("dataSource", e.articulos)
             })
     }
+    $scope.eliminarCategoria = function (a) {
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta categoría?");
+        result.then(function (val) {
+            if (val) {
+                if (!NotNullNotUndefinedNotEmpty($scope.currentarticulo.accesoriosElim)) {
+                    $scope.currentarticulo.accesoriosElim = []
+                }
 
+                var b = $scope.currentarticulo.accesorios.splice(a.rowIndex, 1);
+                $scope.currentarticulo.accesoriosElim.push(b[0]);
+                $scope.datagridcats.option("dataSource", $scope.currentarticulo.accesorios);
+                $scope.selectedCat = null;
+            }
+        });
+    }
     $scope.SelectBoxCategs = {
         dataSource: [],
         valueExpr: "idCategoria",
@@ -845,5 +899,13 @@
 
         }
     };
-
+    $scope.eliminarArticulos = function (art) {
+        console.log(art);
+        var c = $scope.selectedCat.articulos.splice(art.rowIndex, 1);
+        if (!NotNullNotUndefinedNotEmpty($scope.currentarticulo.articulosElim)) {
+            $scope.currentarticulo.articulosElim = [];
+        }
+        $scope.currentarticulo.articulosElim.push(c[0]);
+        $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
+    }
 });
