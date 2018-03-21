@@ -1,5 +1,6 @@
 ﻿appadmin.controller('Articulos', function ($scope, Llamada, $timeout) {
     //console.log("Holi");
+    $scope.anadiendoCategoria = false;
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
         switch (val) {
@@ -129,9 +130,11 @@
         articulo.idSeccion = $scope.lastMarca.idSeccion;
         articulo.idFamilia = $scope.lastModelo.idFamilia;
         articulo.idTipoVidrio = $scope.lastVidrio.idTipoVidrio;
+        articulo.idTipoVidrio = $scope.lastCategoria.idCategoria;
         articulo.descripcionSeccion = $scope.lastMarca.descripcionSeccion;
         articulo.descripcionFamilia = $scope.lastModelo.descripcionFamilia;
         articulo.descripcionTipoVidrio = $scope.lastVidrio.descripcion;
+        articulo.descripcionCategoria = $scope.lastCategoria.descripcion;
         guardarCambios(articulo);
     };
     $scope.modificarArticulo = function (vid) {
@@ -151,6 +154,8 @@
             .then(function (respuesta) {
                 //console.log(respuesta);
                 $scope.popupVisible = true;
+
+                $scope.anadiendoCategoria = false;
                 $scope.selectedCat = null;
                 $scope.currentarticulo = respuesta.data;
                 $scope.lastMarca = {
@@ -164,6 +169,10 @@
                 $scope.lastVidrio = {
                     idTipoVidrio: $scope.currentarticulo.idTipoVidrio,
                     descripcion: $scope.currentarticulo.descripcionTipoVidrio
+                };
+                $scope.lastCategoria = {
+                    idCategoria: $scope.currentarticulo.idCategoria,
+                    descripcion: $scope.currentarticulo.descripcionCategoria
                 };
                 Llamada.get("CategoriasLeer")
                     .then(function (respuesta) {
@@ -214,6 +223,7 @@
         if (NotNullNotUndefinedNotEmpty(art.articulosElim)) {
 
             for (r = 0; r < art.articulosElim.length; r++) {
+                art.articulosElim[r].idArticuloRel = art.articulosElim[r].idArticulo;
                 art.accesorioseliminar.push(art.articulosElim[r]);
             }
         }
@@ -327,6 +337,35 @@
         onValueChanged: function (e) {
             //console.log(e);
             $scope.lastVidrio = e.component._options.selectedItem;
+            console.log(e.component._options.selectedItem);
+        }
+    };
+
+    $scope.selectBox4 = {
+        dataSource: [],
+        displayExpr: "descripcion",
+        placeholder: "Selecciona una categoría",
+        noDataText: 'No se han encontrado categorías',
+        valueExpr: "idCategoria",
+        //searchEnabled: true,
+        //value: products[0].idTipoVehiculo,
+        //fieldTemplate: 'field',
+        onInitialized: function (e) {
+            $scope.selectElement4 = e.component;
+            Llamada.get("CategoriasLeer")
+                .then(function (respuesta) {
+                    //console.log(respuesta.data);
+                    $scope.categorias = respuesta.data;
+
+                    if (NotNullNotUndefinedNotEmpty($scope.selectElement4)) {
+                        $scope.selectElement4.option("dataSource", $scope.categorias);
+                    }
+
+                });
+        },
+        onValueChanged: function (e) {
+            //console.log(e);
+            $scope.lastCategoria = e.component._options.selectedItem;
             console.log(e.component._options.selectedItem);
         }
     };
@@ -945,20 +984,33 @@
     };
     $scope.eliminarArticulos = function (art) {
         //console.log(art);
-        var c = $scope.selectedCat.articulos.splice(art.rowIndex, 1);
-        if (!NotNullNotUndefinedNotEmpty($scope.currentarticulo.articulosElim)) {
-            $scope.currentarticulo.articulosElim = [];
-        }
-        $scope.currentarticulo.articulosElim.push(c[0]);
-        $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
+        result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este artículo?");
+        result.then(function (val) {
+            if (val) {
+                var c = $scope.selectedCat.articulos.splice(art.rowIndex, 1);
+                if (!NotNullNotUndefinedNotEmpty($scope.currentarticulo.articulosElim)) {
+                    $scope.currentarticulo.articulosElim = [];
+                }
+                console.log(c);
+                $scope.currentarticulo.articulosElim.push(c[0]);
+                $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
+            }
+        });
+        
     }
     $scope.anadirColumna = function () {
         //console.log($scope.datagridcats)
-        $scope.currentarticulo.accesorios.push({
-            idCategoria: 0,
-            descripcion: null,
-        })
-        $scope.datagridcats.option("dataSource", $scope.currentarticulo.accesorios);
+        if (!$scope.anadiendoCategoria) {
+            $scope.currentarticulo.accesorios.push({
+                idCategoria: 0,
+                descripcion: null,
+            })
+            $scope.datagridcats.option("dataSource", $scope.currentarticulo.accesorios);
+            $scope.anadiendoCategoria = true;
+        } else {
+            alert("NO")
+        }
+        
 
     }
     $scope.anadirColumnaArt = function () {

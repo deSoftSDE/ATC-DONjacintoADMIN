@@ -90,6 +90,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.DescripcionWeb2 = AsignaCadena("DescripcionWeb2");
                     res.AnoInicial = AsignaEntero("AnoInicial");
                     res.AnoFinal = AsignaEntero("AnoFinal");
+                    res.IdCategoria = AsignaEntero("IDCategoria");
+                    res.DescripcionCategoria = AsignaCadena("DescripcionCategoria");
                 }
                 res.Accesorios = new List<Categoria>();
                 _reader.NextResult();

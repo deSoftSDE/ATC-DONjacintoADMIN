@@ -270,6 +270,8 @@ namespace dsASPCAutoCAdmin.Entidades
         public List<ModificarAccesorio> accesoriosinsertar { get; set; }
         [DataMember]
         public int IdArticuloCategoria { get; set; }
+        [DataMember]
+        public string DescripcionCategoria { get; set; }
         //[DataMember]
         //public List<ModificarAccesorio> accesorioseliminar { get; set; }
     }
