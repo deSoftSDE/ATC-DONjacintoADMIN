@@ -278,7 +278,7 @@
         bindingOptions: {
             visible: 'popupVisible'
         },
-        closeOnOutsideClick: true
+        closeOnOutsideClick: false
     };
     $scope.cambioInput = function () {
         alert("Holi");
@@ -940,14 +940,14 @@
         columns: [
             {
                 dataField: "descripcion",
-                width: "50%",
+                width: "60%",
                 caption: "Categorías",
                 cellTemplate:"descriptionTemplate"
                 
                 
             }, {
                 caption: "Eliminar",
-                width: "25%",
+                width: "20%",
                 alignment: "center",
                 allowFiltering: false,
                 allowSorting: false,
@@ -955,7 +955,7 @@
                 cellTemplate: "deleteTemplate"
             }, {
                 caption: "Ver Artículos",
-                width: "25%",
+                width: "20%",
                 alignment: "center",
                 allowFiltering: false,
                 allowSorting: false,

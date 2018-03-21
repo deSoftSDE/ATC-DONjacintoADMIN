@@ -214,13 +214,14 @@
 
                                 <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-1"></div>
+                                        <div class="col-10">
                                             <span ng-if="cat.value">
                                                 {{cat.value}}
                                             </span>
                                             <div ng-hide="cat.value">
 
-                                                <div style="z-index:99999999;" dx-lookup="SelectBoxCategs" dx-item-alias="product" class="">
+                                                <div style="z-index:2001;" dx-lookup="SelectBoxCategs" dx-item-alias="product" class="field-customization">
 
                                                 </div>
                                             </div>
