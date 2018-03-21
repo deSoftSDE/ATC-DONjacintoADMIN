@@ -22,7 +22,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         selection: {
             mode: "single"
@@ -164,7 +164,6 @@
             //alert("Error");
         }
         //console.log(vid);
-        
         $scope.currentarticulo = vid.data;
         Llamada.get("ArticulosLeerPorID?IDArticulo=" + vid.data.idArticulo)
             .then(function (respuesta) {
@@ -257,7 +256,7 @@
         //console.log(art);
         art.carrocerias = $scope.datagridcarrocerias.option("dataSource");
         console.log($scope.datagridcarrocerias)
-        var c = 5;
+        //var c = 5;
         Llamada.post("ArticulosModificar", art)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
@@ -283,6 +282,30 @@
     $scope.cambioInput = function () {
         alert("Holi");
     };
+    validarFechas = function () {
+        var res = true;
+        var carroceriasvalidadas = JSON.parse("" + JSON.stringify($scope.datagridcarrocerias.option("dataSource")));
+        if (NotNullNotUndefinedNotEmpty(carroceriasvalidadas)) {
+            console.log("No están nulas");
+            for (i = 0; i < carroceriasvalidadas.length; i++) {
+                console.log("Recorriendo");
+                var ano = carroceriasvalidadas[i].anos;
+                if (NotNullNotUndefinedNotEmpty(ano)) {
+                    console.log("Ano no nulo");
+                    var anosplit = ano.split("-");
+                    if (isNaN(anosplit[0])) {
+                        res = false;
+                    }
+                    if (isNaN(anosplit[1])) {
+                        res = false;
+                    }
+                } else {
+                    console.log("Ano es nulo");
+                }
+            }
+        }
+        return res;
+    }
     $scope.selectBox = {
         dataSource: [],
         displayExpr: "descripcionSeccion",
@@ -350,6 +373,7 @@
                 .then(function (respuesta) {
                     //console.log(respuesta.data);
                     $scope.tiposvid = respuesta.data;
+                    $scope.tiposvid.splice(0, 0, { descripcionTipoVidrio: "Sin Tipo", descripcion: "Sin Tipo", idTipoVidrio: null });
                     for (i = 0; i < $scope.tiposvid.length; i++) {
                         $scope.tiposvid[i].url = Llamada.getRuta($scope.tiposvid[i].imagen);
                     }
@@ -381,6 +405,7 @@
                 .then(function (respuesta) {
                     //console.log(respuesta.data);
                     $scope.categorias = respuesta.data;
+                    $scope.categorias.splice(0, 0, { descripcion: "Sin Categoría", idCategoria: null })
 
                     if (NotNullNotUndefinedNotEmpty($scope.selectElement4)) {
                         $scope.selectElement4.option("dataSource", $scope.categorias);
@@ -485,7 +510,13 @@
         descripcion: "Descripción"
     };
     $scope.guardarCambiosPopup = function () {
-        $scope.guardarCambios($scope.currentarticulo);
+        //alert("Guardando");
+        if (validarFechas()) {
+            $scope.guardarCambios($scope.currentarticulo);
+        } else {
+            mensajeError("Las fechas introducidas deben tener la sintaxis XXXX-XXXX");
+        }
+        
     };
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
@@ -669,7 +700,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         selection: {
             mode: "single"
@@ -711,7 +742,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: true
+            allowUpdating: true
         },
         selection: {
             mode: "single"
@@ -866,7 +897,7 @@
                         } else {
                             mensajeError("Accesorio duplicado");
                         }
-                        var eliminado = false;
+                        //var eliminado = false;
                         
                        
                         //alert("Añadido");
@@ -922,7 +953,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         noDataText:"Añadir Categoría de Accesorios",
         selection: {
@@ -966,6 +997,13 @@
         onInitialized: function (e) {
             //console.log(e);
             $scope.datagridcats = e.component;
+        },
+        onCellClick: function (e) {
+            //alert("Holiii");
+            //console.log(e);
+
+            //$scope.selectedCat = e.data;
+            $scope.mostrarArticulosCat(e);
         }
     }
     $scope.modificarCat = function (cat) {
@@ -983,7 +1021,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         selection: {
             mode: "single"
@@ -1057,8 +1095,8 @@
                 .then(function (respuesta) {
                     $scope.categorias = respuesta.data;
                     $scope.selectboxcategs.option("dataSource", $scope.categorias);
-                    console.log("Holi")
-                    console.log($scope.selectboxcategs)
+                    //console.log("Holi")
+                    //console.log($scope.selectboxcategs)
                 })
         },
         onValueChanged: function (e) {

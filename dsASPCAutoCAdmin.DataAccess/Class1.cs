@@ -129,6 +129,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                         DescripcionFamilia = AsignaCadena("DescripcionFamilia"),
                         DescripcionSeccion = AsignaCadena("DescripcionSeccion"),
                         IDArticuloModelo = AsignaEntero("IDArticuloModelo"),
+                        IDFamilia = AsignaEntero("IDFamilia"),
                     };
                     res.Carrocerias.Add(carr);
                 }
@@ -591,9 +592,18 @@ namespace dsASPCAutoCAdmin.DataAccess
             var res = new ResultadoIM();
             var cc = _configuration.GetConnectionString("DefaultConnection");
             var cr = "";
+            var carr = "";
             try
             {
                 cr = dsCore.Comun.Ayudas.SerializarACadenaXML(bs.accesoriosinsertar);
+            }
+            catch
+            {
+                //Si está vacía la lista no nos importa
+            }
+            try
+            {
+                carr = dsCore.Comun.Ayudas.SerializarACadenaXML(bs.Carrocerias);
             }
             catch
             {
@@ -617,6 +627,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@AnoInicial", bs.AnoInicial),
                     new SqlParameter("@AnoFinal", bs.AnoFinal),
                     new SqlParameter("@Accesorios", cr),
+                    new SqlParameter("@Carrocerias", carr),
 
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosModificar", param);
