@@ -185,6 +185,22 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-12">
+                    <div id="gridContainer" dx-data-grid="dataGridCarrocerias" dx-item-alias="carr" style="width:100% !important;">
+                        <div data-options="dxTemplate:{ name:'anosTemplate' }">
+                            <input type="text" ng-model="carr.value" class="form-control" />
+                            {{carr.value}}
+                        </div>
+                        
+                        <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
+                            <textarea ng-model="carr.value" class="form-control">
+
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-6">
                     <div class="row">
                         <div class="col-2">

@@ -272,8 +272,28 @@ namespace dsASPCAutoCAdmin.Entidades
         public int IdArticuloCategoria { get; set; }
         [DataMember]
         public string DescripcionCategoria { get; set; }
+        [DataMember]
+        public List<ArticuloCarroceria> Carrocerias { get; set; }
         //[DataMember]
         //public List<ModificarAccesorio> accesorioseliminar { get; set; }
+    }
+    [DataContract]
+    public class ArticuloCarroceria
+    {
+        [DataMember]
+        public int IDModeloCarroceria { get; set; }
+        [DataMember]
+        public string DescripcionCarroceria { get; set; }
+        [DataMember]
+        public string Anos { get; set; }
+        [DataMember]
+        public string DescripcionArticuloModelo { get; set; }
+        [DataMember]
+        public int IDArticuloModelo { get; set; }
+        [DataMember]
+        public string DescripcionFamilia { get; set; }
+        [DataMember]
+        public string DescripcionSeccion { get; set; }
     }
     [DataContract]
     public class MensajeRespuesta
