@@ -591,6 +591,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@IDArticulo", bs.IdArticulo),
                     new SqlParameter("@IDFamilia", bs.IdFamilia),
                     new SqlParameter("@IDTipoVidrio", bs.IdTipoVidrio),
+                    new SqlParameter("@IDCategoriaA", bs.IdCategoria),
                     new SqlParameter("@Codigo", bs.Codigo),
                     new SqlParameter("@Descripcion", bs.Descripcion),
                     new SqlParameter("@DescripcionCorta", bs.DescripcionCorta),
