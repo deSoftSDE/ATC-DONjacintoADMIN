@@ -291,6 +291,8 @@ namespace dsASPCAutoCAdmin.Entidades
         [DataMember]
         public int IDArticuloModelo { get; set; }
         [DataMember]
+        public int IDFamilia { get; set; }
+        [DataMember]
         public string DescripcionFamilia { get; set; }
         [DataMember]
         public string DescripcionSeccion { get; set; }

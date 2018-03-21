@@ -164,7 +164,6 @@
             //alert("Error");
         }
         //console.log(vid);
-        
         $scope.currentarticulo = vid.data;
         Llamada.get("ArticulosLeerPorID?IDArticulo=" + vid.data.idArticulo)
             .then(function (respuesta) {
@@ -283,6 +282,30 @@
     $scope.cambioInput = function () {
         alert("Holi");
     };
+    validarFechas = function () {
+        var res = true;
+        var carroceriasvalidadas = JSON.parse("" + JSON.stringify($scope.datagridcarrocerias.option("dataSource")));
+        if (NotNullNotUndefinedNotEmpty(carroceriasvalidadas)) {
+            console.log("No están nulas");
+            for (i = 0; i < carroceriasvalidadas.length; i++) {
+                console.log("Recorriendo");
+                var ano = carroceriasvalidadas[i].anos;
+                if (NotNullNotUndefinedNotEmpty(ano)) {
+                    console.log("Ano no nulo");
+                    var anosplit = ano.split("-");
+                    if (isNaN(anosplit[0])) {
+                        res = false;
+                    }
+                    if (isNaN(anosplit[1])) {
+                        res = false;
+                    }
+                } else {
+                    console.log("Ano es nulo");
+                }
+            }
+        }
+        return res;
+    }
     $scope.selectBox = {
         dataSource: [],
         displayExpr: "descripcionSeccion",
@@ -485,7 +508,13 @@
         descripcion: "Descripción"
     };
     $scope.guardarCambiosPopup = function () {
-        $scope.guardarCambios($scope.currentarticulo);
+        //alert("Guardando");
+        if (validarFechas()) {
+            $scope.guardarCambios($scope.currentarticulo);
+        } else {
+            mensajeError("Las fechas introducidas deben tener la sintaxis XXXX-XXXX");
+        }
+        
     };
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
