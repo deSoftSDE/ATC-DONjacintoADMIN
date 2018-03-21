@@ -63,6 +63,7 @@ namespace dsASPCAutoCAdmin.DataAccess
         {
             var res = new BuscaArticulo();
             var Accesorios = new List<BuscaArticulo>();
+            res.Carrocerias = new List<ArticuloCarroceria>();
             var cc = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection conn = new SqlConnection(cc))
             {
@@ -115,6 +116,21 @@ namespace dsASPCAutoCAdmin.DataAccess
                     ar.IdCategoria = AsignaEntero("IdCategoria");
                     ar.IdArticuloCategoria = AsignaEntero("IDArticuloCategoria");
                     Accesorios.Add(ar);
+                }
+                _reader.NextResult();
+                while (_reader.Read())
+                {
+                    var carr = new ArticuloCarroceria
+                    {
+                        IDModeloCarroceria = AsignaEntero("IDModeloCarroceria"),
+                        DescripcionCarroceria = AsignaCadena("DescripcionCarroceria"),
+                        Anos = AsignaCadena("Anos"),
+                        DescripcionArticuloModelo = AsignaCadena("DescripcionArticuloModelo"),
+                        DescripcionFamilia = AsignaCadena("DescripcionFamilia"),
+                        DescripcionSeccion = AsignaCadena("DescripcionSeccion"),
+                        IDArticuloModelo = AsignaEntero("IDArticuloModelo"),
+                    };
+                    res.Carrocerias.Add(carr);
                 }
             }
             foreach (Categoria cat in res.Accesorios)

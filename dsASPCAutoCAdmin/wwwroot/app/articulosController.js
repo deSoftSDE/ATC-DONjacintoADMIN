@@ -201,6 +201,7 @@
                         //alert("Holiii");
                         $scope.selectElement4.option("value", $scope.lastCategoria.idCategoria);
                         $scope.selectElement3.option("value", $scope.lastVidrio.idTipoVidrio);
+                        $scope.datagridcarrocerias.option("dataSource", $scope.currentarticulo.carrocerias);
                     })
             })
         
@@ -254,6 +255,9 @@
         art.accesoriosinsertar = art.accesoriosinsertar.concat(art.accesorioseliminar);
         art.accesorios = null;
         //console.log(art);
+        art.carrocerias = $scope.datagridcarrocerias.option("dataSource");
+        console.log($scope.datagridcarrocerias)
+        var c = 5;
         Llamada.post("ArticulosModificar", art)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
@@ -698,6 +702,51 @@
         onInitialized: function (e) {
             //console.log(e);
             $scope.datagridaccs = e.component;
+        }
+    }
+
+    $scope.dataGridCarrocerias = {
+        dataSource: [],
+        keyExpr: "idModeloCarroceria",
+        editing: {
+            allowAdding: false, // Enables insertion
+            allowDeleting: false, // Enables removing
+            editEnabled: true
+        },
+        selection: {
+            mode: "single"
+        },
+        columns: [
+            {
+                dataField: "descripcionSeccion",
+                width: "80%",
+                caption: "Marca",
+                allowEditing: false,
+            }, {
+                dataField: "descripcionFamilia",
+                width: "80%",
+                caption: "Modelo",
+                allowEditing: false,
+            }, {
+                dataField: "descripcionCarroceria",
+                width: "80%",
+                caption: "Modelo",
+                allowEditing: false,
+            }, {
+                dataField: "descripcionArticuloModelo",
+                width: "80%",
+                caption: "Descripcion",
+                //cellTemplate: "descriptionTemplate",
+            }, {
+                dataField: "anos",
+                width: "80%",
+                caption: "Años",
+                //cellTemplate: "anosTemplate",
+            }, 
+        ],
+        onInitialized: function (e) {
+            //console.log(e);
+            $scope.datagridcarrocerias = e.component;
         }
     }
 
