@@ -52,6 +52,10 @@ namespace dsASPCAutoCAdmin.ViewModels
             } else if (ba.cadena != null && ba.cadena.Length > 0)
             {
                 lcb = cadenas.CampoOrdenacion + " LIKE '%" + ba.cadena + "%' "; 
+                if (cadenas.EntidadFuncion == "WebArticulos")
+                {
+                    lcb = lcb + " OR Codigo LIKE '%" + ba.cadena + "%' ";
+                }
             }
             var criterioAuxiliares = new CriterioBusqueda
             {

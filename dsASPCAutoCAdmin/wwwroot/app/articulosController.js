@@ -22,7 +22,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         selection: {
             mode: "single"
@@ -256,7 +256,7 @@
         //console.log(art);
         art.carrocerias = $scope.datagridcarrocerias.option("dataSource");
         console.log($scope.datagridcarrocerias)
-        var c = 5;
+        //var c = 5;
         Llamada.post("ArticulosModificar", art)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
@@ -700,7 +700,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         selection: {
             mode: "single"
@@ -742,7 +742,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: true
+            allowUpdating: true
         },
         selection: {
             mode: "single"
@@ -897,7 +897,7 @@
                         } else {
                             mensajeError("Accesorio duplicado");
                         }
-                        var eliminado = false;
+                        //var eliminado = false;
                         
                        
                         //alert("Añadido");
@@ -953,7 +953,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         noDataText:"Añadir Categoría de Accesorios",
         selection: {
@@ -997,6 +997,13 @@
         onInitialized: function (e) {
             //console.log(e);
             $scope.datagridcats = e.component;
+        },
+        onCellClick: function (e) {
+            //alert("Holiii");
+            //console.log(e);
+
+            //$scope.selectedCat = e.data;
+            $scope.mostrarArticulosCat(e);
         }
     }
     $scope.modificarCat = function (cat) {
@@ -1014,7 +1021,7 @@
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
-            editEnabled: false
+            allowUpdating: false
         },
         selection: {
             mode: "single"
@@ -1088,8 +1095,8 @@
                 .then(function (respuesta) {
                     $scope.categorias = respuesta.data;
                     $scope.selectboxcategs.option("dataSource", $scope.categorias);
-                    console.log("Holi")
-                    console.log($scope.selectboxcategs)
+                    //console.log("Holi")
+                    //console.log($scope.selectboxcategs)
                 })
         },
         onValueChanged: function (e) {

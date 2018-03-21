@@ -196,7 +196,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             if (NotNullNotUndefinedNotEmpty($scope.currentmodelo.imagenes[indice].fdata)) {
                 Llamada.postFile($scope.currentmodelo.imagenes[indice].fdata)
                     .then(function (respuesta) {
-                        alert("Subida");
+                        //alert("Subida");
                         $scope.currentmodelo.imagenes[indice].valor = respuesta[0].contenido;
                         indice++;
                         recorrerImagenes(indice);
