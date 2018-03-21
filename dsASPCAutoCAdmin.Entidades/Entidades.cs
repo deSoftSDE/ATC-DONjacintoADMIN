@@ -265,7 +265,7 @@ namespace dsASPCAutoCAdmin.Entidades
         [DataMember]
         public List<Categoria> Accesorios { get; set; }
         [DataMember]
-        public int IdCategoria { get; set; }
+        public int? IdCategoria { get; set; }
         [DataMember]
         public List<ModificarAccesorio> accesoriosinsertar { get; set; }
         [DataMember]

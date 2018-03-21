@@ -373,6 +373,7 @@
                 .then(function (respuesta) {
                     //console.log(respuesta.data);
                     $scope.tiposvid = respuesta.data;
+                    $scope.tiposvid.splice(0, 0, { descripcionTipoVidrio: "Sin Tipo", descripcion: "Sin Tipo", idTipoVidrio: null });
                     for (i = 0; i < $scope.tiposvid.length; i++) {
                         $scope.tiposvid[i].url = Llamada.getRuta($scope.tiposvid[i].imagen);
                     }
@@ -404,6 +405,7 @@
                 .then(function (respuesta) {
                     //console.log(respuesta.data);
                     $scope.categorias = respuesta.data;
+                    $scope.categorias.splice(0, 0, { descripcion: "Sin Categoría", idCategoria: null })
 
                     if (NotNullNotUndefinedNotEmpty($scope.selectElement4)) {
                         $scope.selectElement4.option("dataSource", $scope.categorias);
