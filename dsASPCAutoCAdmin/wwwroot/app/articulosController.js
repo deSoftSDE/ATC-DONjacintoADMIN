@@ -1,5 +1,5 @@
 ﻿appadmin.controller('Articulos', function ($scope, Llamada, $timeout) {
-    console.log("Holi");
+    //console.log("Holi");
     $scope.cambiarPagina = function (sender, val) {
         cambiarBotonesPaginacion("");
         switch (val) {
@@ -30,14 +30,14 @@
             template: "detail"
         },*/
         onRowInserted: function (info, a) {
-            console.log(info);
-            console.log(a);
+            //console.log(info);
+            //console.log(a);
         },
         onInitNewRow: function (info, b) {
-            console.log("init");
-            console.log(info);
+            //console.log("init");
+            //console.log(info);
             info.data.descripcion = 'Nuevo';
-            console.log("HOLIII");
+            //console.log("HOLIII");
             info.component.saveEditData();
         },
         /*onSelectionChanged: function (e) {
@@ -45,7 +45,7 @@
             e.component.expandRow(e.currentSelectedRowKeys[0]);
         },*/
         onRowRemoving: function (e) {
-            console.log(e);
+            //console.log(e);
             eliminarRegistro(e.data.idCarroceria);
         },
         columns: [
@@ -87,7 +87,7 @@
             }]
         },
         onInitialized: function (e) {
-            console.log(e);
+            //console.log(e);
             $scope.datagrid = e.component;
         }
     };
@@ -114,8 +114,8 @@
                     for (i = 0; i < $scope.orders.length; i++) {
                         $scope.orders[i].url = Llamada.getRuta($scope.orders[i].imagen);
                     }
-                    console.log($scope.orders);
-                    console.log("Arriba las orders");
+                    //console.log($scope.orders);
+                    //console.log("Arriba las orders");
                     $scope.datagrid.option("dataSource", $scope.orders);
                 }
                 //$scope.datagrid.repaint();
@@ -141,15 +141,15 @@
             $scope.selectElement2.option("value", undefined);
 
         } catch (ex) {
-            console.log(ex);
+            //console.log(ex);
             //alert("Error");
         }
-        console.log(vid);
+        //console.log(vid);
         
         $scope.currentarticulo = vid.data;
         Llamada.get("ArticulosLeerPorID?IDArticulo=" + vid.data.idArticulo)
             .then(function (respuesta) {
-                console.log(respuesta);
+                //console.log(respuesta);
                 $scope.popupVisible = true;
                 $scope.selectedCat = null;
                 $scope.currentarticulo = respuesta.data;
@@ -181,9 +181,9 @@
     };
     guardarCambios = function (art) {
         art.files = null;
-        console.log(art);
-        console.log("Hasta aqui he llegado!");
-        console.log(art);
+        //console.log(art);
+        //console.log("Hasta aqui he llegado!");
+        //console.log(art);
         art.accesoriosinsertar = [];
         art.accesorioseliminar = [];
         for (i = 0; i < art.accesorios.length; i++) {
@@ -222,7 +222,7 @@
         }
         art.accesoriosinsertar = art.accesoriosinsertar.concat(art.accesorioseliminar);
         art.accesorios = null;
-        console.log(art);
+        //console.log(art);
         Llamada.post("ArticulosModificar", art)
             .then(function (respuesta) {
                 mensajeExito("Datos guardados con éxito");
@@ -262,16 +262,16 @@
             oldValue = e.component.option("value");
         },
         onValueChanged: function (e) {
-            console.log(e);
+            //console.log(e);
             if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
-                console.log(e);
-                console.log(e.component._options);
-                console.log(e.component._options.selectedItem);
+                //console.log(e);
+                //console.log(e.component._options);
+                //console.log(e.component._options.selectedItem);
                 $scope.lastMarca = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
                 buscaModelos($scope.lastMarca);
             } else {
-                console.log(e);
-                console.log("Está vacío!!");
+                //console.log(e);
+                //console.log("Está vacío!!");
                 oldValue = e.previousValue;
             }
 
@@ -289,12 +289,12 @@
         },
         onValueChanged: function (e) {
             if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
-                console.log(e);
-                console.log(e.component._options);
-                console.log(e.component._options.selectedItem);
+                //console.log(e);
+                //console.log(e.component._options);
+                //console.log(e.component._options.selectedItem);
                 $scope.lastModelo = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
-                console.log("Mira el modelo:");
-                console.log($scope.lastModelo);
+                //console.log("Mira el modelo:");
+                //console.log($scope.lastModelo);
             }
 
         }
@@ -313,7 +313,7 @@
             $scope.selectElement3 = e.component;
             Llamada.get("TiposVidrioLeer")
                 .then(function (respuesta) {
-                    console.log(respuesta.data);
+                    //console.log(respuesta.data);
                     $scope.tiposvid = respuesta.data;
                     for (i = 0; i < $scope.tiposvid.length; i++) {
                         $scope.tiposvid[i].url = Llamada.getRuta($scope.tiposvid[i].imagen);
@@ -325,7 +325,7 @@
                 });
         },
         onValueChanged: function (e) {
-            console.log(e);
+            //console.log(e);
             $scope.lastVidrio = e.component._options.selectedItem;
             console.log(e.component._options.selectedItem);
         }
@@ -333,13 +333,13 @@
     
 
     buscaMarcas = function (val) {
-        console.log("Ahora  busca marcas");
-        console.log(val);
-        console.log($scope.newValor);
+        //console.log("Ahora  busca marcas");
+        //console.log(val);
+        //console.log($scope.newValor);
         Llamada.get("MarcasLeerPorCadena?cadena=" + $scope.newValor)
             .then(function (respuesta) {
-                console.log(respuesta.data);
-                console.log($scope.selectElement);
+                //console.log(respuesta.data);
+                //console.log($scope.selectElement);
                 $scope.marcas = respuesta.data;
                 for (i = 0; i < $scope.marcas.length; i++) {
                     $scope.marcas[i].url = Llamada.getRuta($scope.marcas[i].imagen);
@@ -349,13 +349,13 @@
             });
     };
     buscaModelos = function (val) {
-        console.log("Ahora  busca modelos");
-        console.log(val);
-        console.log($scope.newValor);
+        //console.log("Ahora  busca modelos");
+        //console.log(val);
+        //console.log($scope.newValor);
         Llamada.get("ModelosLeerPorMarca?IDSeccion=" + val.idSeccion)
             .then(function (respuesta) {
-                console.log(respuesta.data);
-                console.log($scope.selectElement);
+                //console.log(respuesta.data);
+                //console.log($scope.selectElement);
                 $scope.modelos = respuesta.data;
                 for (i = 0; i < $scope.modelos.length; i++) {
                     $scope.modelos[i].url = Llamada.getRuta($scope.modelos[i].imagen);
@@ -387,9 +387,9 @@
         }
     };
     $scope.inittext = function (e) {
-        console.log(e);
-        console.log("Aqui se inicializa");
-        console.log(e);
+        //console.log(e);
+        //console.log("Aqui se inicializa");
+        //console.log(e);
         $scope.campotexto = e.component;
     };
     $scope.eliminarRegistro = function (id) {
@@ -400,7 +400,7 @@
 
                 Llamada.get("CarroceriasEliminar?idCarroceria=" + id.data.idCarroceria)
                     .then(function (respuesta) {
-                        console.log(respuesta);
+                        //console.log(respuesta);
                         
                             LeerRegistros($scope.lastConsulta);
                     });
@@ -499,13 +499,13 @@
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar este vidrio?");
         result.then(function (val) {
             if (val) {
-                console.log("OK");
+                //console.log("OK");
                 $scope.$apply(function () {
                     vidrio.modificador = 2;
                 });
 
 
-                console.log(vidrio);
+                //console.log(vidrio);
             }
         });
     };
@@ -523,8 +523,8 @@
         buscaChangePromise = $timeout($scope.activarBusqueda, 1000);
     };
     $scope.activarBusqueda = function () {
-        console.log("Ok, busco con");
-        console.log($scope.buscador);
+        //console.log("Ok, busco con");
+        //console.log($scope.buscador);
         var obj = {
             tipo: "Articulo",
             cadena: $scope.buscador
@@ -532,7 +532,7 @@
         LeerRegistros(obj);
     };
     $scope.anularBusqueda = function () {
-        console.log("Ok, anulo búsqueda");
+        //console.log("Ok, anulo búsqueda");
         $scope.buscador = "";
         var obj = {
             tipo: "Articulo",
@@ -553,7 +553,7 @@
             $scope.selectElementCategorias = e.component;
         },
         onValueChanged: function (e) {
-            console.log(e);
+            //console.log(e);
             /*if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
                 console.log(e);
                 console.log(e.component._options);
@@ -581,7 +581,7 @@
             oldValue = e.component.option("value");
         },
         onValueChanged: function (e) {
-            console.log(e);
+            //console.log(e);
             /*if (NotNullNotUndefinedNotEmpty(e.component._options.selectedItem)) {
                 console.log(e);
                 console.log(e.component._options);
@@ -611,11 +611,11 @@
             mode: "single"
         },
         onRowInserted: function (info, a) {
-            console.log(info);
-            console.log(a);
+            //console.log(info);
+            //console.log(a);
         },
         onRowRemoving: function (e) {
-            console.log(e);
+            //console.log(e);
             alert("Esto no está hecho bien");
 
             //eliminarRegistro(e.data.idCarroceria);
@@ -636,7 +636,7 @@
             }
         ],
         onInitialized: function (e) {
-            console.log(e);
+            //console.log(e);
             $scope.datagridaccs = e.component;
         }
     }
@@ -674,12 +674,12 @@
         searchEnabled: true,
         fieldTemplate: 'field',
         onInitialized: function (e) {
-            console.log(e);
+            //console.log(e);
             $scope.selectboxcatc = e.component;
 
             Llamada.get("ArticulosLeerPorCategoria?IDCategoria=" + $scope.selectedCat.idCategoria)
                 .then(function (respuesta) {
-                    console.log("holii");
+                    //console.log("holii");
                     $scope.selectboxcatc.option("dataSource", respuesta.data);
                     // $scope.datagridaccs.option("dataSource", e.articulos)
                 })
@@ -687,10 +687,10 @@
 
         },
         onValueChanged: function (e) {
-            console.log(e);
+            //console.log(e);
             $scope.lastAccesorio = JSON.parse("" + JSON.stringify(e.component._options.selectedItem));
             if (NotNullNotUndefinedNotEmpty($scope.lastAccesorio)) {
-                console.log($scope.lastAccesorio);
+                //console.log($scope.lastAccesorio);
                 idcategoria = $scope.selectedCat.idCategoria;
                 for (i = 0; i < $scope.currentarticulo.accesorios.length; i++) {
                     if ($scope.currentarticulo.accesorios[i].idCategoria == idcategoria) {
@@ -704,7 +704,7 @@
                             }
                         }
                         for (w = 0; w < $scope.currentarticulo.accesorios[i].articulos.length; w++) {
-                            console.log("hola" + $scope.currentarticulo.accesorios[i].articulos[w].idCategoria);
+                            //console.log("hola" + $scope.currentarticulo.accesorios[i].articulos[w].idCategoria);
                             if ($scope.currentarticulo.accesorios[i].articulos[w].idCategoria == 0) {
                                 
                                 $scope.currentarticulo.accesorios[i].articulos.splice(w, 1);
@@ -719,7 +719,7 @@
                         }
                        
                         //alert("Añadido");
-                        console.log($scope.currentarticulo);
+                        //console.log($scope.currentarticulo);
                         $scope.datagridarticuloscat.option("dataSource", $scope.currentarticulo.accesorios[i].articulos)
                     }
                 }
@@ -730,7 +730,7 @@
 
     buscaAccesorios = function () {
         idcategoria = $scope.selectedCat.idCategoria;
-        console.log($scope.newValorAccesorio);
+        //console.log($scope.newValorAccesorio);
         Llamada.get("ArticulosLeerPorCategoriaYCadena?IDCategoria=" + idcategoria + "&Cadena=" + $scope.newValorAccesorio)
             .then(function (respuesta) {
                 $scope.selectboxcatc.option("dataSource", respuesta.data);
@@ -741,7 +741,7 @@
         result.then(function (val) {
             if (val) {
                 idcategoria = $scope.tabpanel._options.selectedItem.idCategoria;
-                console.log(art);
+                //console.log(art);
                 
             }
         });
@@ -777,11 +777,11 @@
             mode: "single"
         },
         onRowInserted: function (info, a) {
-            console.log(info);
-            console.log(a);
+            //console.log(info);
+            //console.log(a);
         },
         onRowRemoving: function (e) {
-            console.log(e);
+            //console.log(e);
             alert("Esto no está hecho bien");
             //eliminarRegistro(e.data.idCarroceria);
         },
@@ -812,12 +812,12 @@
             }
         ],
         onInitialized: function (e) {
-            console.log(e);
+            //console.log(e);
             $scope.datagridcats = e.component;
         }
     }
     $scope.modificarCat = function (cat) {
-        console.log(cat);
+        //console.log(cat);
         if (cat.modificando === true) {
             cat.modificando = false;
         } else {
@@ -837,11 +837,11 @@
             mode: "single"
         },
         onRowInserted: function (info, a) {
-            console.log(info);
-            console.log(a);
+            //console.log(info);
+            //console.log(a);
         },
         onRowRemoving: function (e) {
-            console.log(e);
+            //console.log(e);
             alert("Esto no está hecho bien");
             //eliminarRegistro(e.data.idCarroceria);
         },
@@ -864,15 +864,18 @@
             }
         ],
         onInitialized: function (e) {
-            console.log(e);
+            //console.log(e);
             $scope.datagridarticuloscat = e.component;
         }
     }
     $scope.mostrarArticulosCat = function (Cat) {
-        console.log(Cat);
+        //console.log(Cat);
         $scope.selectedCat = $scope.currentarticulo.accesorios[Cat.rowIndex];
-        console.log($scope.selectedCat);
+        //console.log($scope.selectedCat);
         $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
+        //alert("Holiiii");
+        //console.log(Cat);
+        $scope.datagridarticuloscat.columnOption(0, "caption", Cat.data.descripcion)
         
     }
     $scope.eliminarCategoria = function (a) {
@@ -941,7 +944,7 @@
         }
     };
     $scope.eliminarArticulos = function (art) {
-        console.log(art);
+        //console.log(art);
         var c = $scope.selectedCat.articulos.splice(art.rowIndex, 1);
         if (!NotNullNotUndefinedNotEmpty($scope.currentarticulo.articulosElim)) {
             $scope.currentarticulo.articulosElim = [];
@@ -950,7 +953,7 @@
         $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
     }
     $scope.anadirColumna = function () {
-        console.log($scope.datagridcats)
+        //console.log($scope.datagridcats)
         $scope.currentarticulo.accesorios.push({
             idCategoria: 0,
             descripcion: null,
@@ -964,7 +967,8 @@
         if (!NotNullNotUndefinedNotEmpty($scope.selectedCat.articulos)) {
             $scope.selectedCat.articulos = [];
         }
-        console.log($scope.selectedCat);
+        //console.log($scope.selectedCat);
+        
         $scope.selectedCat.articulos.push({ idCategoria: 0, descripcion: null })
         $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
 
