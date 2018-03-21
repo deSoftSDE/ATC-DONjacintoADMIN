@@ -617,6 +617,7 @@
         onRowRemoving: function (e) {
             console.log(e);
             alert("Esto no está hecho bien");
+
             //eliminarRegistro(e.data.idCarroceria);
         },
         columns: [
@@ -675,6 +676,15 @@
         onInitialized: function (e) {
             console.log(e);
             $scope.selectboxcatc = e.component;
+
+            Llamada.get("ArticulosLeerPorCategoria?IDCategoria=" + $scope.selectedCat.idCategoria)
+                .then(function (respuesta) {
+                    console.log("holii");
+                    $scope.selectboxcatc.option("dataSource", respuesta.data);
+                    // $scope.datagridaccs.option("dataSource", e.articulos)
+                })
+
+
         },
         onValueChanged: function (e) {
             console.log(e);
@@ -693,8 +703,17 @@
                                 found = true;
                             }
                         }
+                        for (w = 0; w < $scope.currentarticulo.accesorios[i].articulos.length; w++) {
+                            console.log("hola" + $scope.currentarticulo.accesorios[i].articulos[w].idCategoria);
+                            if ($scope.currentarticulo.accesorios[i].articulos[w].idCategoria == 0) {
+                                
+                                $scope.currentarticulo.accesorios[i].articulos.splice(w, 1);
+                            }
+                        }
                         if (!found) {
+                            
                             $scope.currentarticulo.accesorios[i].articulos.push($scope.lastAccesorio);
+
                         } else {
                             mensajeError("Accesorio duplicado");
                         }
@@ -829,9 +848,12 @@
         columns: [
             {
                 dataField: "descripcion",
-                width: "80%",
-                caption: "Descripcion",
-            }, {
+                width: "50%",
+                caption: "Descripción",
+                cellTemplate: "descriptionTemplate"
+
+
+            },  {
                 caption: "",
                 width: "20%",
                 alignment: "center",
@@ -851,12 +873,7 @@
         $scope.selectedCat = $scope.currentarticulo.accesorios[Cat.rowIndex];
         console.log($scope.selectedCat);
         $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
-        Llamada.get("ArticulosLeerPorCategoria?IDCategoria=" + $scope.selectedCat.idCategoria)
-            .then(function (respuesta) {
-                console.log("holii");
-                $scope.selectboxcatc.option("dataSource", respuesta.data);
-               // $scope.datagridaccs.option("dataSource", e.articulos)
-            })
+        
     }
     $scope.eliminarCategoria = function (a) {
         result = DevExpress.ui.dialog.confirm("¿Seguro que deseas eliminar esta categoría?");
@@ -940,5 +957,21 @@
         })
         $scope.datagridcats.option("dataSource", $scope.currentarticulo.accesorios);
 
+    }
+    $scope.anadirColumnaArt = function () {
+
+
+        if (!NotNullNotUndefinedNotEmpty($scope.selectedCat.articulos)) {
+            $scope.selectedCat.articulos = [];
+        }
+        console.log($scope.selectedCat);
+        $scope.selectedCat.articulos.push({ idCategoria: 0, descripcion: null })
+        $scope.datagridarticuloscat.option("dataSource", $scope.selectedCat.articulos);
+
+
+
+
+
+        
     }
 });
