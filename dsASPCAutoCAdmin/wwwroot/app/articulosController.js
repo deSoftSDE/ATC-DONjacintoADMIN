@@ -773,6 +773,7 @@
             allowDeleting: false, // Enables removing
             editEnabled: false
         },
+        noDataText:"Añadir Categoría de Accesorios",
         selection: {
             mode: "single"
         },
@@ -789,7 +790,7 @@
             {
                 dataField: "descripcion",
                 width: "50%",
-                caption: "Descripción",
+                caption: "Categorías",
                 cellTemplate:"descriptionTemplate"
                 
                 

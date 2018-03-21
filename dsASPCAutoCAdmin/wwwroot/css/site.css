@@ -2461,3 +2461,27 @@ a.dx-link-delete{
 label.etiq-form{
     font-size:12px;
 }
+button.btn-add {
+    box-shadow: 0 1px 3px transparent;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff !important;
+    border-color: #ddd;
+    color: #333;
+    height: 40px;
+    cursor:pointer;
+}
+button.btn-add:hover {
+        background-color: #f3f3f3 !important;
+    }
+button.btn-grid {
+    /*box-shadow: 0 1px 3px transparent;*/
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    border:none;
+    background-color: #fff !important;
+    color: #333;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

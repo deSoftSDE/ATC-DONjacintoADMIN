@@ -203,90 +203,111 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-2">
-                    <h4>Añadir accesorios</h4>
-                </div>
-                <div class="col-5">
-                    <input type="submit" ng-click="anadirColumna()" />
-                    <div id="gridContainer" dx-data-grid="dataGridCategorias" dx-item-alias="cat" style="width:100% !important;">
-
-                        <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2">
+                            <label class="etiq-form text-right"><STRONG> ACCESORIOS</STRONG></label>
+                        </div>
+                        <div class="col-10">
                             <div class="row">
-                                <div class="col-6">
-                                    <span ng-if="cat.value">
-                                        {{cat.value}}
-                                        
-
-                                    </span>
-                                    <div ng-hide="cat.value">
-                                       
-                                        <div style="z-index:99999999;" dx-select-box="SelectBoxCategs" dx-item-alias="product" class="mb-1">
-
-                                        </div>
-                                    </div>
+                                <div class="col text-right pb-1">
+                                    <button type="submit" class="btn-add p-1" ng-click="anadirColumna()"> <i class="fas fa-plus"></i> Añadir accesorios </button>
                                 </div>
                             </div>
+                            <div id="gridContainer" dx-data-grid="dataGridCategorias" dx-item-alias="cat" style="width:100% !important;">
+
+                                <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <span ng-if="cat.value">
+                                                {{cat.value}}
+                                            </span>
+                                            <div ng-hide="cat.value">
+
+                                                <div style="z-index:99999999;" dx-select-box="SelectBoxCategs" dx-item-alias="product" class="">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 
-                        </div>
+                                </div>
 
-                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+                                <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
-                            <button type="submit" ng-click="eliminarCategoria(cat)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+                                    <button type="submit" ng-click="eliminarCategoria(cat)" class="btn-grid"><i class="fas fa-trash-alt fa-lg"></i> </button>
 
-                        </div>
-                        <div data-options="dxTemplate:{ name:'editTemplate' }">
+                                </div>
+                                <div data-options="dxTemplate:{ name:'editTemplate' }">
 
-                            <button type="submit" ng-click="mostrarArticulosCat(cat)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Ver Artículos</button>
+                                    <button type="submit" ng-click="mostrarArticulosCat(cat)" class="btn-grid"><i class="fas fa-eye fa-lg"></i></button>
 
+                                </div>
+
+                            </div>
                         </div>
 
                     </div>
+                   
+
                 </div>
-                <div class="col-5">
-                    <div ng-hide="!selectedCat">
-
-                        <h4>{{selectedCat.descripcion}} <input type="submit" ng-click="anadirColumnaArt()" /></h4>
-                        <div id="gridContainer" dx-data-grid="dataGridArticulosCat" dx-item-alias="art" style="width:100% !important;">
-
-                            
-                            <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <span ng-if="art.value">
-                                            {{art.value}}
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                                <div ng-hide="!selectedCat">
+                                    <div class="row">
+                                        <div class="col text-right pb-1">
+                                            <button class="btn-add p-1" ng-click="anadirColumnaArt()"><i class="fas fa-plus"></i> Añadir Artículos</button>
+                                        </div>
+                                    </div>
 
 
-                                        </span>
-                                        <div ng-hide="art.value">
-                                            <div style="z-index:99999999;height:30px" dx-select-box="selectoboxcat" dx-item-alias="product" class="mb-1">
-                                                <div data-options="dxTemplate: { name: 'field' }">
+                                    <div id="gridContainer" dx-data-grid="dataGridArticulosCat" dx-item-alias="art" style="width:100% !important;">
 
-                                                    <div dx-text-box="settingsboxAccesorios"></div>
+
+                                        <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span ng-if="art.value">
+                                                        {{art.value}}
+
+
+                                                    </span>
+                                                    <div ng-hide="art.value">
+                                                        <div style="z-index:99999999;" dx-select-box="selectoboxcat" dx-item-alias="product" class="mb-1">
+                                                            <div data-options="dxTemplate: { name: 'field' }">
+
+                                                                <div dx-text-box="settingsboxAccesorios"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
 
+
+
                                         </div>
+
+                                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                                            <button type="submit" ng-click="eliminarArticulos(art)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+
+                                        </div>
+
+
                                     </div>
+
                                 </div>
-
-
-
-                            </div>
-                            
-                            <div data-options="dxTemplate:{ name:'deleteTemplate' }">
-
-                                <button type="submit" ng-click="eliminarArticulos(art)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
-
                             </div>
 
-
-                        </div>
-                        
+                       
                     </div>
                 </div>
-            </div>
+                
+                    </div>
 
 
 
