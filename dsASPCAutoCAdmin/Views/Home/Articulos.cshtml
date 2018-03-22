@@ -79,180 +79,214 @@
     </div>
     @*POPUP EDITAR ARTICULOS*@
     <div dx-popup="popupOptions">
-        <div class='popup-property-details' dx-scroll-view="scrollarticulos">
+        <div>
             <div class="row">
                 <div class="col-12">
-                    <fieldset disabled>
-                        <div class="form-group row">
-                            <label class="col-1 etiq-form text-right pr-0"> ARTÍCULO</label>
-                            <div class="col-11">
-                                <input type="text" ng-model="currentarticulo.descripcion" class="form-control form-control-sm" />
-                            </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <fieldset disabled>
+                                <div class="form-group row">
+                                    <label class="col-1 etiq-form text-right pr-0"> ARTÍCULO</label>
+                                    <div class="col-11">
+                                        <input type="text" ng-model="currentarticulo.descripcion" class="form-control form-control-sm" />
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                    </fieldset>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <fieldset disabled>
+                                <div class="form-group row">
+                                    <label class="col-2 etiq-form text-right pr-0">EUROCODE</label>
+                                    <div class="col-10"> <input type="text" class="form-control form-control-sm" ng-model="currentarticulo.codigo" /> </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-6">
+                            <fieldset disabled>
+                                <div class="form-group row">
+                                    <label class="col-2 etiq-form text-right pr-0">CÓD. INTERNO</label>
+                                    <div class="col-10"> <input type="text" class="form-control form-control-sm" ng-model="currentarticulo.idArticulo" /> </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        @*INICIO CONTENIDO CON SCROLL*@
+        <div class='popup-property-details' dx-scroll-view="scrollarticulos">
+
             <div class="row">
-                <div class="col-6">
-                    <fieldset disabled>
-                        <div class="form-group row">
-                            <label class="col-2 etiq-form text-right pr-0">EUROCODE</label>
-                            <div class="col-10"> <input type="text" class="form-control form-control-sm" ng-model="currentarticulo.codigo"/> </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-2 etiq-form text-right pr-0">CÓD. INTERNO</label>
-                            <div class="col-10"> <input type="text" class="form-control form-control-sm" ng-model="currentarticulo.idArticulo" /> </div>
-                        </div>
-                        <div class="form-group  row">
-                            <label class="col-2 etiq-form text-right pr-0">DESCRIP. CORTA</label>
-                            <div class="col-10">  <input type="text" ng-model="currentarticulo.descripcionCorta" class="form-control form-control-sm" /> </div>
-                        </div>
-                    </fieldset>
-                </div>
-                <div class="col-6">
-                    <fieldset disabled>
-                        <div class="form-group">
-                            <label class="etiq-form">DESCRIP. DETALLADA </label>
-                            <div class="col-12">
-                                <textarea type="" ng-model="currentarticulo.descripcionDetallada" class="form-control form-control-sm" style="height:95px;"></textarea>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <fieldset disabled>
+                                <div class="form-group  row">
+                                    <label class="col-2 etiq-form text-right pr-0">DESCRIP. CORTA</label>
+                                    <div class="col-10">  <input type="text" ng-model="currentarticulo.descripcionCorta" class="form-control form-control-sm" /> </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group row">
+                                <label class="etiq-form col-2 pr-0 text-right">Descrip. Web1 </label>
+                                <div class="col-10">
+                                    <input type="text" ng-model="currentarticulo.descripcionWeb1" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="etiq-form col-2 pr-0 text-right">Descrip. Web2 </label>
+                                <div class="col-10">
+                                    <input type="text" ng-model="currentarticulo.descripcionWeb2" class="form-control form-control-sm" />
+                                </div>
                             </div>
                         </div>
-                    </fieldset>
+                        <div class="col-6">
+                            <fieldset disabled>
+
+                                <div class="form-group">
+                                    <label class="etiq-form">DESCRIP. DETALLADA </label>
+                                    <div class="col-12">
+                                        <textarea type="" ng-model="currentarticulo.descripcionDetallada" class="form-control form-control-sm" style="height:95px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-12">
                     <hr />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 row">
-                    <div class="col-6">
-                        <div class="form-group row">
-                            <label class="etiq-form col-2 pr-0 text-right">Descrip. Web1 </label>
-                            <div class="col-10">
-                                <input type="text" ng-model="currentarticulo.descripcionWeb1" class="form-control form-control-sm" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="etiq-form col-2 pr-0 text-right">Descrip. Web2 </label>
-                            <div class="col-10">
-                                <input type="text" ng-model="currentarticulo.descripcionWeb2" class="form-control form-control-sm" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="row">
-                            <label class="etiq-form col-2 text-right pr-0">CATEGORÍA</label>
-                            <div class="col-10">
-                                <div style="z-index:99999999;" dx-select-box="selectBox4" dx-item-alias="product" class="mb-1">
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="row">
-                            <label class="etiq-form col-2 text-right pr-0">TIPO</label>
-                            <div class="col-10">
-                                <div style="z-index:99999999;" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
-                                    <div data-options="dxTemplate: { name: 'field' }">
-                                        <div class="custom-item">
-                                            <img ng-src="{{product.ImageSrc}}" />
-                                            {{product.descripcion}}
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 row">
+                            <div class="col-6">
+                                <div class="row">
+                                    <label class="etiq-form col-2 text-right pr-0">CATEGORÍA</label>
+                                    <div class="col-10">
+                                        <div style="z-index:99999999;" dx-select-box="selectBox4" dx-item-alias="product" class="mb-1">
                                         </div>
                                     </div>
-                                    <div data-options="dxTemplate: { name: 'item' }">
-                                        <div class="custom-item">
-                                            <div class="row">
-                                                <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/imagen_defect.png'" /></div>
-                                                <div class="col-md-3">
-                                                    <div class="product-name">
-                                                        {{product.descripcion}}
+
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <label class="etiq-form col-2 text-right pr-0">TIPO VIDRIO</label>
+                                    <div class="col-10">
+                                        <div style="z-index:99999999;" dx-select-box="selectBox3" dx-item-alias="product" class="mb-1">
+                                            <div data-options="dxTemplate: { name: 'field' }">
+                                                <div class="custom-item">
+                                                    <img ng-src="{{product.ImageSrc}}" />
+                                                    {{product.descripcion}}
+                                                </div>
+                                            </div>
+                                            <div data-options="dxTemplate: { name: 'item' }">
+                                                <div class="custom-item">
+                                                    <div class="row">
+                                                        <div class="col-md-3"><img ng-src="{{product.url}}" style="width:50px" onerror="this.src='../images/imagen_defect.png'" /></div>
+                                                        <div class="col-md-3">
+                                                            <div class="product-name">
+                                                                {{product.descripcion}}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+
                             </div>
 
-                        </div>
 
+                        </div>
                     </div>
-
-
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div id="gridContainer" dx-data-grid="dataGridCarrocerias" dx-item-alias="carr" style="width:100% !important;">
-                        <div data-options="dxTemplate:{ name:'anosTemplate' }">
-                            <input type="text" ng-model="carr.value" class="form-control" />
-                            {{carr.value}}
-                        </div>
-                        
-                        <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
-                            <textarea ng-model="carr.value" class="form-control">
+                <div class="row p-3 mb-4" style="background-color:#ecf0f3; border-radius:5px;">
+                    <div class="col-12 ">
+                        <label class="etiq-form text-right"><strong>MODELOS</strong></label>
+                    </div>
+                    <div class="col-12 p-3">
+                        <div id="gridContainer" dx-data-grid="dataGridCarrocerias" dx-item-alias="carr" style="width:100% !important;">
+                            <div data-options="dxTemplate:{ name:'anosTemplate' }">
+                                <input type="text" ng-model="carr.value" class="form-control" />
+                                {{carr.value}}
+                            </div>
+
+                            <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
+                                <textarea ng-model="carr.value" class="form-control">
 
                             </textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-2">
-                            <label class="etiq-form text-right"><STRONG> ACCESORIOS</STRONG></label>
-                        </div>
-                        <div class="col-10">
-                            <div class="row">
-                                <div class="col text-right pb-1">
-                                    <button type="submit" class="btn-add p-1" ng-click="anadirColumna()"> <i class="fas fa-plus"></i> Añadir accesorios </button>
-                                </div>
+                <div class="row p-3 mb-4" style="background-color:#ecf0f3; border-radius:5px;">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2">
+                                <label class="etiq-form text-right"><STRONG> ACCESORIOS</STRONG></label>
                             </div>
-                            <div id="gridContainer" dx-data-grid="dataGridCategorias" dx-item-alias="cat" style="width:100% !important;">
+                            <div class="col-10">
+                                <div class="row">
+                                    <div class="col text-right pb-1">
+                                        <button type="submit" class="btn-add p-1" ng-click="anadirColumna()"> <i class="fas fa-plus"></i> Añadir accesorios </button>
+                                    </div>
+                                </div>
+                                <div id="gridContainer" dx-data-grid="dataGridCategorias" dx-item-alias="cat" style="width:100% !important;">
 
-                                <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-10">
-                                            <span ng-if="cat.value">
-                                                {{cat.value}}
-                                            </span>
-                                            <div ng-hide="cat.value">
+                                    <div data-options="dxTemplate:{ name:'descriptionTemplate' }">
+                                        <div class="row">
+                                            <div class="col-1"></div>
+                                            <div class="col-10">
+                                                <span ng-if="cat.value">
+                                                    {{cat.value}}
+                                                </span>
+                                                <div ng-hide="cat.value">
 
-                                                <div style="z-index:2001;" dx-lookup="SelectBoxCategs" dx-item-alias="product" class="field-customization">
+                                                    <div style="z-index:2001;" dx-lookup="SelectBoxCategs" dx-item-alias="product" class="field-customization">
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+
+
                                     </div>
 
+                                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
+                                        <button type="submit" ng-click="eliminarCategoria(cat)" class="btn-grid"><i class="fas fa-trash-alt fa-lg"></i> </button>
 
-                                </div>
+                                    </div>
+                                    <div data-options="dxTemplate:{ name:'editTemplate' }">
 
-                                <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+                                        <button type="submit" class="btn-grid"><i class="fas fa-eye fa-lg"></i></button>
 
-                                    <button type="submit" ng-click="eliminarCategoria(cat)" class="btn-grid"><i class="fas fa-trash-alt fa-lg"></i> </button>
-
-                                </div>
-                                <div data-options="dxTemplate:{ name:'editTemplate' }">
-
-                                    <button type="submit"  class="btn-grid"><i class="fas fa-eye fa-lg"></i></button>
+                                    </div>
 
                                 </div>
-
                             </div>
+
                         </div>
 
-                    </div>
-                   
 
-                </div>
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-12">
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12">
                                 <div ng-hide="!selectedCat">
                                     <div class="row">
                                         <div class="col text-right pb-1">
@@ -290,7 +324,7 @@
 
                                         <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
-                                            <button type="submit" ng-click="eliminarArticulos(art)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Eliminar</button>
+                                            <button type="submit" ng-click="eliminarArticulos(art)" class="btn btn-default btn-sm btn-grid"><i class="fas fa-trash-alt fa-lg"></i></button>
 
                                         </div>
 
@@ -300,26 +334,43 @@
                                 </div>
                             </div>
 
-                       
+
+                        </div>
                     </div>
+
+
                 </div>
+                <div class="col-12">
+                   <div class="row" style=" height:125px;"> 
+                       <div class="col-12">
+                           <div class="col text-right">
+                               <button class="btn btn-primary " type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()"><i class="fas fa-save"></i> Guardar</button>
+                               <button class="btn btn-danger  " type="submit" value="Guardar cambios" ng-click="cancelarCambios()"><i class="fas fa-ban"></i> Cancelar</button>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+
                 
-                    </div>
 
 
-
-
-
-
-
-            <div class="row">
-                <div class="row align-items-end">
-                    <div class="col text-right">
-                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
-                    </div>
-                </div>
             </div>
+            
+
+            @*FIN CONTENIDO CON SCROLL*@
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
     </div>
 </div>

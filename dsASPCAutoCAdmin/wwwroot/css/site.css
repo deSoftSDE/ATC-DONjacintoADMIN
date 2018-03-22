@@ -2480,7 +2480,7 @@ button.btn-grid {
     /*border-width: 1px;*/
     /*border-style: solid;*/
     border:none;
-    background-color: #fff !important;
+    background-color: transparent !important;
     color: #333;
     width: 30px;
     height: 30px;
@@ -2526,4 +2526,15 @@ button.btn-grid {
 .dx-theme-generic .dx-fieldset {
     width: 40%;
     float: left;
+}
+
+span.dx-datagrid-nodata{
+    margin-left:0 !important;
+}
+tr.clicked {
+    background-color: #eceeef !important;
+    font-weight:bold;
+}
+.hovered {
+    cursor: pointer;
 }

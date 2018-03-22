@@ -735,10 +735,43 @@
             $scope.datagridaccs = e.component;
         }
     }
-
+    $scope.rowAlternationEnabled = true;
+    function moveEditColumnToLeft(dataGrid) {
+        dataGrid.columnOption("command:edit", {
+            visibleIndex: -1,
+            width: "auto"
+        });
+    }
     $scope.dataGridCarrocerias = {
         dataSource: [],
         keyExpr: "idModeloCarroceria",
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+            rowAlternationEnabled: "rowAlternationEnabled"
+        },
+        noDataText: 'No se han encontrado modelos asociados a este artículo',
+
+        onContentReady: function (e) {
+            moveEditColumnToLeft(e.component);
+        },
+        onCellPrepared: function (e) {
+            if (e.rowType === "data" && e.column.command === "edit") {
+                var isEditing = e.row.isEditing,
+                    $links = e.cellElement.find(".dx-link");
+
+                $links.text("");
+
+                if (isEditing) {
+                    $links.filter(".dx-link-save").addClass("dx-icon-save");
+                    $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+                } else {
+                    $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                    $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+                }
+            }
+        },
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
@@ -750,27 +783,27 @@
         columns: [
             {
                 dataField: "descripcionSeccion",
-                width: "80%",
+                width: "10%",
                 caption: "Marca",
                 allowEditing: false,
             }, {
                 dataField: "descripcionFamilia",
-                width: "80%",
+                width: "20%",
                 caption: "Modelo",
                 allowEditing: false,
             }, {
                 dataField: "descripcionCarroceria",
-                width: "80%",
-                caption: "Modelo",
+                width: "30%",
+                caption: "Carrocería",
                 allowEditing: false,
             }, {
                 dataField: "descripcionArticuloModelo",
-                width: "80%",
+                width: "30%",
                 caption: "Descripcion",
                 //cellTemplate: "descriptionTemplate",
             }, {
                 dataField: "anos",
-                width: "80%",
+                width: "10%",
                 caption: "Años",
                 //cellTemplate: "anosTemplate",
             }, 
@@ -947,15 +980,47 @@
             $scope.cambiobusquedaaccesorios();
         }
     };
+    $scope.showColumnLines = false;
+    $scope.showRowLines = true;
+    $scope.showBorders = true;
+    $scope.rowAlternationEnabled = true;
+    $scope.onCellHoverChanged = function (hoverCell) {
+        if (hoverCell.eventType == 'mouseover')
+            hoverCell.cellElement.addClass('hovered');
+        else
+            hoverCell.cellElement.removeClass('hovered');
+    }
+
     $scope.dataGridCategorias = {
         dataSource: [],
         keyExpr: "id",
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+            
+        },
+        onCellHoverChanged: $scope.onCellHoverChanged,
+        onRowClick: function (info) {
+            try {
+                var elementos = info.element["0"].childNodes["0"].childNodes[5].childNodes["0"].childNodes["0"].childNodes["0"].childNodes["0"].childNodes["0"].childNodes[1].childNodes;
+                for (i = 0; i < elementos.length; i++) {
+                    elementos[i].className = "dx-row dx-data-row dx-row-lines";
+                }
+                info.rowElement.hasClass('clicked') ? info.rowElement.removeClass('clicked') : info.rowElement.addClass('clicked');
+            } catch (ex) {
+
+            }
+            
+        },
+        //hoverStateEnabled: true,
+        //activeStateEnabled:true,
         editing: {
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
             allowUpdating: false
         },
-        noDataText:"Añadir Categoría de Accesorios",
+        noDataText:"No se han añadido ACCESORIOS a este artículo",
         selection: {
             mode: "single"
         },
@@ -1023,6 +1088,14 @@
             allowDeleting: false, // Enables removing
             allowUpdating: false
         },
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+
+        },
+
+        noDataText:"No se han añadido ARTÍCULOS a esta categoría de accesorios",
         selection: {
             mode: "single"
         },
@@ -1038,13 +1111,13 @@
         columns: [
             {
                 dataField: "descripcion",
-                width: "50%",
+                width: "80%",
                 caption: "Descripción",
                 cellTemplate: "descriptionTemplate"
 
 
             },  {
-                caption: "",
+                caption: "Eliminar",
                 width: "20%",
                 alignment: "center",
                 allowFiltering: false,
@@ -1089,6 +1162,13 @@
         placeholder: "Selecciona una Categoría",
         displayExpr: "descripcion",
         //value: products[0].idFamilia,
+        noDataText: "No hay datos que mostrar",
+        searchPlaceholder:"Buscar",
+        cancelButtonText: "Cancelar",
+        searchEnabled: false,
+        showPopupTitle: false,
+        showCancelButton: false,
+        activeStateEnabled:true,
         onInitialized: function (e) {
             $scope.selectboxcategs = e.component;
             Llamada.get("CategoriasLeer")
