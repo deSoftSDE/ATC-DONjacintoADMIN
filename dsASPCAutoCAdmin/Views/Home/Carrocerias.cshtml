@@ -88,24 +88,68 @@
         <div class='popup-property-details' dx-scroll-view="scrollarticulos">
             <div class="row">
                 <div class="col-4">
+                    <div class="form-group row form-group-sm">
+                        <label class="col-12 etiq-form ">NOMBRE CARROCERÍA</label>
+                        <div class="col-12">
+                            <input type="text" ng-model="currentcarroceria.descripcion" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group ">
+                                <label class="">Incluir un tipo de Vidrio a la Carrocería</label>
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control campo-search" ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="desplegable" style="display:none" id="desplegable" ng-hide="!mostrardesplegable">
+                                <table class="tablaresultados">
+                                    <tbody>
+                                        <tr ng-if="!loading" class="" ng-repeat="resultado in resultadobusqueda" ng-click="anadirVidrio(resultado)">
+                                            <td class="">
+                                                <a class="resul-search" style="cursor:pointer;">
+                                                    {{resultado.descripcion}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr class="otrainfo" ng-if="loading">
+                                            <td class="">
+                                                <a>
+                                                    <img class="img-fluid" src="~/img/cargando.gif" />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr ng-show="resultadobusqueda.length<1" class="otrainfo">
+                                            <td>
+                                                <a>
+                                                    No hay resultados que mostrar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-4">
                     <div class="form">
                         <div class="form-group">
-                            <label>Descripción Carrocería </label>
-                            <div class="col-12">
-                                <input type="text" ng-model="currentcarroceria.descripcion" class="form-control" />
-                            </div>
-
                             <div class="row">
                                 <div class="col-6 offset-3">
-
-                                    <img class="img-fluid d-block mx-auto" ng-src="{{currentcarroceria.url}}" onerror="this.src='../images/imagen_defect.png'" />
+                                    <img class="img-fluid d-block mx-auto" style="max-height:40px;" ng-src="{{currentcarroceria.url}}" onerror="this.src='../images/imagen_defect.png'" />
                                 </div>
-                                <div class="col-12">
-                                    <hr />
-                                </div>
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="form-group">
-                                        <label>Sube una imagen de la carrocería</label>
+                                        <label class="text-center">Sube una imagen de la carrocería</label>
                                         <div class="col-12 text-center">
                                             <input type="file" id="filesup" ng-file-model="currentcarroceria.files" />
                                         </div>
@@ -115,54 +159,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-4">
-                    <div class="form-group">
-                        <label class="">Incluir un tipo de Vidrio a la Carrocería</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control campo-search" ng-blur="focofuera()" ng-focus="entrafoco()" placeholder="Buscar tipo de vidrio" value="" id="busqueda_producto" tabindex="1" autocomplete="off" ng-change="cambiobusqueda()" ng-model="cadena" name="producto">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="desplegable" style="display:none" id="desplegable" ng-hide="!mostrardesplegable">
-                        <table class="tablaresultados">
-                            <tbody>
-                                <tr ng-if="!loading" class="" ng-repeat="resultado in resultadobusqueda" ng-click="anadirVidrio(resultado)">
-                                    <td class="">
-                                        <a class="resul-search" style="cursor:pointer;">
-                                            {{resultado.descripcion}}
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="otrainfo" ng-if="loading">
-                                    <td class="">
-                                        <a>
-                                            <img class="img-fluid" src="~/img/cargando.gif" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr ng-show="resultadobusqueda.length<1" class="otrainfo">
-                                    <td>
-                                        <a>
-                                            No hay resultados que mostrar
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
 
                 </div>
-                <div class="col-4">
-                    <div class="col text-right">
-                        @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
-                        <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
-                    </div>
-                </div>
+
+
                 <div class="col-12">
                     <div class="row">
                         <div class="col-6 " id="style-3" style="max-height:300px;overflow: auto; ">
@@ -170,10 +173,10 @@
                                 <table class="table-sm ">
                                     <tr>
                                         <th>Tipo de Vidrio</th>
-                                        <th>Posición Vertical</th>
-                                        <th>Posicion Horizontal</th>
-                                        <th>Extension Vertical</th>
-                                        <th>Extensión Horizontal</th>
+                                        <th> (fila)</th>
+                                        <th>(Columna)</th>
+                                        <th>Extension filas</th>
+                                        <th>Extensión Columnas</th>
                                     </tr>
                                     <tr ng-repeat="vidrio in currentcarroceria.vidrios | filter:noEliminado">
                                         <td>{{vidrio.descripcion}}</td>
@@ -187,30 +190,24 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <img src="~/images/esquema_coche.png" style="max-height:400px" class="img-fluid d-block mx-auto "/>
+                            <img src="~/images/esquema_coche.png" style="max-height:400px" class="img-fluid d-block mx-auto " />
                         </div>
 
                     </div>
                 </div>
-               
-                
-                <div class="row">
-                    <div class="col-12">
-                        <hr />
+
+                <div class="col-12 mt-3">
+                    <div class="row" >
+                        <div class="col-12">
+                            <div class="col text-right">
+                                <button class="btn btn-primary " type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()"><i class="fas fa-save"></i> Guardar</button>
+                                <button class="btn btn-danger  " type="submit" value="Guardar cambios" ng-click="cancelarCambios()"><i class="fas fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
 
-                </div>
-                <div class="row">
-                    <div class="col text-right">
-                        @*<input type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()" />*@
-                        @*<button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>
-                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>*@
-                    </div>
-                </div>
-            
-        </div>
+            </div>
     </div>
 </div>

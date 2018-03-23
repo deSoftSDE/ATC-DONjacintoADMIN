@@ -17,143 +17,156 @@
         @c.descripcionSeccion >
     </a>
     @c.DescripcionFamilia
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+        <div class="col-12">
+            <h2 class="">@c.DescripcionFamilia</h2>
+        </div>
+    </div>
+
 
     <div class="row mt-3">
         <div class="col-6">
-            <h2>@c.DescripcionFamilia</h2>
-            <div class="form-group">
-                <label>Descripción del Modelo (Familia) </label>
+
+            <fieldset disabled>
+                <div class="form-group">
+                    <label class="etiq-form col-12">DESCRIPCIÓN DEL MODELO (Familia) </label>
+                    <div class="col-12">
+                        <input type="text" ng-change="cambios=true" ng-model="currentmodelo.descripcionFamilia" class="form-control form-control-sm" />
+                    </div>
+
+                </div>
+            </fieldset>
+
+
+        </div>
+        @*CARROCERIAS*@
+
+        <div class="col-6">
+            <div class="form-group row">
+                <label class="col-12 etiq-form ">TIPO DE VEHÍCULO</label>
                 <div class="col-12">
-                    <input type="text" ng-change="cambios=true" ng-model="currentmodelo.descripcionFamilia" class="form-control" />
+                    <select class="form-control form-control-sm" ng-model="currentmodelo.idTipoVehiculo">
+                        <option value="0">Sin tipo</option>
+                        @foreach (TipoVehiculo tv in vh)
+                        {
+                            <option ng-selected="currentmodelo.idTipoVehiculo == @tv.IDTipoVehiculo" value="@tv.IDTipoVehiculo">@tv.Descripcion</option>
+                        }
+                    </select>
                 </div>
 
             </div>
-            <div class="col-12">
-                <label>Selecciona el tipo de vehículo</label>
-                <select class="form-control" ng-model="currentmodelo.idTipoVehiculo">
-                    <option value="0">Sin tipo</option>
-                    @foreach (TipoVehiculo tv in vh)
-                {
-                    <option ng-selected="currentmodelo.idTipoVehiculo == @tv.IDTipoVehiculo" value="@tv.IDTipoVehiculo">@tv.Descripcion</option>
-            }
-                </select>
-            </div>
-        </div>
-        @*CARROCERIAS*@
-        <div class="col-6">
-            <div class="form-group">
-                <label class="">Incluir una carrocería existente</label>
-                <div class="input-group">
-                    <input type="text" class="form-control campo-search " ng-blur="focofuera2()" ng-focus="entrafoco2()" placeholder="Buscar Carrocería" value="" id="busqueda_producto2" tabindex="1" autocomplete="off" ng-change="cambiobusqueda2()" ng-model="cadena2" name="producto2">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-            <div class="desplegable" style="display:none" id="desplegable2" ng-hide="!mostrardesplegable2">
-                <table class="tablaresultados">
-                    <tbody>
-                        <tr ng-if="!loading2" class="" ng-repeat="resultado in resultadobusqueda2" ng-click="anadirCarroceria(resultado)">
-                            <td class="p-2">
-                                <a class="resul-search" style="cursor:pointer;">
-                                    {{resultado.descripcion}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="otrainfo" ng-if="loading2">
-                            <td class="">
-                                <a>
-                                    <img class="img-fluid" src="~/img/cargando.gif" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr ng-show="resultadobusqueda2.length<1" class="otrainfo">
-                            <td>
-                                <a>
-                                    No hay resultados que mostrar
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="dx-viewport demo-container">
-                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="carroceria" style="width:100% !important;">
-                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                        <img class="img-fluid" ng-src="{{carroceria.value}}" />
-                    </div>
-                    <div data-options="dxTemplate:{ name:'editTemplate' }">
-                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <button type="submit" ng-click="modificarCarroceria(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
-                    </div>
-                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
-                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <button type="submit" ng-click="eliminarRegistro(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-
-                </div>
-            </div>
-
-
 
         </div>
-        <div class="col-6">
+    </div>
+    <div class="row pb-3" style="background-color:#ecf0f3; border-radius:5px;">
+        <div class="col-12 text-center">
+            <label class="etiq-form text-center"><strong>CARROCERÍAS</strong></label>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 px-3">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control campo-search form-control-sm " ng-blur="focofuera2()" ng-focus="entrafoco2()" placeholder="Buscar Carrocería" value="" id="busqueda_producto2" tabindex="1" autocomplete="off" ng-change="cambiobusqueda2()" ng-model="cadena2" name="producto2">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="desplegable" style="display:none" id="desplegable2" ng-hide="!mostrardesplegable2">
+                        <table class="tablaresultados">
+                            <tbody>
+                                <tr ng-if="!loading2" class="" ng-repeat="resultado in resultadobusqueda2" ng-click="anadirCarroceria(resultado)">
+                                    <td class="p-2">
+                                        <a class="resul-search" style="cursor:pointer;">
+                                            {{resultado.descripcion}}
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="otrainfo" ng-if="loading2">
+                                    <td class="">
+                                        <a>
+                                            <img class="img-fluid" src="~/img/cargando.gif" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr ng-show="resultadobusqueda2.length<1" class="otrainfo">
+                                    <td>
+                                        <a>
+                                            No hay resultados que mostrar
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="carroceria" style="width:100% !important;">
+                        <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                            <img class="img-fluid" ng-src="{{carroceria.value}}" />
+                        </div>
+                        <div data-options="dxTemplate:{ name:'editTemplate' }">
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                            <button type="submit" ng-click="modificarCarroceria(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar</button>
+                        </div>
+                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                            <button type="submit" ng-click="eliminarRegistro(carroceria)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 pb-3" style="background-color:#ecf0f3; border-radius:5px;">
+        <div class="col-12 text-center">
+            <label class="etiq-form text-center"><strong>IMÁGENES</strong></label>
+        </div>
+        <div class="col-6" style="border-right:1px solid #d5d7d8">
             <div class="col-6 offset-3">
                 <img class="img-fluid d-block mx-auto" ng-src="{{currentmodelo.url}}" onerror="this.src='../../images/imagen_defect.png'" />
             </div>
             <div class="col-12">
                 <hr />
             </div>
-
             <div class="col-12">
-                <div class="form-group">
-                    <label>Sube una imagen del Modelo (Familia)</label>
-                    <div class="col-12 text-center">
-                        <input type="file" id="filesup" ng-file-model="currentmodelo.files" />
+                <div class="form-group form-group-sm text-center">
+                    <label class="etiq-form text-center">Imágen principal Modelo (Familia)</label>
+                    <div class="col-12 ">
+                        <input class="form-control-sm" type="file" id="filesup" ng-file-model="currentmodelo.files" />
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-6 text-right">
-        <button type="submit" value="Añadir Nueva Imagen" ng-click="nuevaImagen()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir nueva imagen</button>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="dx-viewport demo-container">
-                <div id="gridContainer" dx-data-grid="dataGridOptionsImagenes" dx-item-alias="imagen" style="width:100% !important;">
-                    <div data-options="dxTemplate:{ name:'cellTemplate' }">
-                        <img class="img-fluid" ng-src="{{imagen.value}}" />
-                    </div>
-                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
-                        <button type="submit" ng-click="eliminarImagen(imagen)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                    </div>
 
-                </div>
-            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-           
-            
-            @*<p>Use this area to provide additional information.</p>*@
-            <!--<div class="row mb-4">
-                <div class="col-6">
-
-                </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6"><label class="etiq-form">Galería de Imágenes</label></div>
                 <div class="col-6 text-right">
-                    @*<input type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" />*@
-                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="anadirCarroceria()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Añadir Carrocería existente</button>
-                    <button type="submit" value="Añadir Nuevo Tipo" ng-click="crearRegistro()" class="btn btn-primary"><i class="fas fa-plus-square"></i> Crear Nueva Carrocería </button>
+                    <button type="submit" value="Añadir Nueva Imagen" ng-click="nuevaImagen()" class="btn-add p-1"><i class="fas fa-plus-square"></i> Añadir nueva imagen</button>
                 </div>
-            </div>-->
-            
+                <div class="col-12">
+                    <div class="dx-viewport demo-container">
+                        <div id="gridContainer" dx-data-grid="dataGridOptionsImagenes" dx-item-alias="imagen" style="width:100% !important;">
+                            <div data-options="dxTemplate:{ name:'cellTemplate' }">
+                                <img class="img-fluid d-block mx-auto" style="max-height:30px;"  ng-src="{{imagen.value}}" />
+                            </div>
+                            <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+                                <button type="submit" ng-click="eliminarImagen(imagen)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row m-2">
+<div class="row m-2">
         <div class="col text-right">
             <button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosModelo()"><i class="fas fa-save"></i> Guardar</button>
 
@@ -256,7 +269,7 @@
         <div class='popup-property-details'>
             <div class="form">
                 <div class="form-group">
-                    <label>Imagen </label>
+                    <label>Puedes seleccionar varias imágenes </label>
                     <div class="col-12">
                         <input type="file" ng-file-model="newImagen" id="imagenpopup" multiple />
                     </div>

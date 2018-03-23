@@ -34,7 +34,18 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
             
         });
+    $scope.showColumnLines = false;
+    $scope.showRowLines = true;
+    $scope.showBorders = true;
+    $scope.rowAlternationEnabled = true;
     $scope.dataGridOptions = {
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+            rowAlternationEnabled: "rowAlternationEnabled"
+        },
+        noDataText:"No se ha asociado ninguna carrocería a este modelo",
         dataSource: [],
         keyExpr: "id",
         editing: {
@@ -113,6 +124,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
             allowDeleting: false, // Enables removing
             editEnabled: false
         },
+        noDataText:"No hay imágenes de este modelo para la galería",
         selection: {
             mode: "single"
         },
@@ -477,10 +489,10 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
     }
     $scope.popupImagenVisible = false;
     $scope.popupImagen = {
-        width: "80%",
-        height: "80%",
+        width: "400px",
+        height: "300px",
         showTitle: true,
-        title: "Imagen",
+        title: "Imágenes Galería",
         fullScreen: false,
         dragEnabled: false,
         bindingOptions: {

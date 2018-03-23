@@ -12,7 +12,17 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    $scope.showColumnLines = false;
+    $scope.showRowLines = true;
+    $scope.showBorders = true;
+    $scope.rowAlternationEnabled = true;
     $scope.dataGridOptions = {
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+            rowAlternationEnabled: "rowAlternationEnabled"
+        },
         dataSource: [],
         keyExpr: "id",
         editing: {
@@ -22,6 +32,7 @@
             columnAutoWidth:true,
             
         },
+        noDataText:"No se han cargado datos",
         selection: {
             mode: "single"
         },

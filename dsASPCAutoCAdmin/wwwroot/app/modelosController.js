@@ -42,7 +42,17 @@
                 $scope.cambios = false;
             });
     }
+    $scope.showColumnLines = false;
+    $scope.showRowLines = true;
+    $scope.showBorders = true;
+    $scope.rowAlternationEnabled = true;
     $scope.dataGridOptions = {
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+            rowAlternationEnabled: "rowAlternationEnabled"
+        },
         dataSource: [],
         keyExpr: "id",
         editing: {

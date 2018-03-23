@@ -16,7 +16,10 @@
     $scope.verMarca = function (a) {
         irAMarca(a);
     };
-    
+    $scope.showColumnLines = false;
+    $scope.showRowLines = true;
+    $scope.showBorders = true;
+    $scope.rowAlternationEnabled = true;
     $scope.dataGridOptions = {
         dataSource: [],
         keyExpr: "id",
@@ -24,6 +27,12 @@
             allowAdding: false, // Enables insertion
             allowDeleting: false, // Enables removing
             editEnabled: false
+        },
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+            rowAlternationEnabled: "rowAlternationEnabled"
         },
         selection: {
             mode: "single"
@@ -222,8 +231,8 @@
     };
     $scope.popupVisible = false;
     $scope.popupOptions = {
-        width: "90%",
-        height: "90%",
+        width: "98%",
+        height: "98%",
         showTitle: true,
         title: "Carrocería",
         fullScreen:false,

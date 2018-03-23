@@ -13,7 +13,17 @@
         $scope.vm.cm.accionPagina = val;
         LeerRegistros($scope.vm.cm);
     };
+    $scope.showColumnLines = false;
+    $scope.showRowLines = true;
+    $scope.showBorders = true;
+    $scope.rowAlternationEnabled = true;
     $scope.dataGridOptions = {
+        bindingOptions: {
+            showColumnLines: "showColumnLines",
+            showRowLines: "showRowLines",
+            showBorders: "showBorders",
+            rowAlternationEnabled: "rowAlternationEnabled"
+        },
         dataSource: [],
         editing: {
             allowAdding: false, // Enables insertion
