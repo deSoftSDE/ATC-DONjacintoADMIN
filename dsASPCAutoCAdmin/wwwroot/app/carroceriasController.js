@@ -16,6 +16,25 @@
     $scope.verMarca = function (a) {
         irAMarca(a);
     };
+    $scope.previsualizarCarroceria = function () {
+        console.log($scope.currentcarroceria)
+        Llamada.post("EsquemaDeCarroceria", $scope.currentcarroceria)
+            .then(function (respuesta) {
+                $scope.tabla = respuesta.data.filas;
+                for (i = 0; i < $scope.tabla.length; i++) {
+                    for (h = 0; h < $scope.tabla[i].celdas.length; h++) {
+                        if (NotNullNotUndefinedNotEmpty($scope.tabla[i].celdas[h].vidrio)) {
+                            $scope.tabla[i].celdas[h].vidrio.url = Llamada.getRuta($scope.tabla[i].celdas[h].vidrio.imagen);
+                        }
+
+                    }
+                }
+                //alert("Holi");
+            })
+    }
+    $scope.NotNull = function (val) {
+        return NotNullNotUndefinedNotEmpty(val);
+    }
     $scope.showColumnLines = false;
     $scope.showRowLines = true;
     $scope.showBorders = true;
@@ -203,6 +222,7 @@
                 $scope.popupVisible = true;
                 $scope.currentcarroceria = respuesta.data;
                 $scope.currentcarroceria.url = Llamada.getRuta($scope.currentcarroceria.imagen);
+                $scope.previsualizarCarroceria();
             });
     };
     guardarCambios = function (carroceria) {
@@ -279,6 +299,7 @@
             descripcion: "",
             url: Llamada.getRuta(""),
         };
+        $scope.tabla = null;
     };
     $scope.guardarCambiosPopup = function () {
         $scope.guardarCambios($scope.currentcarroceria);

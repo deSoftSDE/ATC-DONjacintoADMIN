@@ -190,7 +190,18 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <img src="~/images/esquema_coche.png" style="max-height:400px" class="img-fluid d-block mx-auto " />
+                            <input type="submit" ng-click="previsualizarCarroceria()" class="form-control" value="Previsualizar" />
+                            <table border="1">
+                                <tr ng-repeat="fila in tabla">
+                                    <td class="text-center " ng-repeat="celda in fila.celdas" colspan="{{celda.extensionHor}}" rowspan="{{celda.extensionVer}}">
+                                        <div class="{{classTieneArticulos(celda)}}">
+                                            <img ng-if="NotNull(celda.vidrio)" title="{{celda.vidrio.descripcion}}" ng-src="{{celda.vidrio.url}}" class="img-responsive text-center {{claseestaGris(celda)}}" style="margin:0 auto;" />
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
 
                     </div>
