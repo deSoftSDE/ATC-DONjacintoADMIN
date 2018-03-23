@@ -686,5 +686,30 @@ namespace dsASPCAutoCAdmin.Controllers
             return result;
         }
 
+        [HttpPost]
+        public IActionResult EsquemaDeCarroceria([FromBody] Carroceria carr)
+        {
+            ObjectResult result;
+            //var ad = new AdaptadorAtc(_configuration);
+            try
+            {
+                //var carr = ad.CarroceriasLeerEsquema(idmodelocarroceria, ano);
+                var res = new EsquemaViewModel(carr);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+
     }
 }

@@ -416,6 +416,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                         PosHor = AsignaEntero("PosHor"),
                         SpanVer = AsignaEntero("SpanVer"),
                         SpanHor = AsignaEntero("SpanHor"),
+                        Imagen = AsignaCadena("Imagen"),
                     };
                     res.Vidrios.Add(vd);
                 }
