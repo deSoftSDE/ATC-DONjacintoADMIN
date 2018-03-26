@@ -200,20 +200,25 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <input type="submit" ng-click="previsualizarCarroceria()" class="form-control" value="Previsualizar" />
-                            <table border="1">
-                                <tr ng-repeat="fila in tabla">
-                                    <td class="text-center " ng-repeat="celda in fila.celdas" colspan="{{celda.extensionHor}}" rowspan="{{celda.extensionVer}}">
-                                        <div class="{{classTieneArticulos(celda)}}">
-                                            <img ng-if="NotNull(celda.vidrio)" title="{{celda.vidrio.descripcion}}" ng-src="{{celda.vidrio.url}}" class="img-responsive text-center {{claseestaGris(celda)}}" style="margin:0 auto;" />
+                            <div class="row"> 
+                                <div class="col-12">
+                                    <table border="1">
+                                        <tr ng-repeat="fila in tabla">
+                                            <td class="text-center " ng-repeat="celda in fila.celdas" colspan="{{celda.extensionHor}}" rowspan="{{celda.extensionVer}}">
+                                                <div class="{{classTieneArticulos(celda)}}">
+                                                    <img ng-if="NotNull(celda.vidrio)" title="{{celda.vidrio.descripcion}}" ng-src="{{celda.vidrio.url}}" class="img-responsive text-center {{claseestaGris(celda)}}" style="margin:0 auto;" />
 
-                                        </div>
+                                                </div>
 
-                                    </td>
-                                </tr>
-                            </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-6 offset-3 mt-3">
+                                    <input type="submit" ng-click="previsualizarCarroceria()" class="form-control" value="Previsualizar" />
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
 
