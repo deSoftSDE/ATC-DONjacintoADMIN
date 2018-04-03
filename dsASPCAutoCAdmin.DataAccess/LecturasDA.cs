@@ -55,6 +55,11 @@ namespace dsASPCAutoCAdmin.DataAccess
                     MetodoRellenarLista = metodoRellenoModelo;
                     TipoDato = typeof(Modelo);
                     break;
+                case "UsuarioWeb":
+                case "UsuariosWeb":
+                    MetodoRellenarLista = metodoRellenoUsuarios;
+                    TipoDato = typeof(UsuarioDatosEmail);
+                    break;
 
 
             }
@@ -139,6 +144,16 @@ namespace dsASPCAutoCAdmin.DataAccess
             ((Modelo)entidadLista).Imagen = AsignaCadena("Imagen");
             ((Modelo)entidadLista).CodigoFamilia = AsignaCadena("CodigoFamilia");
 
+        }
+        private void metodoRellenoUsuarios(object entidadLista)
+        {
+            ((UsuarioDatosEmail)entidadLista).IdUsuarioWeb = AsignaEntero("IDUsuarioWeb");
+            ((UsuarioDatosEmail)entidadLista).Nombre = AsignaCadena("Nombre");
+            ((UsuarioDatosEmail)entidadLista).Email = AsignaCadena("Email");
+            ((UsuarioDatosEmail)entidadLista).EmaildsWin = AsignaCadena("ListaEmails");
+            ((UsuarioDatosEmail)entidadLista).NombreCompleto = AsignaCadena("Cliente");
+            ((UsuarioDatosEmail)entidadLista).Activo = AsignaBool("Activo");
+            ((UsuarioDatosEmail)entidadLista).IdClienteDelegacion = AsignaEntero("IdClienteDelegacion");
         }
     }
 }

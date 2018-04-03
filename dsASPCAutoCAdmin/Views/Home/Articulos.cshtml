@@ -140,6 +140,7 @@
                                 <label class="etiq-form col-2 pr-0 text-right">Descrip. Web2 </label>
                                 <div class="col-10">
                                     <input type="text" ng-model="currentarticulo.descripcionWeb2" class="form-control form-control-sm" />
+
                                 </div>
                             </div>
                         </div>
@@ -166,6 +167,22 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-6">
+                    <label class="etiq-form col-2 text-right pr-0">Un Click:</label>
+                     <input type="checkbox" ng-model="currentarticulo.unClickB" />
+                </div>
+                <div class="col-6">
+                    <label class="etiq-form col-2 text-right pr-0">Novedad:</label>
+                     <input type="checkbox" ng-model="currentarticulo.novedadB" />
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <hr />
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-12">
@@ -343,21 +360,21 @@
 
                 </div>
                 <div class="col-12">
-                   <div class="row" style=" height:125px;"> 
-                       <div class="col-12">
-                           <div class="col text-right">
-                               <button class="btn btn-primary " type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()"><i class="fas fa-save"></i> Guardar</button>
-                               <button class="btn btn-danger  " type="submit" value="Guardar cambios" ng-click="cancelarCambios()"><i class="fas fa-ban"></i> Cancelar</button>
-                           </div>
-                       </div>
-                   </div>
+                    <div class="row" style=" height:125px;">
+                        <div class="col-12">
+                            <div class="col text-right">
+                                <button class="btn btn-primary " type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()"><i class="fas fa-save"></i> Guardar</button>
+                                <button class="btn btn-danger  " type="submit" value="Guardar cambios" ng-click="cancelarCambios()"><i class="fas fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                
+
 
 
             </div>
-            
+
 
             @*FIN CONTENIDO CON SCROLL*@
 

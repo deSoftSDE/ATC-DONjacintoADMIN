@@ -1,0 +1,199 @@
+﻿@{
+    ViewData["Title"] = "Tipo de Vehiculo";
+}
+
+
+<div class="container " ng-controller="Usuarios">
+    <div class="row">
+        <div class="col-12 p-5">
+            <h2>@ViewData["Title"]</h2>
+            <h3>@ViewData["Message"]</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row mb-4">
+                <div class="col-6">
+                    @*<div class="dataTables_wrapper">
+                        <div class="dataTables_paginate" style="float:left">
+                            <ul class="pagination">
+                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
+                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
+                                </li>
+                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
+                                </li>
+                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
+                                </li>
+                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="input-group">
+
+
+                        <input type="text" class="form-control campo-search " placeholder="Buscar Usuarios" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
+                        <div class="input-group-append">
+                            <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-default boton-buscar form-control-sm btn-right " type="submit" id="btn_buscar" tabindex="2" ng-click="anularBusqueda()">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Invitar Clientes"  class="btn btn-primary" ng-click="abrirPoupupInvitar()"/> 
+            <div class="dx-viewport demo-container">
+                
+                <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
+                    <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'editTemplate' }">
+                        <div ng-if="tiv.data.idClienteDelegacion > 0">
+                            {{tiv.data.nombreCompleto}}
+                        </div>
+                        <div ng-if="tiv.data.idClienteDelegacion < 1">
+                            <button type="submit" ng-click="modificarUsuario(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Asignar Cliente</button>
+
+                        </div>
+                        @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                        
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row mt-4">
+                <div class="col-6 offset-3 ">
+                    <div class="">
+                        <nav class="">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled" id="primera" ng-click="cambiarPagina(this, 'F')">
+                                    <a class="page-link"><i class="fa fa-step-backward fa-xs "></i><small style="font-size:72%">Primera</small> </a>
+                                </li>
+                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                    <a class="page-link"><i class="fa fa-caret-left fa-xs "></i> <small style="font-size:72%"> anterior</small></a>
+                                </li>
+                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                    <a class="page-link"><small style="font-size:72%">siguiente</small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                                </li>
+                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                    <a class="page-link"><small style="font-size:72%">Última</small> <i class="fa fa-step-forward fa-xs "></i> </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+   <div dx-popup="popupInvitarOptions">
+       <div class='popup-property-details'>
+           <div class="form">
+               <div class="row">
+                   <div class="dx-viewport demo-container">
+                       Mostrando {{bloque}} de {{registros}} clientes
+                       <div id="gridContainer" dx-data-grid="dataGridClientes" dx-item-alias="tiv" style="width:100% !important;">
+                           <div data-options="dxTemplate:{ name:'editTemplate' }">
+                               <span ng-if="tiv.data.idUsuarioWeb < 1">
+                                   <button type="submit" ng-click="invitarCliente(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Invitar Cliente</button>
+                               </span>
+                           </div>
+                       </div>
+
+                   </div>
+                   <div>
+                       <input type="text" class="form-control" ng-model="ncliente" ng-change="cambioPaginaTimeout()" />
+                       <ul class="pagination justify-content-center">
+                           <li class="page-item disabled" ng-click="paginaAnteriorClientes()">
+                               <a class="page-link"><i class="fa fa-caret-left fa-xs "></i><small style="font-size:72%"></small> </a>
+                           </li>
+                           <li class="page-item">
+
+                               <input type="number" class="form-control" ng-model="pagina" ng-change="cambioPagina()" />
+
+                           </li>
+                           <li class="page-item" ng-click="paginaSiguienteClientes()">
+                               <a class="page-link"><small style="font-size:72%"></small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                           </li>
+                       </ul>
+
+                   </div>
+               </div>
+           </div>
+        </div>
+   </div>
+    <div dx-popup="popupOptions">
+        <div class='popup-property-details'>
+            <div class="form">
+                <div class="form-group">
+                    <label>Descripción del tipo de vehículo </label>
+                    <div class="col-12">
+                        <input type="text" ng-model="currentusuario.nombre" disabled class="form-control" />
+                        <input type="text" ng-model="currentusuario.nombreCompleto" disabled class="form-control" />
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="dx-viewport demo-container">
+                        Mostrando {{bloque}} de {{registros}} clientes
+                        <div id="gridContainer" dx-data-grid="dataGridClientes2" dx-item-alias="tiv" style="width:100% !important;">
+                            <div data-options="dxTemplate:{ name:'editTemplate' }">
+                                <button type="submit" ng-click="asignarCliente(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Asignar Cliente</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" ng-model="ncliente" ng-change="cambioPaginaTimeout()" />
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled" ng-click="paginaAnteriorClientes()">
+                                <a class="page-link"><i class="fa fa-caret-left fa-xs "></i><small style="font-size:72%"></small> </a>
+                            </li>
+                            <li class="page-item">
+
+                                <input type="number" class="form-control" ng-model="pagina" ng-change="cambioPagina()" />
+
+                            </li>
+                            <li class="page-item" ng-click="paginaSiguienteClientes()">
+                                <a class="page-link"><small style="font-size:72%"></small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">
+                        @*<button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>*@
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

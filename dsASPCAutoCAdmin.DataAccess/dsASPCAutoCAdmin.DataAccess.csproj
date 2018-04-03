@@ -10,10 +10,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades.csproj" />
+    <ProjectReference Include="..\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\..\..\..\..\..\..\..\core2017\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="dsCore.Buscador">
       <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore.Buscador.dll</HintPath>
     </Reference>
@@ -26,8 +29,14 @@
     <Reference Include="dsCore2.DataAccess">
       <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore2.DataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="MailKit">
+      <HintPath>..\..\..\..\..\..\..\..\core2017\MailKit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit">
+      <HintPath>..\..\..\..\..\..\..\..\core2017\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SqlClient">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\system.data.sqlclient\4.4.0\ref\netstandard2.0\System.Data.SqlClient.dll</HintPath>

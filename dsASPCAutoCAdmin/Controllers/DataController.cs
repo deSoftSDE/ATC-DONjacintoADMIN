@@ -42,6 +42,7 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+
         public IActionResult TiposVehiculoLeer()
         {
             ObjectResult result;
@@ -228,6 +229,29 @@ namespace dsASPCAutoCAdmin.Controllers
             try
             {
                 var res = ad.MarcasCrearModificar(marca);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpPost]
+        public IActionResult ClientesLeer([FromBody] PaginacionClientes cl)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.ClientesLeer(cl.pagina, cl.bloque, cl.nCliente);
                 result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK
@@ -710,6 +734,81 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        [HttpGet]
+        public IActionResult ClientesAsignarUsuarioWeb(int IDUsuarioWeb, int IDCliente)
+        {
+            ObjectResult result;
+            var ad = new ServicioCorreo(_configuration);
+            try
+            {
+                var res = ad.ClientesAsignarUsuarioWeb(IDUsuarioWeb, IDCliente);
+                //var res = new EsquemaViewModel(carr);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpGet]
+        public IActionResult UsuariosWebEliminar(int IDUsuarioWeb)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                ad.UsuariosWebEliminar(IDUsuarioWeb);
+                //var res = new EsquemaViewModel(carr);
+                result = new ObjectResult(1)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpGet]
+        public IActionResult ClientesInvitacionesProcesar(int IDCliente)
+        {
+            ObjectResult result;
+            var ad = new ServicioCorreo(_configuration);
+            try
+            {
+                var ob = new List<Cliente>();
+                ob.Add(new Cliente { IDCliente = IDCliente });
+                var res = ad.ClientesInvitacionesProcesar(ob);
+                //var res = new EsquemaViewModel(carr);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        
 
     }
 }

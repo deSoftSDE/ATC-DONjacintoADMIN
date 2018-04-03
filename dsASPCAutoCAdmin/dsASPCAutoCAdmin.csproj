@@ -18,10 +18,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\dsASPCAutoCAdmin.DataAccess\dsASPCAutoCAdmin.DataAccess.csproj" />
-    <ProjectReference Include="..\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades.csproj" />
+    <ProjectReference Include="..\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades\dsASPCAutoCAdmin.Entidades.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\..\..\..\..\..\..\..\core2017\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="dsCore.Buscador">
       <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore.Buscador.dll</HintPath>
     </Reference>
@@ -33,6 +36,12 @@
     </Reference>
     <Reference Include="dsCore2.DataAccess">
       <HintPath>..\..\..\..\..\..\..\..\core2017\dsCore2.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit">
+      <HintPath>..\..\..\..\..\..\..\..\core2017\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit">
+      <HintPath>..\..\..\..\..\..\..\..\core2017\MimeKit.dll</HintPath>
     </Reference>
   </ItemGroup>
 

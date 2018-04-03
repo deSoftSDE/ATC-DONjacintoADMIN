@@ -21,6 +21,7 @@ namespace dsASPCAutoCAdmin.ViewModels
                 new ElementoMenu { Key = "Tipos de Vidrio", Value = "TiposVidrio", Img = "~/images/logo.png" },
                 //new ElementoMenu { Key = "Vidrio", Value = "Vidrio" },
                 new ElementoMenu { Key = "Articulos", Value = "Articulos", Img = "~/images/logo.png" },
+                new ElementoMenu { Key = "Usuarios", Value = "Usuarios", Img = "~/images/logo.png" },
 
             };
         }

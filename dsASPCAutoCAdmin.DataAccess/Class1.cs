@@ -93,6 +93,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.AnoFinal = AsignaEntero("AnoFinal");
                     res.IdCategoria = AsignaEntero("IDCategoria");
                     res.DescripcionCategoria = AsignaCadena("DescripcionCategoria");
+                    res.UnClick = AsignaEntero("UnClick");
+                    res.Novedad = AsignaEntero("Novedad");
                 }
                 res.Accesorios = new List<Categoria>();
                 _reader.NextResult();
@@ -143,6 +145,14 @@ namespace dsASPCAutoCAdmin.DataAccess
                         cat.Articulos.Add(ar);
                     }
                 }
+            }
+            if (res.UnClick > 0)
+            {
+                res.UnClickB = true;
+            }
+            if (res.Novedad > 0)
+            {
+                res.NovedadB = true;
             }
             return res;
         }
@@ -594,6 +604,22 @@ namespace dsASPCAutoCAdmin.DataAccess
             var cc = _configuration.GetConnectionString("DefaultConnection");
             var cr = "";
             var carr = "";
+            if (bs.UnClickB == true)
+            {
+                bs.UnClick = 1;
+            }
+            else
+            {
+                bs.UnClick = 0;
+            }
+            if (bs.NovedadB == true)
+            {
+                bs.Novedad = 1;
+            }
+            else
+            {
+                bs.Novedad = 0;
+            }
             try
             {
                 cr = dsCore.Comun.Ayudas.SerializarACadenaXML(bs.accesoriosinsertar);
@@ -629,6 +655,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@AnoFinal", bs.AnoFinal),
                     new SqlParameter("@Accesorios", cr),
                     new SqlParameter("@Carrocerias", carr),
+                    new SqlParameter("@UnClick", bs.UnClick),
+                    new SqlParameter("@Novedad", bs.Novedad),
 
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosModificar", param);
@@ -779,6 +807,95 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.Resultado = AsignaCadena("Resultado");
                 }
             }
+            return res;
+        }
+        public List<UsuarioDatosEmail> UsuariosWebLeer(BusquedaUsuarios us)
+        {
+            var res = new List<UsuarioDatosEmail>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                //SIN HACER
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idInicio", us.IdInicio),
+                    new SqlParameter("@tamPag", us.tamPag),
+                    new SqlParameter("@cadena", us.cadena),
+                    new SqlParameter("@activo", us.activo),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.UsuariosWebLeer", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    res.Add(new UsuarioDatosEmail
+                    {
+                        IdUsuarioWeb = AsignaEntero("IDUsuarioWeb"),
+                        Nombre = AsignaCadena("Nombre"),
+                        Email = AsignaCadena("Email"),
+                        EmaildsWin = AsignaCadena("ListaEmails"),
+                        NombreCompleto = AsignaCadena("Cliente"),
+                        Activo = AsignaBool("Activo"),
+                        IdClienteDelegacion = AsignaEntero("IdClienteDelegacion"),
+                    });
+                }
+            }
+            return res;
+        }
+        public void UsuariosWebEliminar(int idUsuarioWeb)
+        {
+            var res = new ResultadoIM();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idUsuarioWeb", idUsuarioWeb),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.UsuariosWebEliminar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+        }
+        public BuscaClientes ClientesLeer(int pagina, int bloque, string ncliente)
+        {
+            var res = new BuscaClientes();
+            res.Clientes = new List<Cliente>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@pagina", pagina),
+                    new SqlParameter("@bloque", bloque),
+                    new SqlParameter("@nCliente", ncliente)
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ClientesLeer", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.NumReg = AsignaEntero("Registros");
+                }
+                _reader.NextResult();
+                while (_reader.Read())
+                {
+                    var cl = new Cliente
+                    {
+                        IDCliente = AsignaEntero("IDCliente"),
+                        Delegacion = AsignaCadena("Delegacion"),
+                        Nombre = AsignaCadena("Cliente"),
+                        NombreComercial = AsignaCadena("NombreComercial"),
+                        RazonSocial = AsignaCadena("RazonSocial"),
+                        Cif = AsignaCadena("Cif"),
+                        NombreMunicipio = AsignaCadena("NombreMunicipio"),
+                        NombreProvincia = AsignaCadena("NombreProvincia"),
+                        IDUsuarioWeb = AsignaEntero("IDUsuarioWeb"),
+                    };
+                    res.Clientes.Add(cl);
+                }
+            }
+            res.Busqueda = new PaginacionClientes();
+            res.Busqueda.bloque = bloque;
+            res.Busqueda.pagina = pagina;
+            res.Busqueda.nCliente = ncliente;
             return res;
         }
         public ResultadoIM CarroceriasCrearModificar(Carroceria tiv)

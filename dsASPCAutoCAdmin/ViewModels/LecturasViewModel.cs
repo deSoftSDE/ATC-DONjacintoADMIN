@@ -51,10 +51,10 @@ namespace dsASPCAutoCAdmin.ViewModels
                 }
             } else if (ba.cadena != null && ba.cadena.Length > 0)
             {
-                lcb = cadenas.CampoOrdenacion + " LIKE '%" + ba.cadena + "%' "; 
+                lcb = cadenas.CampoOrdenacion + " LIKE '%" + ba.cadena.Replace(" ", "%") + "%' "; 
                 if (cadenas.EntidadFuncion == "WebArticulos")
                 {
-                    lcb = lcb + " OR Codigo LIKE '%" + ba.cadena + "%' ";
+                    lcb = lcb + " OR Codigo LIKE '%" + ba.cadena.Replace(" ", "%") + "%' ";
                 }
             }
             var criterioAuxiliares = new CriterioBusqueda
@@ -73,7 +73,7 @@ namespace dsASPCAutoCAdmin.ViewModels
                 ValorClave = vc,
                 CampoClave = cadenas.CampoClave, //"IdArticulo",
                 EntidadFuncion = cadenas.EntidadFuncion, //"BuscaArticulo",
-                ValorFuncion = "'" + ba.cadena + "'",
+                ValorFuncion = "'" + ba.cadena.Replace(" ", "%") + "'",
                 EntidadVista = cadenas.Vista, // "VBuscaArticulo",
                 idAlmacen = 1,
                 idDelegacion = 0
@@ -147,6 +147,14 @@ namespace dsASPCAutoCAdmin.ViewModels
                     res.Entidad = "Articulo";
                     res.CampoOrdenacion = "Descripcion";
                     break;
+                case "UsuariosWeb":
+                case "UsuarioWeb":
+                    res.Vista = "VUsuariosWeb";
+                    res.EntidadFuncion = "VUsuariosWeb";
+                    res.CampoClave = "IdUsuarioWeb";
+                    res.Entidad = "UsuarioWeb";
+                    res.CampoOrdenacion = "Nombre";
+                    break;
             }
             return res;
         }
@@ -185,6 +193,10 @@ namespace dsASPCAutoCAdmin.ViewModels
                     case "Articulos":
                         RellenoIndiceArticulo(action);
                         break;
+                    case "UsuarioWeb":
+                    case "UsuariosWeb":
+                        RellenoIndiceUsuarios(action);
+                        break;
                 }
             }
             catch
@@ -201,6 +213,16 @@ namespace dsASPCAutoCAdmin.ViewModels
             cm.LastIndice = c.IDCarroceria;
             cm.FirstValor = d.Descripcion;
             cm.FirstIndice = d.IDCarroceria;
+            cm.AccionPagina = action;
+        }
+        private void RellenoIndiceUsuarios(string action)
+        {
+            var c = (UsuarioDatosEmail)Articulos[Articulos.Count - 1];
+            var d = (UsuarioDatosEmail)Articulos[0];
+            cm.LastValor = c.Nombre;
+            cm.LastIndice = c.IdUsuarioWeb;
+            cm.FirstValor = d.Nombre;
+            cm.FirstIndice = d.IdUsuarioWeb;
             cm.AccionPagina = action;
         }
         private void RellenoIndiceTipoVidrio(string action)
