@@ -115,6 +115,8 @@ namespace dsASPCAutoCAdmin.DataAccess
             ((TipoVidrio)entidadLista).IDTipoVidrio = AsignaEntero("IDTipoVidrio");
             ((TipoVidrio)entidadLista).Descripcion = AsignaCadena("Descripcion");
             ((TipoVidrio)entidadLista).Imagen = AsignaCadena("Imagen");
+            ((TipoVidrio)entidadLista).Eurocode = AsignaCadena("Eurocode");
+
         }
         private void metodoRellenoCarroceria(object entidadLista)
         {
@@ -154,6 +156,7 @@ namespace dsASPCAutoCAdmin.DataAccess
             ((UsuarioDatosEmail)entidadLista).NombreCompleto = AsignaCadena("Cliente");
             ((UsuarioDatosEmail)entidadLista).Activo = AsignaBool("Activo");
             ((UsuarioDatosEmail)entidadLista).IdClienteDelegacion = AsignaEntero("IdClienteDelegacion");
+            ((UsuarioDatosEmail)entidadLista).UltimoAcceso = AsignaFechaNull("UltimoAcceso");
         }
     }
 }

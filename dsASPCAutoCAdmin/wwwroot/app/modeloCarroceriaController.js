@@ -326,6 +326,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         };
     };
     $scope.anadirCarroceria = function (r) {
+        $scope.currentmodelo.bloquearCambioAutoB = true;
         if (!NotNullNotUndefinedNotEmpty($scope.currentmodelo.carrocerias)) {
             $scope.currentmodelo.carrocerias = [];
         }

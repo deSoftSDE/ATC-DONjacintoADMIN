@@ -70,6 +70,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                 SqlParameter[] param = new SqlParameter[]
                 {
                     new SqlParameter("@IDArticulo", IDArticulo),
+                    new SqlParameter("@Admin", 1),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosLeerPorID", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -95,6 +96,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.DescripcionCategoria = AsignaCadena("DescripcionCategoria");
                     res.UnClick = AsignaEntero("UnClick");
                     res.Novedad = AsignaEntero("Novedad");
+                    res.CambioAuto = AsignaEntero("BloquearCambioAuto");
                 }
                 res.Accesorios = new List<Categoria>();
                 _reader.NextResult();
@@ -132,7 +134,12 @@ namespace dsASPCAutoCAdmin.DataAccess
                         DescripcionSeccion = AsignaCadena("DescripcionSeccion"),
                         IDArticuloModelo = AsignaEntero("IDArticuloModelo"),
                         IDFamilia = AsignaEntero("IDFamilia"),
+                        EliminarInt = AsignaEntero("Eliminado"),
                     };
+                    if (carr.EliminarInt > 0)
+                    {
+                        carr.Eliminar = true;
+                    }
                     res.Carrocerias.Add(carr);
                 }
             }
@@ -153,6 +160,10 @@ namespace dsASPCAutoCAdmin.DataAccess
             if (res.Novedad > 0)
             {
                 res.NovedadB = true;
+            }
+            if (res.CambioAuto > 0)
+            {
+                res.CambioAutoB = true;
             }
             return res;
         }
@@ -256,6 +267,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.DescripcionFamilia = AsignaCadena("DescripcionFamilia");
                     res.descripcionTipoVehiculo = AsignaCadena("DescripcionTipoVehiculo");
                     res.idTipoVehiculo = AsignaEntero("IdTipoVehiculo");
+                    res.BloquearCambioAuto = AsignaEntero("BloquearCambioAuto");
 
                 }
                 res.Carrocerias = new List<Carroceria>();
@@ -281,6 +293,10 @@ namespace dsASPCAutoCAdmin.DataAccess
                     };
                     res.Imagenes.Add(im);
                 }
+            }
+            if (res.BloquearCambioAuto > 0)
+            {
+                res.BloquearCambioAutoB = true;
             }
             return res;
         }
@@ -413,6 +429,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.IDCarroceria = AsignaEntero("IDCarroceria");
                     res.Imagen = AsignaCadena("Imagen");
                     res.Descripcion = AsignaCadena("Descripcion");
+                    res.Eurocode = AsignaCadena("Eurocode");
                 }
                 _reader.NextResult();
                 while (_reader.Read())
@@ -620,6 +637,21 @@ namespace dsASPCAutoCAdmin.DataAccess
             {
                 bs.Novedad = 0;
             }
+            if (bs.CambioAutoB == true)
+            {
+                bs.CambioAuto = 1;
+            }
+            else
+            {
+                bs.CambioAuto = 0;
+            }
+            foreach (ArticuloCarroceria ac in bs.Carrocerias)
+            {
+                if (ac.Eliminar)
+                {
+                    ac.EliminarInt = 1;
+                }
+            }
             try
             {
                 cr = dsCore.Comun.Ayudas.SerializarACadenaXML(bs.accesoriosinsertar);
@@ -657,6 +689,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Carrocerias", carr),
                     new SqlParameter("@UnClick", bs.UnClick),
                     new SqlParameter("@Novedad", bs.Novedad),
+                    new SqlParameter("@BloquearCambioAuto", bs.CambioAuto),
 
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ArticulosModificar", param);
@@ -697,6 +730,10 @@ namespace dsASPCAutoCAdmin.DataAccess
         public ResultadoIM ModelosCrearModificar(Modelo tiv)
         {
             var res = new ResultadoIM();
+            if (tiv.BloquearCambioAutoB)
+            {
+                tiv.BloquearCambioAuto = 1;
+            }
             var cc = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection conn = new SqlConnection(cc))
             {
@@ -748,7 +785,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Imagenes", img),
                     new SqlParameter("@ImagenesElim", imgel),
                     new SqlParameter("@idTipoVehiculo", tiv.idTipoVehiculo),
-                    
+                    new SqlParameter("@BloquearCambioAuto", tiv.BloquearCambioAuto),
+
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ModelosCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -773,6 +811,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@IDTipoVidrio", tiv.IDTipoVidrio),
                     new SqlParameter("@Descripcion", tiv.Descripcion),
                     new SqlParameter("@Imagen", tiv.Imagen),
+                    new SqlParameter("@Eurocode", tiv.Eurocode),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.TiposVidrioCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
@@ -918,6 +957,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@Descripcion", tiv.Descripcion),
                     new SqlParameter("@Vidrios", vid),
                     new SqlParameter("@ImagenCarr", tiv.Imagen),
+                    new SqlParameter("@Eurocode", tiv.Eurocode),
+
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.CarroceriasCrearModificar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);

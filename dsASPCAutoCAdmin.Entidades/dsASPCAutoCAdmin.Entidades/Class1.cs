@@ -23,6 +23,8 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Descripcion { get; set; }
         [DataMember]
         public string Imagen { get; set; }
+        [DataMember]
+        public string Eurocode { get; set; }
     }
     [DataContract]
     public class Carroceria
@@ -37,6 +39,8 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Imagen { get; set; }
         [DataMember]
         public int IDModeloCarroceria { get; set; }
+        [DataMember]
+        public string Eurocode { get; set; }
     }
     [DataContract]
     public class ResultadoIM
@@ -165,6 +169,9 @@ namespace dsASPCAutoCAdmin.Entidades
         public List<ImagenFamilia> Imagenes { get; set; }
         [DataMember]
         public List<ImagenFamilia> ImagenesEliminadas { get; set; }
+        public int BloquearCambioAuto { get; set; }
+        [DataMember]
+        public Boolean BloquearCambioAutoB { get; set; }
     }
     [DataContract]
     public class ImagenFamilia
@@ -277,6 +284,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public string DescripcionCategoria { get; set; }
         [DataMember]
         public List<ArticuloCarroceria> Carrocerias { get; set; }
+        [DataMember]
         public int UnClick { get; set; }
         [DataMember]
         public Boolean UnClickB { get; set; }
@@ -284,8 +292,11 @@ namespace dsASPCAutoCAdmin.Entidades
         public Boolean NovedadB { get; set; }
         [DataMember]
         public int Novedad { get; set; }
-        //[DataMember]
-        //public List<ModificarAccesorio> accesorioseliminar { get; set; }
+        [DataMember]
+        public Boolean CambioAutoB { get; set; }
+        [DataMember]
+        public int CambioAuto { get; set; }
+        
     }
     public class UsuarioDatosEmail
     {
@@ -299,6 +310,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public Guid? GuidRecuperacion { get; set; }
         public bool Activo { get; set; }
         public int IdClienteDelegacion { get; set; }
+        public DateTime? UltimoAcceso { get; set; }
     }
     public class PaginacionClientes
     {
@@ -350,6 +362,9 @@ namespace dsASPCAutoCAdmin.Entidades
         public string DescripcionFamilia { get; set; }
         [DataMember]
         public string DescripcionSeccion { get; set; }
+        [DataMember]
+        public Boolean Eliminar { get; set; }
+        public int EliminarInt { get; set; }
     }
     [DataContract]
     public class MensajeRespuesta

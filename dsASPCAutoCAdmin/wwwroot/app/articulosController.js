@@ -386,6 +386,7 @@
         onValueChanged: function (e) {
             //console.log(e);
             $scope.lastVidrio = e.component._options.selectedItem;
+            $scope.currentarticulo.cambioAutoB = true;
             console.log(e.component._options.selectedItem);
         }
     };
@@ -805,6 +806,11 @@
                 dataField: "anos",
                 width: "10%",
                 caption: "Años",
+                //cellTemplate: "anosTemplate",
+            }, {
+                dataField: "eliminar",
+                width: "10%",
+                caption: "No válido"
                 //cellTemplate: "anosTemplate",
             }, 
         ],

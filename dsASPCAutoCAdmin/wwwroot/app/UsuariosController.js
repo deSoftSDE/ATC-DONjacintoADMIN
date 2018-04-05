@@ -72,6 +72,12 @@
                 dataField: "activo",
                 caption: "Activo"
             }, {
+                width: "20%",
+                dataField: "ultimoAcceso",
+                dataType: 'date',
+                format: "MM/dd/yyyy HH:mm",
+                caption: "Último acceso"
+            }, {
                 caption: "",
                 width: "20%",
                 allowFiltering: false,

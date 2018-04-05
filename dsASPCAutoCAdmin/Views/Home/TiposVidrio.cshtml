@@ -88,13 +88,20 @@
     </div>
    
     <div dx-popup="popupOptions">
-        <div class='popup-property-details'>
+        <div class='popup-property-details' dx-scroll-view="scrollarticulos">
             <div class="form">
                 <div class="form-group">
                     <label>Descripción </label>
                     <div class="col-12">
                         <input type="text" ng-model="currentvidrio.descripcion" class="form-control" />
                         <small id="emailHelp" class="form-text text-muted">Descripción del tipo de vidrio</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Eurocode </label>
+                    <div class="col-12">
+                        <input type="text" ng-model="currentvidrio.eurocode" class="form-control" />
+                        <small id="emailHelp2" class="form-text text-muted">Grupo de caracteres que identifica este tipo de vidrio en el eurocode</small>
                     </div>
                 </div>
                 <div class="row">
@@ -107,7 +114,7 @@
                         <img class="img-fluid d-block mx-auto" src="~/images/imagen_defect.png" />
                     </div>
                     <div class="col-12">
-                         <hr />
+                        <hr />
                     </div>
                     <div class="col-12">
                         <div class="form-group">
@@ -119,7 +126,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    
+
                 </div>
                 <div class="row">
                     <div class="col text-right">
