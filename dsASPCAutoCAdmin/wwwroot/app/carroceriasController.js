@@ -223,6 +223,14 @@
                 $scope.currentcarroceria = respuesta.data;
                 $scope.currentcarroceria.url = Llamada.getRuta($scope.currentcarroceria.imagen);
                 $scope.previsualizarCarroceria();
+                Llamada.get("TiposVidrioLeerPorCadena?cadena=p")
+                    .then(function (respuesta) {
+                        $scope.resultadobusqueda = respuesta.data;
+                        //$scope.NumReg = respuesta.data.numReg;
+                        //$scope.mostrardesplegable = true;
+                        $scope.loading = false;
+                        document.getElementById("desplegable").style.display = "block";
+                    });
             });
     };
     guardarCambios = function (carroceria) {
@@ -426,6 +434,6 @@
         };
         LeerRegistros(obj);
     }
-
+    
 
 });

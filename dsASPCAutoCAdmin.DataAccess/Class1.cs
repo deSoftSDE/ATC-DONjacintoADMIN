@@ -971,5 +971,80 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public EmpresaWeb DatosEmpresaProcesar(EmpresaWeb em)
+        {
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            var de = dsCore.Comun.Ayudas.SerializarACadenaXML(em);
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@empresa", de)
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.DatosEmpresa_Procesar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+            return DatosEmpresaLeer();
+        }
+        public EmpresaWeb DatosEmpresaLeer()
+        {
+            var res = new EmpresaWeb();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.DatosEmpresaLeer", null);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.IdDatosWeb = AsignaEntero("IdDatosWeb");
+                    res.IdEmpresa = AsignaEntero("IdEmpresa");
+                    res.GuidImg = AsignaGuid("GuidImg");
+                    res.GuidIcono = AsignaGuid("GuidIcono");
+                    res.Direccion = AsignaCadena("Direccion");
+                    res.CodPostal = AsignaCadena("CodPostal");
+                    res.Localidad = AsignaCadena("Localidad");
+                    res.Telefono = AsignaCadena("Telefono");
+                    res.Email = AsignaCadena("Email");
+                    res.Web = AsignaCadena("Web");
+                    res.PaginaFacebook = AsignaCadena("PaginaFacebook");
+                    res.PaginaTwitter = AsignaCadena("PaginaTwitter");
+                    res.PaginaGooglePlus = AsignaCadena("PaginaGooglePlus");
+                    res.PaginaPinterest = AsignaCadena("PaginaPinterest");
+                    res.PaginaLinkedIn = AsignaCadena("PaginaLinkedIn");
+                    res.AcercaDe = AsignaCadena("AcercaDe");
+                    res.IdClienteVentaDirecta = AsignaEntero("IdClienteVentaDirecta");
+                    res.VisiblePedidos = AsignaBool("VisiblePedidos");
+                    res.VisibleFacturas = AsignaBool("VisibleFacturas");
+                    res.VisibleFinanzas = AsignaBool("VisibleFinanzas");
+                    res.VisibleCatalogo = AsignaBool("VisibleCatalogo");
+                    res.VisibleCuenta = AsignaBool("VisibleCuenta");
+                    res.VisibleIdiomas = AsignaBool("VisibleIdiomas");
+                    res.VisibleMensajes = AsignaBool("VisibleMensajes");
+                    res.VisiblePlantillas = AsignaBool("VisiblePlantillas");
+                    res.VisibleInvitado = AsignaBool("VisibleInvitado");
+                    res.VisibleVentaDirecta = AsignaBool("VisibleVentaDirecta");
+                }
+                _reader.NextResult();
+                if (_reader.Read())
+                {
+                    res.NombreCuenta = AsignaCadena("NombreCuenta");
+                    res.Usuario = AsignaCadena("Usuario");
+                    res.Clave = AsignaCadena("Clave");
+                    res.ServCorreoSal = AsignaCadena("ServCorreoSal");
+                    res.PuertoCorreoSal = AsignaEntero("PuertoCorreoSal");
+                    
+                    res.NombreSitio = AsignaCadena("NombreSitio");
+                    res.RutaLogo = AsignaCadena("RutaLogo");
+                   
+                    res.dirEmailContacto = AsignaCadena("dirEmailContacto");
+                }
+            }
+            return res;
+        }
+        public void PruebaCreacionPedidoWeb()
+        {
+            var pw = new PedidoWeb();
+            pw.Fecha = DateTime.Now;
+        }
     }
 }

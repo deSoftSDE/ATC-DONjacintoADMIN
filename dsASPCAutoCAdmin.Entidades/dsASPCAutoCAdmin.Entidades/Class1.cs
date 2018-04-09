@@ -2,6 +2,7 @@
 using MimeKit;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -311,6 +312,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public bool Activo { get; set; }
         public int IdClienteDelegacion { get; set; }
         public DateTime? UltimoAcceso { get; set; }
+        public string ipAddress { get; set; }
     }
     public class PaginacionClientes
     {
@@ -895,6 +897,81 @@ namespace dsASPCAutoCAdmin.Entidades
         public string RutaLogo { get; set; }
         public string CorreoRecuperacion { get; set; }
         public string RutaRecuperacion { get; set; }
+    }
+    [DataContract]
+    public class EmpresaWeb
+    {
+        [DataMember]
+        public int IdDatosWeb { get; set; }
+        [DataMember]
+        public int IdEmpresa { get; set; }
+        [DataMember]
+        public Guid GuidImg { get; set; }
+        [DataMember]
+        public Guid GuidIcono { get; set; }
+        [DataMember]
+        public string Direccion { get; set; }
+        [DataMember]
+        public string CodPostal { get; set; }
+        [DataMember]
+        public string Localidad { get; set; }
+        [DataMember]
+        public string Telefono { get; set; }
+        [DataMember]
+        public string Email { get; set; }
+        [DataMember]
+        public string Web { get; set; }
+        [DataMember]
+        public string PaginaFacebook { get; set; }
+        [DataMember]
+        public string PaginaTwitter { get; set; }
+        [DataMember]
+        public string PaginaGooglePlus { get; set; }
+        [DataMember]
+        public string PaginaPinterest { get; set; }
+        [DataMember]
+        public string PaginaLinkedIn { get; set; }
+        [DataMember]
+        [DataType(DataType.MultilineText)]
+        public string AcercaDe { get; set; }
+        [DataMember]
+        public int IdClienteVentaDirecta { get; set; }
+        [DataMember]
+        public Boolean VisiblePedidos { get; set; }
+        [DataMember]
+        public Boolean VisibleFacturas { get; set; }
+        [DataMember]
+        public Boolean VisibleFinanzas { get; set; }
+        [DataMember]
+        public Boolean VisibleCatalogo { get; set; }
+        [DataMember]
+        public Boolean VisibleCuenta { get; set; }
+        [DataMember]
+        public Boolean VisibleIdiomas { get; set; }
+        [DataMember]
+        public Boolean VisibleMensajes { get; set; }
+        [DataMember]
+        public Boolean VisiblePlantillas { get; set; }
+        [DataMember]
+        public Boolean VisibleInvitado { get; set; }
+        [DataMember]
+        public Boolean VisibleVentaDirecta { get; set; }
+        [DataMember]
+        public string NombreCuenta { get; set; }
+        [DataMember]
+        public string Usuario { get; set; }
+        [DataMember]
+        public string Clave { get; set; }
+        [DataMember]
+        public string ServCorreoSal { get; set; }
+        [DataMember]
+        public int PuertoCorreoSal { get; set; }
+        [DataMember]
+        public string NombreSitio { get; set; }
+        [DataMember]
+        public string RutaLogo { get; set; }
+        [DataMember]
+        public string dirEmailContacto { get; set; }
     }
 
 

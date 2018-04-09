@@ -396,6 +396,7 @@
         displayExpr: "descripcion",
         placeholder: "Selecciona una categoría",
         noDataText: 'No se han encontrado categorías',
+        disabled: true,
         valueExpr: "idCategoria",
         //searchEnabled: true,
         //value: products[0].idTipoVehiculo,

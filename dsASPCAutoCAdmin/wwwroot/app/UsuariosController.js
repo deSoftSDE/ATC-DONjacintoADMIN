@@ -78,6 +78,10 @@
                 format: "MM/dd/yyyy HH:mm",
                 caption: "Último acceso"
             }, {
+                width: "20%",
+                dataField: "ipAddress",
+                caption: "Dirección IP"
+            }, {
                 caption: "",
                 width: "20%",
                 allowFiltering: false,

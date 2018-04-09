@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using DevExtreme.AspNet.Data;
 using dsASPCAutoCAdmin.DataAccess;
 using Microsoft.Extensions.Configuration;
+using dsASPCAutoCAdmin.Entidades;
 
 namespace dsASPCAutoCAdmin.Controllers
 {
@@ -112,6 +113,26 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Message"] = "";
             return View();
         }
+        public IActionResult Web()
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            ViewData["Message"] = "";
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            var b = ad.DatosEmpresaLeer();
+            return View(b);
+        }
+        [HttpPost]
+        public IActionResult Web([FromForm] EmpresaWeb a)
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            ViewData["Message"] = "";
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            ad.DatosEmpresaProcesar(a);
+            var b = ad.DatosEmpresaLeer();
+            return View(b);
+        }
         [HttpGet]
         public IActionResult Marca(int id)
         {
@@ -124,6 +145,7 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Message"] = "Modelos de " + mc.DescripcionSeccion;
             return View();
         }
+
 
         public IActionResult Error()
         {

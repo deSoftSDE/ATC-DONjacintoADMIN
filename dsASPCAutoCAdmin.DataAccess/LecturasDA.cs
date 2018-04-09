@@ -157,6 +157,7 @@ namespace dsASPCAutoCAdmin.DataAccess
             ((UsuarioDatosEmail)entidadLista).Activo = AsignaBool("Activo");
             ((UsuarioDatosEmail)entidadLista).IdClienteDelegacion = AsignaEntero("IdClienteDelegacion");
             ((UsuarioDatosEmail)entidadLista).UltimoAcceso = AsignaFechaNull("UltimoAcceso");
+            ((UsuarioDatosEmail)entidadLista).ipAddress = AsignaCadena("UltimaIPAcceso");
         }
     }
 }

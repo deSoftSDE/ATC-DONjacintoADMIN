@@ -337,6 +337,7 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         } else {
             mensajeError("La carrocería seleccionada ya forma parte del modelo.");
         }
+        $scope.mostrardesplegable2 = false;
         
     };
     $scope.selected = 0;
@@ -374,8 +375,10 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         $timeout(fnocultar2, 1000);
     };
     $scope.entrafoco2 = function () {
+        //alert("Holi");
         if (NotNullNotUndefinedNotEmpty($scope.resultadobusqueda2)) {
-            $scope.mostrardesplegable = true;
+            $scope.mostrardesplegable2 = true;
+            console.log("Muestro desplegable");
         }
     };
     buscarArticulos = function () {
@@ -525,4 +528,12 @@ appadmin.controller('ModeloCarroceria', function ($scope, Llamada, $timeout) {
         document.getElementById("imagenpopup").value = null
         $scope.datagridImagenes.option("dataSource", $scope.currentmodelo.imagenes);
     }
+    Llamada.get("CarroceriasLeerPorCadena?cadena=")
+        .then(function (respuesta) {
+            $scope.resultadobusqueda2 = respuesta.data;
+            //$scope.NumReg = respuesta.data.numReg;
+            //$scope.mostrardesplegable2 = true;
+            //$scope.loading2 = false;
+            document.getElementById("desplegable2").style.display = "block";
+        });
 });

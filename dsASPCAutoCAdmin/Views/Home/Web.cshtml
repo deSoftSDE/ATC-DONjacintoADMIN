@@ -1,0 +1,65 @@
+﻿@{
+   @model EmpresaWeb
+}
+<form method="post" asp-action="Web" asp-controller="Home">
+    <label>Dirección</label>
+    @Html.EditorFor(Model => Model.Direccion, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Código Postal</label>
+    @Html.EditorFor(Model => Model.CodPostal, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Localidad</label>
+    @Html.EditorFor(Model => Model.Localidad, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Teléfono</label>
+    @Html.EditorFor(Model => Model.Telefono, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Email</label>
+    @Html.EditorFor(Model => Model.Email, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Web</label>
+    @Html.EditorFor(Model => Model.Web, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Página de Facebook</label>
+    @Html.EditorFor(Model => Model.PaginaFacebook, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Página de Twitter</label>
+    @Html.EditorFor(Model => Model.PaginaTwitter, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Página de Google+</label>
+    @Html.EditorFor(Model => Model.PaginaGooglePlus, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Página de Pinterest</label>
+    @Html.EditorFor(Model => Model.PaginaPinterest, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Página de Linkedin</label>
+    @Html.EditorFor(Model => Model.PaginaLinkedIn, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Acerca de</label>
+    @Html.EditorFor(Model => Model.AcercaDe, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Pedidos Visibles</label>
+    @Html.EditorFor(Model => Model.VisiblePedidos)
+    <label>Facturas Visibles</label>
+    @Html.EditorFor(Model => Model.VisibleFacturas)
+    <label>Finanzas Visibles</label>
+    @Html.EditorFor(Model => Model.VisibleFinanzas)
+    <label>Catálogo Visible</label>
+    @Html.EditorFor(Model => Model.VisibleCatalogo)
+    <label>Cuenta Visible</label>
+    @Html.EditorFor(Model => Model.VisibleCuenta)
+    <label>Idiomas Visibles</label>
+    @Html.EditorFor(Model => Model.VisibleIdiomas)
+    <label>Mensajes Visibles</label>
+    @Html.EditorFor(Model => Model.VisibleMensajes)
+    <label>Plantillas Visibles</label>
+    @Html.EditorFor(Model => Model.VisiblePlantillas)
+    <label>Invitado Visible</label>
+    @Html.EditorFor(Model => Model.VisibleInvitado)
+    <label>Venta Directa Visible</label>
+    @Html.EditorFor(Model => Model.VisibleVentaDirecta)
+    <label>Cuenta de Correo</label>
+    @Html.EditorFor(Model => Model.NombreCuenta, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Usuario de Correo</label>
+    @Html.EditorFor(Model => Model.Usuario, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Clave de Correo</label>
+    @Html.EditorFor(Model => Model.Clave, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Servidor de Correo Saliente</label>
+    @Html.EditorFor(Model => Model.ServCorreoSal, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Puerto de Correo Saliente</label>
+    @Html.EditorFor(Model => Model.PuertoCorreoSal, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Nombre del Sitio</label>
+    @Html.EditorFor(Model => Model.NombreSitio, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>Ruta logo del sitio</label>
+    @Html.EditorFor(Model => Model.RutaLogo, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    @*@Html.EditorForModel()*@
+    <input type="submit" value="Guardar Cambios" class="btn btn-primary"/>
+</form>
