@@ -932,6 +932,8 @@ namespace dsASPCAutoCAdmin.Entidades
         [DataMember]
         public string PaginaLinkedIn { get; set; }
         [DataMember]
+        public string PaginaInstagram { get; set; }
+        [DataMember]
         [DataType(DataType.MultilineText)]
         public string AcercaDe { get; set; }
         [DataMember]
@@ -994,6 +996,28 @@ namespace dsASPCAutoCAdmin.Entidades
         public Boolean VisibleAlmacenesListado { get; set; }
         [DataMember]
         public Boolean VisibleAlmacenesFicha { get; set; }
+        [DataMember]
+        public string Copyright { get; set; }
+    }
+    [DataContract]
+    public class ImagenCabWeb
+    {
+        [DataMember]
+        public int IdImagen { get; set; }
+        [DataMember]
+        public int IdEmpresa { get; set; }
+        [DataMember]
+        public Guid RowGuid { get; set; }
+        [DataMember]
+        public string ImagenSt { get; set; }
+        [DataMember]
+        public string Titulo { get; set; }
+        [DataMember]
+        public string Subtitulo { get; set; }
+        [DataMember]
+        public string Contenido { get; set; }
+        [DataMember]
+        public int tipoTransaccion { get; set; }
     }
     [DataContract]
     public class MensajeWeb

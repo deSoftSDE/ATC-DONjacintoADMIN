@@ -169,6 +169,12 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Mensajes"] = msj;
             return View();
         }
+        public IActionResult CabeceraWeb()
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            return View();
+        }
         [HttpGet]
         public IActionResult Mensaje(int id)
         {

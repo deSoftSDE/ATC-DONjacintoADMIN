@@ -1148,7 +1148,8 @@ namespace dsASPCAutoCAdmin.DataAccess
                     
                     res.NombreSitio = AsignaCadena("NombreSitio");
                     res.RutaLogo = AsignaCadena("RutaLogo");
-                   
+
+                    res.PaginaInstagram = AsignaCadena("PaginaInstagram");
                     res.dirEmailContacto = AsignaCadena("dirEmailContacto");
 
                     res.VisibleCategorias = AsignaBool("VisibleCategorias");
@@ -1158,7 +1159,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.VisibleNovedades = AsignaBool("VisibleNovedades");
 
                     res.VisibleExpress = AsignaBool("VisibleExpress");
-
+                    res.Copyright = AsignaCadena("Copyright");
                     res.VisibleUltimosPedidos = AsignaBool("VisibleUltimosPedidos");
 
                     res.VisibleIP = AsignaBool("VisibleIP");
@@ -1176,10 +1177,52 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
-        public void PruebaCreacionPedidoWeb()
+        public List<ImagenCabWeb> ImagenesCabWebLeer()
         {
-            var pw = new PedidoWeb();
-            pw.Fecha = DateTime.Now;
+            var res = new List<ImagenCabWeb>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ImagenesCabWebLeer", null);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var cw = new ImagenCabWeb
+                    {
+                        IdImagen = AsignaEntero("IdImagen"),
+                        IdEmpresa = AsignaEntero("IdEmpresa"),
+                        RowGuid = AsignaGuid("RoweGuid"),
+                        ImagenSt = AsignaCadena("ImagenSt"),
+                        Titulo = AsignaCadena("Titulo"),
+                        Subtitulo = AsignaCadena("Subtitulo"),
+                        Contenido = AsignaCadena("Contenido"),
+                    };
+                    res.Add(cw);
+                }
+            }
+            return res;
+        }
+        public List<ImagenCabWeb> ImagenCabWeb_Procesar(ImagenCabWeb img)
+        {
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@IdImagen", img.IdImagen),
+                    //new SqlParameter("@RowGuid", img.RowGuid),
+                    new SqlParameter("@ImagenSt", img.ImagenSt),
+                    new SqlParameter("@Titulo", img.Titulo),
+                    new SqlParameter("@Subtitulo", img.Subtitulo),
+                    new SqlParameter("@Contenido", img.Contenido),
+                    new SqlParameter("@IdEmpresa", img.IdEmpresa),
+                    new SqlParameter("@tipoTransaccion", img.tipoTransaccion),
+                    
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ImagenCabWeb_Procesar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+            return ImagenesCabWebLeer();
         }
     }
 }
