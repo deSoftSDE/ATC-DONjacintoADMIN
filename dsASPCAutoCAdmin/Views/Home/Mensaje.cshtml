@@ -1,0 +1,90 @@
+﻿@{ 
+    var msj = (MensajeWeb)ViewData["Mensaje"];
+    @model MensajeWeb;
+}
+<form method="post" asp-controller="Home" asp-action="ModificarMensaje" ng-controller="Mensajes">
+    <label>
+        Titulo
+    </label>
+    @Html.EditorFor(Model => Model.Titulo, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>
+        Mensaje
+    </label>
+    @Html.EditorFor(Model => Model.Mensaje, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    <label>
+        Prioridad
+    </label>
+    @Html.EditorFor(Model => Model.Prioridad, new { htmlAttributes = new { @class = "form-control", @type = "range", @min = "0", @max = "3" } })
+    <label>Destinatario</label>
+    <input type="text" disabled value="@msj.Cliente" class="form-control" id="nombrecliente" />
+    <input type="hidden" value="" name="IdUsuarioWeb" id="idUsuarioWeb" />
+    <input type="button" ng-click="openPopup()" value="Seleccionar Usuario" class="btn btn-default" />
+    <input type="button" ng-click="todosUsuarios()" value="Todos los Usuarios" class="btn btn-default" />
+    <div style="display:none">
+        @Html.EditorFor(Model => Model.IdMensaje)
+        @Html.EditorFor(Model => Model.IdCliente, new { htmlAttributes = new { @id = "idcliente" } })
+    </div>
+    <br />
+    <br />
+    <input type="button" value="Descartar Cambios" class="btn btn-danger" />
+    <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
+
+    <div dx-popup="popupOptions">
+        <div class='popup-property-details'>
+            <div class="form">
+
+                <div class="row">
+                    <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
+                        <div data-options="dxTemplate:{ name:'deleteTemplate' }">
+
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+                            <button type="submit" ng-click="seleccionarUsuario(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Seleccionar</button>
+
+                        </div>
+                        <div data-options="dxTemplate:{ name:'editTemplate' }">
+                            <div ng-if="tiv.data.idClienteDelegacion > 0">
+                                {{tiv.data.nombreCompleto}}
+                            </div>
+                            @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-6 offset-3 ">
+                            <div class="">
+                                <nav class="">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item disabled" id="primera" ng-click="cambiarPagina(this, 'F')">
+                                            <a class="page-link"><i class="fa fa-step-backward fa-xs "></i><small style="font-size:72%">Primera</small> </a>
+                                        </li>
+                                        <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
+                                            <a class="page-link"><i class="fa fa-caret-left fa-xs "></i> <small style="font-size:72%"> anterior</small></a>
+                                        </li>
+                                        <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
+                                            <a class="page-link"><small style="font-size:72%">siguiente</small>  <i class="fa fa-caret-right fa-xs "></i></a>
+                                        </li>
+                                        <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
+                                            <a class="page-link"><small style="font-size:72%">Última</small> <i class="fa fa-step-forward fa-xs "></i> </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right">
+                        @*<button class="btn btn-primary" type="submit" value="Guardar cambios" ng-click="guardarCambiosPopup()">Guardar</button>*@
+                        <button class="btn btn-danger" type="submit" value="Guardar cambios" ng-click="cancelarCambios()">Cancelar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>

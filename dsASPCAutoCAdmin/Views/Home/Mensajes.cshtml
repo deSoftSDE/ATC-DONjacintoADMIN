@@ -1,0 +1,81 @@
+﻿@{ 
+    var msjs = (List<MensajeWeb>)ViewData["Mensajes"];
+}
+<a class="btn btn-primary" asp-controller="Home" asp-action="Mensaje">
+    Nuevo Mensaje
+</a>
+
+<table class="table table-striped table-bordered table-hover table-checkable order-column tabla-listado-prod">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Titulo</th>
+            <th>Mensaje</th>
+            <th>Cliente</th>
+            <th>Leído</th>
+            <th>Fecha</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(MensajeWeb mw in msjs)
+        {
+        <tr class="odd gradeX">
+
+
+            <td>@*<img width="20px" ng-src="{{imagenArticulo(articulo.idArticulo)}}" onerror="this.src='../img/altdisponible.png'" /> He quitado esto porque noto que se ralentiza*@</td>
+
+            <td>@mw.Titulo</td>
+            <td>
+                @mw.Mensaje
+            </td>
+            <td>
+                @if (mw.IdCliente > 0)
+                {
+                    <div>@mw.Cliente</div>
+
+                } else
+                {
+                    <div>Todos</div>
+                }
+                
+            </td>
+            <td>
+                @if(mw.Leido)
+                {
+                    <div>Si</div>
+
+                } else
+                {
+                    <div>No</div>
+
+                }
+            </td>
+            <td>
+                <div>@mw.FechaEnvio</div>
+            </td>
+            <td>
+                <form method="get" asp-controller="Home" asp-action="Mensaje">
+                    <input type="hidden" name="id" value="@mw.IdMensaje" />
+                    <input type="submit" value="Modificar" class="form-control" />
+                </form>
+            </td>
+
+            <td>
+                <form method="get" asp-controller="Home" asp-action="EliminarMensaje">
+                    <input type="hidden" name="id" value="@mw.IdMensaje"/>
+                    <input type="submit" value="Eliminar" class="form-control" />
+                </form>
+                
+            </td>
+        </tr>
+
+        }
+        
+
+
+    </tbody>
+
+</table>

@@ -145,8 +145,65 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Message"] = "Modelos de " + mc.DescripcionSeccion;
             return View();
         }
-
-
+        [HttpPost]
+        public IActionResult Mensajes(MensajeWeb msj)
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            return View();
+        }
+        public IActionResult EliminarMensaje(int id)
+        {
+            //var em = new MenuViewModel();
+            //ViewData["FilterMenu"] = em.menu;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            ad.MensajeEliminar(id);
+            return RedirectToAction("Mensajes", "Home");
+        }
+        public IActionResult Mensajes()
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            var msj = ad.MensajeLeer(-1, 0);
+            ViewData["Mensajes"] = msj;
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Mensaje(int id)
+        {
+            var em = new MenuViewModel();
+            ViewData["FilterMenu"] = em.menu;
+            if (id > 0 )
+            {
+                var ad = new AdaptadorAtcAdmin(_configuration);
+                var msj = ad.MensajeLeerPorId(-1, 0, id);
+                if (msj.IdCliente < 1)
+                {
+                    msj.Cliente = "Todos";
+                }
+                ViewData["Mensaje"] = msj;
+                return View(msj);
+            } else
+            {
+               var  msj = new MensajeWeb();
+                if (msj.IdCliente < 1)
+                {
+                    msj.Cliente = "Todos";
+                }
+                ViewData["Mensaje"] = msj;
+                return View(msj);
+            }
+            
+        }
+        [HttpPost]
+        public IActionResult ModificarMensaje([FromForm] MensajeWeb msj)
+        {
+            var em = new MenuViewModel();
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            ad.MensajeModificar(msj);
+            return RedirectToAction("Mensajes", "Home");
+        }
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

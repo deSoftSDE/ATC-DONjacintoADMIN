@@ -167,6 +167,92 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+
+        public List<MensajeWeb> MensajeLeer(int idCliente, int bloque)
+        {
+            var res = new List<MensajeWeb>();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idCliente", idCliente),
+                    new SqlParameter("@bloque", bloque),
+                    new SqlParameter("@idMensaje", 0),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.MensajeLeer", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var mj = new MensajeWeb
+                    {
+                        IdMensaje = AsignaEntero("IdMensaje"),
+
+                        IdCliente = AsignaEntero("IdCliente"),
+
+                        Prioridad = AsignaEntero("Prioridad"),
+
+                        Titulo = AsignaCadena("Titulo"),
+
+                        Mensaje = AsignaCadena("Mensaje"),
+
+                        FechaEnvio = AsignaFechaNull("FechaEnvio"),
+
+                        FechaLeido = AsignaFechaNull("FechaLeido"),
+
+                        Leido = AsignaBool("Leido"),
+
+                        TipoTransaccion = AsignaCadena("TipoTransaccion"),
+
+                        Cliente = AsignaCadena("Cliente")
+                };
+                    res.Add(mj);
+                }
+
+            }
+            return res;
+        }
+        public MensajeWeb MensajeLeerPorId(int idCliente, int bloque, int idMensaje)
+        {
+            var res = new MensajeWeb();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idCliente", idCliente),
+                    new SqlParameter("@bloque", bloque),
+                    new SqlParameter("@idMensaje", idMensaje),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.MensajeLeer", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    res.IdMensaje = AsignaEntero("IdMensaje");
+
+                    res.IdCliente = AsignaEntero("IdCliente");
+
+                    res.Prioridad = AsignaEntero("Prioridad");
+
+                    res.Titulo = AsignaCadena("Titulo");
+
+                    res.Mensaje = AsignaCadena("Mensaje");
+
+                    res.FechaEnvio = AsignaFechaNull("FechaEnvio");
+
+                    res.FechaLeido = AsignaFechaNull("FechaLeido");
+
+                    res.Leido = AsignaBool("Leido");
+
+                    res.TipoTransaccion = AsignaCadena("TipoTransaccion");
+
+                    res.Cliente = AsignaCadena("Cliente");
+                }
+
+            }
+            return res;
+        }
+
         public List<BuscaArticulo> ArticulosLeerPorCategoria(int IDCategoria)
         {
             var res = new List<BuscaArticulo>();
@@ -339,6 +425,33 @@ namespace dsASPCAutoCAdmin.DataAccess
                     new SqlParameter("@IDCarroceria", IDCarroceria),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.CarroceriasEliminar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+        }
+        public void MensajeEliminar(int idMensaje)
+        {
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idMensaje", idMensaje),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.Mensaje_Eliminar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+        }
+        public void MensajeModificar(MensajeWeb msj)
+        {
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            var msjst = dsCore.Comun.Ayudas.SerializarACadenaXML(msj);
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@mensaje", msjst),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.Mensaje_Procesar", param);
                 _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
         }
