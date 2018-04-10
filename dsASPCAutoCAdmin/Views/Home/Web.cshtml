@@ -2,88 +2,88 @@
    @model EmpresaWeb
 }
 <form method="post" asp-action="Web" asp-controller="Home">
-    <label>Dirección</label>
+    <br><label>Dirección</label>
     @Html.EditorFor(Model => Model.Direccion, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Código Postal</label>
+    <br><label>Código Postal</label>
     @Html.EditorFor(Model => Model.CodPostal, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Localidad</label>
+    <br><label>Localidad</label>
     @Html.EditorFor(Model => Model.Localidad, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Teléfono</label>
+    <br><label>Teléfono</label>
     @Html.EditorFor(Model => Model.Telefono, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Email</label>
+    <br><label>Email</label>
     @Html.EditorFor(Model => Model.Email, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Web</label>
+    <br><label>Web</label>
     @Html.EditorFor(Model => Model.Web, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Página de Facebook</label>
+    <br><label>Página de Facebook</label>
     @Html.EditorFor(Model => Model.PaginaFacebook, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Página de Twitter</label>
+    <br><label>Página de Twitter</label>
     @Html.EditorFor(Model => Model.PaginaTwitter, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Página de Google+</label>
+    <br><label>Página de Google+</label>
     @Html.EditorFor(Model => Model.PaginaGooglePlus, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Página de Pinterest</label>
+    <br><label>Página de Pinterest</label>
     @Html.EditorFor(Model => Model.PaginaPinterest, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Página de Linkedin</label>
+    <br><label>Página de Linkedin</label>
     @Html.EditorFor(Model => Model.PaginaLinkedIn, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Acerca de</label>
+    <br><label>Acerca de</label>
     @Html.EditorFor(Model => Model.AcercaDe, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Pedidos Visibles</label>
+    <br><label>Pedidos Visibles</label>
     @Html.EditorFor(Model => Model.VisiblePedidos)
-    <label>Facturas Visibles</label>
+    <br><label>Facturas Visibles</label>
     @Html.EditorFor(Model => Model.VisibleFacturas)
-    <label>Finanzas Visibles</label>
+    <br><label>Finanzas Visibles</label>
     @Html.EditorFor(Model => Model.VisibleFinanzas)
-    <label>Catálogo Visible</label>
+    <br><label>Catálogo Visible</label>
     @Html.EditorFor(Model => Model.VisibleCatalogo)
-    <label>Cuenta Visible</label>
+    <br><label>Cuenta Visible</label>
     @Html.EditorFor(Model => Model.VisibleCuenta)
-    <label>Idiomas Visibles</label>
+    <br><label>Idiomas Visibles</label>
     @Html.EditorFor(Model => Model.VisibleIdiomas)
-    <label>Mensajes Visibles</label>
+    <br><label>Mensajes Visibles</label>
     @Html.EditorFor(Model => Model.VisibleMensajes)
-    <label>Plantillas Visibles</label>
+    <br><label>Plantillas Visibles</label>
     @Html.EditorFor(Model => Model.VisiblePlantillas)
-    <label>Invitado Visible</label>
+    <br><label>Invitado Visible</label>
     @Html.EditorFor(Model => Model.VisibleInvitado)
-    <label>Venta Directa Visible</label>
+    <br><label>Venta Directa Visible</label>
     @Html.EditorFor(Model => Model.VisibleVentaDirecta)
 
-    <label>Categorias Visibles</label>
+    <br><label>Categorias Visibles</label>
     @Html.EditorFor(Model => Model.VisibleCategorias)
-    <label>Vehículos Visibles</label>
+    <br><label>Vehículos Visibles</label>
     @Html.EditorFor(Model => Model.VisibleVehiculos)
-    <label>Novedades Visibles</label>
+    <br><label>Novedades Visibles</label>
     @Html.EditorFor(Model => Model.VisibleNovedades)
-    <label>Pedido Express Visible</label>
+    <br><label>Pedido Express Visible</label>
     @Html.EditorFor(Model => Model.VisibleExpress)
-    <label>Últimos pedidos Visible</label>
+    <br><label>Últimos pedidos Visible</label>
     @Html.EditorFor(Model => Model.VisibleUltimosPedidos)
-    <label>VisibleIP</label>
+    <br><label>VisibleIP</label>
     @Html.EditorFor(Model => Model.VisibleIP)
-    <label>Visible Última Conexión</label>
+    <br><label>Visible Última Conexión</label>
     @Html.EditorFor(Model => Model.VisibleUltimaConexion)
-    <label>Características Eurocode Visible en listados</label>
+    <br><label>Características Eurocode Visible en listados</label>
     @Html.EditorFor(Model => Model.VisibleEurocodeListado)
-    <label>Características Eurocode Visible en ficha Artículo</label>
+    <br><label>Características Eurocode Visible en ficha Artículo</label>
     @Html.EditorFor(Model => Model.VisibleEurocodeFicha)
-    <label>Almacenes visibles en Listado</label>
+    <br><label>Almacenes visibles en Listado</label>
     @Html.EditorFor(Model => Model.VisibleAlmacenesListado)
-    <label>Almacenes Visibles en ficha Artículo</label>
+    <br><label>Almacenes Visibles en ficha Artículo</label>
     @Html.EditorFor(Model => Model.VisibleAlmacenesFicha)
 
 
-    <label>Cuenta de Correo</label>
+    <br><label>Cuenta de Correo</label>
     @Html.EditorFor(Model => Model.NombreCuenta, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Usuario de Correo</label>
+    <br><label>Usuario de Correo</label>
     @Html.EditorFor(Model => Model.Usuario, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Clave de Correo</label>
+    <br><label>Clave de Correo</label>
     @Html.EditorFor(Model => Model.Clave, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Servidor de Correo Saliente</label>
+    <br><label>Servidor de Correo Saliente</label>
     @Html.EditorFor(Model => Model.ServCorreoSal, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Puerto de Correo Saliente</label>
+    <br><label>Puerto de Correo Saliente</label>
     @Html.EditorFor(Model => Model.PuertoCorreoSal, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Nombre del Sitio</label>
+    <br><label>Nombre del Sitio</label>
     @Html.EditorFor(Model => Model.NombreSitio, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <label>Ruta logo del sitio</label>
+    <br><label>Ruta logo del sitio</label>
     @Html.EditorFor(Model => Model.RutaLogo, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     @*@Html.EditorForModel()*@
     <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
