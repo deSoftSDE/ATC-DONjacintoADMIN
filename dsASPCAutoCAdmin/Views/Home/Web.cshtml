@@ -46,6 +46,31 @@
     @Html.EditorFor(Model => Model.VisibleInvitado)
     <label>Venta Directa Visible</label>
     @Html.EditorFor(Model => Model.VisibleVentaDirecta)
+
+    <label>Categorias Visibles</label>
+    @Html.EditorFor(Model => Model.VisibleCategorias)
+    <label>Vehículos Visibles</label>
+    @Html.EditorFor(Model => Model.VisibleVehiculos)
+    <label>Novedades Visibles</label>
+    @Html.EditorFor(Model => Model.VisibleNovedades)
+    <label>Pedido Express Visible</label>
+    @Html.EditorFor(Model => Model.VisibleExpress)
+    <label>Últimos pedidos Visible</label>
+    @Html.EditorFor(Model => Model.VisibleUltimosPedidos)
+    <label>VisibleIP</label>
+    @Html.EditorFor(Model => Model.VisibleIP)
+    <label>Visible Última Conexión</label>
+    @Html.EditorFor(Model => Model.VisibleUltimaConexion)
+    <label>Características Eurocode Visible en listados</label>
+    @Html.EditorFor(Model => Model.VisibleEurocodeListado)
+    <label>Características Eurocode Visible en ficha Artículo</label>
+    @Html.EditorFor(Model => Model.VisibleEurocodeFicha)
+    <label>Almacenes visibles en Listado</label>
+    @Html.EditorFor(Model => Model.VisibleAlmacenesListado)
+    <label>Almacenes Visibles en ficha Artículo</label>
+    @Html.EditorFor(Model => Model.VisibleAlmacenesFicha)
+
+
     <label>Cuenta de Correo</label>
     @Html.EditorFor(Model => Model.NombreCuenta, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     <label>Usuario de Correo</label>
@@ -61,5 +86,5 @@
     <label>Ruta logo del sitio</label>
     @Html.EditorFor(Model => Model.RutaLogo, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     @*@Html.EditorForModel()*@
-    <input type="submit" value="Guardar Cambios" class="btn btn-primary"/>
+    <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
 </form>

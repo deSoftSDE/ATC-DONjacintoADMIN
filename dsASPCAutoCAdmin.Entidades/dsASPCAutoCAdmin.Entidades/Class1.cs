@@ -972,6 +972,28 @@ namespace dsASPCAutoCAdmin.Entidades
         public string RutaLogo { get; set; }
         [DataMember]
         public string dirEmailContacto { get; set; }
+        [DataMember]
+        public Boolean VisibleCategorias { get; set; }
+        [DataMember]
+        public Boolean VisibleVehiculos { get; set; }
+        [DataMember]
+        public Boolean VisibleNovedades { get; set; }
+        [DataMember]
+        public Boolean VisibleExpress { get; set; }
+        [DataMember]
+        public Boolean VisibleUltimosPedidos { get; set; }
+        [DataMember]
+        public Boolean VisibleIP { get; set; }
+        [DataMember]
+        public Boolean VisibleUltimaConexion { get; set; }
+        [DataMember]
+        public Boolean VisibleEurocodeListado { get; set; }
+        [DataMember]
+        public Boolean VisibleEurocodeFicha { get; set; }
+        [DataMember]
+        public Boolean VisibleAlmacenesListado { get; set; }
+        [DataMember]
+        public Boolean VisibleAlmacenesFicha { get; set; }
     }
     [DataContract]
     public class MensajeWeb

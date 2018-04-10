@@ -1150,6 +1150,28 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.RutaLogo = AsignaCadena("RutaLogo");
                    
                     res.dirEmailContacto = AsignaCadena("dirEmailContacto");
+
+                    res.VisibleCategorias = AsignaBool("VisibleCategorias");
+
+                    res.VisibleVehiculos = AsignaBool("VisibleVehiculos");
+
+                    res.VisibleNovedades = AsignaBool("VisibleNovedades");
+
+                    res.VisibleExpress = AsignaBool("VisibleExpress");
+
+                    res.VisibleUltimosPedidos = AsignaBool("VisibleUltimosPedidos");
+
+                    res.VisibleIP = AsignaBool("VisibleIP");
+
+                    res.VisibleUltimaConexion = AsignaBool("VisibleUltimaConexion");
+
+                    res.VisibleEurocodeListado = AsignaBool("VisibleEurocodeListado");
+
+                    res.VisibleEurocodeFicha = AsignaBool("VisibleEurocodeFicha");
+
+                    res.VisibleAlmacenesListado = AsignaBool("VisibleAlmacenesListado");
+
+                    res.VisibleAlmacenesFicha = AsignaBool("VisibleAlmacenesFicha");
                 }
             }
             return res;
