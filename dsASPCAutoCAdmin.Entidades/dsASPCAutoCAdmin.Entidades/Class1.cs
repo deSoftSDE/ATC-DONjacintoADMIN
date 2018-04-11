@@ -975,6 +975,8 @@ namespace dsASPCAutoCAdmin.Entidades
         [DataMember]
         public string dirEmailContacto { get; set; }
         [DataMember]
+        public string dirEmailBajoPedido { get; set; }
+        [DataMember]
         public Boolean VisibleCategorias { get; set; }
         [DataMember]
         public Boolean VisibleVehiculos { get; set; }
@@ -998,6 +1000,8 @@ namespace dsASPCAutoCAdmin.Entidades
         public Boolean VisibleAlmacenesFicha { get; set; }
         [DataMember]
         public string Copyright { get; set; }
+        [DataMember]
+        public Boolean VisiblePrecioListado { get; set; }
     }
     [DataContract]
     public class ImagenCabWeb

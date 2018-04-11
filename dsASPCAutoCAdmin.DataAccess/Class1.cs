@@ -1173,6 +1173,10 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.VisibleAlmacenesListado = AsignaBool("VisibleAlmacenesListado");
 
                     res.VisibleAlmacenesFicha = AsignaBool("VisibleAlmacenesFicha");
+
+                    res.VisiblePrecioListado = AsignaBool("VisiblePrecioListado");
+
+                    res.dirEmailBajoPedido = AsignaCadena("dirEmailBajoPedido");
                 }
             }
             return res;

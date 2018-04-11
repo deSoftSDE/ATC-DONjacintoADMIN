@@ -10,8 +10,11 @@
     @Html.EditorFor(Model => Model.Localidad, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     <br><label>Teléfono</label>
     @Html.EditorFor(Model => Model.Telefono, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-    <br><label>Email</label>
+    <br><label>Email Contacto</label>
     @Html.EditorFor(Model => Model.Email, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+
+    <br><label>Email Bajo Pedido</label>
+    @Html.EditorFor(Model => Model.dirEmailBajoPedido, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     <br><label>Web</label>
     @Html.EditorFor(Model => Model.Web, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     <br><label>Copyright</label>
@@ -73,6 +76,8 @@
     @Html.EditorFor(Model => Model.VisibleAlmacenesListado)
     <br><label>Almacenes Visibles en ficha Artículo</label>
     @Html.EditorFor(Model => Model.VisibleAlmacenesFicha)
+    <br><label>Precios Visibles en listados</label>
+    @Html.EditorFor(Model => Model.VisiblePrecioListado)
 
 
     <br><label>Cuenta de Correo</label>
@@ -80,7 +85,7 @@
     <br><label>Usuario de Correo</label>
     @Html.EditorFor(Model => Model.Usuario, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     <br><label>Clave de Correo</label>
-    @Html.EditorFor(Model => Model.Clave, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+    @Html.EditorFor(Model => Model.Clave, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
     <br><label>Servidor de Correo Saliente</label>
     @Html.EditorFor(Model => Model.ServCorreoSal, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
     <br><label>Puerto de Correo Saliente</label>
