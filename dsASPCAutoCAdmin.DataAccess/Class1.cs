@@ -1181,6 +1181,63 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
+        public void PermisosUsuarioModificar(EmpresaWeb empr, int idUsuarioWeb)
+        {
+            var em = dsCore.Comun.Ayudas.SerializarACadenaXML(empr);
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idUsuarioWeb", idUsuarioWeb),
+                    new SqlParameter("@permisos", em),
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.PermisosUsuarioModificar", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+
+            }
+        public EmpresaWeb PermisosLeerPorIDUsuario(int idUsuarioWeb)
+        {
+            var deUsuario = new EmpresaWeb();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idUsuarioWeb", idUsuarioWeb)
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.PermisosLeerPorIDUsuario", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                if (_reader.Read())
+                {
+                    deUsuario.VisiblePedidos = AsignaBool("VisiblePedidos");
+                    deUsuario.VisibleFacturas = AsignaBool("VisibleFacturas");
+                    deUsuario.VisibleFinanzas = AsignaBool("VisibleFinanzas");
+                    deUsuario.VisibleCatalogo = AsignaBool("VisibleCatalogo");
+                    deUsuario.VisibleCuenta = AsignaBool("VisibleCuenta");
+                    deUsuario.VisibleIdiomas = AsignaBool("VisibleIdiomas");
+                    deUsuario.VisibleMensajes = AsignaBool("VisibleMensajes");
+                    deUsuario.VisiblePlantillas = AsignaBool("VisiblePlantillas");
+                    deUsuario.VisibleInvitado = AsignaBool("VisibleInvitado");
+                    deUsuario.VisibleVentaDirecta = AsignaBool("VisibleVentaDirecta");
+                    deUsuario.VisibleCategorias = AsignaBool("VisibleCategorias");
+                    deUsuario.VisibleVehiculos = AsignaBool("VisibleVehiculos");
+                    deUsuario.VisibleNovedades = AsignaBool("VisibleNovedades");
+                    deUsuario.VisibleExpress = AsignaBool("VisibleExpress");
+                    deUsuario.Copyright = AsignaCadena("Copyright");
+                    deUsuario.VisibleUltimosPedidos = AsignaBool("VisibleUltimosPedidos");
+                    deUsuario.VisibleIP = AsignaBool("VisibleIP");
+                    deUsuario.VisibleUltimaConexion = AsignaBool("VisibleUltimaConexion");
+                    deUsuario.VisibleEurocodeListado = AsignaBool("VisibleEurocodeListado");
+                    deUsuario.VisibleEurocodeFicha = AsignaBool("VisibleEurocodeFicha");
+                    deUsuario.VisibleAlmacenesListado = AsignaBool("VisibleAlmacenesListado");
+                    deUsuario.VisibleAlmacenesFicha = AsignaBool("VisibleAlmacenesFicha");
+                    deUsuario.VisiblePrecioListado = AsignaBool("VisiblePrecioListado");
+                }
+            }
+            return deUsuario; 
+        }
         public List<ImagenCabWeb> ImagenesCabWebLeer()
         {
             var res = new List<ImagenCabWeb>();

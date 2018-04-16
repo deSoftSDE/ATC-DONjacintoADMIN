@@ -89,6 +89,14 @@
                 allowEditing: false,
                 alingment: "center",
                 cellTemplate: "deleteTemplate"
+            }, {
+                caption: "",
+                width: "20%",
+                allowFiltering: false,
+                allowSorting: false,
+                allowEditing: false,
+                alingment: "center",
+                cellTemplate: "permisosTemplate"
             }
         ],
         onInitialized: function (e) {
@@ -497,6 +505,36 @@
             }
         });
     };
+    $scope.popupPermisosOptions = {
+        width: 660,
+        height: "auto",
+        showTitle: true,
+        title: "Permisos de usuario",
+        dragEnabled: false,
+        bindingOptions: {
+            visible: 'popupPermisosVisible'
+        },
+        closeOnOutsideClick: true
+    }
+    $scope.modificarPermisos = function (usuario) {
+        $scope.popupPermisosVisible = true;
+        Llamada.get("PermisosLeerPorIDUsuario?idUsuarioWeb=" + usuario.idUsuarioWeb)
+            .then(function (respuesta) {
+                $scope.usuarioseleccionado = usuario;
+                $scope.permisosUs = respuesta.data;
+            });
+    }
+    $scope.cancelarCambiosPermisos = function () {
+        $scope.popupPermisosVisible = false;
+    }
+    $scope.guardarCambiosPermisos = function () {
+        Llamada.post("PermisosUsuarioModificar?idUsuarioWeb=" + $scope.usuarioseleccionado.idUsuarioWeb, $scope.permisosUs)
+            .then(function (respuesta) {
+                console.log(respuesta.data);
+                $scope.popupPermisosVisible = false;
+                mensajeExito("Datos guardados con éxito");
+            })
+    }
 
 
     var buscaChangePromise;

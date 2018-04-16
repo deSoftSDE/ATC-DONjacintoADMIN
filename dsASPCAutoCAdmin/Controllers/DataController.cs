@@ -290,6 +290,28 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        public IActionResult PermisosLeerPorIDUsuario(int idUsuarioWeb)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.PermisosLeerPorIDUsuario(idUsuarioWeb);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
         [HttpPost]
         public IActionResult ImagenesCabWeb_Procesar([FromBody] ImagenCabWeb img)
         {
@@ -299,6 +321,29 @@ namespace dsASPCAutoCAdmin.Controllers
             {
                 var res = ad.ImagenCabWeb_Procesar(img);
                 result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpPost]
+        public IActionResult PermisosUsuarioModificar([FromBody] EmpresaWeb empr, int idUsuarioWeb)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                ad.PermisosUsuarioModificar(empr, idUsuarioWeb);
+                result = new ObjectResult(1)
                 {
                     StatusCode = (int)HttpStatusCode.OK
                 };
