@@ -88,7 +88,8 @@
                 allowSorting: false,
                 allowEditing: false,
                 alingment: "center",
-                cellTemplate: "deleteTemplate"
+                cellTemplate: "deleteTemplate",
+                caption: "Eliminar"
             }, {
                 caption: "",
                 width: "20%",
@@ -96,7 +97,8 @@
                 allowSorting: false,
                 allowEditing: false,
                 alingment: "center",
-                cellTemplate: "permisosTemplate"
+                cellTemplate: "permisosTemplate",
+                caption:"Permisos"
             }
         ],
         onInitialized: function (e) {
@@ -151,7 +153,7 @@
                 allowSorting: false,
                 allowEditing: false,
                 alignment: "center",
-                caption: "Seleccionar",
+                caption: "Invitar Cliente",
                 cellTemplate: "editTemplate"
             }
         ],
@@ -355,8 +357,9 @@
     };
     $scope.popupVisible = false;
     $scope.popupOptions = {
-        width: 660,
-        height: "auto",
+        width: "90%",
+        height: "90%",
+        position:"top",
         showTitle: true,
         title: "Editar un usuario",
         dragEnabled: false,
@@ -367,8 +370,9 @@
     };
     $scope.popupInvitarVisible = false;
     $scope.popupInvitarOptions = {
-        width: 660,
-        height: "auto",
+        width: "90%",
+        height: "90%",
+        position:"top",
         showTitle: true,
         title: "Invitar a un cliente",
         dragEnabled: false,

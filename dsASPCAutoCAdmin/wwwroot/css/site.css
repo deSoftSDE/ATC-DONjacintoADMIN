@@ -817,7 +817,7 @@ a {
     top: 0;
     bottom: 0;
     float: left;
-    width: 139px;
+    width: 154px;
     min-height: 955px
 }
 
@@ -2560,26 +2560,6 @@ tr.clicked {
     /*background-color:red;*/
     height:60px;
 }
-
-.desplegable {
-    font-size: 14px;
-    text-align: left;
-    /*box-shadow: 5px 5px rgba(102,102,102,.1);*/
-    -webkit-box-shadow: 0px 6px 8px 2px rgba(0,0,0,0.33);
-    -moz-box-shadow: 0px 6px 8px 2px rgba(0,0,0,0.33);
-    box-shadow: 0px 6px 8px 2px rgba(0,0,0,0.33);
-    /*left: 0;*/
-    min-width: 175px;
-    position: absolute;
-    z-index: 1000;
-    display: none;
-    float: left;
-    list-style: none;
-    text-shadow: none;
-    padding: 0;
-    background-color: #fff !important;
-    /*margin: 10px 0 0;*/
-    border: 1px solid #eee;
-    font-family:, Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
-    width: 96%;
+li.menu-lateral{
+    font-size:0.9rem;
 }
