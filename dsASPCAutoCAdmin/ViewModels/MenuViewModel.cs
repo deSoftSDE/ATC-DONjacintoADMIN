@@ -20,9 +20,9 @@ namespace dsASPCAutoCAdmin.ViewModels
                 new ElementoMenu { Key = "Carrocerias", Value = "Carrocerias", Img = "~/images/logo.png" },
                 new ElementoMenu { Key = "Tipos de Vidrio", Value = "TiposVidrio", Img = "~/images/logo.png" },
                 //new ElementoMenu { Key = "Vidrio", Value = "Vidrio" },
-                new ElementoMenu { Key = "Articulos", Value = "Articulos", Img = "~/images/logo.png" },
+                new ElementoMenu { Key = "Articulos", Value = "Articulos", Img = "~/images/logo.png", Clase="articulos" },
                 new ElementoMenu { Key = "Usuarios", Value = "Usuarios", Img = "~/images/logo.png" },
-                new ElementoMenu { Key = "Configuración", Value = "Web", Img = "~/images/logo.png" },
+                new ElementoMenu { Key = "Configuración", Value = "Web", Img = "~/images/logo.png", Clase= "menu" },
                 new ElementoMenu { Key = "Mensajes", Value = "Mensajes", Img = "~/images/logo.png" },
                 new ElementoMenu { Key = "Slider Inicio", Value = "CabeceraWeb", Img = "~/images/logo.png" },
             };

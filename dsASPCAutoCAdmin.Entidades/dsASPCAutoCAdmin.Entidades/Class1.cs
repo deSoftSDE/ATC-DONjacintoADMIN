@@ -14,6 +14,7 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Key { get; set; }
         public string Value { get; set; }
         public string Img { get; set; }
+        public string Clase { get; set; }
     }
     [DataContract]
     public class TipoVidrio

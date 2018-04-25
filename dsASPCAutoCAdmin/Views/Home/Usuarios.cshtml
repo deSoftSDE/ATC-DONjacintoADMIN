@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Clientes";
+    ViewData["Title"] = "Usuarios";
 }
 
 
@@ -12,33 +12,10 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="row mb-4">
-                <div class="col-6">
-                    @*<div class="dataTables_wrapper">
-                        <div class="dataTables_paginate" style="float:left">
-                            <ul class="pagination">
-                                <li class="page-item" id="primera" ng-click="cambiarPagina(this, 'F')">
-                                    <a class="page-link"><i class="fa fa-step-backward "></i> Primera</a>
-                                </li>
-                                <li class="page-item" id="anterior" ng-click="cambiarPagina(this, 'P')">
-                                    <a class="page-link"><i class="fa fa-caret-left "></i> anterior</a>
-                                </li>
-                                <li class="page-item" id="siguiente" ng-click="cambiarPagina(this, 'N')">
-                                    <a class="page-link"> siguiente <i class="fa fa-caret-right "></i></a>
-                                </li>
-                                <li class="page-item" id="ultima" ng-click="cambiarPagina(this, 'L')">
-                                    <a class="page-link">Última <i class="fa fa-step-forward "></i> </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>*@
-                </div>
-            </div>
+            
             <div class="row mb-3">
                 <div class="col-12">
                     <div class="input-group">
-
-
                         <input type="text" class="form-control campo-search " placeholder="Buscar Usuarios" value="" autocomplete="off" ng-model="buscador" ng-change="cambioBuscador()">
                         <div class="input-group-append">
                             <button class="btn btn-default boton-buscar form-control-sm " type="submit" id="btn_buscar" tabindex="2" ng-click="activarBusqueda()">
@@ -50,15 +27,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 text-right my-3">
+                    <button type="submit" value="" class="btn btn-primary" ng-click="abrirPoupupInvitar()"> <i class="fas fa-gift"></i> Enviar invitación a Clientes</button>
+                </div>
             </div>
-            <input type="submit" value="Invitar Clientes"  class="btn btn-primary" ng-click="abrirPoupupInvitar()"/> 
             <div class="dx-viewport demo-container">
                 
                 <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="tiv" style="width:100% !important;">
                     <div data-options="dxTemplate:{ name:'deleteTemplate' }">
 
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
-                        <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                        <button type="submit" ng-click="eliminarRegistro(tiv)" class="btn btn-default btn-sm"><i class="fas fa-trash-alt"></i> </button>
 
                     </div>
                     <div data-options="dxTemplate:{ name:'editTemplate' }">
@@ -66,14 +45,14 @@
                             {{tiv.data.nombreCompleto}}
                         </div>
                         <div ng-if="tiv.data.idClienteDelegacion < 1">
-                            <button type="submit" ng-click="modificarUsuario(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Asignar Cliente</button>
+                            <button type="submit" ng-click="modificarUsuario(tiv)" class="btn btn-default btn-sm"><i class="fas fa-link"></i> Asignar Cliente</button>
 
                         </div>
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
 
                     </div>
                     <div data-options="dxTemplate:{ name:'permisosTemplate' }">
-                        <button type="submit" ng-click="modificarPermisos(tiv.data)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Modificar Permisos</button>
+                        <button type="submit" ng-click="modificarPermisos(tiv.data)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Editar </button>
                         @*<input type="submit" ng-click="modificarVidrio(vidrio)" />*@
 
                     </div>
@@ -148,26 +127,44 @@
        <div class='popup-property-details'>
            <div class="form">
                <div class="row">
-                   <div class="dx-viewport demo-container">
-                       Mostrando {{bloque}} de {{registros}} clientes
-                       <div id="gridContainer" dx-data-grid="dataGridClientes" dx-item-alias="tiv" style="width:100% !important;">
-                           <div data-options="dxTemplate:{ name:'editTemplate' }">
-                               <span ng-if="tiv.data.idUsuarioWeb < 1">
-                                   <button type="submit" ng-click="invitarCliente(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Invitar Cliente</button>
-                               </span>
+                   <div class="col-12">
+                       <div class="input-group ">
+                           <input type="text" class="form-control acmpo-search" ng-model="ncliente" ng-change="cambioPaginaTimeout()" placeholder="Escribe aquí para buscar clientes por Nombre, Delegación, Municipio o Provincia" />
+                           <div class="input-group-append">
+                               <buton class="btn btn-default boton-buscar btn-right form-control-sm"><i class="fas fa-search"></i></buton>
+                           </div>
+                          
+                       </div>
+                   </div>
+                   <div class="col-12 mt-3">
+                       <div class="dx-viewport demo-container">
+                          
+                           <div id="gridContainer" dx-data-grid="dataGridClientes" dx-item-alias="tiv" style="width:100% !important;">
+                               <div data-options="dxTemplate:{ name:'editTemplate' }">
+                                   <span ng-if="tiv.data.idUsuarioWeb < 1">
+                                       <button type="submit" ng-click="invitarCliente(tiv)" class="btn btn-default btn-sm"><i class="fas fa-bullhorn"></i></button>
+                                   </span>
+                               </div>
+                           </div>
+
+                       </div>
+                   </div>
+                  
+                   <div class="col-12 mt-3">
+                       <div class="row">
+                           <div class="col-12 text-center">
+                               Mostrando {{bloque}} de <strong> {{registros}} </strong> clientes.
                            </div>
                        </div>
-
-                   </div>
-                   <div>
-                       <input type="text" class="form-control" ng-model="ncliente" ng-change="cambioPaginaTimeout()" />
-                       <ul class="pagination justify-content-center">
+                      
+                       <ul class="pagination justify-content-center mt-2">
                            <li class="page-item disabled" ng-click="paginaAnteriorClientes()">
                                <a class="page-link"><i class="fa fa-caret-left fa-xs "></i><small style="font-size:72%"></small> </a>
                            </li>
-                           <li class="page-item">
 
-                               <input type="number" class="form-control" ng-model="pagina" ng-change="cambioPagina()" />
+                           <li class="page-item text-center">
+
+                               <input type="text" class="form-control" ng-model="pagina" ng-change="cambioPagina()" style="padding:0px; text-align:center;height:35px;width:80px;" />
 
                            </li>
                            <li class="page-item" ng-click="paginaSiguienteClientes()">
@@ -182,6 +179,7 @@
    </div>
     <div dx-popup="popupOptions">
         <div class='popup-property-details'>
+            <div></div>
             <div class="form">
                 <div class="form-group">
                     <label>Buscar un Usuario </label>
@@ -202,7 +200,7 @@
                         Mostrando {{bloque}} de {{registros}} clientes
                         <div id="gridContainer" dx-data-grid="dataGridClientes2" dx-item-alias="tiv" style="width:100% !important;">
                             <div data-options="dxTemplate:{ name:'editTemplate' }">
-                                <button type="submit" ng-click="asignarCliente(tiv)" class="btn btn-default btn-sm"><i class="fas fa-pen-square"></i> Asignar Cliente</button>
+                                <button type="submit" ng-click="asignarCliente(tiv)" class="btn btn-default btn-sm"><i class="fas fa-link"></i>  Asignar Cliente</button>
 
                             </div>
                         </div>
