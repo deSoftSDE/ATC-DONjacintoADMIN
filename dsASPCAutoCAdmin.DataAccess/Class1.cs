@@ -253,6 +253,55 @@ namespace dsASPCAutoCAdmin.DataAccess
             return res;
         }
 
+        public List<Domicilio> DomiciliosLeerPorIDCliente(int idCliente)
+        {
+            var res = new List<Domicilio>();
+            //throw new NotImplementedException();
+            var cc = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection conn = new SqlConnection(cc))
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@idCliente", idCliente),
+                    new SqlParameter("@leerAuxiliares", false)
+                };
+                _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Ventas.DomiciliosCli_LeerXIdCli", param);
+                _reader = _cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (_reader.Read())
+                {
+                    var dom = new Domicilio
+                    {
+                        IDDomicilioCliente = AsignaEntero("IDDomicilioCliente"),
+                        IdCliente = AsignaEntero("IdCliente"),
+                        IdDomicilioRelacion = AsignaEntero("IDDomicilioRelacion"),
+                        IdRelacion = AsignaEntero("IdRelacion"),
+                        IdTipoIva = AsignaEntero("IdTipoIva"),
+                        Direccion = AsignaCadena("Direccion"),
+                        Numero = AsignaCadena("Numero"),
+                        PisoPuerta = AsignaCadena("PisoPuerta"),
+                        IdLocalidad = AsignaEntero("IdLocalidad"),
+                        NombreMunicipio = AsignaCadena("NombreMunicipio"),
+                        CodPostal = AsignaEntero("CodPostal"),
+                        IdProvincia = AsignaEntero("IdProvincia"),
+                        NombreProvincia = AsignaCadena("NombreProvincia"),
+                        IdPais = AsignaEntero("IdPais"),
+                        NombreDomicilio = AsignaCadena("NombreDomicilio"),
+                        TipoDomicilio = AsignaCadena("TipoDomicilio"),
+                        Venta = AsignaEntero("Venta"),
+                        Entrega = AsignaEntero("Entrega"),
+                        Cobro = AsignaEntero("Cobro"),
+                        IdTipoDomicilio = AsignaEntero("IdTipoDomicilio"),
+                        NombrePais = AsignaCadena("NombrePais"),
+                        ApdoPostal = AsignaCadena("ApdoPostal"),
+                    };
+                    res.Add(dom);
+                }
+
+            }
+            return res;
+            
+        }
+
         public List<BuscaArticulo> ArticulosLeerPorCategoria(int IDCategoria)
         {
             var res = new List<BuscaArticulo>();
@@ -1177,6 +1226,9 @@ namespace dsASPCAutoCAdmin.DataAccess
                     res.VisiblePrecioListado = AsignaBool("VisiblePrecioListado");
 
                     res.dirEmailBajoPedido = AsignaCadena("dirEmailBajoPedido");
+                    res.VisiblePrecios = AsignaBool("VisiblePrecios");
+                    res.VisibleDtos = AsignaBool("VisibleDtos");
+                    res.VisibleTotalCompra = AsignaBool("VisibleTotalCompra");
                 }
             }
             return res;
@@ -1234,6 +1286,9 @@ namespace dsASPCAutoCAdmin.DataAccess
                     deUsuario.VisibleAlmacenesListado = AsignaBool("VisibleAlmacenesListado");
                     deUsuario.VisibleAlmacenesFicha = AsignaBool("VisibleAlmacenesFicha");
                     deUsuario.VisiblePrecioListado = AsignaBool("VisiblePrecioListado");
+                    deUsuario.VisiblePrecios = AsignaBool("VisiblePrecios");
+                    deUsuario.VisibleDtos = AsignaBool("VisibleDtos");
+                    deUsuario.VisibleTotalCompra = AsignaBool("VisibleTotalCompra");
                 }
             }
             return deUsuario; 

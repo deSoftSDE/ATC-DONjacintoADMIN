@@ -116,16 +116,33 @@
         <input type="checkbox" ng-model="permisosUs.visibleUltimosPedidos" /> No mostrar Últimos Pedidos<br />
         <input type="checkbox" ng-model="permisosUs.visibleIP" /> No mostrar IP<br />
         <input type="checkbox" ng-model="permisosUs.visibleUltimaConexion" /> No mostrar Ultima Conexion<br />
+        @*
+        Si descomentas estos input tienen toda la funcionalidad, pero veo un poco tonto hacer que esto vaya también por usuario.    
         <input type="checkbox" ng-model="permisosUs.visibleEurocodeListado" /> No mostrar Eurocodes en los listados<br />
         <input type="checkbox" ng-model="permisosUs.visibleEurocodeFicha" /> No mostrar Eurocode en la ficha del artículo<br />
         <input type="checkbox" ng-model="permisosUs.visibleAlmacenesListado" /> No mostrar Almacenes en los listados<br />
-        <input type="checkbox" ng-model="permisosUs.visibleAlmacenesFicha" /> No mostrar Almacenes en la ficha del artículo<br />
+        <input type="checkbox" ng-model="permisosUs.visibleAlmacenesFicha" /> No mostrar Almacenes en la ficha del artículo<br />*@
         <input type="checkbox" ng-model="permisosUs.visiblePedidos" /> No mostrar pedidos<br />
         <input type="checkbox" ng-model="permisosUs.visibleFacturas" /> No mostrar Facturas<br />
         <input type="checkbox" ng-model="permisosUs.visibleFinanzas" /> No mostrar Finanzas<br />
-        <input type="checkbox" ng-model="permisosUs.visibleMensajes" /> No mostrar Mensajes<br />
-        <input type="submit" class="btn-danger btn" value="Cancelar" ng-click="cancelarCambios()"/>
-        <input type="submit" class="btn btn-primary" value="Guardar Cambios" ng-click="guardarCambiosPermisos()"/>
+        <input type="checkbox" ng-model="permisosUs.visiblePrecios" /> No mostrar Precios<br />
+        <input type="checkbox" ng-model="permisosUs.visibleDtos" /> No mostrar Descuentos<br />
+        <input type="checkbox" ng-model="permisosUs.visibleTotalCompra" /> No mostrar Precio Total de la compra<br />
+        <input type="submit" class="btn-danger btn" value="Cancelar" ng-click="cancelarCambiosPermisos()" />
+        <input type="submit" class="btn btn-primary" value="Guardar Cambios" ng-click="guardarCambiosPermisos()" />
+    </div>
+    <div dx-popup="popupDomicilios">
+        <div class='popup-property-details'>
+           <div class="form">
+               <div class="row">
+                   <div class="dx-viewport demo-container">
+                       <div ng-repeat="domicilio in domicilios" ng-click="selectDomicilio(domicilio)">
+                           {{domicilio.nombreDomicilio}}
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
    <div dx-popup="popupInvitarOptions">
        <div class='popup-property-details'>

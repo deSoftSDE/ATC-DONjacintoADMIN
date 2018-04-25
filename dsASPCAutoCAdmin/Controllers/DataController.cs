@@ -290,6 +290,7 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        [HttpGet]
         public IActionResult PermisosLeerPorIDUsuario(int idUsuarioWeb)
         {
             ObjectResult result;
@@ -297,6 +298,29 @@ namespace dsASPCAutoCAdmin.Controllers
             try
             {
                 var res = ad.PermisosLeerPorIDUsuario(idUsuarioWeb);
+                result = new ObjectResult(res)
+                {
+                    StatusCode = (int)HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResult(ex)
+                {
+                    StatusCode = (int)HttpStatusCode.Conflict
+                };
+                Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+            }
+            return result;
+        }
+        [HttpGet]
+        public IActionResult DomiciliosLeerPorIDCliente(int idCliente)
+        {
+            ObjectResult result;
+            var ad = new AdaptadorAtcAdmin(_configuration);
+            try
+            {
+                var res = ad.DomiciliosLeerPorIDCliente(idCliente);
                 result = new ObjectResult(res)
                 {
                     StatusCode = (int)HttpStatusCode.OK
@@ -832,7 +856,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var ad = new ServicioCorreo(_configuration);
             try
             {
-                var res = ad.ClientesAsignarUsuarioWeb(IDUsuarioWeb, IDCliente);
+                var res = ad.ClientesAsignarUsuarioWeb(IDUsuarioWeb, IDCliente, null);
                 //var res = new EsquemaViewModel(carr);
                 result = new ObjectResult(res)
                 {
@@ -849,6 +873,30 @@ namespace dsASPCAutoCAdmin.Controllers
             }
             return result;
         }
+        //[HttpGet]
+        //public IActionResult ClientesAsignarUsuarioWeb(int IDUsuarioWeb, int IDCliente, int IDDomicilioCliente)
+        //{
+        //    ObjectResult result;
+        //    var ad = new ServicioCorreo(_configuration);
+        //    try
+        //    {
+        //        var res = ad.ClientesAsignarUsuarioWeb(IDUsuarioWeb, IDCliente, IDDomicilioCliente);
+        //        //var res = new EsquemaViewModel(carr);
+        //        result = new ObjectResult(res)
+        //        {
+        //            StatusCode = (int)HttpStatusCode.OK
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result = new ObjectResult(ex)
+        //        {
+        //            StatusCode = (int)HttpStatusCode.Conflict
+        //        };
+        //        Request.HttpContext.Response.Headers.Add("dsError", ex.Message);
+        //    }
+        //    return result;
+        //}
         [HttpGet]
         public IActionResult UsuariosWebEliminar(int IDUsuarioWeb)
         {

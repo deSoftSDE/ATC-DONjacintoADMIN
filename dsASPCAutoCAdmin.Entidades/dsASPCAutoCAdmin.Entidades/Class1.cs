@@ -1002,6 +1002,12 @@ namespace dsASPCAutoCAdmin.Entidades
         public string Copyright { get; set; }
         [DataMember]
         public Boolean VisiblePrecioListado { get; set; }
+        [DataMember]
+        public Boolean VisiblePrecios { get; set; }
+        [DataMember]
+        public Boolean VisibleDtos { get; set; }
+        [DataMember]
+        public Boolean VisibleTotalCompra { get; set; }
     }
     [DataContract]
     public class ImagenCabWeb

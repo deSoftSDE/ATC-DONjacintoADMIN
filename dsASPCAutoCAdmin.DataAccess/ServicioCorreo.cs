@@ -115,7 +115,7 @@ namespace dsASPCAutoCAdmin.DataAccess
             }
             return res;
         }
-        public ResultadoAsignacion ClientesAsignarUsuarioWeb(int IDUsuarioWeb, int IDCliente)
+        public ResultadoAsignacion ClientesAsignarUsuarioWeb(int IDUsuarioWeb, int IDCliente, int? IDDomicilioCliente)
         {
             var res = new ResultadoAsignacion();
             var cc = _configuration.GetConnectionString("DefaultConnection");
@@ -125,6 +125,7 @@ namespace dsASPCAutoCAdmin.DataAccess
                 {
                     new SqlParameter("@IDUsuario", IDUsuarioWeb),
                     new SqlParameter("@IDCliente", IDCliente),
+                    new SqlParameter("@IDDomicilioCliente", IDDomicilioCliente),
                     new SqlParameter("@iddelegacion", 0),
                 };
                 _cmd = SQLHelper.PrepareCommand(conn, null, CommandType.StoredProcedure, @"Web.ClientesAsignarUsuarioWeb", param);

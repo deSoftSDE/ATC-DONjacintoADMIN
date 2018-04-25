@@ -377,6 +377,17 @@
         },
         closeOnOutsideClick: false
     };
+    $scope.popupDomicilios = {
+        width: 660,
+        height: "auto",
+        showTitle: true,
+        title: "Selecciona un domicilio",
+        dragEnabled: false,
+        bindingOptions: {
+            visible: 'popupDomiciliosVisible'
+        },
+        closeOnOutsideClick: false
+    };
     $scope.abrirPoupupInvitar = function () {
         $scope.popupInvitarVisible = true;
     };
@@ -464,17 +475,38 @@
         inputChangedPromise = $timeout(buscarArticulos, 1000);
     };
     $scope.asignarCliente = function (cl) {
-        console.log(cl.data);
-        console.log($scope.currentusuario);
-        Llamada.get("ClientesAsignarUsuarioWeb?IDUsuarioWeb=" + $scope.currentusuario.idUsuarioWeb + "&IDCliente=" + cl.data.idCliente)
+        if (true) {
+            console.log(cl.data);
+            console.log($scope.currentusuario);
+            Llamada.get("ClientesAsignarUsuarioWeb?IDUsuarioWeb=" + $scope.currentusuario.idUsuarioWeb + "&IDCliente=" + cl.data.idCliente)
+                .then(function (respuesta) {
+                    console.log(respuesta.data);
+                    $scope.popupVisible = false;
+
+                    mensajeExito("Usuario asignado a un cliente correctamente.");
+                    LeerRegistros($scope.lastConsulta);
+                });
+        } else {
+            Llamada.get("DomiciliosLeerPorIDCliente?idCliente=" + cl.data.idCliente)
+                .then(function (respuesta) {
+                    console.log(respuesta.data);
+                    $scope.domicilios = respuesta.data;
+                    $scope.popupDomiciliosVisible = true;
+                })
+        }
+        
+    };
+    $scope.selectDomicilio = function (dom) {
+        console.log(dom);
+        Llamada.get("ClientesAsignarUsuarioWeb?IDUsuarioWeb=" + $scope.currentusuario.idUsuarioWeb + "&IDCliente=" + dom.idCliente + "&idDomicilioCliente=" + dom.idDomicilioCliente)
             .then(function (respuesta) {
                 console.log(respuesta.data);
                 $scope.popupVisible = false;
-                
+                $scope.popupDomiciliosVisible = true;
                 mensajeExito("Usuario asignado a un cliente correctamente.");
                 LeerRegistros($scope.lastConsulta);
             });
-    };
+    }
     
     $scope.noEliminado = function (vidrio) {
         if (NotNullNotUndefinedNotEmpty(vidrio)) {
