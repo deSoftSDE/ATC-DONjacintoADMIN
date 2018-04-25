@@ -90,10 +90,19 @@
         <div class="left-menu">
             <div class="menu-header"></div>
             <ul>
-                @foreach (var item in FilterMenu)
+                @*@foreach (var item in FilterMenu)
                 {
                     <li class="menu-lateral @item.Clase"><a href="/Home/@item.Value">@item.Key</a></li>
-                }
+                }*@
+                <li class="menu-lateral"><a asp-controller="Home" asp-action="Marcas">Marcas > Modelos</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="TiposVehiculo">Tipos de Vehículo</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="Carrocerias">Carrocerias</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="TiposVidrio">Tipos de Vidrio</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="Articulos">Articulos</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="Usuarios">Usuarios</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="Web">Configuración</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="Mensajes">Mensajes</a></li>
+                                <li class="menu-lateral"><a asp-controller="Home" asp-action="CabeceraWeb">Slider Inicio</a></li>
             </ul>
         </div>
         @*<div class="logo"></div>*@
@@ -116,10 +125,20 @@
                     <div class="col-6">
                         <div class="buttons  d-block d-sm-block d-md-block  d-lg-none ">
                             <ul class="list-inline text-center ">
-                                @foreach (var item in FilterMenu)
-                                {
-                                        <li class="list-inline-item"><a href="/Home/@item.Value">@item.Key</a></li>
-                                }
+                                @*@foreach (var item in FilterMenu)
+        {
+                <li class="list-inline-item"><a asp-controller="Home" asp-action="@item.Value">@item.Key</a></li>
+        }*@
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Marcas">Marcas > Modeloas</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="TiposVehiculo">Tipos de Vehículo</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Carrocerias">Carrocerias</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="TiposVidrio">Tipos de Vidrio</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Articulos">Articulos</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Usuarios">Usuarios</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Web">Configuración</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Mensajes">Mensajes</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="CabeceraWeb">Slider Inicio</a></li>
+
                             </ul>
 
                         </div>
