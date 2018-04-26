@@ -32,6 +32,18 @@ namespace dsASPCAutoCAdmin
                     bootstrap.Mode = BootstrapMode.Bootstrap3;
                 });
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .WithExposedHeaders("content-disposition")
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
             services.AddMvc();
         }
 

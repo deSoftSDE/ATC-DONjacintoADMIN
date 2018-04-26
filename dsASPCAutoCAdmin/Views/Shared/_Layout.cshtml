@@ -1,6 +1,7 @@
 ﻿@using dsASPCAutoCAdmin.Entidades;
 @{ 
     var FilterMenu = (List<ElementoMenu>)ViewData["FilterMenu"];
+    var api = ViewData["Api"];
 }
 <!DOCTYPE html>
 <html ng-app="app">
@@ -43,7 +44,9 @@
         DevAV = window.DevAV || {};
         DevAV.baseUrl = "";
     </script>
-
+    <script type="text/javascript">
+        var Endpoint = '@api';
+    </script>
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -129,7 +132,7 @@
         {
                 <li class="list-inline-item"><a asp-controller="Home" asp-action="@item.Value">@item.Key</a></li>
         }*@
-                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Marcas">Marcas > Modeloas</a></li>
+                                <li class="list-inline-item"><a asp-controller="Home" asp-action="Marcas">Marcas > Modelos</a></li>
                                 <li class="list-inline-item"><a asp-controller="Home" asp-action="TiposVehiculo">Tipos de Vehículo</a></li>
                                 <li class="list-inline-item"><a asp-controller="Home" asp-action="Carrocerias">Carrocerias</a></li>
                                 <li class="list-inline-item"><a asp-controller="Home" asp-action="TiposVidrio">Tipos de Vidrio</a></li>
