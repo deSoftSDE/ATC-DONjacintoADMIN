@@ -18,15 +18,18 @@ namespace dsASPCAutoCAdmin.Controllers
     public class HomeController : Controller
     {
         private IConfiguration _configuration;
+        private string _endPoint;
 
         public HomeController(IConfiguration configuration)
         {
             _configuration = configuration;
+            _endPoint = _configuration.GetSection("JSApi")["api"];
         }
         public IActionResult Index()
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
+            ViewData["Api"] = _endPoint;
             return View();
             
         }
@@ -36,7 +39,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "Your application description page.";
-
+            ViewData["Api"] = _endPoint;
             return View();
         }
 
@@ -44,6 +47,7 @@ namespace dsASPCAutoCAdmin.Controllers
         {
             
             ViewData["Message"] = "Your application description page.";
+            ViewData["Api"] = _endPoint;
             return View();
         }
 
@@ -52,6 +56,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "Your contact page.";
+            ViewData["Api"] = _endPoint;
 
             return View();
         }
@@ -61,6 +66,7 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "";
             //ViewData["Company"] = SampleData.Companies;
+            ViewData["Api"] = _endPoint;
             return View();
         }
         public IActionResult Carrocerias()
@@ -68,6 +74,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "";
+            ViewData["Api"] = _endPoint;
             return View();
         }
         public IActionResult Usuarios()
@@ -75,6 +82,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "";
+            ViewData["Api"] = _endPoint;
             return View();
         }
 
@@ -89,6 +97,7 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Modelo"] = md;
             ViewData["Message"] = "Carrocerias de " + md.DescripcionFamilia;
             ViewData["TiposVehiculo"] = vh;
+            ViewData["Api"] = _endPoint;
             return View();
         }
         public IActionResult TiposVehiculo()
@@ -96,6 +105,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "";
+            ViewData["Api"] = _endPoint;
             return View();
         }
         public IActionResult Articulos()
@@ -103,6 +113,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "Editar artículos";
+            ViewData["Api"] = _endPoint;
             return View();
         }
 
@@ -111,6 +122,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
             ViewData["Message"] = "";
+            ViewData["Api"] = _endPoint;
             return View();
         }
         public IActionResult Web()
@@ -120,6 +132,7 @@ namespace dsASPCAutoCAdmin.Controllers
             ViewData["Message"] = "";
             var ad = new AdaptadorAtcAdmin(_configuration);
             var b = ad.DatosEmpresaLeer();
+            ViewData["Api"] = _endPoint;
             return View(b);
         }
         [HttpPost]
@@ -131,6 +144,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var ad = new AdaptadorAtcAdmin(_configuration);
             ad.DatosEmpresaProcesar(a);
             var b = ad.DatosEmpresaLeer();
+            ViewData["Api"] = _endPoint;
             return View(b);
         }
         [HttpGet]
@@ -143,6 +157,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var mc = ad.MarcasLeerPorID(id);
             ViewData["Marca"] = mc;
             ViewData["Message"] = "Modelos de " + mc.DescripcionSeccion;
+            ViewData["Api"] = _endPoint;
             return View();
         }
         [HttpPost]
@@ -150,6 +165,7 @@ namespace dsASPCAutoCAdmin.Controllers
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
+            ViewData["Api"] = _endPoint;
             return View();
         }
         public IActionResult EliminarMensaje(int id)
@@ -158,6 +174,7 @@ namespace dsASPCAutoCAdmin.Controllers
             //ViewData["FilterMenu"] = em.menu;
             var ad = new AdaptadorAtcAdmin(_configuration);
             ad.MensajeEliminar(id);
+            ViewData["Api"] = _endPoint;
             return RedirectToAction("Mensajes", "Home");
         }
         public IActionResult Mensajes()
@@ -167,12 +184,14 @@ namespace dsASPCAutoCAdmin.Controllers
             var ad = new AdaptadorAtcAdmin(_configuration);
             var msj = ad.MensajeLeer(-1, 0);
             ViewData["Mensajes"] = msj;
+            ViewData["Api"] = _endPoint;
             return View();
         }
         public IActionResult CabeceraWeb()
         {
             var em = new MenuViewModel();
             ViewData["FilterMenu"] = em.menu;
+            ViewData["Api"] = _endPoint;
             return View();
         }
         [HttpGet]
@@ -189,6 +208,7 @@ namespace dsASPCAutoCAdmin.Controllers
                     msj.Cliente = "Todos";
                 }
                 ViewData["Mensaje"] = msj;
+                ViewData["Api"] = _endPoint;
                 return View(msj);
             } else
             {
@@ -198,6 +218,7 @@ namespace dsASPCAutoCAdmin.Controllers
                     msj.Cliente = "Todos";
                 }
                 ViewData["Mensaje"] = msj;
+                ViewData["Api"] = _endPoint;
                 return View(msj);
             }
             
@@ -208,6 +229,7 @@ namespace dsASPCAutoCAdmin.Controllers
             var em = new MenuViewModel();
             var ad = new AdaptadorAtcAdmin(_configuration);
             ad.MensajeModificar(msj);
+            ViewData["Api"] = _endPoint;
             return RedirectToAction("Mensajes", "Home");
         }
         public IActionResult Error()

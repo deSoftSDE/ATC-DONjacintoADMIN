@@ -1,7 +1,9 @@
 ﻿appadmin = angular.module('app', ['dx', 'ng-file-model']);
 appadmin.factory('Llamada', function ($http, $q) {
-    var api_url = "http://" + location.host + "/Data/";
-    var api_stream = "http://" + location.host + "/StreamFiles/";
+    //var api_url = "http://" + location.host + "/Data/";
+    //var api_stream = "http://" + location.host + "/StreamFiles/";
+    var api_url = Endpoint + "Data/";
+    var api_stream = Endpoint + "/StreamFiles/";
     var http = {
         get: function (url) {
             var deferred = $q.defer();

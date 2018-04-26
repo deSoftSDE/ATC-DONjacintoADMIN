@@ -1,6 +1,7 @@
 ﻿using dsASPCAutoCAdmin.DataAccess;
 using dsASPCAutoCAdmin.Entidades;
 using dsASPCAutoCAdmin.ViewModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace dsASPCAutoCAdmin.Controllers
 {
     [Produces("application/json")]
+    [EnableCors("AllowAllOrigins")]
     public class DataController : Controller
     {
         private IConfiguration _configuration;
